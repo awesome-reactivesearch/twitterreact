@@ -1,0 +1,24 @@
+{
+  "name": "appbase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "@appbaseio/reactivebase": "^0.4.0",
+    "react": "^15.4.2",
+    "react-addons-shallow-compare": "^15.4.2",
+    "react-bootstrap": "^0.30.7",
+    "react-select": "^1.0.0-rc.3",
+    "webpack-dev-server": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.2.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --hot"
+  },
+  "author": "",
+  "license": "ISC"
+}
