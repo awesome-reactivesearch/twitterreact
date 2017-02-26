@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
+import {Router, Route, Link, browserHistory } from 'react-router'
+
 import {
 	ReactiveBase,
 	ReactiveList,
@@ -7,7 +9,11 @@ import {
 	TextField,
 	ToggleButton
 } from '@appbaseio/reactivebase';
-import {config} from './config.js';
+
+import {config, onData} from './config.js';
+import {HelloTwitter} from './dashboard.js'
+
+
 const date = new Date();
 const uStyles = {maxWidth: 400, margin: '10px auto 10px'};
 const msgStyles = {maxWidth: 600, margin: '30px auto 50px'};
@@ -25,33 +31,7 @@ const CustomQuery= function(){
 			}
 		};	
 };
-var onData=function(response, err) {
-			
-			let result = null;
-			console.log(response)
-			if (err){
-				console.log(err)
-			}
-			else if(response) {
-				let combineData = response.currentData;
 
-				if(response.mode === 'historic') {
-					combineData = response.currentData.concat(response.newData);
-				}
-				else if(response.mode === 'streaming') {
-					console.log('got streaming')
-					combineData.unshift(response.newData)
-				}
-				console.log(combineData)
-				if (combineData) {
-					result = combineData.map((markerData, index) => {
-						let marker = markerData._source;
-						return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt}/>);
-					});
-				}
-				return result;
-			}
-};
 const get_global=(
 		
 		<ReactiveBase
@@ -88,101 +68,8 @@ const get_global=(
 var t = true;
 var uname = '';
 
-class Tweet extends Component{
-	render(){
-		var tweetStyle = {maxWidth: 550, margin: '10px auto 10px'};
-		var unameStyle = {maxWidth: 550,margin: 'auto', color:'#0000aa'};
-		return(
-		<div style={tweetStyle}>
-			<div style={unameStyle}>
-			{this.props.usr}:
-			</div>
-			<div >
-			{this.props.msg}
-			</div>
-		</div>
-			)
-	}
-}
-
-class HelloTwitter extends Component {
-	onClick(event){
-		console.log("logging out!")
-		ReactDom.render(<Login />, document.getElementById('app'));
-	}
-	newTweet(event) {
-		event.preventDefault()
-		console.log('newTweet')
-		var msg= document.getElementById('newtweet').value
-		// console.log(by)
-		appbaseRef.index({
-		    type: config.credentials.type,
-		    body: {"by": uname, "createdAt":date.getTime(), "msg":msg}
-		}).on('data', function(response) {
-		    console.log(response);
-		}).on('error', function(error) {
-		    console.log(error);
-		});
 
 
-
-	}
- 	render() {
-		const uStyles = {maxWidth: 400, margin: '30px auto 10px'};
-  		const msgStyles = {maxWidth: 800, margin: '0px auto 10px'};
-  		const s = {margin:'10px auto 10px'}
-  		console.log(uname);
-  		return (
-		
-			<ReactiveBase
-				app={config.credentials.app}
-    			username= {config.credentials.username}
-				password= {config.credentials.password}
-				type = {config.credentials.type}
-			>
-			
-			<div className ="row" style={s}>
-				
-					<div className="col-xs-2" style={uStyles}>
-					<TextField
-                        title="User"
-                        componentId="UserSensor"
-                        appbaseField="by"
-                        defaultSelected={uname}
-                    />
-                    <button value="Logout" onClick={this.onClick}>Logout</button>
-					</div>
-				
-				<div className="row">
-					<div className="col-xs-4" style={msgStyles}>
-					<form  id="login" onSubmit={this.newTweet}>
-		            	<div >
-		                	<input type="text" placeholder="Your tweet here..." id="newtweet" />
-		                	<input type="submit" value="Tweet" />
-		            	</div>
-					</form>
-					</div>
-					<div className="col s8 col-xs-8" style={msgStyles}>
-					<ReactiveList
-                        title="Tweets"
-                        componentId="TweetsActuator"
-                        appbaseField="msg"
-                        from={config.ReactiveList.from}
-						size={config.ReactiveList.size}
-						stream={true}
-  						requestOnScroll={true}
-  						onData = {onData}
-                        react={{
-                            'and': ["UserSensor"]
-                        }}
-                    />
-					</div>
-				</div>
-			</div>
-			</ReactiveBase>
-		);
-	}
-}
 
 var get_hw = function(username){
 	uname = username;
@@ -193,14 +80,7 @@ var get_hw = function(username){
 class Login extends Component{
 	onLogin(event){
 		event.preventDefault()
-		console.log('login function')
-		var uname = document.getElementById('username').value
-		if (uname === ""){
-			console.log("error: no username")
-			return;
-		}
-		return(get_hw(uname));
-
+		this.props.history.push('/user')
 	}
 	
 	render(){
@@ -221,4 +101,12 @@ class Login extends Component{
 	}
 }
 
-ReactDom.render(<Login />, document.getElementById('app'));
+ReactDom.render((
+    <Router history={browserHistory}>
+        <Route component={Login}>
+      		<Route path="/" component={Login} />
+	   		<Route path="/user" component={HelloTwitter} />
+      		
+    	</Route>
+  	</Router>
+), document.getElementById('app'));

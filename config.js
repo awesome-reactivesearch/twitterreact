@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+
 const values = [{
 	"label": "Local",
 	"value": "Local"
@@ -31,6 +33,52 @@ const config = {
 	},
 }
 
+var onData=function(response, err) {
+			
+			let result = null;
+			console.log(response)
+			if (err){
+				console.log(err)
+			}
+			else if(response) {
+				let combineData = response.currentData;
+
+				if(response.mode === 'historic') {
+					combineData = response.currentData.concat(response.newData);
+				}
+				else if(response.mode === 'streaming') {
+					console.log('got streaming')
+					combineData.unshift(response.newData)
+				}
+				console.log(combineData)
+				if (combineData) {
+					result = combineData.map((markerData, index) => {
+						let marker = markerData._source;
+						return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt}/>);
+					});
+				}
+				return result;
+			}
+};
+
+class Tweet extends Component{
+	render(){
+		var tweetStyle = {maxWidth: 550, margin: '10px auto 10px'};
+		var unameStyle = {maxWidth: 550,margin: 'auto', color:'#0000aa'};
+		return(
+		<div style={tweetStyle}>
+			<div style={unameStyle}>
+			{this.props.usr}:
+			</div>
+			<div >
+			{this.props.msg}
+			</div>
+		</div>
+			)
+	}
+}
+
 module.exports = {
-	config: config
+	config: config,
+	onData : onData
 };
