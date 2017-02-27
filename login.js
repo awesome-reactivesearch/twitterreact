@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import {Router, Route, Link, browserHistory } from 'react-router'
+import {Router, Route, Link, browserHistory, withRouter} from 'react-router'
 
 import {
 	ReactiveBase,
@@ -11,7 +11,7 @@ import {
 } from '@appbaseio/reactivebase';
 
 import {config, onData} from './config.js';
-import {HelloTwitter} from './dashboard.js'
+import {Dashboard} from './dashboard.js'
 
 
 const date = new Date();
@@ -70,42 +70,65 @@ var uname = '';
 
 
 
+const Login = withRouter(
+	React.createClass({
+		getInitialState() {
+    		return {
+				error: false
+			}
+		},
 
-var get_hw = function(username){
-	uname = username;
-	return (ReactDom.render(<HelloTwitter/>, document.getElementById('app')));
-}
+		onLogin(event){
+			
+			event.preventDefault()
+			const { location } = this.props
 
+			debugger;
+			// this.props.router.replace('user')
 
-class Login extends Component{
-	onLogin(event){
-		event.preventDefault()
-		this.props.history.push('/user')
-	}
-	
-	render(){
+			if (location.state ) {
+				console.log('oops!')
+			}
+			else{
+				console.log('hey!!')
+          		this.props.router.replace('/user')
+        	}
+		},
 		
-		const buttonStyles = {width: '60%' , 'marginTop': '3%', 'fontSize': '1.5em'}
-		return(
-		<div>
-				<form  id="login" onSubmit={this.onLogin}>
-            	<div  style={wellStyles}>
-                	<input type="text" placeholder="Name" id="username" style={buttonStyles}/><br/>
-                	<input type="submit" style={buttonStyles} value="login" />
-            	</div>
-				</form>
+		render(){
+			// debugger;
+			const buttonStyles = {width: '60%' , 'marginTop': '3%', 'fontSize': '1.5em'}
+			return(
+			<div>
+					<form  id="login" onSubmit={this.onLogin}>
+	            	<div  style={wellStyles}>
+	                	<input type="text" placeholder="Name" id="username" style={buttonStyles}/><br/>
+	                	<input type="submit" style={buttonStyles} value="login" />
+	            	</div>
+					</form>
 
-		{get_global}
-		</div>
-		)
-	}
-}
+			{get_global}
+			</div>
+			)
+		}
+	})
+)
+
+// function requireAuth(nextState, replace) {
+// 	console.log(nextState)
+//   if (true) {
+//     replace({
+//       pathname: '/',
+//       state: { nextPathname: nextState.location.pathname }
+//     })
+//   }
+// }
+
 
 ReactDom.render((
     <Router history={browserHistory}>
-        <Route component={Login}>
-      		<Route path="/" component={Login} />
-	   		<Route path="/user" component={HelloTwitter} />
+        <Route path="/" component={Login} >
+	   			<Route path="user" component={Dashboard} />
       		
     	</Route>
   	</Router>
