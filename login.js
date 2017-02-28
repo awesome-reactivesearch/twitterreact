@@ -14,16 +14,11 @@ import {config, onData} from './config.js';
 import {Dashboard} from './dashboard.js'
 
 
-const date = new Date();
+
 const uStyles = {maxWidth: 400, margin: '10px auto 10px'};
 const msgStyles = {maxWidth: 600, margin: '30px auto 50px'};
 const wellStyles = {maxWidth: 600, margin: '40px auto 10px'};
-const appbaseRef = new Appbase({
-  url: config.credentials.url,
-  appname: config.credentials.app,
-  username: config.credentials.username,
-  password: config.credentials.password
-});
+
 const CustomQuery= function(){
 	return {
 			query: {
@@ -82,17 +77,15 @@ const Login = withRouter(
 			
 			event.preventDefault()
 			const { location } = this.props
-
+			const uname = this.refs.username.value
 			debugger;
 			// this.props.router.replace('user')
 
-			if (location.state ) {
-				console.log('oops!')
-			}
-			else{
-				console.log('hey!!')
-          		this.props.router.replace('/user')
-        	}
+			
+			console.log('hey!!')
+          	this.props.router.replace(`/${uname}`)
+          	// console.log(this.props.router)
+        	return;
 		},
 		
 		render(){
@@ -100,9 +93,10 @@ const Login = withRouter(
 			const buttonStyles = {width: '60%' , 'marginTop': '3%', 'fontSize': '1.5em'}
 			return(
 			<div>
+			              <Link to="user">Log out</Link>
 					<form  id="login" onSubmit={this.onLogin}>
 	            	<div  style={wellStyles}>
-	                	<input type="text" placeholder="Name" id="username" style={buttonStyles}/><br/>
+	                	<input type="text" placeholder="Name" ref="username" style={buttonStyles}/><br/>
 	                	<input type="submit" style={buttonStyles} value="login" />
 	            	</div>
 					</form>
@@ -114,22 +108,10 @@ const Login = withRouter(
 	})
 )
 
-// function requireAuth(nextState, replace) {
-// 	console.log(nextState)
-//   if (true) {
-//     replace({
-//       pathname: '/',
-//       state: { nextPathname: nextState.location.pathname }
-//     })
-//   }
-// }
-
 
 ReactDom.render((
     <Router history={browserHistory}>
-        <Route path="/" component={Login} >
-	   			<Route path="user" component={Dashboard} />
-      		
-    	</Route>
+        <Route path="/" component={Login} />
+	   	<Route path=":uname" component={Dashboard} />
   	</Router>
 ), document.getElementById('app'));

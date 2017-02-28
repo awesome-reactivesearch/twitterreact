@@ -9,14 +9,25 @@ import {
 	ToggleButton
 } from '@appbaseio/reactivebase';
 import {config, onData} from './config.js';
-
-const uname = 'a'
+const appbaseRef = new Appbase({
+  url: config.credentials.url,
+  appname: config.credentials.app,
+  username: config.credentials.username,
+  password: config.credentials.password
+});
+const date = new Date();
+// const uname = 'a'
 export const Dashboard = withRouter( 
 	React.createClass({
-		
+		getInitialState() {
+	      return {
+	        error: false
+	      }
+	    },
 		onClick(event){
+			debugger;
 			console.log("logging out!")
-			ReactDom.render(<Login />, document.getElementById('app'));
+			this.props.router.replace('/')
 		},
 
 		newTweet(event) {
@@ -26,7 +37,7 @@ export const Dashboard = withRouter(
 			// console.log(by)
 			appbaseRef.index({
 			    type: config.credentials.type,
-			    body: {"by": uname, "createdAt":date.getTime(), "msg":msg}
+			    body: {"by": this.props.params.uname, "createdAt":date.getTime(), "msg":msg}
 			}).on('data', function(response) {
 			    console.log(response);
 			}).on('error', function(error) {
@@ -40,7 +51,7 @@ export const Dashboard = withRouter(
 			const uStyles = {maxWidth: 400, margin: '30px auto 10px'};
 	  		const msgStyles = {maxWidth: 800, margin: '0px auto 10px'};
 	  		const s = {margin:'10px auto 10px'}
-	  		console.log(uname);
+	  		// console.log(uname);
 	  		return (
 			
 				<ReactiveBase
@@ -57,7 +68,7 @@ export const Dashboard = withRouter(
 	                        title="User"
 	                        componentId="UserSensor"
 	                        appbaseField="by"
-	                        defaultSelected={uname}
+	                        defaultSelected={this.props.params.uname}
 	                    />
 	                    <button value="Logout" onClick={this.onClick}>Logout</button>
 						</div>
