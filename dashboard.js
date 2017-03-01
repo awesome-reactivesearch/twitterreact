@@ -8,24 +8,21 @@ import {
 	TextField,
 	ToggleButton
 } from '@appbaseio/reactivebase';
-import {config, onData} from './config.js';
+import {config, onDataTweets} from './config.js';
 const appbaseRef = new Appbase({
-  url: config.credentials.url,
-  appname: config.credentials.app,
-  username: config.credentials.username,
-  password: config.credentials.password
+  url: config.credential_tweets.url,
+  appname: config.credential_tweets.app,
+  username: config.credential_tweets.username,
+  password: config.credential_tweets.password
 });
 const date = new Date();
+
 // const uname = 'a'
 export const Dashboard = withRouter( 
 	React.createClass({
-		getInitialState() {
-	      return {
-	        error: false
-	      }
-	    },
+
 		onClick(event){
-			debugger;
+			// debugger;
 			console.log("logging out!")
 			this.props.router.replace('/')
 		},
@@ -36,7 +33,7 @@ export const Dashboard = withRouter(
 			var msg= document.getElementById('newtweet').value
 			// console.log(by)
 			appbaseRef.index({
-			    type: config.credentials.type,
+			    type: config.credential_tweets.type,
 			    body: {"by": this.props.params.uname, "createdAt":date.getTime(), "msg":msg}
 			}).on('data', function(response) {
 			    console.log(response);
@@ -48,29 +45,43 @@ export const Dashboard = withRouter(
 
 		},
 	 	render() {
-			const uStyles = {maxWidth: 400, margin: '30px auto 10px'};
-	  		const msgStyles = {maxWidth: 800, margin: '0px auto 10px'};
+			const uStyles = {maxWidth: 400, margin: '30px auto 10px', textAlign:'center', fontSize:'16px'};
+	  		const msgStyles = {maxWidth: 800};
 	  		const s = {margin:'10px auto 10px'}
+	  		const u = this.props.params.uname
+	  		const navStyle = {textAlign:'right',margin: '10px 10px 10px 10px'};
+	  		// debugger;
+	  		const CustomQuery=function(){
+					return {
+							query: {
+								match: {by:u}
+							}
+						};	
+				};
 	  		// console.log(uname);
 	  		return (
-			
+				
+
 				<ReactiveBase
-					app={config.credentials.app}
-	    			username= {config.credentials.username}
-					password= {config.credentials.password}
-					type = {config.credentials.type}
+					app={config.credential_tweets.app}
+	    			username= {config.credential_tweets.username}
+					password= {config.credential_tweets.password}
+					type = {config.credential_tweets.type}
 				>
 				
 				<div className ="row" style={s}>
-					
+					<div style={navStyle}>
+						<button value="Logout" onClick={this.onClick}>Logout</button>
+					</div>
+						<DataController
+							componentId="GetTweets"
+							customQuery= {CustomQuery}
+							showUI = {false}
+						/>
+			
 						<div className="col-xs-2" style={uStyles}>
-						<TextField
-	                        title="User"
-	                        componentId="UserSensor"
-	                        appbaseField="by"
-	                        defaultSelected={this.props.params.uname}
-	                    />
-	                    <button value="Logout" onClick={this.onClick}>Logout</button>
+						<label>{this.props.params.uname}</label>
+	                    
 						</div>
 					
 					<div className="row">
@@ -91,9 +102,9 @@ export const Dashboard = withRouter(
 							size={config.ReactiveList.size}
 							stream={true}
 	  						requestOnScroll={true}
-	  						onData = {onData}
+	  						onData = {onDataTweets}
 	                        react={{
-	                            'and': ["UserSensor"]
+	                            'and': ["GetTweets"]
 	                        }}
 	                    />
 						</div>

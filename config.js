@@ -9,12 +9,19 @@ const values = [{
 }];
 const config = {
 
-    credentials: {
+    credential_tweets: {
         url: "https://scalr.api.appbase.io",
         app: "Twitter",
         username: "0z092JD6X",
         password: "e559dc6b-8c12-40b8-b308-b2c4b6b7b972",
         type: "tweets"
+    },
+    credential_users: {
+        url: "https://scalr.api.appbase.io",
+        app: "Twitter",
+        username: "0z092JD6X",
+        password: "e559dc6b-8c12-40b8-b308-b2c4b6b7b972",
+        type: "users"
     },
     DataController: {
 		customQuery: {
@@ -33,7 +40,7 @@ const config = {
 	},
 }
 
-var onData=function(response, err) {
+var onDataTweets=function(response, err) {
 			
 			let result = null;
 			console.log(response)
@@ -80,5 +87,5 @@ class Tweet extends Component{
 
 module.exports = {
 	config: config,
-	onData : onData
+	onDataTweets : onDataTweets
 };

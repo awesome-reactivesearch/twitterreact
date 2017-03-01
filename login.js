@@ -10,7 +10,7 @@ import {
 	ToggleButton
 } from '@appbaseio/reactivebase';
 
-import {config, onData} from './config.js';
+import {config, onDataTweets} from './config.js';
 import {Dashboard} from './dashboard.js'
 
 
@@ -30,10 +30,10 @@ const CustomQuery= function(){
 const get_global=(
 		
 		<ReactiveBase
-				app={config.credentials.app}
-    			username= {config.credentials.username}
-				password= {config.credentials.password}
-				type = {config.credentials.type}
+				app={config.credential_tweets.app}
+    			username= {config.credential_tweets.username}
+				password= {config.credential_tweets.password}
+				type = {config.credential_tweets.type}
 			>
 			
 			<DataController
@@ -49,7 +49,7 @@ const get_global=(
 					title="Public Tweets"
 					from={config.ReactiveList.from}
 					size={config.ReactiveList.size}
-					onData={onData}
+					onData={onDataTweets}
 					requestOnScroll={true}
 					react={{
 						'and': ["GetGlobal"]
@@ -78,7 +78,7 @@ const Login = withRouter(
 			event.preventDefault()
 			const { location } = this.props
 			const uname = this.refs.username.value
-			debugger;
+			// debugger;
 			// this.props.router.replace('user')
 
 			
@@ -93,7 +93,6 @@ const Login = withRouter(
 			const buttonStyles = {width: '60%' , 'marginTop': '3%', 'fontSize': '1.5em'}
 			return(
 			<div>
-			              <Link to="user">Log out</Link>
 					<form  id="login" onSubmit={this.onLogin}>
 	            	<div  style={wellStyles}>
 	                	<input type="text" placeholder="Name" ref="username" style={buttonStyles}/><br/>
