@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import {Router, Route, Link, browserHistory, withRouter} from 'react-router'
-
 import {
 	ReactiveBase,
 	ReactiveList,
@@ -12,7 +11,7 @@ import {
 
 import {config, onDataTweets} from './config.js';
 import {Dashboard} from './dashboard.js'
-
+import {Profile} from './profile.js'
 
 
 const uStyles = {maxWidth: 400, margin: '10px auto 10px'};
@@ -69,7 +68,6 @@ var t = true;
 var uname = '';
 
 
-
 const Login = withRouter(
 	React.createClass({
 		getInitialState() {
@@ -81,6 +79,8 @@ const Login = withRouter(
 		onLogin(event){
 			event.preventDefault();
 			const { location } = this.props;
+			uname = this.refs.username.value
+			// var chk=1;
 			appbaseRef.search(
 			{
 				type: "users",
@@ -90,11 +90,29 @@ const Login = withRouter(
 					}
 				}
 			}).on('data',function(res) {
-				console.log('query result', res);
+				var chk = res.hits.total
+				// console.log(chk)
+				console.log('query result', res.hits.total);
+				if (chk == 0) {
+					appbaseRef.index(
+					{
+						type: "users",
+						body:{
+							"name":uname,
+							"followers": [],
+							"following":[]
+						}
+					}).on('data', function(response) {
+						console.log(response);
+					}).on('error', function(error) {
+						console.log(error);
+					});
+				}
 			}).on('error',function(err){
 				console.log('search error ',err);
 			});
-			setTimeout(responseStream.stop, 4000);
+			localStorage.user = uname;
+			
 			console.log('hey!!')
 		this.props.router.replace(`/${uname}`)
 		// console.log(this.props.router)
@@ -125,5 +143,6 @@ ReactDom.render((
 	<Router history={browserHistory}>
 		<Route path="/" component={Login} />
 		<Route path=":uname" component={Dashboard} />
+		<Route path="profile/:uname" component={Profile} />
 	</Router>
 ), document.getElementById('app'));

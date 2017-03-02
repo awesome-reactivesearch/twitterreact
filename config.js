@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Router, Route, Link, browserHistory, withRouter} from 'react-router'
 
 const values = [{
 	"label": "Local",
@@ -7,6 +8,7 @@ const values = [{
 	"label": "Global",
 	"value": "Global"
 }];
+
 const config = {
 
 	credential_tweets: {
@@ -39,6 +41,7 @@ const config = {
 			data: values
 		},
 }
+
 var onDataUsers = function(response, err){
 	let result = null;
 			console.log(response)
@@ -59,12 +62,13 @@ var onDataUsers = function(response, err){
 				if (combineData) {
 					result = combineData.map((markerData, index) => {
 						let marker = markerData._source;
-						return (<User name={marker.name});
+						return (<User name={marker.name}/>);
 					});
 				}
 				return result;
 			}
 }
+
 var onDataTweets=function(response, err) {
 			
 			let result = null;
@@ -113,14 +117,16 @@ class Tweet extends Component{
 class User extends Component{
 	render(){
 		return(
-		<label>{name}</label></br>
+		<div>
+		<Link to={`/profile/${this.props.name}`}>{this.props.name}</Link>
+		</div>
 			)
 	}
 }
 
-
 module.exports = {
 	config: config,
 	onDataTweets: onDataTweets,
-	onDataUsers: onDataUsers 
+	onDataUsers: onDataUsers,
+	User: User 
 };

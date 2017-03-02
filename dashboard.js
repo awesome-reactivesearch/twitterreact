@@ -8,7 +8,7 @@ import {
 	TextField,
 	ToggleButton
 } from '@appbaseio/reactivebase';
-import {config, onDataTweets} from './config.js';
+import {config, onDataTweets, onDataUsers} from './config.js';
 const appbaseRef = new Appbase({
 	url: config.credential_tweets.url,
 	appname: config.credential_tweets.app,
@@ -21,12 +21,16 @@ const date = new Date();
 export const Dashboard = withRouter( 
 	React.createClass({
 
-		onClick(event){
+		logOut(event){
 			// debugger;
 			console.log("logging out!")
 			this.props.router.replace('/')
+			delete localStorage.user;
 		},
-
+		goProfile(event){
+			let u = this.props.params.uname;
+			this.props.router.replace(`/profile/${u}`)	
+		},
 		newTweet(event) {
 			event.preventDefault()
 			console.log('newTweet')
@@ -48,7 +52,7 @@ export const Dashboard = withRouter(
 			const u = this.props.params.uname
 			const navStyle = {textAlign:'right',margin: '10px 10px 10px 10px'};
 			// debugger;
-			const CustomQueryTweet=function(){
+			const CustomQueryTweets=function(){
 					return {
 							query: {
 								match: {by:u}
@@ -63,22 +67,25 @@ export const Dashboard = withRouter(
 						};	
 				};
 			// console.log(uname);
+			// debugger;
 			return (
+
 			<div className ="row" style={s}>
 				<div style={navStyle}>
-					<button value="Logout" onClick={this.onClick}>Logout</button>
+					<button value="Profile" onClick={this.goProfile}>Profile</button>
+					<button value="Logout" onClick={this.logOut}>Logout</button>
 				</div>
 					
 		
-					<div className="col-xs-4" style={uStyles}>
+					<div className="col-xs-2" style={uStyles}>
 					<ReactiveBase
-						app={config.credentialusers.app}
+						app={config.credential_users.app}
 						username= {config.credential_users.username}
 						password= {config.credential_users.password}
 						type = {config.credential_users.type}
 					>
-			
-					<label>{this.props.params.uname}</label></br>
+				
+					<label>{this.props.params.uname}</label><br/>
 					<DataController
 						componentId="GetUsers"
 						customQuery= {CustomQueryUsers}
