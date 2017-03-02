@@ -18,7 +18,12 @@ import {Dashboard} from './dashboard.js'
 const uStyles = {maxWidth: 400, margin: '10px auto 10px'};
 const msgStyles = {maxWidth: 600, margin: '30px auto 50px'};
 const wellStyles = {maxWidth: 600, margin: '40px auto 10px'};
-
+const appbaseRef = new Appbase({
+	url: config.credential_tweets.url,
+	appname: config.credential_tweets.app,
+	username: config.credential_tweets.username,
+	password: config.credential_tweets.password
+});
 const CustomQuery= function(){
 	return {
 			query: {
@@ -31,7 +36,7 @@ const get_global=(
 		
 		<ReactiveBase
 				app={config.credential_tweets.app}
-    			username= {config.credential_tweets.username}
+				username= {config.credential_tweets.username}
 				password= {config.credential_tweets.password}
 				type = {config.credential_tweets.type}
 			>
@@ -68,24 +73,32 @@ var uname = '';
 const Login = withRouter(
 	React.createClass({
 		getInitialState() {
-    		return {
+			return {
 				error: false
 			}
 		},
 
 		onLogin(event){
-			
-			event.preventDefault()
-			const { location } = this.props
-			const uname = this.refs.username.value
-			// debugger;
-			// this.props.router.replace('user')
-
-			
+			event.preventDefault();
+			const { location } = this.props;
+			appbaseRef.search(
+			{
+				type: "users",
+				body:{
+					query: {
+						match: {name : uname}
+					}
+				}
+			}).on('data',function(res) {
+				console.log('query result', res);
+			}).on('error',function(err){
+				console.log('search error ',err);
+			});
+			setTimeout(responseStream.stop, 4000);
 			console.log('hey!!')
-          	this.props.router.replace(`/${uname}`)
-          	// console.log(this.props.router)
-        	return;
+		this.props.router.replace(`/${uname}`)
+		// console.log(this.props.router)
+		return;
 		},
 		
 		render(){
@@ -93,11 +106,11 @@ const Login = withRouter(
 			const buttonStyles = {width: '60%' , 'marginTop': '3%', 'fontSize': '1.5em'}
 			return(
 			<div>
-					<form  id="login" onSubmit={this.onLogin}>
-	            	<div  style={wellStyles}>
-	                	<input type="text" placeholder="Name" ref="username" style={buttonStyles}/><br/>
-	                	<input type="submit" style={buttonStyles} value="login" />
-	            	</div>
+					<form id="login" onSubmit={this.onLogin}>
+			<div style={wellStyles}>
+			<input type="text" placeholder="Name" ref="username" style={buttonStyles}/><br/>
+			<input type="submit" style={buttonStyles} value="login" />
+			</div>
 					</form>
 
 			{get_global}
@@ -109,8 +122,8 @@ const Login = withRouter(
 
 
 ReactDom.render((
-    <Router history={browserHistory}>
-        <Route path="/" component={Login} />
-	   	<Route path=":uname" component={Dashboard} />
-  	</Router>
+	<Router history={browserHistory}>
+		<Route path="/" component={Login} />
+		<Route path=":uname" component={Dashboard} />
+	</Router>
 ), document.getElementById('app'));
