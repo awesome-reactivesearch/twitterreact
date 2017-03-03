@@ -92,7 +92,7 @@ const Login = withRouter(
 			}).on('data',function(res) {
 				var chk = res.hits.total
 				// console.log(chk)
-				console.log('query result', res.hits.total);
+				// console.log('query result', res.hits.total);
 				if (chk == 0) {
 					appbaseRef.index(
 					{
@@ -113,7 +113,7 @@ const Login = withRouter(
 			});
 			localStorage.user = uname;
 			
-			console.log('hey!!')
+			// console.log('hey!!')
 		this.props.router.replace(`/${uname}`)
 		// console.log(this.props.router)
 		return;

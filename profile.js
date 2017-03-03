@@ -8,7 +8,7 @@ import {
 	TextField,
 	ToggleButton
 } from '@appbaseio/reactivebase';
-import {config,onDataUsers} from './config.js';
+import {config,onDataUsers, User} from './config.js';
 
 const appbaseRef = new Appbase({
 	url: config.credential_users.url,
@@ -16,6 +16,7 @@ const appbaseRef = new Appbase({
 	username: config.credential_users.username,
 	password: config.credential_users.password
 });
+var u = ''
 
 export const Profile = withRouter( 
 	React.createClass({
@@ -25,15 +26,90 @@ export const Profile = withRouter(
 			this.props.router.replace('/')
 			delete localStorage.user;
 		},
+
 		goProfile(event){
 			let u = localStorage.user;
 			this.props.router.replace(`/profile/${u}`)	
 		},
+
 		goLocal(event){
 			let u = localStorage.user;
 			this.props.router.replace(`/${u}`)	
 		},
-		onDataFollow(response, err){
+
+		followUser(event){
+			let me = localStorage.user
+			console.log('following user')
+			appbaseRef.search(
+			{
+				type: "users",
+				body:{
+					query: {
+						match: {name : me}
+					}
+				}
+			}).on('data', function(res){
+				console.log(res)
+				console.log(res.hits.hits[0]._source)
+				var meId = res.hits.hits[0]._id
+				var mefollowing = res.hits.hits[0]._source.following
+				var mefollowers = res.hits.hits[0]._source.followers
+				mefollowing.push(u)
+				// debugger;
+				appbaseRef.index(
+					{
+					type: "users",
+					id: meId,
+					body:{
+						"name":me,
+						"followers": mefollowers,
+						"following":mefollowing
+					}
+					}).on('data', function(response) {
+						console.log(response);
+					}).on('error', function(error) {
+						console.log(error);
+					});
+			}).on('error', function(err){
+				console.log(err)
+			})
+
+			appbaseRef.search(
+			{
+				type: "users",
+				body:{
+					query: {
+						match: {name : u}
+					}
+				}
+			}).on('data', function(res){
+				console.log(res)
+				console.log(res.hits.hits[0]._source)
+				var uId = res.hits.hits[0]._id
+				var ufollowing = res.hits.hits[0]._source.following
+				var ufollowers = res.hits.hits[0]._source.followers
+				ufollowers.push(me)
+				// debugger;
+				appbaseRef.index(
+					{
+					type: "users",
+					id: uId,
+					body:{
+						"name":u,
+						"followers": ufollowers,
+						"following":ufollowing
+					}
+					}).on('data', function(response) {
+						console.log(response);
+					}).on('error', function(error) {
+						console.log(error);
+					});
+			}).on('error', function(err){
+				console.log(err)
+			})
+		},
+
+		onDataFollowing(response, err){
 			let result = null;
 			console.log(response)
 			if (err){
@@ -49,27 +125,54 @@ export const Profile = withRouter(
 					console.log('got streaming')
 					combineData.unshift(response.newData)
 				}
-				// console.log(combineData)
+				console.log("combineData is:")
+				console.log(combineData)
 				if(combineData){
-					var followers = combineData[0]._source.followers
-					result = followers.map((markerData, index) => {
-						console.log(markerData)
+					var following = combineData[0]._source.following
+					result = following.map((markerData, index) => {
+						return (<User name={markerData} />)	
 					});
-					console.log(followers)
+					
 				}
-				// if (combineData) {
-				// 	result = combineData.map((markerData, index) => {
-				// 		let marker = markerData._source;
-				// 		// return (<User name={marker.name}/>);
-				// 		console.log(markerData)
-				// 	});
-				// }
+				debugger;
 				return result;
 			}
 		},
+
+		onDataFollowers(response, err){
+			let result = null;
+			console.log(response)
+			if (err){
+				console.log(err)
+			}
+			else if(response) {
+				let combineData = response.currentData;
+
+				if(response.mode === 'historic') {
+					combineData = response.currentData.concat(response.newData);
+				}
+				else if(response.mode === 'streaming') {
+					console.log('got streaming')
+					combineData.unshift(response.newData)
+				}
+				console.log("combineData is:")
+				console.log(combineData)
+				if(combineData){
+					var followers = combineData[0]._source.followers
+					result = followers.map((markerData, index) => {
+						return (<User name={markerData} />)	
+					});
+					
+				}
+				
+				return result;
+			}
+		},
+
 		render(){
 			const navStyle = {textAlign:'right',margin: '10px 10px 10px 10px'};
-			const u = this.props.params.uname
+			u = this.props.params.uname
+			let loggedin = localStorage.user;
 			const CustomQuery=function(){
 					return {
 							query: {
@@ -89,7 +192,7 @@ export const Profile = withRouter(
 				<div className ="row" >
 				<div style={navStyle}>
 					<button value="GoLocal" onClick={this.goLocal}>Personal Feed</button>
-					<button value="Profile" onClick={this.goProfile}>My Profile</button>
+					
 					<button value="Logout" onClick={this.logOut}>Logout</button>
 				</div>
 				<DataController
@@ -100,35 +203,39 @@ export const Profile = withRouter(
 				
 				<div className="col-xs-2" >
 				<label>{this.props.params.uname}</label>
-				{(localStorage.user != u)?console.log('not the loggedin user'):console.log('logged user')}
+				{(localStorage.user != u)?(
+					<div>
+					<button value="Follow" onClick={this.followUser}>Follow</button>
+					</div>):console.log('logged user')}
 				</div>
 
-				<div className="col s8 col-xs-8">
+				<div className="col-xs-4">
 				<ReactiveList
 					title="Followers"
 					componentId="FollowersActuator"
-					appbaseField="name"
+					appbaseField="followers"
 					from={config.ReactiveList.from}
 					size={config.ReactiveList.size}
 					stream={true}
 					requestOnScroll={true}
-					onData = {this.onDataFollow}
+					onData = {this.onDataFollowers}
 					react={{
 					 'and': ["GetUserData"]
 					}}
 					  />
 				</div>
 
-				<div className="col s8 col-xs-8">
+				<div className="col-xs-4">
+
 				<ReactiveList
 					title="Following"
 					componentId="FollowingActuator"
-					appbaseField="name"
+					appbaseField="following"
 					from={config.ReactiveList.from}
 					size={config.ReactiveList.size}
 					stream={true}
 					requestOnScroll={true}
-					onData = {this.onDataFollow}
+					onData = {this.onDataFollowing}
 					react={{
 					 'and': ["GetUserData"]
 					}}
