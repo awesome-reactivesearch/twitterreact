@@ -95,7 +95,16 @@ const Login = withRouter(
 				// console.log(chk)
 				// console.log('query result', res.hits.total);
 				// debugger;
+
+				if (chk!=0){
+					localStorage.ufollowing=(res.hits.hits[0]._source.following)
+					debugger;
+				}
+				else{
+					localStorage.ufollowing =[]
+				}
 				if (chk == 0) {
+					
 					appbaseRef.index(
 					{
 						type: "users",
@@ -110,6 +119,7 @@ const Login = withRouter(
 						console.log(error);
 					});
 				}
+
 			}).on('error',function(err){
 				console.log('search error ',err);
 			});

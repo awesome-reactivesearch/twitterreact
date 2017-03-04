@@ -38,6 +38,12 @@ export const Profile = withRouter(
 		},
 
 		followUser(event){
+			this.updateUser(event,true)
+		},
+		unfollowUser(event){
+			this.updateUser(event,false)
+		},
+		updateUser(event, follow){
 			let me = localStorage.user
 			console.log('following user')
 			appbaseRef.search(
@@ -54,7 +60,16 @@ export const Profile = withRouter(
 				var meId = res.hits.hits[0]._id
 				var mefollowing = res.hits.hits[0]._source.following
 				var mefollowers = res.hits.hits[0]._source.followers
-				mefollowing.push(u)
+				// debugger;
+				if(follow){
+					mefollowing.push(u)
+				}
+				else{
+					var index = mefollowing.indexOf(u)
+					mefollowing.splice(index,1)
+					// debugger;
+				}
+				localStorage.ufollowing = mefollowing;
 				// debugger;
 				appbaseRef.index(
 					{
@@ -88,7 +103,14 @@ export const Profile = withRouter(
 				var uId = res.hits.hits[0]._id
 				var ufollowing = res.hits.hits[0]._source.following
 				var ufollowers = res.hits.hits[0]._source.followers
-				ufollowers.push(me)
+				if(follow){
+					ufollowers.push(me)
+				}
+				else{
+					var index = ufollowers.indexOf(u)
+					ufollowing.splice(index,1)
+					// debugger;
+				}
 				// debugger;
 				appbaseRef.index(
 					{
@@ -101,6 +123,7 @@ export const Profile = withRouter(
 					}
 					}).on('data', function(response) {
 						console.log(response);
+						
 					}).on('error', function(error) {
 						console.log(error);
 					});
@@ -169,6 +192,16 @@ export const Profile = withRouter(
 			}
 		},
 
+		chkFollowing(){
+			u = this.props.params.uname
+			let followingList = localStorage.ufollowing
+			debugger;
+			console.log(followingList.indexOf(u))
+			if (followingList.indexOf(u) == -1){
+				return true;
+			}
+			return false
+		},
 		render(){
 			const navStyle = {textAlign:'right',margin: '0'};
 			u = this.props.params.uname
@@ -211,7 +244,10 @@ export const Profile = withRouter(
 				<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 				{(localStorage.user != u)?(
 					<div style={{textAlign:'center'}}>
+					{(this.chkFollowing())?(
 					<button value="Follow" onClick={this.followUser}>Follow</button>
+					):(<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>)}
+
 					</div>):console.log('logged user')}
 				</div>
 
