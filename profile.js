@@ -170,7 +170,7 @@ export const Profile = withRouter(
 		},
 
 		render(){
-			const navStyle = {textAlign:'right',margin: '10px 10px 10px 10px'};
+			const navStyle = {textAlign:'right',margin: '0'};
 			u = this.props.params.uname
 			let loggedin = localStorage.user;
 			const CustomQuery=function(){
@@ -191,8 +191,8 @@ export const Profile = withRouter(
 				>
 
 				<div className ="row" >
-				<nav style={{height:'46px'}}>
-				<div className="nav-wrapper grey lighten-5 z-depth-0">
+				<nav style={{height:'46px'}} className="z-depth-0">
+				<div className="nav-wrapper grey lighten-3">
 				<div style={navStyle}>
 					<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
 					
@@ -207,9 +207,10 @@ export const Profile = withRouter(
 				/>
 				
 				<div className="col s2" >
+				<img style={{height:'100px', marginLeft:'25%', marginTop:'15%'}} src="../user@2x.png" />
 				<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 				{(localStorage.user != u)?(
-					<div>
+					<div style={{textAlign:'center'}}>
 					<button value="Follow" onClick={this.followUser}>Follow</button>
 					</div>):console.log('logged user')}
 				</div>

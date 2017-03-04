@@ -50,7 +50,7 @@ export const Dashboard = withRouter(
 			const msgStyles = {maxWidth: 800};
 			const s = {margin:'10px auto 10px'}
 			const u = this.props.params.uname
-			const navStyle = {textAlign:'right',margin: '10px'};
+			const navStyle = {textAlign:'right',margin: '0px'};
 			// debugger;
 			const CustomQueryTweets=function(){
 					return {
@@ -70,12 +70,12 @@ export const Dashboard = withRouter(
 			// debugger;
 			return (
 
-			<div className ="row" style={s}>
-				<nav style={{height:'46px'}}>
-				<div className="nav-wrapper grey lighten-5">
+			<div className ="row" >
+				<nav style={{height:'50px'}} className="z-depth-0">
+				<div className="nav-wrapper grey lighten-3">
 				<div style={navStyle}>
-					<button value="Profile" onClick={this.goProfile} className="waves-effect waves-light btn">Profile</button>
-					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
+					<button value="Profile" onClick={this.goProfile} className="waves-effect waves-light btn" >Profile</button>
+					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn" >Logout</button>
 				</div>
 				</div>
 				</nav>	
@@ -87,8 +87,8 @@ export const Dashboard = withRouter(
 						password= {config.credential_users.password}
 						type = {config.credential_users.type}
 					>
-				
-					<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3><br/>
+					<img style={{height:'100px', marginLeft:'25%', marginTop:'15%'}} src="user@2x.png" />
+					<h3 style={{textAlign:'center', marginTop:'10px'}}>{this.props.params.uname}</h3><br/>
 					<DataController
 						componentId="GetUsers"
 						customQuery= {CustomQueryUsers}

@@ -94,6 +94,7 @@ const Login = withRouter(
 				var chk = res.hits.total
 				// console.log(chk)
 				// console.log('query result', res.hits.total);
+				// debugger;
 				if (chk == 0) {
 					appbaseRef.index(
 					{
@@ -122,17 +123,17 @@ const Login = withRouter(
 		
 		render(){
 			// debugger;
-			const txtstyle={width:'40%', backgroundColor:'rgba(128, 128, 128, 0.07)'};
+			const txtstyle={width:'25%', backgroundColor:'rgba(128, 128, 128, 0.07)', margin:"1%", fontSize:"20"};
 			return(
 			<div>
-			
+			<div style={{textAlign:'center'}}>
 			<form id="login" onSubmit={this.onLogin}>
 			<div style={{margin:'5%'}}>
-			<input type="text" placeholder="Name" ref="username" style={txtstyle}/><br/>
-			<input type="submit" value="login" className="waves-effect waves-light btn"/>
+			<input type="text blue accent-2" placeholder="Name" ref="username" style={txtstyle}/><br/>
+			<input type="submit" value="Enter your name" className="waves-effect waves-light btn"/>
 			</div>
 			</form>
-
+			</div>
 			{get_global}
 			</div>
 			)
