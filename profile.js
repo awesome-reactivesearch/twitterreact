@@ -134,7 +134,7 @@ export const Profile = withRouter(
 					});
 					
 				}
-				debugger;
+				// debugger;
 				return result;
 			}
 		},
@@ -189,27 +189,33 @@ export const Profile = withRouter(
 					password= {config.credential_users.password}
 					type = {config.credential_users.type}
 				>
+
 				<div className ="row" >
+				<nav style={{height:'46px'}}>
+				<div className="nav-wrapper grey lighten-5 z-depth-0">
 				<div style={navStyle}>
-					<button value="GoLocal" onClick={this.goLocal}>Personal Feed</button>
+					<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
 					
-					<button value="Logout" onClick={this.logOut}>Logout</button>
+					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
 				</div>
+				</div>
+				</nav>
 				<DataController
 						componentId="GetUserData"
 						customQuery= {CustomQuery}
 						showUI = {false}
 				/>
 				
-				<div className="col-xs-2" >
-				<label>{this.props.params.uname}</label>
+				<div className="col s2" >
+				<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 				{(localStorage.user != u)?(
 					<div>
 					<button value="Follow" onClick={this.followUser}>Follow</button>
 					</div>):console.log('logged user')}
 				</div>
 
-				<div className="col-xs-4">
+				<div className="col s4" >
+				<div style={{margin:'15%'}}>
 				<ReactiveList
 					title="Followers"
 					componentId="FollowersActuator"
@@ -224,9 +230,10 @@ export const Profile = withRouter(
 					}}
 					  />
 				</div>
+				</div>
 
-				<div className="col-xs-4">
-
+				<div className="col s4">
+				<div style={{margin:'15%'}}>
 				<ReactiveList
 					title="Following"
 					componentId="FollowingActuator"
@@ -240,6 +247,7 @@ export const Profile = withRouter(
 					 'and': ["GetUserData"]
 					}}
 					  />
+				</div>
 				</div>
 			</div>
 			</ReactiveBase>

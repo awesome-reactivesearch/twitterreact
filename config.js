@@ -102,12 +102,12 @@ class Tweet extends Component{
 		var tweetStyle = {maxWidth: 550, margin: '10px auto 10px'};
 		var unameStyle = {maxWidth: 550,margin: 'auto', color:'#0000aa'};
 		return(
-		<div style={tweetStyle}>
-			<div style={unameStyle}>
-			{this.props.usr}:
-			</div>
-			<div >
-			{this.props.msg}
+		<div className="collection">
+			<div className="collecton-item">
+				<p style={{margin:'1% 3% 1% 3%'}}>{this.props.usr}:
+				<br/>
+				{this.props.msg}
+				</p>
 			</div>
 		</div>
 			)
@@ -117,8 +117,12 @@ class Tweet extends Component{
 class User extends Component{
 	render(){
 		return(
-		<div>
-		<Link to={`/profile/${this.props.name}`}>{this.props.name}</Link>
+		<div className="collection">
+			<div className="collecton-item">
+			<p style={{margin:'1% 3% 1% 3%'}}>
+			<Link to={`/profile/${this.props.name}`}>{this.props.name}</Link>
+			</p>
+			</div>
 		</div>
 			)
 	}

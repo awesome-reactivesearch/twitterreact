@@ -16,7 +16,7 @@ const appbaseRef = new Appbase({
 	password: config.credential_tweets.password
 });
 const date = new Date();
-
+const txtstyle={width:'100%', backgroundColor:'rgba(128, 128, 128, 0.07)'};
 // const uname = 'a'
 export const Dashboard = withRouter( 
 	React.createClass({
@@ -34,7 +34,7 @@ export const Dashboard = withRouter(
 		newTweet(event) {
 			event.preventDefault()
 			console.log('newTweet')
-			var msg= document.getElementById('newtweet').value
+			var msg= this.refs.newtweet.value
 			// console.log(by)
 			appbaseRef.index({
 				type: config.credential_tweets.type,
@@ -50,7 +50,7 @@ export const Dashboard = withRouter(
 			const msgStyles = {maxWidth: 800};
 			const s = {margin:'10px auto 10px'}
 			const u = this.props.params.uname
-			const navStyle = {textAlign:'right',margin: '10px 10px 10px 10px'};
+			const navStyle = {textAlign:'right',margin: '10px'};
 			// debugger;
 			const CustomQueryTweets=function(){
 					return {
@@ -71,13 +71,16 @@ export const Dashboard = withRouter(
 			return (
 
 			<div className ="row" style={s}>
+				<nav style={{height:'46px'}}>
+				<div className="nav-wrapper grey lighten-5">
 				<div style={navStyle}>
-					<button value="Profile" onClick={this.goProfile}>Profile</button>
-					<button value="Logout" onClick={this.logOut}>Logout</button>
+					<button value="Profile" onClick={this.goProfile} className="waves-effect waves-light btn">Profile</button>
+					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
 				</div>
-					
+				</div>
+				</nav>	
 		
-					<div className="col-xs-2" style={uStyles}>
+					<div className="col s2" style={{margin:'0 5% 0 5%'}}>
 					<ReactiveBase
 						app={config.credential_users.app}
 						username= {config.credential_users.username}
@@ -85,7 +88,7 @@ export const Dashboard = withRouter(
 						type = {config.credential_users.type}
 					>
 				
-					<label>{this.props.params.uname}</label><br/>
+					<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3><br/>
 					<DataController
 						componentId="GetUsers"
 						customQuery= {CustomQueryUsers}
@@ -108,15 +111,17 @@ export const Dashboard = withRouter(
 					</div>
 				
 				<div className="row">
-					<div className="col-xs-4" style={msgStyles}>
+					<div className="col s6" style={{margin:'5% 10% 0% 10%'}}>
 					<form id="login" onSubmit={this.newTweet}>
-						<div >
-						<input type="text" placeholder="Your tweet here..." id="newtweet" />
-						<input type="submit" value="Tweet" />
+						
+						<input ref="newtweet" type="text" placeholder="Your tweet here..." style={txtstyle}/>
+						<div style={{textAlign:'right'}}>
+						<input type="submit" value="Tweet" className="waves-effect waves-light btn"/>
 						</div>
+						
 					</form>
 					</div>
-					<div className="col s8 col-xs-8" style={msgStyles}>
+					<div className="col s8" style={msgStyles}>
 					<ReactiveBase
 						app={config.credential_tweets.app}
 						username= {config.credential_tweets.username}
@@ -130,7 +135,7 @@ export const Dashboard = withRouter(
 						showUI = {false}
 					/>
 					<ReactiveList
-						title="Tweets"
+						
 						componentId="TweetsActuator"
 						appbaseField="msg"
 						from={config.ReactiveList.from}

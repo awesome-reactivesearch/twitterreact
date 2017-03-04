@@ -33,20 +33,21 @@ const CustomQuery= function(){
 
 const get_global=(
 		
-		<ReactiveBase
+			<ReactiveBase
 				app={config.credential_tweets.app}
 				username= {config.credential_tweets.username}
 				password= {config.credential_tweets.password}
 				type = {config.credential_tweets.type}
 			>
-			
+			<div>
 			<DataController
 				componentId="GetGlobal"
 				customQuery= {CustomQuery}
 				showUI = {false}
 			/>
-			
-			<div style={wellStyles}>
+			</div>
+			<div className="row" style={{margin:'0 10% 0 10%'}}>
+			<div className="col s10">
 				<ReactiveList
 					componentId="GlobalTweets"
 					appbaseField="msg"
@@ -60,7 +61,7 @@ const get_global=(
 					}}
 				/>
 			</div>
-		
+			</div>
 		</ReactiveBase>
 );
 
@@ -121,15 +122,16 @@ const Login = withRouter(
 		
 		render(){
 			// debugger;
-			const buttonStyles = {width: '60%' , 'marginTop': '3%', 'fontSize': '1.5em'}
+			const txtstyle={width:'40%', backgroundColor:'rgba(128, 128, 128, 0.07)'};
 			return(
 			<div>
-					<form id="login" onSubmit={this.onLogin}>
-			<div style={wellStyles}>
-			<input type="text" placeholder="Name" ref="username" style={buttonStyles}/><br/>
-			<input type="submit" style={buttonStyles} value="login" />
+			
+			<form id="login" onSubmit={this.onLogin}>
+			<div style={{margin:'5%'}}>
+			<input type="text" placeholder="Name" ref="username" style={txtstyle}/><br/>
+			<input type="submit" value="login" className="waves-effect waves-light btn"/>
 			</div>
-					</form>
+			</form>
 
 			{get_global}
 			</div>
