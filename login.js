@@ -98,7 +98,7 @@ const Login = withRouter(
 
 				if (chk!=0){
 					localStorage.ufollowing=(res.hits.hits[0]._source.following)
-					debugger;
+					// debugger;
 				}
 				else{
 					localStorage.ufollowing =[]

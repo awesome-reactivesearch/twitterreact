@@ -5,10 +5,10 @@ import {
 	ReactiveBase,
 	ReactiveList,
 	DataController,
-	TextField,
-	ToggleButton
+	TextField
 } from '@appbaseio/reactivebase';
 import {config, onDataTweets, onDataUsers} from './config.js';
+import {personalTweets} from './tweets.js'
 const appbaseRef = new Appbase({
 	url: config.credential_tweets.url,
 	appname: config.credential_tweets.app,
@@ -122,32 +122,9 @@ export const Dashboard = withRouter(
 					</form>
 					</div>
 					<div className="col s8" style={msgStyles}>
-					<ReactiveBase
-						app={config.credential_tweets.app}
-						username= {config.credential_tweets.username}
-						password= {config.credential_tweets.password}
-						type = {config.credential_tweets.type}
-					>
+					
 			
-					<DataController
-						componentId="GetTweets"
-						customQuery= {CustomQueryTweets}
-						showUI = {false}
-					/>
-					<ReactiveList
-						
-						componentId="TweetsActuator"
-						appbaseField="msg"
-						from={config.ReactiveList.from}
-						size={config.ReactiveList.size}
-						stream={true}
-						requestOnScroll={true}
-						onData = {onDataTweets}
-						react={{
-						'and': ["GetTweets"]
-						}}
-						/>
-						</ReactiveBase>
+					{personalTweets(u)}
 					</div>
 				</div>
 			</div>

@@ -9,7 +9,7 @@ import {
 	ToggleButton
 } from '@appbaseio/reactivebase';
 import {config,onDataUsers, User} from './config.js';
-
+import {personalTweets} from './tweets.js'
 const appbaseRef = new Appbase({
 	url: config.credential_users.url,
 	appname: config.credential_users.app,
@@ -195,7 +195,7 @@ export const Profile = withRouter(
 		chkFollowing(){
 			u = this.props.params.uname
 			let followingList = localStorage.ufollowing
-			debugger;
+			// debugger;
 			console.log(followingList.indexOf(u))
 			if (followingList.indexOf(u) == -1){
 				return true;
@@ -224,71 +224,75 @@ export const Profile = withRouter(
 				>
 
 				<div className ="row" >
-				<nav style={{height:'46px'}} className="z-depth-0">
-				<div className="nav-wrapper grey lighten-3">
-				<div style={navStyle}>
-					<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
-					
-					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
-				</div>
-				</div>
-				</nav>
-				<DataController
-						componentId="GetUserData"
-						customQuery= {CustomQuery}
-						showUI = {false}
-				/>
+					<nav style={{height:'46px'}} className="z-depth-0">
+					<div className="nav-wrapper grey lighten-3">
+						<div style={navStyle}>
+							<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
+							
+							<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
+						</div>
+					</div>
+					</nav>
+					<DataController
+							componentId="GetUserData"
+							customQuery= {CustomQuery}
+							showUI = {false}
+					/>
 				
-				<div className="col s2" >
-				<img style={{height:'100px', marginLeft:'25%', marginTop:'15%'}} src="../user@2x.png" />
-				<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
-				{(localStorage.user != u)?(
-					<div style={{textAlign:'center'}}>
-					{(this.chkFollowing())?(
-					<button value="Follow" onClick={this.followUser}>Follow</button>
-					):(<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>)}
+					<div className="col s2" >
+						<img style={{height:'100px', marginLeft:'25%', marginTop:'15%'}} src="../user@2x.png" />
+						<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
+						{(localStorage.user != u)?(
+							<div style={{textAlign:'center'}}>
+							{(this.chkFollowing())?(
+							<button value="Follow" onClick={this.followUser}>Follow</button>
+							):(<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>)}
 
-					</div>):console.log('logged user')}
-				</div>
+							</div>):console.log('logged user')}
+					</div>
 
-				<div className="col s4" >
-				<div style={{margin:'15%'}}>
-				<ReactiveList
-					title="Followers"
-					componentId="FollowersActuator"
-					appbaseField="followers"
-					from={config.ReactiveList.from}
-					size={config.ReactiveList.size}
-					stream={true}
-					requestOnScroll={true}
-					onData = {this.onDataFollowers}
-					react={{
-					 'and': ["GetUserData"]
-					}}
-					  />
-				</div>
-				</div>
+					<div className="col s4" >
+						<div style={{margin:'15%'}}>
+						<ReactiveList
+							title="Followers"
+							componentId="FollowersActuator"
+							appbaseField="followers"
+							from={config.ReactiveList.from}
+							size={config.ReactiveList.size}
+							stream={true}
+							requestOnScroll={true}
+							onData = {this.onDataFollowers}
+							react={{
+							 'and': ["GetUserData"]
+							}}
+							  />
+						</div>
+					</div>
 
-				<div className="col s4">
-				<div style={{margin:'15%'}}>
-				<ReactiveList
-					title="Following"
-					componentId="FollowingActuator"
-					appbaseField="following"
-					from={config.ReactiveList.from}
-					size={config.ReactiveList.size}
-					stream={true}
-					requestOnScroll={true}
-					onData = {this.onDataFollowing}
-					react={{
-					 'and': ["GetUserData"]
-					}}
-					  />
-				</div>
-				</div>
+					<div className="col s4">
+						<div style={{margin:'15%'}}>
+						<ReactiveList
+							title="Following"
+							componentId="FollowingActuator"
+							appbaseField="following"
+							from={config.ReactiveList.from}
+							size={config.ReactiveList.size}
+							stream={true}
+							requestOnScroll={true}
+							onData = {this.onDataFollowing}
+							react={{
+							 'and': ["GetUserData"]
+							}}
+							  />
+						</div>
+					</div>
+				{personalTweets(u)}
 			</div>
+			
 			</ReactiveBase>
+
 				)
+			
 		}
 	})
 )
