@@ -202,20 +202,24 @@ export const Profile = withRouter(
 			}
 			return false
 		},
+
 		render(){
 			const navStyle = {textAlign:'right',margin: '0'};
 			u = this.props.params.uname
 			let loggedin = localStorage.user;
-			const CustomQuery=function(){
-					return {
-							query: {
-								match: {name:u}
-							}
-						};	
-				};
+			// console.log("user"+u)
+			const CustomQuery = function(){
+				// debugger;
+				// console.log("user1"+this.props.params.uname)
+				return {
+						query: {
+							match: {name:u}
+						}
+					};	
+			};
 			// debugger;
 			return (
-
+				<div className ="row" >
 				<ReactiveBase
 					app={config.credential_users.app}
 					username= {config.credential_users.username}
@@ -223,7 +227,7 @@ export const Profile = withRouter(
 					type = {config.credential_users.type}
 				>
 
-				<div className ="row" >
+				
 					<nav style={{height:'46px'}} className="z-depth-0">
 					<div className="nav-wrapper grey lighten-3">
 						<div style={navStyle}>
@@ -235,7 +239,7 @@ export const Profile = withRouter(
 					</nav>
 					<DataController
 							componentId="GetUserData"
-							customQuery= {CustomQuery}
+							customQuery= {this.CustomQuery}
 							showUI = {false}
 					/>
 				
@@ -286,11 +290,12 @@ export const Profile = withRouter(
 							  />
 						</div>
 					</div>
-				{personalTweets(u)}
-			</div>
+				
+			
 			
 			</ReactiveBase>
 
+			</div>
 				)
 			
 		}
