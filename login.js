@@ -5,6 +5,7 @@ import {
 	ReactiveBase,
 	ReactiveList,
 	DataController,
+	ReactivePaginatedList,
 	TextField,
 	ToggleButton
 } from '@appbaseio/reactivebase';
@@ -48,12 +49,13 @@ const get_global=(
 			</div>
 			<div className="row" style={{margin:'0 10% 0 10%'}}>
 			<div className="col s10">
-				<ReactiveList
+				<ReactivePaginatedList
 					componentId="GlobalTweets"
 					appbaseField="msg"
 					title="Public Tweets"
-					from={config.ReactiveList.from}
-					size={config.ReactiveList.size}
+					from={config.ReactivePaginatedList.from}
+					size={config.ReactivePaginatedList.size}
+					sortOptions = {config.tweetsSortOptions}
 					onData={onDataTweets}
 					requestOnScroll={true}
 					react={{

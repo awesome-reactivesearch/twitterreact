@@ -33,13 +33,29 @@ const config = {
 			}
 		},
 	ReactiveList: {
-			size: 25,
+			size: 100,
 			from: 0
 		},
-		ToggleButton: {
+	ReactivePaginatedList: {
+			size: 10,
+			from: 0
+		},
+	ToggleButton: {
 			defaultSelected: [values[0].value],
 			data: values
 		},
+	tweetsSortOptions:
+		[{
+			"label":"newest first",
+			"appbaseField":"createdAt",
+			"sortBy":"desc"
+		},
+		{
+			"label":"oldest first",
+			"appbaseField":"createdAt",
+			"sortBy":"asc"
+		}]
+	
 }
 
 var onDataUsers = function(response, err){
