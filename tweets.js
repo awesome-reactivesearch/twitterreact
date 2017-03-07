@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
 	ReactiveBase,
-	ReactiveList,
+	ReactivePaginatedList,
 	DataController,
 } from '@appbaseio/reactivebase';
 import {config, onDataTweets, onDataUsers} from './config.js';
@@ -37,7 +37,7 @@ const personalTweets = function(user){
 			customQuery= {CustomQueryTweets}
 			showUI = {false}
 		/>
-		<ReactiveList
+		<ReactivePaginatedList
 			
 			componentId="TweetsActuator"
 			appbaseField="msg"
@@ -46,6 +46,7 @@ const personalTweets = function(user){
 			stream={true}
 			requestOnScroll={true}
 			onData = {onDataTweets}
+			sortOptions = {config.tweetsSortOptions}
 			react={{
 			'and': ["GetTweets"]
 			}}
