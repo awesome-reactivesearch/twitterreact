@@ -151,11 +151,19 @@ const Login = withRouter(
 	})
 )
 
+function requireAuth(nextState, replace) {
+  if (localStorage.user === undefined) {
+    replace({
+      pathname: '/',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
 
 ReactDom.render((
 	<Router history={browserHistory}>
 		<Route path="/" component={Login} />
-		<Route path=":uname" component={Dashboard} />
+		<Route path=":uname" component={Dashboard} onEnter={requireAuth}/>
 		<Route path="profile/:uname" component={Profile} />
 	</Router>
 ), document.getElementById('app'));
