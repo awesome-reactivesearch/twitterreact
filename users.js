@@ -20,18 +20,17 @@ var usr;
 var listFollowers = function(user, onDataFollowers){
 	
 	usr=user;
-	var CustomQueryUsers=function(){
-		// debugger;
-					return {
-							query: {
-								match: {name:usr}
-							}
-						};	
-				};
-	// debugger;
+	// var CustomQueryUsers=function(){
+	// 	// debugger;
+	// 				return {
+	// 						query: {
+	// 							match: {name:usr}
+	// 						}
+	// 					};	
+	// 			};
+	debugger;
 	return (
 		<div>
-		Cool
 		<ReactiveBase
 			app={config.credential_users.app}
 			username= {config.credential_users.username}
@@ -43,7 +42,7 @@ var listFollowers = function(user, onDataFollowers){
 			componentId="GetUser"
 			customQuery= {()=>({
 							query: {
-								match: {name:usr}
+								match: {name:user}
 							}
 						})}
 			showUI = {false}
@@ -82,7 +81,7 @@ var listFollowing = function(user, onDataFollowing){
 			componentId="GetUser"
 			customQuery= {()=>({
 							query: {
-								match: {name:usr}
+								match: {name:user}
 							}
 						})}
 			showUI = {false}

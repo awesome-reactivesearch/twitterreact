@@ -154,10 +154,11 @@ export const Profile = withRouter(
 				console.log(combineData)
 				if(combineData.length!=0){
 					var following = combineData[0]._source.following
-					result = following.map((markerData, index) => {
-						return (<User name={markerData} />)	
-					});
-					
+					if(following!=undefined){
+						result = following.map((markerData, index) => {
+							return (<User name={markerData} />)	
+						});
+					}
 				}
 				// debugger;
 				return result;
@@ -184,9 +185,11 @@ export const Profile = withRouter(
 				console.log(combineData)
 				if(combineData.length!=0){
 					var followers = combineData[0]._source.followers
-					result = followers.map((markerData, index) => {
-						return (<User name={markerData} />)	
-					});
+					if(followers!=undefined){
+						result = followers.map((markerData, index) => {
+							return (<User name={markerData} />)	
+						});
+					}	
 					
 				}
 				
@@ -198,7 +201,7 @@ export const Profile = withRouter(
 			u = this.props.params.uname
 			let followingList = localStorage.ufollowing
 			// debugger;
-			console.log(followingList.indexOf(u))
+			// console.log(followingList.indexOf(u))
 			if (followingList.indexOf(u) == -1){
 				return true;
 			}
@@ -228,14 +231,26 @@ export const Profile = withRouter(
 						{(localStorage.user != u)?(
 							<div style={{textAlign:'center'}}>
 							{(this.chkFollowing())?(
-							<button value="Follow" onClick={this.followUser}>Follow</button>
-							):(<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>)}
+							<div>
+								<button value="Follow" onClick={this.followUser}>Follow</button>
+								{listFollowers(u,this.onDataFollowers)}
+								{listFollowing(u,this.onDataFollowing)}
+							</div>
+							):(
+							<div>
+							<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>
+							{listFollowers(u,this.onDataFollowers)}
+							{listFollowing(u,this.onDataFollowing)}
+							</div>)}
 
-							</div>):console.log('logged user')}
+							</div>):(<div>
+							
+							{listFollowers(u,this.onDataFollowers)}
+							{listFollowing(u,this.onDataFollowing)}
+							</div>)}
 					</div>
 					<div>
-					{listFollowers(u,this.onDataFollowers)}
-					{listFollowing(u,this.onDataFollowing)}
+						
 					</div>
 			</div>
 				)
