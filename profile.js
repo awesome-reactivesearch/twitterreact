@@ -10,6 +10,8 @@ import {
 } from '@appbaseio/reactivebase';
 import {config,onDataUsers, User} from './config.js';
 import {personalTweets} from './tweets.js'
+import {listFollowing, listFollowers} from './users.js'
+
 const appbaseRef = new Appbase({
 	url: config.credential_users.url,
 	appname: config.credential_users.app,
@@ -150,7 +152,7 @@ export const Profile = withRouter(
 				}
 				console.log("combineData is:")
 				console.log(combineData)
-				if(combineData){
+				if(combineData.length!=0){
 					var following = combineData[0]._source.following
 					result = following.map((markerData, index) => {
 						return (<User name={markerData} />)	
@@ -180,7 +182,7 @@ export const Profile = withRouter(
 				}
 				console.log("combineData is:")
 				console.log(combineData)
-				if(combineData){
+				if(combineData.length!=0){
 					var followers = combineData[0]._source.followers
 					result = followers.map((markerData, index) => {
 						return (<User name={markerData} />)	
@@ -207,42 +209,19 @@ export const Profile = withRouter(
 			const navStyle = {textAlign:'right',margin: '0'};
 			u = this.props.params.uname
 			let loggedin = localStorage.user;
-			// console.log("user"+u)
-			const CustomQuery = function(){
-				// debugger;
-				// console.log("user1"+this.props.params.uname)
-				return {
-						query: {
-							match: {name:u}
-						}
-					};	
-			};
+			
 			// debugger;
 			return (
 				<div className ="row" >
-				<ReactiveBase
-					app={config.credential_users.app}
-					username= {config.credential_users.username}
-					password= {config.credential_users.password}
-					type = {config.credential_users.type}
-				>
-
-				
-					<nav style={{height:'46px'}} className="z-depth-0">
+				<nav style={{height:'46px'}} className="z-depth-0">
 					<div className="nav-wrapper grey lighten-3">
 						<div style={navStyle}>
 							<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
-							
 							<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
 						</div>
 					</div>
-					</nav>
-					<DataController
-							componentId="GetUserData"
-							customQuery= {this.CustomQuery}
-							showUI = {false}
-					/>
-				
+				</nav>
+					
 					<div className="col s2" >
 						<img style={{height:'100px', marginLeft:'25%', marginTop:'15%'}} src="../user@2x.png" />
 						<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
@@ -254,47 +233,10 @@ export const Profile = withRouter(
 
 							</div>):console.log('logged user')}
 					</div>
-
-					<div className="col s4" >
-						<div style={{margin:'15%'}}>
-						<ReactiveList
-							title="Followers"
-							componentId="FollowersActuator"
-							appbaseField="followers"
-							from={config.ReactiveList.from}
-							size={config.ReactiveList.size}
-							stream={true}
-							requestOnScroll={true}
-							onData = {this.onDataFollowers}
-							react={{
-							 'and': ["GetUserData"]
-							}}
-							  />
-						</div>
+					<div>
+					{listFollowers(u,this.onDataFollowers)}
+					{listFollowing(u,this.onDataFollowing)}
 					</div>
-
-					<div className="col s4">
-						<div style={{margin:'15%'}}>
-						<ReactiveList
-							title="Following"
-							componentId="FollowingActuator"
-							appbaseField="following"
-							from={config.ReactiveList.from}
-							size={config.ReactiveList.size}
-							stream={true}
-							requestOnScroll={true}
-							onData = {this.onDataFollowing}
-							react={{
-							 'and': ["GetUserData"]
-							}}
-							  />
-						</div>
-					</div>
-				
-			
-			
-			</ReactiveBase>
-
 			</div>
 				)
 			

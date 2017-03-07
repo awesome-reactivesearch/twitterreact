@@ -14,6 +14,7 @@ const appbaseRef = new Appbase({
 });
 var usr;
 const CustomQueryTweets=function(){
+		// debugger;
 					return {
 							query: {
 								match: {by:usr}
@@ -21,7 +22,7 @@ const CustomQueryTweets=function(){
 						};	
 				};
 const personalTweets = function(user){
-	debugger;
+	// debugger;
 	usr=user;
 	return (
 		<div>

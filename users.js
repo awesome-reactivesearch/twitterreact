@@ -4,92 +4,109 @@ import {
 	ReactiveList,
 	DataController,
 } from '@appbaseio/reactivebase';
-import {config, onDataTweets, onDataUsers} from './config.js';
+import {config,onDataUsers, User} from './config.js';
 
 const appbaseRef = new Appbase({
-	url: config.credential_userts.url,
-	appname: config.credential_userts.app,
-	username: config.credential_userts.username,
+	url: config.credential_users.url,
+	appname: config.credential_users.app,
+	username: config.credential_users.username,
 	password: config.credential_users.password
 });
 var usr;
-const CustomQueryUsers=function(){
+
+
+
+
+var listFollowers = function(user, onDataFollowers){
+	
+	usr=user;
+	var CustomQueryUsers=function(){
 		// debugger;
 					return {
 							query: {
-								match: {by:usr}
+								match: {name:usr}
 							}
 						};	
 				};
-
-const listFollowers = function(user, onDataFollowers){
 	// debugger;
-	usr=user;
 	return (
 		<div>
+		Cool
 		<ReactiveBase
-			app={config.credential_userts.app}
-			username= {config.credential_userts.username}
-			password= {config.credential_userts.password}
-			type = {config.credential_userts.type}
+			app={config.credential_users.app}
+			username= {config.credential_users.username}
+			password= {config.credential_users.password}
+			type = {config.credential_users.type}
 		>
 		<DataController
+		
 			componentId="GetUser"
-			customQuery= {CustomQueryUsers}
+			customQuery= {()=>({
+							query: {
+								match: {name:usr}
+							}
+						})}
 			showUI = {false}
 		/>
 		<ReactiveList
 			title= "Followers"
 			componentId="FollowersActuators"
-			appbaseField="msg"
+			appbaseField="followers"
 			from={config.ReactiveList.from}
 			size={config.ReactiveList.size}
 			stream={true}
 			requestOnScroll={true}
 			onData = {onDataFollowers}
 			react={{
-			'and': ["GetUsers"]
+				'and': ["GetUser"]
 			}}
 			/>
 		</ReactiveBase>
 		</div>
 		)
 }
-const listFollowing = function(user, onDataFollowing){
+
+var listFollowing = function(user, onDataFollowing){
 	// debugger;
 	usr=user;
+
 	return (
 		<div>
 		<ReactiveBase
-			app={config.credential_userts.app}
-			username= {config.credential_userts.username}
-			password= {config.credential_userts.password}
-			type = {config.credential_userts.type}
+			app={config.credential_users.app}
+			username= {config.credential_users.username}
+			password= {config.credential_users.password}
+			type = {config.credential_users.type}
 		>
 		<DataController
 			componentId="GetUser"
-			customQuery= {CustomQueryUsers}
+			customQuery= {()=>({
+							query: {
+								match: {name:usr}
+							}
+						})}
 			showUI = {false}
 		/>
 		<ReactiveList
 			title= "Following"
 			componentId="FollowingActuators"
-			appbaseField="msg"
+			appbaseField="following"
 			from={config.ReactiveList.from}
 			size={config.ReactiveList.size}
 			stream={true}
 			requestOnScroll={true}
 			onData = {onDataFollowing}
 			react={{
-			'and': ["GetUsers"]
+				'and': ["GetUser"]
 			}}
 			/>
 		</ReactiveBase>
 		</div>
 		)
-}
+};
 
 
 module.exports = {
-	personalTweets: personalTweets
+	listFollowing: listFollowing,
+	listFollowers: listFollowers
 };
