@@ -28,7 +28,7 @@ var listFollowers = function(user, onDataFollowers){
 	// 						}
 	// 					};	
 	// 			};
-	debugger;
+	// debugger;
 	return (
 		<div>
 		<ReactiveBase

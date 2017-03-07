@@ -185,9 +185,14 @@ export const Profile = withRouter(
 				console.log(combineData)
 				if(combineData.length!=0){
 					var followers = combineData[0]._source.followers
+					var name = combineData[0]._source.name
+					var unfollowflg=false
+					if(name == localStorage.user){
+						unfollowflg=true;
+					}
 					if(followers!=undefined){
 						result = followers.map((markerData, index) => {
-							return (<User name={markerData} />)	
+							return (<User name={markerData} unfollowflg={unfollowflg}/>)	
 						});
 					}	
 					
@@ -212,7 +217,7 @@ export const Profile = withRouter(
 			const navStyle = {textAlign:'right',margin: '0'};
 			u = this.props.params.uname
 			let loggedin = localStorage.user;
-			
+			const msgStyles = {maxWidth: 800, marginLeft:'10%', marginTop:'5%'};
 			// debugger;
 			return (
 				<div className ="row" >
@@ -225,9 +230,8 @@ export const Profile = withRouter(
 					</div>
 				</nav>
 					
-					<div className="col s2" >
-						<img style={{height:'100px', marginLeft:'25%', marginTop:'15%'}} src="../user@2x.png" />
-						<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
+					<div className="col s12 m4 l3" >
+						
 						{(localStorage.user != u)?(
 							<div style={{textAlign:'center'}}>
 							{(this.chkFollowing())?(
@@ -249,8 +253,10 @@ export const Profile = withRouter(
 							{listFollowing(u,this.onDataFollowing)}
 							</div>)}
 					</div>
-					<div>
-						
+					<div className="col s12 m8 l9" style={msgStyles}>
+						<img style={{height:'75px'}} src="../user@2x.png" />
+						<h3 >{this.props.params.uname}</h3>
+						{personalTweets(this.props.params.uname)}
 					</div>
 			</div>
 				)
