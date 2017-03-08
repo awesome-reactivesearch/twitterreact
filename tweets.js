@@ -25,7 +25,7 @@ const personalTweets = function(user){
 	// debugger;
 	usr=user;
 	return (
-		<div>
+		<div className="z-depth-1">
 		<ReactiveBase
 			app={config.credential_tweets.app}
 			username= {config.credential_tweets.username}

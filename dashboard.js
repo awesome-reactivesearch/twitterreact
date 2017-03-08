@@ -71,29 +71,31 @@ export const Dashboard = withRouter(
 			return (
 
 			<div className ="row" >
-				<nav style={{height:'50px'}} className="z-depth-0">
-				<div className="nav-wrapper grey lighten-3">
+				<nav className="nav-wrapper grey lighten-3 z-depth-100" style={{height:'50px', position:'fixed', top:0}}>
 				<div style={navStyle}>
 					<button value="Profile" onClick={this.goProfile} className="waves-effect waves-light btn" >Profile</button>
 					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn" >Logout</button>
 				</div>
-				</div>
+				
 				</nav>	
 		
-					<div className="col s2" style={{margin:'0 5% 0 5%'}}>
+					<div className="col s2" style={{margin:'5% 5% 0 2%'}}>
 					<ReactiveBase
 						app={config.credential_users.app}
 						username= {config.credential_users.username}
 						password= {config.credential_users.password}
 						type = {config.credential_users.type}
 					>
-					<img style={{height:'100px', marginLeft:'25%', marginTop:'15%'}} src="user@2x.png" />
+					<div className="z-depth-1">
+					<img style={{height:'100px', margin:'0 25% 15% 15%'}} src="user@2x.png" />
 					<h3 style={{textAlign:'center', marginTop:'10px'}}>{this.props.params.uname}</h3><br/>
+					</div>
 					<DataController
 						componentId="GetUsers"
 						customQuery= {CustomQueryUsers}
 						showUI = {false}
 					/>
+					<div className = "z-depth-1" style={{marginTop:'5%'}}>
 					<ReactiveList
 						title="Users"
 						componentId="UsersActuator"
@@ -107,11 +109,13 @@ export const Dashboard = withRouter(
 							'and': ["GetUsers"]
 						}}
 					/>
+					</div>
 					</ReactiveBase>
+					
 					</div>
 				
 				<div className="row">
-					<div className="col s6" style={{margin:'5% 10% 0% 10%'}}>
+					<div className="col s6" style={{margin:'10% 10% 0% 5%'}}>
 					<form id="login" onSubmit={this.newTweet}>
 						
 						<input ref="newtweet" type="text" placeholder="Your tweet here..." style={txtstyle}/>
@@ -121,7 +125,7 @@ export const Dashboard = withRouter(
 						
 					</form>
 					</div>
-					<div className="col s8" style={msgStyles}>
+					<div className="col s6 z-depth-1">
 					
 			
 					{personalTweets(u)}

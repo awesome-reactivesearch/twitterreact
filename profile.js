@@ -221,7 +221,7 @@ export const Profile = withRouter(
 			// debugger;
 			return (
 				<div className ="row" >
-				<nav style={{height:'46px'}} className="z-depth-0">
+				<nav className="nav-wrapper grey lighten-3 z-depth-100" style={{height:'50px', position:'fixed', top:0}}>
 					<div className="nav-wrapper grey lighten-3">
 						<div style={navStyle}>
 							<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
@@ -253,10 +253,14 @@ export const Profile = withRouter(
 							{listFollowing(u,this.onDataFollowing)}
 							</div>)}
 					</div>
-					<div className="col s12 m8 l9" style={msgStyles}>
-						<img style={{height:'75px'}} src="../user@2x.png" />
-						<h3 >{this.props.params.uname}</h3>
+					<div className="col s12 m8 l91" style={msgStyles}>
+						<div className="z-depth-1" style={{width:'25%'}}>
+							<img style={{height:'15%',margin:'15% 15% 15% 15%'}} src="../user@2x.png" />
+							<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
+						</div>
+						<div className = "z-depth-1">
 						{personalTweets(this.props.params.uname)}
+						</div>
 					</div>
 			</div>
 				)
