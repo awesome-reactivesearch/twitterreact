@@ -33,20 +33,6 @@ const CustomQuery= function(){
 };
 
 const get_global=(
-		
-			<ReactiveBase
-				app={config.credential_tweets.app}
-				username= {config.credential_tweets.username}
-				password= {config.credential_tweets.password}
-				type = {config.credential_tweets.type}
-			>
-			<div>
-			<DataController
-				componentId="GetGlobal"
-				customQuery= {CustomQuery}
-				showUI = {false}
-			/>
-			</div>
 			<div className="row" style={{margin:'0 10% 0 10%'}}>
 			<div className="col s10">
 				<ReactivePaginatedList
@@ -59,12 +45,11 @@ const get_global=(
 					onData={onDataTweets}
 					requestOnScroll={true}
 					react={{
-						'and': ["GetGlobal"]
+						'and':['SearchTweet']
 					}}
 				/>
 			</div>
 			</div>
-		</ReactiveBase>
 );
 
 var t = true;
@@ -135,18 +120,37 @@ const Login = withRouter(
 		
 		render(){
 			// debugger;
-			const txtstyle={width:'25%', backgroundColor:'rgba(128, 128, 128, 0.07)', margin:"1%", fontSize:"20"};
+			const txtstyle={width:'85%', backgroundColor:'#fafafa', margin:'3%', fontSize:"20px"};
 			return(
 			<div>
-			<div style={{textAlign:'center'}}>
+			<ReactiveBase
+				app={config.credential_tweets.app}
+				username= {config.credential_tweets.username}
+				password= {config.credential_tweets.password}
+				type = {config.credential_tweets.type}
+			>
+			<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
+			<div style={{width:'25%', margin:'3px 3px 3px 3px'}}>
+				<TextField
+					componentId = "SearchTweet"
+					appbaseField = "msg"
+					placeholder = "Search tweet here..."
+					// executeQuery={true}
+					customQuery= {CustomQuery}
+				/>
+			</div>
+			</nav>
+			<div className="z-depth-1 grey lighten-2" style={{width:'25%',margin:'75px 0 0 30%',textAlign:'center'}}>
 			<form id="login" onSubmit={this.onLogin}>
 			<div style={{margin:'5%'}}>
 			<input type="text blue accent-2" placeholder="Name" ref="username" style={txtstyle}/><br/>
-			<input type="submit" value="Enter your name" className="waves-effect waves-light btn"/>
+			<input type="submit" style={{width:'85%', margin:'0 0 3% 0',padding:'2px'}} value="Enter your name" className="waves-effect waves-light btn"/>
 			</div>
 			</form>
 			</div>
+			
 			{get_global}
+			</ReactiveBase>
 			</div>
 			)
 		}

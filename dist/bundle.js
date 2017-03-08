@@ -41511,7 +41511,7 @@ var personalTweets = function personalTweets(user) {
 	usr = user;
 	return _react2.default.createElement(
 		'div',
-		null,
+		{ className: 'z-depth-1' },
 		_react2.default.createElement(
 			_reactivebase.ReactiveBase,
 			{
@@ -76167,42 +76167,24 @@ var CustomQuery = function CustomQuery() {
 };
 
 var get_global = _react2.default.createElement(
-	_reactivebase.ReactiveBase,
-	{
-		app: _config.config.credential_tweets.app,
-		username: _config.config.credential_tweets.username,
-		password: _config.config.credential_tweets.password,
-		type: _config.config.credential_tweets.type
-	},
+	'div',
+	{ className: 'row', style: { margin: '0 10% 0 10%' } },
 	_react2.default.createElement(
 		'div',
-		null,
-		_react2.default.createElement(_reactivebase.DataController, {
-			componentId: 'GetGlobal',
-			customQuery: CustomQuery,
-			showUI: false
+		{ className: 'col s10' },
+		_react2.default.createElement(_reactivebase.ReactivePaginatedList, {
+			componentId: 'GlobalTweets',
+			appbaseField: 'msg',
+			title: 'Public Tweets',
+			from: _config.config.ReactivePaginatedList.from,
+			size: _config.config.ReactivePaginatedList.size,
+			sortOptions: _config.config.tweetsSortOptions,
+			onData: _config.onDataTweets,
+			requestOnScroll: true,
+			react: {
+				'and': ['SearchTweet']
+			}
 		})
-	),
-	_react2.default.createElement(
-		'div',
-		{ className: 'row', style: { margin: '0 10% 0 10%' } },
-		_react2.default.createElement(
-			'div',
-			{ className: 'col s10' },
-			_react2.default.createElement(_reactivebase.ReactivePaginatedList, {
-				componentId: 'GlobalTweets',
-				appbaseField: 'msg',
-				title: 'Public Tweets',
-				from: _config.config.ReactivePaginatedList.from,
-				size: _config.config.ReactivePaginatedList.size,
-				sortOptions: _config.config.tweetsSortOptions,
-				onData: _config.onDataTweets,
-				requestOnScroll: true,
-				react: {
-					'and': ["GetGlobal"]
-				}
-			})
-		)
 	)
 );
 
@@ -76268,26 +76250,50 @@ var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 	},
 	render: function render() {
 		// debugger;
-		var txtstyle = { width: '25%', backgroundColor: 'rgba(128, 128, 128, 0.07)', margin: "1%", fontSize: "20" };
+		var txtstyle = { width: '85%', backgroundColor: '#fafafa', margin: '3%', fontSize: "20px" };
 		return _react2.default.createElement(
 			'div',
 			null,
 			_react2.default.createElement(
-				'div',
-				{ style: { textAlign: 'center' } },
+				_reactivebase.ReactiveBase,
+				{
+					app: _config.config.credential_tweets.app,
+					username: _config.config.credential_tweets.username,
+					password: _config.config.credential_tweets.password,
+					type: _config.config.credential_tweets.type
+				},
 				_react2.default.createElement(
-					'form',
-					{ id: 'login', onSubmit: this.onLogin },
+					'nav',
+					{ style: { color: 'black', backgroundColor: '#dadada', height: '60px', position: 'fixed' } },
 					_react2.default.createElement(
 						'div',
-						{ style: { margin: '5%' } },
-						_react2.default.createElement('input', { type: 'text blue accent-2', placeholder: 'Name', ref: 'username', style: txtstyle }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'submit', value: 'Enter your name', className: 'waves-effect waves-light btn' })
+						{ style: { width: '25%', margin: '3px 3px 3px 3px' } },
+						_react2.default.createElement(_reactivebase.TextField, {
+							componentId: 'SearchTweet',
+							appbaseField: 'msg',
+							placeholder: 'Search tweet here...'
+							// executeQuery={true}
+							, customQuery: CustomQuery
+						})
 					)
-				)
-			),
-			get_global
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'z-depth-1 grey lighten-2', style: { width: '25%', margin: '75px 0 0 30%', textAlign: 'center' } },
+					_react2.default.createElement(
+						'form',
+						{ id: 'login', onSubmit: this.onLogin },
+						_react2.default.createElement(
+							'div',
+							{ style: { margin: '5%' } },
+							_react2.default.createElement('input', { type: 'text blue accent-2', placeholder: 'Name', ref: 'username', style: txtstyle }),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('input', { type: 'submit', style: { width: '85%', margin: '0 0 3% 0', padding: '2px' }, value: 'Enter your name', className: 'waves-effect waves-light btn' })
+						)
+					)
+				),
+				get_global
+			)
 		);
 	}
 }));
@@ -84466,29 +84472,25 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 			{ className: 'row' },
 			_react2.default.createElement(
 				'nav',
-				{ style: { height: '50px' }, className: 'z-depth-0' },
+				{ className: 'nav-wrapper grey lighten-3 z-depth-100', style: { height: '50px', position: 'fixed', top: 0 } },
 				_react2.default.createElement(
 					'div',
-					{ className: 'nav-wrapper grey lighten-3' },
+					{ style: navStyle },
 					_react2.default.createElement(
-						'div',
-						{ style: navStyle },
-						_react2.default.createElement(
-							'button',
-							{ value: 'Profile', onClick: this.goProfile, className: 'waves-effect waves-light btn' },
-							'Profile'
-						),
-						_react2.default.createElement(
-							'button',
-							{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
-							'Logout'
-						)
+						'button',
+						{ value: 'Profile', onClick: this.goProfile, className: 'waves-effect waves-light btn' },
+						'Profile'
+					),
+					_react2.default.createElement(
+						'button',
+						{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
+						'Logout'
 					)
 				)
 			),
 			_react2.default.createElement(
 				'div',
-				{ className: 'col s2', style: { margin: '0 5% 0 5%' } },
+				{ className: 'col s2', style: { margin: '5% 5% 0 2%' } },
 				_react2.default.createElement(
 					_reactivebase.ReactiveBase,
 					{
@@ -84497,31 +84499,39 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 						password: _config.config.credential_users.password,
 						type: _config.config.credential_users.type
 					},
-					_react2.default.createElement('img', { style: { height: '100px', marginLeft: '25%', marginTop: '15%' }, src: 'user@2x.png' }),
 					_react2.default.createElement(
-						'h3',
-						{ style: { textAlign: 'center', marginTop: '10px' } },
-						this.props.params.uname
+						'div',
+						{ className: 'z-depth-1' },
+						_react2.default.createElement('img', { style: { height: '100px', margin: '0 25% 15% 15%' }, src: 'user@2x.png' }),
+						_react2.default.createElement(
+							'h3',
+							{ style: { textAlign: 'center', marginTop: '10px' } },
+							this.props.params.uname
+						),
+						_react2.default.createElement('br', null)
 					),
-					_react2.default.createElement('br', null),
 					_react2.default.createElement(_reactivebase.DataController, {
 						componentId: 'GetUsers',
 						customQuery: CustomQueryUsers,
 						showUI: false
 					}),
-					_react2.default.createElement(_reactivebase.ReactiveList, {
-						title: 'Users',
-						componentId: 'UsersActuator',
-						appbaseField: 'name',
-						from: _config.config.ReactiveList.from,
-						size: _config.config.ReactiveList.size,
-						stream: true,
-						requestOnScroll: true,
-						onData: _config.onDataUsers,
-						react: {
-							'and': ["GetUsers"]
-						}
-					})
+					_react2.default.createElement(
+						'div',
+						{ className: 'z-depth-1', style: { marginTop: '5%' } },
+						_react2.default.createElement(_reactivebase.ReactiveList, {
+							title: 'Users',
+							componentId: 'UsersActuator',
+							appbaseField: 'name',
+							from: _config.config.ReactiveList.from,
+							size: _config.config.ReactiveList.size,
+							stream: true,
+							requestOnScroll: true,
+							onData: _config.onDataUsers,
+							react: {
+								'and': ["GetUsers"]
+							}
+						})
+					)
 				)
 			),
 			_react2.default.createElement(
@@ -84529,7 +84539,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 				{ className: 'row' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'col s6', style: { margin: '5% 10% 0% 10%' } },
+					{ className: 'col s6', style: { margin: '10% 10% 0% 5%' } },
 					_react2.default.createElement(
 						'form',
 						{ id: 'login', onSubmit: this.newTweet },
@@ -84543,7 +84553,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'col s8', style: msgStyles },
+					{ className: 'col s6 z-depth-1' },
 					(0, _tweets.personalTweets)(u)
 				)
 			)
@@ -84776,7 +84786,7 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 			{ className: 'row' },
 			_react2.default.createElement(
 				'nav',
-				{ style: { height: '46px' }, className: 'z-depth-0' },
+				{ className: 'nav-wrapper grey lighten-3 z-depth-100', style: { height: '50px', position: 'fixed', top: 0 } },
 				_react2.default.createElement(
 					'div',
 					{ className: 'nav-wrapper grey lighten-3' },
@@ -84832,14 +84842,22 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 			),
 			_react2.default.createElement(
 				'div',
-				{ className: 'col s12 m8 l9', style: msgStyles },
-				_react2.default.createElement('img', { style: { height: '75px' }, src: '../user@2x.png' }),
+				{ className: 'col s12 m8 l91', style: msgStyles },
 				_react2.default.createElement(
-					'h3',
-					null,
-					this.props.params.uname
+					'div',
+					{ className: 'z-depth-1', style: { width: '25%' } },
+					_react2.default.createElement('img', { style: { height: '15%', margin: '15% 15% 15% 15%' }, src: '../user@2x.png' }),
+					_react2.default.createElement(
+						'h3',
+						{ style: { textAlign: 'center' } },
+						this.props.params.uname
+					)
 				),
-				(0, _tweets.personalTweets)(this.props.params.uname)
+				_react2.default.createElement(
+					'div',
+					{ className: 'z-depth-1' },
+					(0, _tweets.personalTweets)(this.props.params.uname)
+				)
 			)
 		);
 	}
