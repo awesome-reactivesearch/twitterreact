@@ -14,7 +14,7 @@ import {config, onDataTweets} from './config.js';
 import {Dashboard} from './dashboard.js'
 import {Profile} from './profile.js'
 
-
+var flg=0;
 const uStyles = {maxWidth: 400, margin: '10px auto 10px'};
 const msgStyles = {maxWidth: 600, margin: '30px auto 50px'};
 const wellStyles = {maxWidth: 600, margin: '40px auto 10px'};
@@ -24,33 +24,29 @@ const appbaseRef = new Appbase({
 	username: config.credential_tweets.username,
 	password: config.credential_tweets.password
 });
-const CustomQuery= function(){
-	return {
+const CustomQuery= function(value){
+	// debugger;
+	console.log("Default Value:", value);
+	if(flg===0){
+		value="";
+		flg=1;
+	}
+	// debugger;
+	if(value === undefined || value===""){
+		// debugger;
+		return {
 			query: {
 				match_all: {}
 			}
-		};	
+		};
+	}
+	else {
+		// debugger;
+	return {
+			match: {msg:value}
+		};
+	}	
 };
-
-const get_global=(
-			<div className="row" style={{margin:'0 10% 0 10%'}}>
-			<div className="col s10">
-				<ReactivePaginatedList
-					componentId="GlobalTweets"
-					appbaseField="msg"
-					title="Public Tweets"
-					from={config.ReactivePaginatedList.from}
-					size={config.ReactivePaginatedList.size}
-					sortOptions = {config.tweetsSortOptions}
-					onData={onDataTweets}
-					requestOnScroll={true}
-					react={{
-						'and':['SearchTweet']
-					}}
-				/>
-			</div>
-			</div>
-);
 
 var t = true;
 var uname = '';
@@ -58,12 +54,9 @@ var uname = '';
 
 const Login = withRouter(
 	React.createClass({
-		getInitialState() {
-			return {
-				error: false
-			}
+		componentWillMount() {
+			this.txtDefault = "";
 		},
-
 		onLogin(event){
 			event.preventDefault();
 			const { location } = this.props;
@@ -120,7 +113,9 @@ const Login = withRouter(
 		
 		render(){
 			// debugger;
+			flg=0;
 			const txtstyle={width:'85%', backgroundColor:'#fafafa', margin:'3%', fontSize:"20px"};
+			console.log("STATE", this.txtDefault);
 			return(
 			<div>
 			<ReactiveBase
@@ -129,17 +124,23 @@ const Login = withRouter(
 				password= {config.credential_tweets.password}
 				type = {config.credential_tweets.type}
 			>
+			<div className="navbar-fixed">
 			<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
+			<div className="nav-wrapper">
 			<div style={{width:'25%', margin:'3px 3px 3px 3px'}}>
 				<TextField
 					componentId = "SearchTweet"
 					appbaseField = "msg"
 					placeholder = "Search tweet here..."
 					// executeQuery={true}
+					defaultSelected = {this.txtDefault}
 					customQuery= {CustomQuery}
 				/>
 			</div>
+			</div>
 			</nav>
+			</div>
+			
 			<div className="z-depth-1 grey lighten-2" style={{width:'25%',margin:'75px 0 0 30%',textAlign:'center'}}>
 			<form id="login" onSubmit={this.onLogin}>
 			<div style={{margin:'5%'}}>
@@ -149,7 +150,23 @@ const Login = withRouter(
 			</form>
 			</div>
 			
-			{get_global}
+			<div className="row" style={{margin:'0 10% 0 10%'}}>
+			<div className="col s10">
+				<ReactivePaginatedList
+					componentId="GlobalTweets"
+					appbaseField="msg"
+					title="Public Tweets"
+					from={config.ReactivePaginatedList.from}
+					size={config.ReactivePaginatedList.size}
+					sortOptions = {config.tweetsSortOptions}
+					onData={onDataTweets}
+					requestOnScroll={true}
+					react={{
+						'and':['SearchTweet']
+					}}
+				/>
+			</div>
+			</div>
 			</ReactiveBase>
 			</div>
 			)
@@ -166,9 +183,13 @@ function requireAuth(nextState, replace) {
   }
 }
 
+function enteringLogin(nextState, replace){
+
+}
+
 ReactDom.render((
 	<Router history={browserHistory}>
-		<Route path="/" component={Login} />
+		<Route path="/" component={Login} onEnter={enteringLogin}/>
 		<Route path=":uname" component={Dashboard} onEnter={requireAuth}/>
 		<Route path="profile/:uname" component={Profile} />
 	</Router>

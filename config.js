@@ -138,8 +138,8 @@ class User extends Component{
 			<p style={{margin:'1% 2% 1% 2%'}}>
 			<Link to={`/profile/${this.props.name}`}>{this.props.name}</Link>
 			{(this.props.unfollowflg!=undefined)?(<button style={{marginLeft:'25%'}}>Unfollow</button>
-			):(
-			<div></div>)}
+			):(<label></label>
+			)}
 			</p>
 			</div>
 		</div>

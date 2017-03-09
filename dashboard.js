@@ -52,12 +52,26 @@ export const Dashboard = withRouter(
 			const u = this.props.params.uname
 			const navStyle = {textAlign:'right',margin: '0px'};
 			// debugger;
-			const CustomQueryTweets=function(){
+			const CustomQueryTweets=function(value){
+				if(value === undefined || value===""){
+					return{
+						query:{
+							"match": { by: u}
+						}
+					}
+				}
+				else{
 					return {
 							query: {
-								match: {by:u}
+								"bool": { 
+									"must": [
+										{ "match": { by: u}}, 
+										{ "match": { msg: value}}
+									],
+								}
 							}
 						};	
+				}
 				};
 			const CustomQueryUsers=function(){
 					return {
@@ -71,7 +85,15 @@ export const Dashboard = withRouter(
 			return (
 
 			<div className ="row" >
-				<nav className="nav-wrapper grey lighten-3 z-depth-100" style={{height:'50px', position:'fixed', top:0}}>
+				<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
+				<div style={{width:'25%', margin:'3px 3px 3px 3px'}}>
+				<TextField
+					componentId = "SearchTweet"
+					appbaseField = "msg"
+					placeholder = "Search tweet here..."
+					customQuery= {CustomQueryTweets}
+				/>
+				</div>
 				<div style={navStyle}>
 					<button value="Profile" onClick={this.goProfile} className="waves-effect waves-light btn" >Profile</button>
 					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn" >Logout</button>
@@ -79,7 +101,7 @@ export const Dashboard = withRouter(
 				
 				</nav>	
 		
-					<div className="col s2" style={{margin:'5% 5% 0 2%'}}>
+					<div className="col s2" style={{margin:'75px 5% 0 2%'}}>
 					<ReactiveBase
 						app={config.credential_users.app}
 						username= {config.credential_users.username}
