@@ -30934,7 +30934,7 @@ var User = function (_Component2) {
 							'button',
 							{ style: { marginLeft: '25%' } },
 							'Unfollow'
-						) : _react2.default.createElement('div', null)
+						) : _react2.default.createElement('label', null)
 					)
 				)
 			);
@@ -41498,14 +41498,7 @@ var appbaseRef = new Appbase({
 	password: _config.config.credential_tweets.password
 });
 var usr;
-var CustomQueryTweets = function CustomQueryTweets() {
-	// debugger;
-	return {
-		query: {
-			match: { by: usr }
-		}
-	};
-};
+
 var personalTweets = function personalTweets(user) {
 	// debugger;
 	usr = user;
@@ -41520,13 +41513,7 @@ var personalTweets = function personalTweets(user) {
 				password: _config.config.credential_tweets.password,
 				type: _config.config.credential_tweets.type
 			},
-			_react2.default.createElement(_reactivebase.DataController, {
-				componentId: 'GetTweets',
-				customQuery: CustomQueryTweets,
-				showUI: false
-			}),
 			_react2.default.createElement(_reactivebase.ReactivePaginatedList, {
-
 				componentId: 'TweetsActuator',
 				appbaseField: 'msg',
 				from: _config.config.ReactiveList.from,
@@ -41536,7 +41523,7 @@ var personalTweets = function personalTweets(user) {
 				onData: _config.onDataTweets,
 				sortOptions: _config.config.tweetsSortOptions,
 				react: {
-					'and': ["GetTweets"]
+					'and': ["SearchTweet"]
 				}
 			})
 		)
@@ -76149,6 +76136,7 @@ var _profile = __webpack_require__(423);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var flg = 0;
 var uStyles = { maxWidth: 400, margin: '10px auto 10px' };
 var msgStyles = { maxWidth: 600, margin: '30px auto 50px' };
 var wellStyles = { maxWidth: 600, margin: '40px auto 10px' };
@@ -76158,45 +76146,36 @@ var appbaseRef = new Appbase({
 	username: _config.config.credential_tweets.username,
 	password: _config.config.credential_tweets.password
 });
-var CustomQuery = function CustomQuery() {
-	return {
-		query: {
-			match_all: {}
-		}
-	};
-};
-
-var get_global = _react2.default.createElement(
-	'div',
-	{ className: 'row', style: { margin: '0 10% 0 10%' } },
-	_react2.default.createElement(
-		'div',
-		{ className: 'col s10' },
-		_react2.default.createElement(_reactivebase.ReactivePaginatedList, {
-			componentId: 'GlobalTweets',
-			appbaseField: 'msg',
-			title: 'Public Tweets',
-			from: _config.config.ReactivePaginatedList.from,
-			size: _config.config.ReactivePaginatedList.size,
-			sortOptions: _config.config.tweetsSortOptions,
-			onData: _config.onDataTweets,
-			requestOnScroll: true,
-			react: {
-				'and': ['SearchTweet']
+var CustomQuery = function CustomQuery(value) {
+	// debugger;
+	console.log("Default Value:", value);
+	if (flg === 0) {
+		value = "";
+		flg = 1;
+	}
+	// debugger;
+	if (value === undefined || value === "") {
+		// debugger;
+		return {
+			query: {
+				match_all: {}
 			}
-		})
-	)
-);
+		};
+	} else {
+		// debugger;
+		return {
+			match: { msg: value }
+		};
+	}
+};
 
 var t = true;
 var uname = '';
 
 var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 	displayName: 'Login',
-	getInitialState: function getInitialState() {
-		return {
-			error: false
-		};
+	componentWillMount: function componentWillMount() {
+		this.txtDefault = "";
 	},
 	onLogin: function onLogin(event) {
 		event.preventDefault();
@@ -76250,7 +76229,9 @@ var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 	},
 	render: function render() {
 		// debugger;
+		flg = 0;
 		var txtstyle = { width: '85%', backgroundColor: '#fafafa', margin: '3%', fontSize: "20px" };
+		console.log("STATE", this.txtDefault);
 		return _react2.default.createElement(
 			'div',
 			null,
@@ -76263,23 +76244,32 @@ var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 					type: _config.config.credential_tweets.type
 				},
 				_react2.default.createElement(
-					'nav',
-					{ style: { color: 'black', backgroundColor: '#dadada', height: '60px', position: 'fixed' } },
+					'div',
+					{ className: 'navbar-fixed' },
 					_react2.default.createElement(
-						'div',
-						{ style: { width: '25%', margin: '3px 3px 3px 3px' } },
-						_react2.default.createElement(_reactivebase.TextField, {
-							componentId: 'SearchTweet',
-							appbaseField: 'msg',
-							placeholder: 'Search tweet here...'
-							// executeQuery={true}
-							, customQuery: CustomQuery
-						})
+						'nav',
+						{ style: { color: 'black', backgroundColor: '#dadada', height: '60px', position: 'fixed' } },
+						_react2.default.createElement(
+							'div',
+							{ className: 'nav-wrapper' },
+							_react2.default.createElement(
+								'div',
+								{ style: { width: '25%', margin: '3px 3px 3px 3px' } },
+								_react2.default.createElement(_reactivebase.TextField, {
+									componentId: 'SearchTweet',
+									appbaseField: 'msg',
+									placeholder: 'Search tweet here...'
+									// executeQuery={true}
+									, defaultSelected: this.txtDefault,
+									customQuery: CustomQuery
+								})
+							)
+						)
 					)
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'z-depth-1 grey lighten-2', style: { width: '25%', margin: '75px 0 0 30%', textAlign: 'center' } },
+					{ className: 'z-depth-1 grey lighten-2', style: { width: '25%', margin: '3% auto 0 auto', textAlign: 'center' } },
 					_react2.default.createElement(
 						'form',
 						{ id: 'login', onSubmit: this.onLogin },
@@ -76292,7 +76282,27 @@ var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 						)
 					)
 				),
-				get_global
+				_react2.default.createElement(
+					'div',
+					{ className: 'row', style: { margin: '0 10% 0 10%' } },
+					_react2.default.createElement(
+						'div',
+						{ className: 'col s10' },
+						_react2.default.createElement(_reactivebase.ReactivePaginatedList, {
+							componentId: 'GlobalTweets',
+							appbaseField: 'msg',
+							title: 'Public Tweets',
+							from: _config.config.ReactivePaginatedList.from,
+							size: _config.config.ReactivePaginatedList.size,
+							sortOptions: _config.config.tweetsSortOptions,
+							onData: _config.onDataTweets,
+							requestOnScroll: true,
+							react: {
+								'and': ['SearchTweet']
+							}
+						})
+					)
+				)
 			)
 		);
 	}
@@ -76307,10 +76317,12 @@ function requireAuth(nextState, replace) {
 	}
 }
 
+function enteringLogin(nextState, replace) {}
+
 _reactDom2.default.render(_react2.default.createElement(
 	_reactRouter.Router,
 	{ history: _reactRouter.browserHistory },
-	_react2.default.createElement(_reactRouter.Route, { path: '/', component: Login }),
+	_react2.default.createElement(_reactRouter.Route, { path: '/', component: Login, onEnter: enteringLogin }),
 	_react2.default.createElement(_reactRouter.Route, { path: ':uname', component: _dashboard.Dashboard, onEnter: requireAuth }),
 	_react2.default.createElement(_reactRouter.Route, { path: 'profile/:uname', component: _profile.Profile })
 ), document.getElementById('app'));
@@ -84451,12 +84463,22 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 		var u = this.props.params.uname;
 		var navStyle = { textAlign: 'right', margin: '0px' };
 		// debugger;
-		var CustomQueryTweets = function CustomQueryTweets() {
-			return {
-				query: {
-					match: { by: u }
-				}
-			};
+		var CustomQueryTweets = function CustomQueryTweets(value) {
+			if (value === undefined || value === "") {
+				return {
+					query: {
+						"match": { by: u }
+					}
+				};
+			} else {
+				return {
+					query: {
+						"bool": {
+							"must": [{ "match": { by: u } }, { "match": { msg: value } }]
+						}
+					}
+				};
+			}
 		};
 		var CustomQueryUsers = function CustomQueryUsers() {
 			return {
@@ -84472,7 +84494,17 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 			{ className: 'row' },
 			_react2.default.createElement(
 				'nav',
-				{ className: 'nav-wrapper grey lighten-3 z-depth-100', style: { height: '50px', position: 'fixed', top: 0 } },
+				{ style: { color: 'black', backgroundColor: '#dadada', height: '60px', position: 'fixed' } },
+				_react2.default.createElement(
+					'div',
+					{ style: { width: '25%', margin: '3px 3px 3px 3px' } },
+					_react2.default.createElement(_reactivebase.TextField, {
+						componentId: 'SearchTweet',
+						appbaseField: 'msg',
+						placeholder: 'Search tweet here...',
+						customQuery: CustomQueryTweets
+					})
+				),
 				_react2.default.createElement(
 					'div',
 					{ style: navStyle },
@@ -84490,7 +84522,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 			),
 			_react2.default.createElement(
 				'div',
-				{ className: 'col s2', style: { margin: '5% 5% 0 2%' } },
+				{ className: 'col s2', style: { margin: '75px 5% 0 2%' } },
 				_react2.default.createElement(
 					_reactivebase.ReactiveBase,
 					{

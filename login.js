@@ -141,7 +141,7 @@ const Login = withRouter(
 			</nav>
 			</div>
 			
-			<div className="z-depth-1 grey lighten-2" style={{width:'25%',margin:'75px 0 0 30%',textAlign:'center'}}>
+			<div className="z-depth-1 grey lighten-2" style={{width:'25%',margin:'3% auto 0 auto',textAlign:'center'}}>
 			<form id="login" onSubmit={this.onLogin}>
 			<div style={{margin:'5%'}}>
 			<input type="text blue accent-2" placeholder="Name" ref="username" style={txtstyle}/><br/>
