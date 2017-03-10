@@ -14,7 +14,7 @@ const appbaseRef = new Appbase({
 });
 var usr;
 
-const personalTweets = function(user){
+const personalTweets = function(user, reactOn){
 	// debugger;
 	usr=user;
 	return (
@@ -35,7 +35,7 @@ const personalTweets = function(user){
 			onData = {onDataTweets}
 			sortOptions = {config.tweetsSortOptions}
 			react={{
-			'and': ["SearchMyTweet"]
+			'and': [reactOn]
 			}}
 			/>
 		</ReactiveBase>

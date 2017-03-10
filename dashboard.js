@@ -40,15 +40,18 @@ export const Dashboard = withRouter(
 			event.preventDefault()
 			console.log('newTweet')
 			var msg= this.refs.newtweet.value
-			// console.log(by)
-			appbaseRef.index({
-				type: config.credential_tweets.type,
-				body: {"by": this.props.params.uname, "createdAt":date.getTime(), "msg":msg}
-			}).on('data', function(response) {
-				console.log(response);
-			}).on('error', function(error) {
-				console.log(error);
-			});
+			// debugger;
+			if(msg!=""){
+				// console.log(by)
+				appbaseRef.index({
+					type: config.credential_tweets.type,
+					body: {"by": this.props.params.uname, "createdAt":date.getTime(), "msg":msg}
+				}).on('data', function(response) {
+					console.log(response);
+				}).on('error', function(error) {
+					console.log(error);
+				});
+			}
 		},
 	 	render() {
 			const uStyles = {maxWidth: 400, margin: '30px auto 10px', textAlign:'center', fontSize:'16px'};
@@ -98,14 +101,28 @@ export const Dashboard = withRouter(
 				<div className="navbar-fixed">
 				<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
 				<div className="nav-wrapper" >
-				<div style={{width:'25%', margin:'3px 3px 3px 3px'}}>
-				<TextField
-					componentId = "SearchMyTweet"
-					appbaseField = "msg"
-					placeholder = "Search tweet here..."
-					customQuery= {CustomQueryTweets}
-					defaultSelected = {this.txtDefault}
-				/>
+				<div style={{margin:'3px 3px 3px 3px'}}>
+					<div style={{float:'left',fontSize:'125%',width:'15%',marginLeft:'2%'}}>
+					Twitter on Appbase
+					</div>
+					<div style={{widh:'20%',float:'left'}}>
+					<ReactiveBase
+						app={config.credential_tweets.app}
+						username= {config.credential_tweets.username}
+						password= {config.credential_tweets.password}
+						type = {config.credential_tweets.type}
+					>
+					
+					<TextField
+						componentId = "SearchMyTweet"
+						appbaseField = "msg"
+						placeholder = "Search tweet here..."
+						customQuery= {CustomQueryTweets}
+						defaultSelected = {this.txtDefault}
+					/>
+					
+					</ReactiveBase>
+					</div>
 				</div>
 				<div style={navStyle}>
 					<button value="Profile" onClick={this.goProfile} className="waves-effect waves-light btn" >Profile</button>
@@ -152,7 +169,7 @@ export const Dashboard = withRouter(
 					</div>
 				
 				<div className="row">
-					<div className="col s6" style={{margin:'10% 10% 0% 5%'}}>
+					<div className="col s6" style={{margin:'3% 10% 0% 5%'}}>
 					<form id="login" onSubmit={this.newTweet}>
 						
 						<input ref="newtweet" type="text" placeholder="Your tweet here..." style={txtstyle}/>
@@ -165,7 +182,7 @@ export const Dashboard = withRouter(
 					<div className="col s6 z-depth-1">
 					
 			
-					{personalTweets(u)}
+					{personalTweets(u,"SearchMyTweet")}
 					</div>
 				</div>
 			</div>

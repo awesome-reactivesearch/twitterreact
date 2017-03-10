@@ -18,8 +18,8 @@ const appbaseRef = new Appbase({
 	username: config.credential_users.username,
 	password: config.credential_users.password
 });
-var u = ''
-
+var u = '';
+var val='';
 export const Profile = withRouter( 
 	React.createClass({
 		logOut(event){
@@ -133,7 +133,33 @@ export const Profile = withRouter(
 				console.log(err)
 			})
 		},
-
+		CustomQuery(value){
+			// HACK: Check if the value is changed will again mounting the TextField component.
+			debugger;
+			if(val===value){
+				value="";
+			}
+			if(value === undefined || value===""){
+				return{
+					query:{
+						"match": { by: u}
+					}
+				}
+			}
+			else{
+				val=value;
+				return {
+						query: {
+							"bool": { 
+								"must": [
+									{ "match": { by: u}}, 
+									{ "match": { msg: value}}
+								],
+							}
+						}
+					};	
+			}
+			},
 		onDataFollowing(response, err){
 			let result = null;
 			console.log(response)
@@ -224,46 +250,63 @@ export const Profile = withRouter(
 				<div className="navbar-fixed">
 				<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
 				<div className="nav-wrapper">
-					<div className="nav-wrapper grey lighten-3">
-						<div style={navStyle}>
-							<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
-							<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
-						</div>
+				<div style={{margin:'3px 3px 3px 3px'}}>
+					<div style={{float:'left',fontSize:'125%',width:'15%',marginLeft:'2%'}}>
+					Twitter on Appbase
 					</div>
+					<div style={{widh:'20%',float:'left'}}>
+				<ReactiveBase
+					app={config.credential_tweets.app}
+					username= {config.credential_tweets.username}
+					password= {config.credential_tweets.password}
+					type = {config.credential_tweets.type}
+				>
+				
+				<TextField
+					componentId = "SearchUserTweet"
+					appbaseField = "msg"
+					placeholder = "Search tweet here..."
+					customQuery= {this.CustomQuery}
+				/>
+				
+				</ReactiveBase>
+				</div>
+				</div>
+				<div style={navStyle}>
+					<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
+					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
+				</div>
 				</div>
 				</nav>
 				</div>
 					
-					<div className="col s12 m4 l3" >
-						
+					<div className="col s12 m2 l2" >
+					{listFollowers(u,this.onDataFollowers)}
+					{listFollowing(u,this.onDataFollowing)}
+					</div>
+					<div className="col s12 m8 l91" style={msgStyles}>
+						<div style={{float:'left', width:'20%'}}>
+							<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
+							
+						</div>
+						<div style={{float:'left',width:'25%'}}>
+						<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 						{(localStorage.user != u)?(
 							<div style={{textAlign:'center'}}>
 							{(this.chkFollowing())?(
-							<div>
+							<div style={{float:'left'}}>
 								<button value="Follow" onClick={this.followUser}>Follow</button>
-								{listFollowers(u,this.onDataFollowers)}
-								{listFollowing(u,this.onDataFollowing)}
 							</div>
 							):(
-							<div>
-							<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>
-							{listFollowers(u,this.onDataFollowers)}
-							{listFollowing(u,this.onDataFollowing)}
+							<div style={{float:'left'}}>
+								<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>
 							</div>)}
 
 							</div>):(<div>
-							
-							{listFollowers(u,this.onDataFollowers)}
-							{listFollowing(u,this.onDataFollowing)}
 							</div>)}
-					</div>
-					<div className="col s12 m8 l91" style={msgStyles}>
-						<div className="z-depth-1" style={{width:'25%'}}>
-							<img style={{height:'15%',margin:'15% 15% 15% 15%'}} src="../user@2x.png" />
-							<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 						</div>
 						<div className = "z-depth-1">
-						{personalTweets(this.props.params.uname)}
+						{personalTweets(this.props.params.uname, "SearchUserTweet")}
 						</div>
 					</div>
 			</div>

@@ -36,7 +36,7 @@ const Login = withRouter(
 				value="";
 			}
 			// debugger;
-			if(value === undefined || value==="$all$tweet" || value===""){
+			if(value === undefined || value===""){
 				// debugger;
 				this.txtDefault=""
 				return {
@@ -125,7 +125,10 @@ const Login = withRouter(
 			<div className="navbar-fixed">
 			<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
 			<div className="nav-wrapper">
-			<div style={{width:'25%', margin:'3px 3px 3px 3px'}}>
+			<div style={{ margin:'3px 3px 3px 3px'}}>
+				<div style={{float:'left',fontSize:'175%',width:'20%',marginLeft:'2%'}}>
+				Twitter on Appbase
+				</div>
 				<TextField
 					componentId = "SearchTweet"
 					appbaseField = "msg"
@@ -134,6 +137,7 @@ const Login = withRouter(
 					
 					customQuery= {this.CustomQuery}
 				/>
+
 			</div>
 			</div>
 			</nav>

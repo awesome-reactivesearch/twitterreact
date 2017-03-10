@@ -30932,7 +30932,7 @@ var User = function (_Component2) {
 						),
 						this.props.unfollowflg != undefined ? _react2.default.createElement(
 							'button',
-							{ style: { marginLeft: '25%' } },
+							{ style: { float: 'right' } },
 							'Unfollow'
 						) : _react2.default.createElement('label', null)
 					)
@@ -41499,7 +41499,7 @@ var appbaseRef = new Appbase({
 });
 var usr;
 
-var personalTweets = function personalTweets(user) {
+var personalTweets = function personalTweets(user, reactOn) {
 	// debugger;
 	usr = user;
 	return _react2.default.createElement(
@@ -41523,7 +41523,7 @@ var personalTweets = function personalTweets(user) {
 				onData: _config.onDataTweets,
 				sortOptions: _config.config.tweetsSortOptions,
 				react: {
-					'and': ["SearchMyTweet"]
+					'and': [reactOn]
 				}
 			})
 		)
@@ -76158,7 +76158,7 @@ var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 			value = "";
 		}
 		// debugger;
-		if (value === undefined || value === "$all$tweet" || value === "") {
+		if (value === undefined || value === "") {
 			// debugger;
 			this.txtDefault = "";
 			return {
@@ -76252,7 +76252,12 @@ var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 							{ className: 'nav-wrapper' },
 							_react2.default.createElement(
 								'div',
-								{ style: { width: '25%', margin: '3px 3px 3px 3px' } },
+								{ style: { margin: '3px 3px 3px 3px' } },
+								_react2.default.createElement(
+									'div',
+									{ style: { float: 'left', fontSize: '175%', width: '20%', marginLeft: '2%' } },
+									'Twitter on Appbase'
+								),
 								_react2.default.createElement(_reactivebase.TextField, {
 									componentId: 'SearchTweet',
 									appbaseField: 'msg',
@@ -84451,15 +84456,18 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 		event.preventDefault();
 		console.log('newTweet');
 		var msg = this.refs.newtweet.value;
-		// console.log(by)
-		appbaseRef.index({
-			type: _config.config.credential_tweets.type,
-			body: { "by": this.props.params.uname, "createdAt": date.getTime(), "msg": msg }
-		}).on('data', function (response) {
-			console.log(response);
-		}).on('error', function (error) {
-			console.log(error);
-		});
+		// debugger;
+		if (msg != "") {
+			// console.log(by)
+			appbaseRef.index({
+				type: _config.config.credential_tweets.type,
+				body: { "by": this.props.params.uname, "createdAt": date.getTime(), "msg": msg }
+			}).on('data', function (response) {
+				console.log(response);
+			}).on('error', function (error) {
+				console.log(error);
+			});
+		}
 	},
 	render: function render() {
 		var uStyles = { maxWidth: 400, margin: '30px auto 10px', textAlign: 'center', fontSize: '16px' };
@@ -84513,14 +84521,32 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 						{ className: 'nav-wrapper' },
 						_react2.default.createElement(
 							'div',
-							{ style: { width: '25%', margin: '3px 3px 3px 3px' } },
-							_react2.default.createElement(_reactivebase.TextField, {
-								componentId: 'SearchMyTweet',
-								appbaseField: 'msg',
-								placeholder: 'Search tweet here...',
-								customQuery: CustomQueryTweets,
-								defaultSelected: this.txtDefault
-							})
+							{ style: { margin: '3px 3px 3px 3px' } },
+							_react2.default.createElement(
+								'div',
+								{ style: { float: 'left', fontSize: '125%', width: '15%', marginLeft: '2%' } },
+								'Twitter on Appbase'
+							),
+							_react2.default.createElement(
+								'div',
+								{ style: { widh: '20%', float: 'left' } },
+								_react2.default.createElement(
+									_reactivebase.ReactiveBase,
+									{
+										app: _config.config.credential_tweets.app,
+										username: _config.config.credential_tweets.username,
+										password: _config.config.credential_tweets.password,
+										type: _config.config.credential_tweets.type
+									},
+									_react2.default.createElement(_reactivebase.TextField, {
+										componentId: 'SearchMyTweet',
+										appbaseField: 'msg',
+										placeholder: 'Search tweet here...',
+										customQuery: CustomQueryTweets,
+										defaultSelected: this.txtDefault
+									})
+								)
+							)
 						),
 						_react2.default.createElement(
 							'div',
@@ -84594,7 +84620,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 				{ className: 'row' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'col s6', style: { margin: '10% 10% 0% 5%' } },
+					{ className: 'col s6', style: { margin: '3% 10% 0% 5%' } },
 					_react2.default.createElement(
 						'form',
 						{ id: 'login', onSubmit: this.newTweet },
@@ -84609,7 +84635,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 				_react2.default.createElement(
 					'div',
 					{ className: 'col s6 z-depth-1' },
-					(0, _tweets.personalTweets)(u)
+					(0, _tweets.personalTweets)(u, "SearchMyTweet")
 				)
 			)
 		);
@@ -84655,7 +84681,7 @@ var appbaseRef = new Appbase({
 	password: _config.config.credential_users.password
 });
 var u = '';
-
+var val = '';
 var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.createClass({
 	displayName: 'Profile',
 	logOut: function logOut(event) {
@@ -84759,6 +84785,29 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 			console.log(err);
 		});
 	},
+	CustomQuery: function CustomQuery(value) {
+		// HACK: Check if the value is changed will again mounting the TextField component.
+		debugger;
+		if (val === value) {
+			value = "";
+		}
+		if (value === undefined || value === "") {
+			return {
+				query: {
+					"match": { by: u }
+				}
+			};
+		} else {
+			val = value;
+			return {
+				query: {
+					"bool": {
+						"must": [{ "match": { by: u } }, { "match": { msg: value } }]
+					}
+				}
+			};
+		}
+	},
 	onDataFollowing: function onDataFollowing(response, err) {
 		var result = null;
 		console.log(response);
@@ -84850,20 +84899,44 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 						{ className: 'nav-wrapper' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'nav-wrapper grey lighten-3' },
+							{ style: { margin: '3px 3px 3px 3px' } },
 							_react2.default.createElement(
 								'div',
-								{ style: navStyle },
+								{ style: { float: 'left', fontSize: '125%', width: '15%', marginLeft: '2%' } },
+								'Twitter on Appbase'
+							),
+							_react2.default.createElement(
+								'div',
+								{ style: { widh: '20%', float: 'left' } },
 								_react2.default.createElement(
-									'button',
-									{ value: 'GoLocal', onClick: this.goLocal, className: 'waves-effect waves-light btn' },
-									'Personal Feed'
-								),
-								_react2.default.createElement(
-									'button',
-									{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
-									'Logout'
+									_reactivebase.ReactiveBase,
+									{
+										app: _config.config.credential_tweets.app,
+										username: _config.config.credential_tweets.username,
+										password: _config.config.credential_tweets.password,
+										type: _config.config.credential_tweets.type
+									},
+									_react2.default.createElement(_reactivebase.TextField, {
+										componentId: 'SearchUserTweet',
+										appbaseField: 'msg',
+										placeholder: 'Search tweet here...',
+										customQuery: this.CustomQuery
+									})
 								)
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ style: navStyle },
+							_react2.default.createElement(
+								'button',
+								{ value: 'GoLocal', onClick: this.goLocal, className: 'waves-effect waves-light btn' },
+								'Personal Feed'
+							),
+							_react2.default.createElement(
+								'button',
+								{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
+								'Logout'
 							)
 						)
 					)
@@ -84871,55 +84944,52 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 			),
 			_react2.default.createElement(
 				'div',
-				{ className: 'col s12 m4 l3' },
-				localStorage.user != u ? _react2.default.createElement(
-					'div',
-					{ style: { textAlign: 'center' } },
-					this.chkFollowing() ? _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-							'button',
-							{ value: 'Follow', onClick: this.followUser },
-							'Follow'
-						),
-						(0, _users.listFollowers)(u, this.onDataFollowers),
-						(0, _users.listFollowing)(u, this.onDataFollowing)
-					) : _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-							'button',
-							{ value: 'Unfollow', onClick: this.unfollowUser },
-							'Unfollow'
-						),
-						(0, _users.listFollowers)(u, this.onDataFollowers),
-						(0, _users.listFollowing)(u, this.onDataFollowing)
-					)
-				) : _react2.default.createElement(
-					'div',
-					null,
-					(0, _users.listFollowers)(u, this.onDataFollowers),
-					(0, _users.listFollowing)(u, this.onDataFollowing)
-				)
+				{ className: 'col s12 m2 l2' },
+				(0, _users.listFollowers)(u, this.onDataFollowers),
+				(0, _users.listFollowing)(u, this.onDataFollowing)
 			),
 			_react2.default.createElement(
 				'div',
 				{ className: 'col s12 m8 l91', style: msgStyles },
 				_react2.default.createElement(
 					'div',
-					{ className: 'z-depth-1', style: { width: '25%' } },
-					_react2.default.createElement('img', { style: { height: '15%', margin: '15% 15% 15% 15%' }, src: '../user@2x.png' }),
+					{ style: { float: 'left', width: '20%' } },
+					_react2.default.createElement('img', { style: { height: '15%', margin: '15% 10% 15% 15%' }, src: '../user@2x.png' })
+				),
+				_react2.default.createElement(
+					'div',
+					{ style: { float: 'left', width: '25%' } },
 					_react2.default.createElement(
 						'h3',
 						{ style: { textAlign: 'center' } },
 						this.props.params.uname
-					)
+					),
+					localStorage.user != u ? _react2.default.createElement(
+						'div',
+						{ style: { textAlign: 'center' } },
+						this.chkFollowing() ? _react2.default.createElement(
+							'div',
+							{ style: { float: 'left' } },
+							_react2.default.createElement(
+								'button',
+								{ value: 'Follow', onClick: this.followUser },
+								'Follow'
+							)
+						) : _react2.default.createElement(
+							'div',
+							{ style: { float: 'left' } },
+							_react2.default.createElement(
+								'button',
+								{ value: 'Unfollow', onClick: this.unfollowUser },
+								'Unfollow'
+							)
+						)
+					) : _react2.default.createElement('div', null)
 				),
 				_react2.default.createElement(
 					'div',
 					{ className: 'z-depth-1' },
-					(0, _tweets.personalTweets)(this.props.params.uname)
+					(0, _tweets.personalTweets)(this.props.params.uname, "SearchUserTweet")
 				)
 			)
 		);
