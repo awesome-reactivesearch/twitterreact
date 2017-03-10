@@ -95,7 +95,9 @@ export const Dashboard = withRouter(
 			return (
 
 			<div className ="row" >
+				<div className="navbar-fixed">
 				<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
+				<div className="nav-wrapper" >
 				<div style={{width:'25%', margin:'3px 3px 3px 3px'}}>
 				<TextField
 					componentId = "SearchMyTweet"
@@ -109,19 +111,21 @@ export const Dashboard = withRouter(
 					<button value="Profile" onClick={this.goProfile} className="waves-effect waves-light btn" >Profile</button>
 					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn" >Logout</button>
 				</div>
-				
+				</div>
 				</nav>	
-		
-					<div className="col s2" style={{margin:'75px 5% 0 2%'}}>
+				</div>
+					<div className="col s2" style={{margin:'auto 5% 0 2%'}}>
 					<ReactiveBase
 						app={config.credential_users.app}
 						username= {config.credential_users.username}
 						password= {config.credential_users.password}
 						type = {config.credential_users.type}
 					>
-					<div className="z-depth-1">
-					<img style={{height:'100px', margin:'0 25% 15% 15%'}} src="user@2x.png" />
-					<h3 style={{textAlign:'center', marginTop:'10px'}}>{this.props.params.uname}</h3><br/>
+					<div style={{height:'25%'}}>
+					<div style={{margin:'0 auto 0 auto'}}>
+					<img style={{height:'65%',padding:'3%',margin:'0 0 0 14%'}} src="user@2x.png" />
+					<h3 style={{textAlign:'center', marginTop:'auto'}}>{this.props.params.uname}</h3><br/>
+					</div>
 					</div>
 					<DataController
 						componentId="GetUsers"

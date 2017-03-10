@@ -84503,37 +84503,45 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 			'div',
 			{ className: 'row' },
 			_react2.default.createElement(
-				'nav',
-				{ style: { color: 'black', backgroundColor: '#dadada', height: '60px', position: 'fixed' } },
+				'div',
+				{ className: 'navbar-fixed' },
 				_react2.default.createElement(
-					'div',
-					{ style: { width: '25%', margin: '3px 3px 3px 3px' } },
-					_react2.default.createElement(_reactivebase.TextField, {
-						componentId: 'SearchMyTweet',
-						appbaseField: 'msg',
-						placeholder: 'Search tweet here...',
-						customQuery: CustomQueryTweets,
-						defaultSelected: this.txtDefault
-					})
-				),
-				_react2.default.createElement(
-					'div',
-					{ style: navStyle },
+					'nav',
+					{ style: { color: 'black', backgroundColor: '#dadada', height: '60px', position: 'fixed' } },
 					_react2.default.createElement(
-						'button',
-						{ value: 'Profile', onClick: this.goProfile, className: 'waves-effect waves-light btn' },
-						'Profile'
-					),
-					_react2.default.createElement(
-						'button',
-						{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
-						'Logout'
+						'div',
+						{ className: 'nav-wrapper' },
+						_react2.default.createElement(
+							'div',
+							{ style: { width: '25%', margin: '3px 3px 3px 3px' } },
+							_react2.default.createElement(_reactivebase.TextField, {
+								componentId: 'SearchMyTweet',
+								appbaseField: 'msg',
+								placeholder: 'Search tweet here...',
+								customQuery: CustomQueryTweets,
+								defaultSelected: this.txtDefault
+							})
+						),
+						_react2.default.createElement(
+							'div',
+							{ style: navStyle },
+							_react2.default.createElement(
+								'button',
+								{ value: 'Profile', onClick: this.goProfile, className: 'waves-effect waves-light btn' },
+								'Profile'
+							),
+							_react2.default.createElement(
+								'button',
+								{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
+								'Logout'
+							)
+						)
 					)
 				)
 			),
 			_react2.default.createElement(
 				'div',
-				{ className: 'col s2', style: { margin: '75px 5% 0 2%' } },
+				{ className: 'col s2', style: { margin: 'auto 5% 0 2%' } },
 				_react2.default.createElement(
 					_reactivebase.ReactiveBase,
 					{
@@ -84544,14 +84552,18 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 					},
 					_react2.default.createElement(
 						'div',
-						{ className: 'z-depth-1' },
-						_react2.default.createElement('img', { style: { height: '100px', margin: '0 25% 15% 15%' }, src: 'user@2x.png' }),
+						{ style: { height: '25%' } },
 						_react2.default.createElement(
-							'h3',
-							{ style: { textAlign: 'center', marginTop: '10px' } },
-							this.props.params.uname
-						),
-						_react2.default.createElement('br', null)
+							'div',
+							{ style: { margin: '0 auto 0 auto' } },
+							_react2.default.createElement('img', { style: { height: '65%', padding: '3%', margin: '0 0 0 14%' }, src: 'user@2x.png' }),
+							_react2.default.createElement(
+								'h3',
+								{ style: { textAlign: 'center', marginTop: 'auto' } },
+								this.props.params.uname
+							),
+							_react2.default.createElement('br', null)
+						)
 					),
 					_react2.default.createElement(_reactivebase.DataController, {
 						componentId: 'GetUsers',
@@ -84828,23 +84840,31 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 			'div',
 			{ className: 'row' },
 			_react2.default.createElement(
-				'nav',
-				{ className: 'nav-wrapper grey lighten-3 z-depth-100', style: { height: '50px', position: 'fixed', top: 0 } },
+				'div',
+				{ className: 'navbar-fixed' },
 				_react2.default.createElement(
-					'div',
-					{ className: 'nav-wrapper grey lighten-3' },
+					'nav',
+					{ style: { color: 'black', backgroundColor: '#dadada', height: '60px', position: 'fixed' } },
 					_react2.default.createElement(
 						'div',
-						{ style: navStyle },
+						{ className: 'nav-wrapper' },
 						_react2.default.createElement(
-							'button',
-							{ value: 'GoLocal', onClick: this.goLocal, className: 'waves-effect waves-light btn' },
-							'Personal Feed'
-						),
-						_react2.default.createElement(
-							'button',
-							{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
-							'Logout'
+							'div',
+							{ className: 'nav-wrapper grey lighten-3' },
+							_react2.default.createElement(
+								'div',
+								{ style: navStyle },
+								_react2.default.createElement(
+									'button',
+									{ value: 'GoLocal', onClick: this.goLocal, className: 'waves-effect waves-light btn' },
+									'Personal Feed'
+								),
+								_react2.default.createElement(
+									'button',
+									{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
+									'Logout'
+								)
+							)
 						)
 					)
 				)

@@ -221,14 +221,18 @@ export const Profile = withRouter(
 			// debugger;
 			return (
 				<div className ="row" >
-				<nav className="nav-wrapper grey lighten-3 z-depth-100" style={{height:'50px', position:'fixed', top:0}}>
+				<div className="navbar-fixed">
+				<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
+				<div className="nav-wrapper">
 					<div className="nav-wrapper grey lighten-3">
 						<div style={navStyle}>
 							<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
 							<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
 						</div>
 					</div>
+				</div>
 				</nav>
+				</div>
 					
 					<div className="col s12 m4 l3" >
 						
