@@ -20,15 +20,6 @@ var usr;
 var listFollowers = function(user, onDataFollowers){
 	
 	usr=user;
-	// var CustomQueryUsers=function(){
-	// 	// debugger;
-	// 				return {
-	// 						query: {
-	// 							match: {name:usr}
-	// 						}
-	// 					};	
-	// 			};
-	// debugger;
 	return (
 		<div>
 		<ReactiveBase
