@@ -35,7 +35,7 @@ const personalTweets = function(user){
 			onData = {onDataTweets}
 			sortOptions = {config.tweetsSortOptions}
 			react={{
-			'and': ["SearchTweet"]
+			'and': ["SearchMyTweet"]
 			}}
 			/>
 		</ReactiveBase>

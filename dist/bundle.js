@@ -41523,7 +41523,7 @@ var personalTweets = function personalTweets(user) {
 				onData: _config.onDataTweets,
 				sortOptions: _config.config.tweetsSortOptions,
 				react: {
-					'and': ["SearchTweet"]
+					'and': ["SearchMyTweet"]
 				}
 			})
 		)
@@ -76146,36 +76146,34 @@ var appbaseRef = new Appbase({
 	username: _config.config.credential_tweets.username,
 	password: _config.config.credential_tweets.password
 });
-var CustomQuery = function CustomQuery(value) {
-	// debugger;
-	console.log("Default Value:", value);
-	if (flg === 0) {
-		value = "";
-		flg = 1;
-	}
-	// debugger;
-	if (value === undefined || value === "") {
-		// debugger;
-		return {
-			query: {
-				match_all: {}
-			}
-		};
-	} else {
-		// debugger;
-		return {
-			match: { msg: value }
-		};
-	}
-};
 
 var t = true;
 var uname = '';
-
+var val = '';
 var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 	displayName: 'Login',
-	componentWillMount: function componentWillMount() {
-		this.txtDefault = "";
+	CustomQuery: function CustomQuery(value) {
+		// HACK: Check if the value is changed will again mounting the TextField component.
+		if (val === value) {
+			value = "";
+		}
+		// debugger;
+		if (value === undefined || value === "$all$tweet" || value === "") {
+			// debugger;
+			this.txtDefault = "";
+			return {
+				query: {
+					match_all: {}
+				}
+			};
+		} else {
+			// debugger;
+			val = value;
+			return {
+				term: { msg: value }
+
+			};
+		}
 	},
 	onLogin: function onLogin(event) {
 		event.preventDefault();
@@ -76260,8 +76258,8 @@ var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 									appbaseField: 'msg',
 									placeholder: 'Search tweet here...'
 									// executeQuery={true}
-									, defaultSelected: this.txtDefault,
-									customQuery: CustomQuery
+
+									, customQuery: this.CustomQuery
 								})
 							)
 						)
@@ -76299,7 +76297,8 @@ var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 							requestOnScroll: true,
 							react: {
 								'and': ['SearchTweet']
-							}
+							},
+							stream: true
 						})
 					)
 				)
@@ -84427,15 +84426,21 @@ var appbaseRef = new Appbase({
 	username: _config.config.credential_tweets.username,
 	password: _config.config.credential_tweets.password
 });
+
 var date = new Date();
 var txtstyle = { width: '100%', backgroundColor: 'rgba(128, 128, 128, 0.07)' };
+
+var val = '';
 // const uname = 'a'
 var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default.createClass({
 	displayName: 'Dashboard',
+	componentWillMount: function componentWillMount() {
+		this.txtDefault = "";
+	},
 	logOut: function logOut(event) {
 		// debugger;
 		console.log("logging out!");
-		this.props.router.replace('/');
+		this.props.router.push('/');
 		delete localStorage.user;
 	},
 	goProfile: function goProfile(event) {
@@ -84464,6 +84469,10 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 		var navStyle = { textAlign: 'right', margin: '0px' };
 		// debugger;
 		var CustomQueryTweets = function CustomQueryTweets(value) {
+			// HACK: Check if the value is changed will again mounting the TextField component.
+			if (val === value) {
+				value = "";
+			}
 			if (value === undefined || value === "") {
 				return {
 					query: {
@@ -84471,6 +84480,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 					}
 				};
 			} else {
+				val = value;
 				return {
 					query: {
 						"bool": {
@@ -84499,10 +84509,11 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 					'div',
 					{ style: { width: '25%', margin: '3px 3px 3px 3px' } },
 					_react2.default.createElement(_reactivebase.TextField, {
-						componentId: 'SearchTweet',
+						componentId: 'SearchMyTweet',
 						appbaseField: 'msg',
 						placeholder: 'Search tweet here...',
-						customQuery: CustomQueryTweets
+						customQuery: CustomQueryTweets,
+						defaultSelected: this.txtDefault
 					})
 				),
 				_react2.default.createElement(

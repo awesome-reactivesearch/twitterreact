@@ -15,16 +15,21 @@ const appbaseRef = new Appbase({
 	username: config.credential_tweets.username,
 	password: config.credential_tweets.password
 });
+
 const date = new Date();
 const txtstyle={width:'100%', backgroundColor:'rgba(128, 128, 128, 0.07)'};
+
+var val = '';
 // const uname = 'a'
 export const Dashboard = withRouter( 
 	React.createClass({
-
+		componentWillMount() {
+			this.txtDefault = "";
+		},
 		logOut(event){
 			// debugger;
 			console.log("logging out!")
-			this.props.router.replace('/')
+			this.props.router.push('/')
 			delete localStorage.user;
 		},
 		goProfile(event){
@@ -53,6 +58,10 @@ export const Dashboard = withRouter(
 			const navStyle = {textAlign:'right',margin: '0px'};
 			// debugger;
 			const CustomQueryTweets=function(value){
+				// HACK: Check if the value is changed will again mounting the TextField component.
+				if(val===value){
+					value="";
+				}
 				if(value === undefined || value===""){
 					return{
 						query:{
@@ -61,6 +70,7 @@ export const Dashboard = withRouter(
 					}
 				}
 				else{
+					val=value;
 					return {
 							query: {
 								"bool": { 
@@ -88,10 +98,11 @@ export const Dashboard = withRouter(
 				<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
 				<div style={{width:'25%', margin:'3px 3px 3px 3px'}}>
 				<TextField
-					componentId = "SearchTweet"
+					componentId = "SearchMyTweet"
 					appbaseField = "msg"
 					placeholder = "Search tweet here..."
 					customQuery= {CustomQueryTweets}
+					defaultSelected = {this.txtDefault}
 				/>
 				</div>
 				<div style={navStyle}>

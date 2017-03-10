@@ -24,39 +24,37 @@ const appbaseRef = new Appbase({
 	username: config.credential_tweets.username,
 	password: config.credential_tweets.password
 });
-const CustomQuery= function(value){
-	// debugger;
-	console.log("Default Value:", value);
-	if(flg===0){
-		value="";
-		flg=1;
-	}
-	// debugger;
-	if(value === undefined || value===""){
-		// debugger;
-		return {
-			query: {
-				match_all: {}
-			}
-		};
-	}
-	else {
-		// debugger;
-	return {
-			match: {msg:value}
-		};
-	}	
-};
 
 var t = true;
 var uname = '';
-
-
+var val = '';
 const Login = withRouter(
 	React.createClass({
-		componentWillMount() {
-			this.txtDefault = "";
+		CustomQuery(value){
+			// HACK: Check if the value is changed will again mounting the TextField component.
+			if(val===value){
+				value="";
+			}
+			// debugger;
+			if(value === undefined || value==="$all$tweet" || value===""){
+				// debugger;
+				this.txtDefault=""
+				return {
+					query: {
+						match_all: {}
+					}
+				};
+			}
+			else {
+				// debugger;
+				val = value;
+			return {
+					term: {msg:value}
+					
+				};
+			}	
 		},
+		
 		onLogin(event){
 			event.preventDefault();
 			const { location } = this.props;
@@ -133,8 +131,8 @@ const Login = withRouter(
 					appbaseField = "msg"
 					placeholder = "Search tweet here..."
 					// executeQuery={true}
-					defaultSelected = {this.txtDefault}
-					customQuery= {CustomQuery}
+					
+					customQuery= {this.CustomQuery}
 				/>
 			</div>
 			</div>
@@ -164,6 +162,7 @@ const Login = withRouter(
 					react={{
 						'and':['SearchTweet']
 					}}
+					stream = {true}
 				/>
 			</div>
 			</div>
@@ -184,7 +183,6 @@ function requireAuth(nextState, replace) {
 }
 
 function enteringLogin(nextState, replace){
-
 }
 
 ReactDom.render((
