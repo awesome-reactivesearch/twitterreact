@@ -137,7 +137,8 @@ class User extends Component{
 			<div className="collecton-item">
 			<p style={{margin:'1% 2% 1% 2%'}}>
 			<Link to={`/profile/${this.props.name}`}>{this.props.name}</Link>
-			{(this.props.unfollowflg!=undefined)?(<button style={{float:'right'}}>Unfollow</button>
+			{(this.props.unfollowflg!=undefined)?(
+				<button style={{float:'right', margin:'1% 2% 1% 0', width:'5%', height:'4%', textAlign:'center'}} className="waves-effect waves-light btn red">Unfollow</button>
 			):(<label></label>
 			)}
 			</p>

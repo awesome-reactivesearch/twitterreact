@@ -133,63 +133,6 @@ export const Profile = withRouter(
 				console.log(err)
 			})
 		},
-		CustomQuery(value){
-			// HACK: Check if the value is changed will again mounting the TextField component.
-			debugger;
-			if(val===value){
-				value="";
-			}
-			if(value === undefined || value===""){
-				return{
-					query:{
-						"match": { by: u}
-					}
-				}
-			}
-			else{
-				val=value;
-				return {
-						query: {
-							"bool": { 
-								"must": [
-									{ "match": { by: u}}, 
-									{ "match": { msg: value}}
-								],
-							}
-						}
-					};	
-			}
-			},
-		onDataFollowing(response, err){
-			let result = null;
-			console.log(response)
-			if (err){
-				console.log(err)
-			}
-			else if(response) {
-				let combineData = response.currentData;
-
-				if(response.mode === 'historic') {
-					combineData = response.currentData.concat(response.newData);
-				}
-				else if(response.mode === 'streaming') {
-					console.log('got streaming')
-					combineData.unshift(response.newData)
-				}
-				console.log("combineData is:")
-				console.log(combineData)
-				if(combineData.length!=0){
-					var following = combineData[0]._source.following
-					if(following!=undefined){
-						result = following.map((markerData, index) => {
-							return (<User name={markerData} />)	
-						});
-					}
-				}
-				// debugger;
-				return result;
-			}
-		},
 
 		onDataFollowers(response, err){
 			let result = null;
@@ -210,7 +153,38 @@ export const Profile = withRouter(
 				console.log("combineData is:")
 				console.log(combineData)
 				if(combineData.length!=0){
-					var followers = combineData[0]._source.followers
+					var following = combineData[0]._source.followers
+					if(following!=undefined){
+						result = following.map((markerData, index) => {
+							return (<User name={markerData} />)	
+						});
+					}
+				}
+				// debugger;
+				return result;
+			}
+		},
+
+		onDataFollowing(response, err){
+			let result = null;
+			console.log(response)
+			if (err){
+				console.log(err)
+			}
+			else if(response) {
+				let combineData = response.currentData;
+
+				if(response.mode === 'historic') {
+					combineData = response.currentData.concat(response.newData);
+				}
+				else if(response.mode === 'streaming') {
+					console.log('got streaming')
+					combineData.unshift(response.newData)
+				}
+				console.log("combineData is:")
+				console.log(combineData)
+				if(combineData.length!=0){
+					var followers = combineData[0]._source.following
 					var name = combineData[0]._source.name
 					var unfollowflg=false
 					if(name == localStorage.user){
@@ -238,11 +212,47 @@ export const Profile = withRouter(
 			}
 			return false
 		},
+		componentWillMount() {
+
+			this.txtDefault = "";
+		},
 
 		render(){
+			const CustomQueryTweets=function(value){
+				// HACK: Check if the value is changed will again mounting the TextField component.
+				debugger;
+				if(val===value){
+					value="";
+				}
+				if(value === undefined || value===""){
+					return{
+						query:{
+							"match": { by: u}
+						}
+					}
+				}
+				else{
+					val=value;
+					return {
+							query: {
+								"bool": { 
+									"must": [
+										{ "match": { by: u}}, 
+										{ "match": { msg: value}}
+									],
+								}
+							}
+						};	
+				}
+				};
 			const navStyle = {textAlign:'right',margin: '0'};
 			u = this.props.params.uname
 			let loggedin = localStorage.user;
+			let getUser = "GetUser" + u;
+			let followerActuator = "FollowerActuator"+u;
+			let followingActuator = "FollowingActuator"+u;
+			// debugger;
+
 			const msgStyles = {maxWidth: 800, marginLeft:'10%', marginTop:'5%'};
 			// debugger;
 			return (
@@ -263,10 +273,12 @@ export const Profile = withRouter(
 				>
 				
 				<TextField
-					componentId = "SearchUserTweet"
+					componentId = {"SearchUserTweet"}
 					appbaseField = "msg"
 					placeholder = "Search tweet here..."
-					customQuery= {this.CustomQuery}
+					customQuery= {CustomQueryTweets}
+					defaultSelected = {this.txtDefault}
+
 				/>
 				
 				</ReactiveBase>
@@ -281,13 +293,12 @@ export const Profile = withRouter(
 				</div>
 					
 					<div className="col s12 m2 l2" >
-					{listFollowers(u,this.onDataFollowers)}
-					{listFollowing(u,this.onDataFollowing)}
+					{listFollowers(u,this.onDataFollowers,followerActuator,getUser)}
+					{listFollowing(u,this.onDataFollowing,followingActuator,getUser)}
 					</div>
 					<div className="col s12 m8 l91" style={msgStyles}>
 						<div style={{float:'left', width:'20%'}}>
 							<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
-							
 						</div>
 						<div style={{float:'left',width:'25%'}}>
 						<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>

@@ -15,7 +15,7 @@ const appbaseRef = new Appbase({
 var usr;
 
 const personalTweets = function(user, reactOn){
-	// debugger;
+	debugger;
 	usr=user;
 	return (
 		<div className="z-depth-1">
@@ -26,7 +26,7 @@ const personalTweets = function(user, reactOn){
 			type = {config.credential_tweets.type}
 		>
 		<ReactivePaginatedList
-			componentId="TweetsActuator"
+			componentId={"TweetsActuator"+user}
 			appbaseField="msg"
 			from={config.ReactiveList.from}
 			size={config.ReactiveList.size}

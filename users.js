@@ -17,9 +17,10 @@ var usr;
 
 
 
-var listFollowers = function(user, onDataFollowers){
+var listFollowers = function(user, onDataFollowers, followerActuator, getUser){
 	
 	usr=user;
+	// debugger;
 	return (
 		<div>
 		<ReactiveBase
@@ -30,7 +31,7 @@ var listFollowers = function(user, onDataFollowers){
 		>
 		<DataController
 		
-			componentId="GetUser"
+			componentId={getUser}
 			customQuery= {()=>({
 							query: {
 								match: {name:user}
@@ -40,7 +41,7 @@ var listFollowers = function(user, onDataFollowers){
 		/>
 		<ReactiveList
 			title= "Followers"
-			componentId="FollowersActuators"
+			componentId={followerActuator}
 			appbaseField="followers"
 			from={config.ReactiveList.from}
 			size={config.ReactiveList.size}
@@ -48,7 +49,7 @@ var listFollowers = function(user, onDataFollowers){
 			requestOnScroll={true}
 			onData = {onDataFollowers}
 			react={{
-				'and': ["GetUser"]
+				'and': [getUser]
 			}}
 			/>
 		</ReactiveBase>
@@ -56,10 +57,10 @@ var listFollowers = function(user, onDataFollowers){
 		)
 }
 
-var listFollowing = function(user, onDataFollowing){
+var listFollowing = function(user, onDataFollowing, followingActuator, getUser){
 	// debugger;
 	usr=user;
-
+	// debugger;
 	return (
 		<div>
 		<ReactiveBase
@@ -69,7 +70,7 @@ var listFollowing = function(user, onDataFollowing){
 			type = {config.credential_users.type}
 		>
 		<DataController
-			componentId="GetUser"
+			componentId={getUser}
 			customQuery= {()=>({
 							query: {
 								match: {name:user}
@@ -79,7 +80,7 @@ var listFollowing = function(user, onDataFollowing){
 		/>
 		<ReactiveList
 			title= "Following"
-			componentId="FollowingActuators"
+			componentId={followingActuator}
 			appbaseField="following"
 			from={config.ReactiveList.from}
 			size={config.ReactiveList.size}
@@ -87,7 +88,7 @@ var listFollowing = function(user, onDataFollowing){
 			requestOnScroll={true}
 			onData = {onDataFollowing}
 			react={{
-				'and': ["GetUser"]
+				'and': [getUser]
 			}}
 			/>
 		</ReactiveBase>
