@@ -22,6 +22,7 @@ var u = '';
 var val='';
 export const Profile = withRouter( 
 	React.createClass({
+		
 		logOut(event){
 			// debugger;
 			console.log("logging out!")
@@ -212,15 +213,34 @@ export const Profile = withRouter(
 			}
 			return false
 		},
-		componentWillMount() {
-
-			this.txtDefault = "";
+		tryMe(){
+			return !this.state.b
 		},
-
+		getComponents(nextState, callback){
+			console.log("woah!!")
+		},
+		componentWillReceiveProps(nextProps) {
+			
+			// this.setState({x:(this.state.x+1)})
+			if(this.state.x%2==0){
+				
+				this.setState({x:(this.state.x+1), b:!this.state.b})
+			}
+			else{
+				this.setState({x:(this.state.x+1), b:this.state.b})
+			}
+			console.log('state', this.state)
+		},
+		componentWillMount() {
+			console.log('hey11!')
+			this.state = {x:1, b:true}
+		},
 		render(){
+			u = this.props.params.uname
+			console.log('username now is', u)
 			const CustomQueryTweets=function(value){
 				// HACK: Check if the value is changed will again mounting the TextField component.
-				debugger;
+				// debugger;
 				if(val===value){
 					value="";
 				}
@@ -246,13 +266,12 @@ export const Profile = withRouter(
 				}
 				};
 			const navStyle = {textAlign:'right',margin: '0'};
-			u = this.props.params.uname
+			
 			let loggedin = localStorage.user;
 			let getUser = "GetUser" + u;
 			let followerActuator = "FollowerActuator"+u;
 			let followingActuator = "FollowingActuator"+u;
 			// debugger;
-
 			const msgStyles = {maxWidth: 800, marginLeft:'10%', marginTop:'5%'};
 			// debugger;
 			return (
@@ -291,11 +310,21 @@ export const Profile = withRouter(
 				</div>
 				</nav>
 				</div>
-					
+					{(this.tryMe())?
+
+					(<div className="col s12 m2 l2" >
+						Broom
+						{listFollowers(this.props.params.uname,this.onDataFollowers,followerActuator,getUser)}
+						{listFollowing(this.props.params.uname,this.onDataFollowing,followingActuator,getUser)}
+					</div>):(
 					<div className="col s12 m2 l2" >
-					{listFollowers(u,this.onDataFollowers,followerActuator,getUser)}
-					{listFollowing(u,this.onDataFollowing,followingActuator,getUser)}
-					</div>
+						Breed
+						{listFollowers(this.props.params.uname,this.onDataFollowers,followerActuator,getUser)}
+						{listFollowing(this.props.params.uname,this.onDataFollowing,followingActuator,getUser)}
+					</div>)
+					}
+					
+					
 					<div className="col s12 m8 l91" style={msgStyles}>
 						<div style={{float:'left', width:'20%'}}>
 							<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
@@ -307,22 +336,25 @@ export const Profile = withRouter(
 							{(this.chkFollowing())?(
 							<div style={{float:'left'}}>
 								<button value="Follow" onClick={this.followUser}>Follow</button>
+								
 							</div>
 							):(
 							<div style={{float:'left'}}>
 								<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>
+								
 							</div>)}
 
 							</div>):(<div>
+							
 							</div>)}
 						</div>
 						<div className = "z-depth-1">
 						{personalTweets(this.props.params.uname, "SearchUserTweet")}
 						</div>
 					</div>
-			</div>
+				</div>
 				)
 			
-		}
+			}
 	})
 )

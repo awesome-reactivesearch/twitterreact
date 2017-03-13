@@ -193,6 +193,6 @@ ReactDom.render((
 	<Router history={browserHistory}>
 		<Route path="/" component={Login} onEnter={enteringLogin}/>
 		<Route path=":uname" component={Dashboard} onEnter={requireAuth}/>
-		<Route path="profile/:uname" component={Profile} />
+		<Route path="profile/:uname" component={Profile}  addHandlerKey={true} />
 	</Router>
 ), document.getElementById('app'));

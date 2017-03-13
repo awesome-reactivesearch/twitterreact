@@ -15,7 +15,7 @@ const appbaseRef = new Appbase({
 var usr;
 
 const personalTweets = function(user, reactOn){
-	debugger;
+	// debugger;
 	usr=user;
 	return (
 		<div className="z-depth-1">

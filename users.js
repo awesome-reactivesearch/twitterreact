@@ -19,7 +19,7 @@ var usr;
 
 var listFollowers = function(user, onDataFollowers, followerActuator, getUser){
 	
-	usr=user;
+	// usr=user;
 	// debugger;
 	return (
 		<div>
@@ -59,7 +59,7 @@ var listFollowers = function(user, onDataFollowers, followerActuator, getUser){
 
 var listFollowing = function(user, onDataFollowing, followingActuator, getUser){
 	// debugger;
-	usr=user;
+	// usr=user;
 	// debugger;
 	return (
 		<div>
