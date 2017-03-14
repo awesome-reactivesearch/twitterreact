@@ -132,9 +132,7 @@ const Login = withRouter(
 				<TextField
 					componentId = "SearchTweet"
 					appbaseField = "msg"
-					placeholder = "Search tweet here..."
-					// executeQuery={true}
-					
+					placeholder = "Search tweet here..."					
 					customQuery= {this.CustomQuery}
 				/>
 

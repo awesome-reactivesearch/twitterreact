@@ -219,18 +219,10 @@ export const Profile = withRouter(
 		getComponents(nextState, callback){
 			console.log("woah!!")
 		},
-		componentWillReceiveProps(nextProps) {
-			
-			// this.setState({x:(this.state.x+1)})
-			if(this.state.x%2==0){
-				
-				this.setState({x:(this.state.x+1), b:!this.state.b})
-			}
-			else{
-				this.setState({x:(this.state.x+1), b:this.state.b})
-			}
-			console.log('state', this.state)
+		componentDidUpdate(prevProps, prevState) {
+			console.log("wohooo!!")
 		},
+		
 		componentWillMount() {
 			console.log('hey11!')
 			this.state = {x:1, b:true}
@@ -238,7 +230,8 @@ export const Profile = withRouter(
 		render(){
 			u = this.props.params.uname
 			console.log('username now is', u)
-			const CustomQueryTweets=function(value){
+
+			var CustomQueryTweets=function(value){
 				// HACK: Check if the value is changed will again mounting the TextField component.
 				// debugger;
 				if(val===value){
@@ -247,7 +240,7 @@ export const Profile = withRouter(
 				if(value === undefined || value===""){
 					return{
 						query:{
-							"match": { by: u}
+							match_all: {}
 						}
 					}
 				}
@@ -257,13 +250,34 @@ export const Profile = withRouter(
 							query: {
 								"bool": { 
 									"must": [
-										{ "match": { by: u}}, 
+										{ match_all: {}}, 
 										{ "match": { msg: value}}
 									],
 								}
 							}
 						};	
 				}
+				};
+			const CustomQueryT=function(data){
+				// debugger;
+				if(data!=undefined){
+					if(data[0].value===''){
+
+					}
+					else{
+						return{
+							query : {
+								match: {by:data[0].value}
+							}
+						}
+					}
+				}
+				return {
+						query: {
+							match_all: {}
+						}
+					};	
+				
 				};
 			const navStyle = {textAlign:'right',margin: '0'};
 			
@@ -275,15 +289,10 @@ export const Profile = withRouter(
 			const msgStyles = {maxWidth: 800, marginLeft:'10%', marginTop:'5%'};
 			// debugger;
 			return (
-				<div className ="row" >
+			<div className ="row" >
 				<div className="navbar-fixed">
 				<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
 				<div className="nav-wrapper">
-				<div style={{margin:'3px 3px 3px 3px'}}>
-					<div style={{float:'left',fontSize:'125%',width:'15%',marginLeft:'2%'}}>
-					Twitter on Appbase
-					</div>
-					<div style={{widh:'20%',float:'left'}}>
 				<ReactiveBase
 					app={config.credential_tweets.app}
 					username= {config.credential_tweets.username}
@@ -291,22 +300,50 @@ export const Profile = withRouter(
 					type = {config.credential_tweets.type}
 				>
 				
+					<div style={{float:'left',fontSize:'125%',width:'15%',marginLeft:'2%'}}>
+					Twitter on Appbase
+					</div>
+					
+				
+					<div style={{widh:'10%',float:'left'}}>
+				
 				<TextField
 					componentId = {"SearchUserTweet"}
 					appbaseField = "msg"
 					placeholder = "Search tweet here..."
 					customQuery= {CustomQueryTweets}
-					defaultSelected = {this.txtDefault}
+					defaultSelected = ""
 
 				/>
 				
-				</ReactiveBase>
+				
 				</div>
+				<div className="z-depth-0" style={{width:'30%',float:'left',marginLeft:'2%'}}>
+					
+					<ToggleButton
+						componentId = "SwitchTweet"
+						appbaseField = "by"
+						multiSelect = {false}
+						data = {[
+							{
+								'label':'Global',
+								'value':''
+							},
+							{
+								'label':'Personal',
+								'value':this.props.params.uname
+							}
+							]}
+						customQuery = {CustomQueryT}
+					/>
+					
+					
 				</div>
-				<div style={navStyle}>
+				<div style={{float:'right',margin: '0px'}}>
 					<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
 					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
 				</div>
+				</ReactiveBase>
 				</div>
 				</nav>
 				</div>
@@ -314,11 +351,13 @@ export const Profile = withRouter(
 
 					(<div className="col s12 m2 l2" >
 						Broom
+						{this.state.x}
 						{listFollowers(this.props.params.uname,this.onDataFollowers,followerActuator,getUser)}
 						{listFollowing(this.props.params.uname,this.onDataFollowing,followingActuator,getUser)}
 					</div>):(
 					<div className="col s12 m2 l2" >
 						Breed
+						{this.state.x}
 						{listFollowers(this.props.params.uname,this.onDataFollowers,followerActuator,getUser)}
 						{listFollowing(this.props.params.uname,this.onDataFollowing,followingActuator,getUser)}
 					</div>)
@@ -349,7 +388,7 @@ export const Profile = withRouter(
 							</div>)}
 						</div>
 						<div className = "z-depth-1">
-						{personalTweets(this.props.params.uname, "SearchUserTweet")}
+						{personalTweets(this.props.params.uname, ["SearchUserTweet","SwitchTweet"])}
 						</div>
 					</div>
 				</div>

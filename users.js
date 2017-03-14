@@ -21,6 +21,15 @@ var listFollowers = function(user, onDataFollowers, followerActuator, getUser){
 	
 	// usr=user;
 	// debugger;
+	const customQuery=function(){
+		return (
+			{
+				query: {
+					match: {name: user}
+				}
+			}
+			)
+	}
 	return (
 		<div>
 		<ReactiveBase
@@ -32,11 +41,7 @@ var listFollowers = function(user, onDataFollowers, followerActuator, getUser){
 		<DataController
 		
 			componentId={getUser}
-			customQuery= {()=>({
-							query: {
-								match: {name:user}
-							}
-						})}
+			customQuery= {customQuery}
 			showUI = {false}
 		/>
 		<ReactiveList
@@ -60,7 +65,16 @@ var listFollowers = function(user, onDataFollowers, followerActuator, getUser){
 var listFollowing = function(user, onDataFollowing, followingActuator, getUser){
 	// debugger;
 	// usr=user;
-	// debugger;
+	// debugger; 
+	const customQuery=function(){
+		return (
+			{
+				query: {
+					match: {name: user}
+				}
+			}
+			)
+	}
 	return (
 		<div>
 		<ReactiveBase
@@ -71,11 +85,7 @@ var listFollowing = function(user, onDataFollowing, followingActuator, getUser){
 		>
 		<DataController
 			componentId={getUser}
-			customQuery= {()=>({
-							query: {
-								match: {name:user}
-							}
-						})}
+			customQuery= {customQuery}
 			showUI = {false}
 		/>
 		<ReactiveList

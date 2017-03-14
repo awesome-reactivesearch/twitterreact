@@ -35,7 +35,7 @@ const personalTweets = function(user, reactOn){
 			onData = {onDataTweets}
 			sortOptions = {config.tweetsSortOptions}
 			react={{
-			'and': [reactOn]
+				'and': reactOn
 			}}
 			/>
 		</ReactiveBase>

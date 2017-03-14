@@ -30931,9 +30931,13 @@ var User = function (_Component2) {
 							this.props.name
 						),
 						this.props.unfollowflg != undefined ? _react2.default.createElement(
-							'button',
-							{ style: { float: 'right' } },
-							'Unfollow'
+							'div',
+							{ style: { color: 'white', float: 'right', width: '25%', height: '4%', margin: '1% 25% 1% 0' } },
+							_react2.default.createElement(
+								'button',
+								{ className: 'red', style: { textAlign: 'center' } },
+								'Unfollow'
+							)
 						) : _react2.default.createElement('label', null)
 					)
 				)
@@ -41514,7 +41518,7 @@ var personalTweets = function personalTweets(user, reactOn) {
 				type: _config.config.credential_tweets.type
 			},
 			_react2.default.createElement(_reactivebase.ReactivePaginatedList, {
-				componentId: 'TweetsActuator',
+				componentId: "TweetsActuator" + user,
 				appbaseField: 'msg',
 				from: _config.config.ReactiveList.from,
 				size: _config.config.ReactiveList.size,
@@ -41523,7 +41527,7 @@ var personalTweets = function personalTweets(user, reactOn) {
 				onData: _config.onDataTweets,
 				sortOptions: _config.config.tweetsSortOptions,
 				react: {
-					'and': [reactOn]
+					'and': reactOn
 				}
 			})
 		)
@@ -76261,10 +76265,8 @@ var Login = (0, _reactRouter.withRouter)(_react2.default.createClass({
 								_react2.default.createElement(_reactivebase.TextField, {
 									componentId: 'SearchTweet',
 									appbaseField: 'msg',
-									placeholder: 'Search tweet here...'
-									// executeQuery={true}
-
-									, customQuery: this.CustomQuery
+									placeholder: 'Search tweet here...',
+									customQuery: this.CustomQuery
 								})
 							)
 						)
@@ -76328,7 +76330,7 @@ _reactDom2.default.render(_react2.default.createElement(
 	{ history: _reactRouter.browserHistory },
 	_react2.default.createElement(_reactRouter.Route, { path: '/', component: Login, onEnter: enteringLogin }),
 	_react2.default.createElement(_reactRouter.Route, { path: ':uname', component: _dashboard.Dashboard, onEnter: requireAuth }),
-	_react2.default.createElement(_reactRouter.Route, { path: 'profile/:uname', component: _profile.Profile })
+	_react2.default.createElement(_reactRouter.Route, { path: 'profile/:uname', component: _profile.Profile, addHandlerKey: true })
 ), document.getElementById('app'));
 
 /***/ }),
@@ -84474,7 +84476,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 		var msgStyles = { maxWidth: 800 };
 		var s = { margin: '10px auto 10px' };
 		var u = this.props.params.uname;
-		var navStyle = { textAlign: 'right', margin: '0px' };
+
 		// debugger;
 		var CustomQueryTweets = function CustomQueryTweets(value) {
 			// HACK: Check if the value is changed will again mounting the TextField component.
@@ -84484,7 +84486,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 			if (value === undefined || value === "") {
 				return {
 					query: {
-						"match": { by: u }
+						match_all: {}
 					}
 				};
 			} else {
@@ -84492,13 +84494,30 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 				return {
 					query: {
 						"bool": {
-							"must": [{ "match": { by: u } }, { "match": { msg: value } }]
+							"must": [{ match_all: {} }, { "match": { msg: value } }]
 						}
 					}
 				};
 			}
 		};
 		var CustomQueryUsers = function CustomQueryUsers() {
+			return {
+				query: {
+					match_all: {}
+				}
+			};
+		};
+		var CustomQueryT = function CustomQueryT(data) {
+			// debugger;
+			if (data != undefined) {
+				if (data[0].value === '') {} else {
+					return {
+						query: {
+							match: { by: data[0].value }
+						}
+					};
+				}
+			}
 			return {
 				query: {
 					match_all: {}
@@ -84520,46 +84539,60 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 						'div',
 						{ className: 'nav-wrapper' },
 						_react2.default.createElement(
-							'div',
-							{ style: { margin: '3px 3px 3px 3px' } },
+							_reactivebase.ReactiveBase,
+							{
+								app: _config.config.credential_tweets.app,
+								username: _config.config.credential_tweets.username,
+								password: _config.config.credential_tweets.password,
+								type: _config.config.credential_tweets.type
+							},
 							_react2.default.createElement(
 								'div',
-								{ style: { float: 'left', fontSize: '125%', width: '15%', marginLeft: '2%' } },
+								{ style: { float: 'left', fontSize: '125%', width: '15%', marginLeft: '1% 2% auto 2%' } },
 								'Twitter on Appbase'
 							),
 							_react2.default.createElement(
 								'div',
-								{ style: { widh: '20%', float: 'left' } },
-								_react2.default.createElement(
-									_reactivebase.ReactiveBase,
-									{
-										app: _config.config.credential_tweets.app,
-										username: _config.config.credential_tweets.username,
-										password: _config.config.credential_tweets.password,
-										type: _config.config.credential_tweets.type
-									},
-									_react2.default.createElement(_reactivebase.TextField, {
-										componentId: 'SearchMyTweet',
-										appbaseField: 'msg',
-										placeholder: 'Search tweet here...',
-										customQuery: CustomQueryTweets,
-										defaultSelected: this.txtDefault
-									})
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ style: navStyle },
-							_react2.default.createElement(
-								'button',
-								{ value: 'Profile', onClick: this.goProfile, className: 'waves-effect waves-light btn' },
-								'Profile'
+								{ style: { widh: '10%', float: 'left' } },
+								_react2.default.createElement(_reactivebase.TextField, {
+									componentId: 'SearchMyTweet',
+									appbaseField: 'msg',
+									placeholder: 'Search tweet here...',
+									customQuery: CustomQueryTweets,
+									defaultSelected: this.txtDefault
+								})
 							),
 							_react2.default.createElement(
-								'button',
-								{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
-								'Logout'
+								'div',
+								{ className: 'z-depth-0', style: { width: '30%', float: 'left', marginLeft: '2%' } },
+								_react2.default.createElement(_reactivebase.ToggleButton, {
+									componentId: 'SwitchTweet',
+									appbaseField: 'by',
+									multiSelect: false,
+									data: [{
+										'label': 'Global',
+										'value': ''
+									}, {
+										'label': 'Personal',
+										'value': this.props.params.uname
+									}],
+									customQuery: CustomQueryT,
+									defaultSelected: this.props.params.uname
+								})
+							),
+							_react2.default.createElement(
+								'div',
+								{ style: { float: 'right', margin: '0px' } },
+								_react2.default.createElement(
+									'button',
+									{ value: 'Profile', onClick: this.goProfile, className: 'waves-effect waves-light btn' },
+									'Profile'
+								),
+								_react2.default.createElement(
+									'button',
+									{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
+									'Logout'
+								)
 							)
 						)
 					)
@@ -84635,7 +84668,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 				_react2.default.createElement(
 					'div',
 					{ className: 'col s6 z-depth-1' },
-					(0, _tweets.personalTweets)(u, "SearchMyTweet")
+					(0, _tweets.personalTweets)(u, ["SwitchTweet", "SearchMyTweet"])
 				)
 			)
 		);
@@ -84785,27 +84818,32 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 			console.log(err);
 		});
 	},
-	CustomQuery: function CustomQuery(value) {
-		// HACK: Check if the value is changed will again mounting the TextField component.
-		debugger;
-		if (val === value) {
-			value = "";
-		}
-		if (value === undefined || value === "") {
-			return {
-				query: {
-					"match": { by: u }
+	onDataFollowers: function onDataFollowers(response, err) {
+		var result = null;
+		console.log(response);
+		if (err) {
+			console.log(err);
+		} else if (response) {
+			var combineData = response.currentData;
+
+			if (response.mode === 'historic') {
+				combineData = response.currentData.concat(response.newData);
+			} else if (response.mode === 'streaming') {
+				console.log('got streaming');
+				combineData.unshift(response.newData);
+			}
+			console.log("combineData is:");
+			console.log(combineData);
+			if (combineData.length != 0) {
+				var following = combineData[0]._source.followers;
+				if (following != undefined) {
+					result = following.map(function (markerData, index) {
+						return _react2.default.createElement(_config.User, { name: markerData });
+					});
 				}
-			};
-		} else {
-			val = value;
-			return {
-				query: {
-					"bool": {
-						"must": [{ "match": { by: u } }, { "match": { msg: value } }]
-					}
-				}
-			};
+			}
+			// debugger;
+			return result;
 		}
 	},
 	onDataFollowing: function onDataFollowing(response, err) {
@@ -84825,35 +84863,7 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 			console.log("combineData is:");
 			console.log(combineData);
 			if (combineData.length != 0) {
-				var following = combineData[0]._source.following;
-				if (following != undefined) {
-					result = following.map(function (markerData, index) {
-						return _react2.default.createElement(_config.User, { name: markerData });
-					});
-				}
-			}
-			// debugger;
-			return result;
-		}
-	},
-	onDataFollowers: function onDataFollowers(response, err) {
-		var result = null;
-		console.log(response);
-		if (err) {
-			console.log(err);
-		} else if (response) {
-			var combineData = response.currentData;
-
-			if (response.mode === 'historic') {
-				combineData = response.currentData.concat(response.newData);
-			} else if (response.mode === 'streaming') {
-				console.log('got streaming');
-				combineData.unshift(response.newData);
-			}
-			console.log("combineData is:");
-			console.log(combineData);
-			if (combineData.length != 0) {
-				var followers = combineData[0]._source.followers;
+				var followers = combineData[0]._source.following;
 				var name = combineData[0]._source.name;
 				var unfollowflg = false;
 				if (name == localStorage.user) {
@@ -84879,10 +84889,70 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 		}
 		return false;
 	},
+	tryMe: function tryMe() {
+		return !this.state.b;
+	},
+	getComponents: function getComponents(nextState, callback) {
+		console.log("woah!!");
+	},
+	componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+		console.log("wohooo!!");
+	},
+	componentWillMount: function componentWillMount() {
+		console.log('hey11!');
+		this.state = { x: 1, b: true };
+	},
 	render: function render() {
-		var navStyle = { textAlign: 'right', margin: '0' };
 		u = this.props.params.uname;
+		console.log('username now is', u);
+
+		var CustomQueryTweets = function CustomQueryTweets(value) {
+			// HACK: Check if the value is changed will again mounting the TextField component.
+			// debugger;
+			if (val === value) {
+				value = "";
+			}
+			if (value === undefined || value === "") {
+				return {
+					query: {
+						match_all: {}
+					}
+				};
+			} else {
+				val = value;
+				return {
+					query: {
+						"bool": {
+							"must": [{ match_all: {} }, { "match": { msg: value } }]
+						}
+					}
+				};
+			}
+		};
+		var CustomQueryT = function CustomQueryT(data) {
+			// debugger;
+			if (data != undefined) {
+				if (data[0].value === '') {} else {
+					return {
+						query: {
+							match: { by: data[0].value }
+						}
+					};
+				}
+			}
+			return {
+				query: {
+					match_all: {}
+				}
+			};
+		};
+		var navStyle = { textAlign: 'right', margin: '0' };
+
 		var loggedin = localStorage.user;
+		var getUser = "GetUser" + u;
+		var followerActuator = "FollowerActuator" + u;
+		var followingActuator = "FollowingActuator" + u;
+		// debugger;
 		var msgStyles = { maxWidth: 800, marginLeft: '10%', marginTop: '5%' };
 		// debugger;
 		return _react2.default.createElement(
@@ -84898,8 +84968,13 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 						'div',
 						{ className: 'nav-wrapper' },
 						_react2.default.createElement(
-							'div',
-							{ style: { margin: '3px 3px 3px 3px' } },
+							_reactivebase.ReactiveBase,
+							{
+								app: _config.config.credential_tweets.app,
+								username: _config.config.credential_tweets.username,
+								password: _config.config.credential_tweets.password,
+								type: _config.config.credential_tweets.type
+							},
 							_react2.default.createElement(
 								'div',
 								{ style: { float: 'left', fontSize: '125%', width: '15%', marginLeft: '2%' } },
@@ -84907,46 +84982,65 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 							),
 							_react2.default.createElement(
 								'div',
-								{ style: { widh: '20%', float: 'left' } },
-								_react2.default.createElement(
-									_reactivebase.ReactiveBase,
-									{
-										app: _config.config.credential_tweets.app,
-										username: _config.config.credential_tweets.username,
-										password: _config.config.credential_tweets.password,
-										type: _config.config.credential_tweets.type
-									},
-									_react2.default.createElement(_reactivebase.TextField, {
-										componentId: 'SearchUserTweet',
-										appbaseField: 'msg',
-										placeholder: 'Search tweet here...',
-										customQuery: this.CustomQuery
-									})
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ style: navStyle },
-							_react2.default.createElement(
-								'button',
-								{ value: 'GoLocal', onClick: this.goLocal, className: 'waves-effect waves-light btn' },
-								'Personal Feed'
+								{ style: { widh: '10%', float: 'left' } },
+								_react2.default.createElement(_reactivebase.TextField, {
+									componentId: "SearchUserTweet",
+									appbaseField: 'msg',
+									placeholder: 'Search tweet here...',
+									customQuery: CustomQueryTweets,
+									defaultSelected: ''
+
+								})
 							),
 							_react2.default.createElement(
-								'button',
-								{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
-								'Logout'
+								'div',
+								{ className: 'z-depth-0', style: { width: '30%', float: 'left', marginLeft: '2%' } },
+								_react2.default.createElement(_reactivebase.ToggleButton, {
+									componentId: 'SwitchTweet',
+									appbaseField: 'by',
+									multiSelect: false,
+									data: [{
+										'label': 'Global',
+										'value': ''
+									}, {
+										'label': 'Personal',
+										'value': this.props.params.uname
+									}],
+									customQuery: CustomQueryT
+								})
+							),
+							_react2.default.createElement(
+								'div',
+								{ style: { float: 'right', margin: '0px' } },
+								_react2.default.createElement(
+									'button',
+									{ value: 'GoLocal', onClick: this.goLocal, className: 'waves-effect waves-light btn' },
+									'Personal Feed'
+								),
+								_react2.default.createElement(
+									'button',
+									{ value: 'Logout', onClick: this.logOut, className: 'waves-effect waves-light btn' },
+									'Logout'
+								)
 							)
 						)
 					)
 				)
 			),
-			_react2.default.createElement(
+			this.tryMe() ? _react2.default.createElement(
 				'div',
 				{ className: 'col s12 m2 l2' },
-				(0, _users.listFollowers)(u, this.onDataFollowers),
-				(0, _users.listFollowing)(u, this.onDataFollowing)
+				'Broom',
+				this.state.x,
+				(0, _users.listFollowers)(this.props.params.uname, this.onDataFollowers, followerActuator, getUser),
+				(0, _users.listFollowing)(this.props.params.uname, this.onDataFollowing, followingActuator, getUser)
+			) : _react2.default.createElement(
+				'div',
+				{ className: 'col s12 m2 l2' },
+				'Breed',
+				this.state.x,
+				(0, _users.listFollowers)(this.props.params.uname, this.onDataFollowers, followerActuator, getUser),
+				(0, _users.listFollowing)(this.props.params.uname, this.onDataFollowing, followingActuator, getUser)
 			),
 			_react2.default.createElement(
 				'div',
@@ -84989,7 +85083,7 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 				_react2.default.createElement(
 					'div',
 					{ className: 'z-depth-1' },
-					(0, _tweets.personalTweets)(this.props.params.uname, "SearchUserTweet")
+					(0, _tweets.personalTweets)(this.props.params.uname, ["SearchUserTweet", "SwitchTweet"])
 				)
 			)
 		);
@@ -85021,18 +85115,17 @@ var appbaseRef = new Appbase({
 });
 var usr;
 
-var listFollowers = function listFollowers(user, onDataFollowers) {
+var listFollowers = function listFollowers(user, onDataFollowers, followerActuator, getUser) {
 
-	usr = user;
-	// var CustomQueryUsers=function(){
-	// 	// debugger;
-	// 				return {
-	// 						query: {
-	// 							match: {name:usr}
-	// 						}
-	// 					};	
-	// 			};
+	// usr=user;
 	// debugger;
+	var customQuery = function customQuery() {
+		return {
+			query: {
+				match: { name: user }
+			}
+		};
+	};
 	return _react2.default.createElement(
 		'div',
 		null,
@@ -85046,19 +85139,13 @@ var listFollowers = function listFollowers(user, onDataFollowers) {
 			},
 			_react2.default.createElement(_reactivebase.DataController, {
 
-				componentId: 'GetUser',
-				customQuery: function customQuery() {
-					return {
-						query: {
-							match: { name: user }
-						}
-					};
-				},
+				componentId: getUser,
+				customQuery: customQuery,
 				showUI: false
 			}),
 			_react2.default.createElement(_reactivebase.ReactiveList, {
 				title: 'Followers',
-				componentId: 'FollowersActuators',
+				componentId: followerActuator,
 				appbaseField: 'followers',
 				from: _config.config.ReactiveList.from,
 				size: _config.config.ReactiveList.size,
@@ -85066,17 +85153,24 @@ var listFollowers = function listFollowers(user, onDataFollowers) {
 				requestOnScroll: true,
 				onData: onDataFollowers,
 				react: {
-					'and': ["GetUser"]
+					'and': [getUser]
 				}
 			})
 		)
 	);
 };
 
-var listFollowing = function listFollowing(user, onDataFollowing) {
+var listFollowing = function listFollowing(user, onDataFollowing, followingActuator, getUser) {
 	// debugger;
-	usr = user;
-
+	// usr=user;
+	// debugger; 
+	var customQuery = function customQuery() {
+		return {
+			query: {
+				match: { name: user }
+			}
+		};
+	};
 	return _react2.default.createElement(
 		'div',
 		null,
@@ -85089,19 +85183,13 @@ var listFollowing = function listFollowing(user, onDataFollowing) {
 				type: _config.config.credential_users.type
 			},
 			_react2.default.createElement(_reactivebase.DataController, {
-				componentId: 'GetUser',
-				customQuery: function customQuery() {
-					return {
-						query: {
-							match: { name: user }
-						}
-					};
-				},
+				componentId: getUser,
+				customQuery: customQuery,
 				showUI: false
 			}),
 			_react2.default.createElement(_reactivebase.ReactiveList, {
 				title: 'Following',
-				componentId: 'FollowingActuators',
+				componentId: followingActuator,
 				appbaseField: 'following',
 				from: _config.config.ReactiveList.from,
 				size: _config.config.ReactiveList.size,
@@ -85109,7 +85197,7 @@ var listFollowing = function listFollowing(user, onDataFollowing) {
 				requestOnScroll: true,
 				onData: onDataFollowing,
 				react: {
-					'and': ["GetUser"]
+					'and': [getUser]
 				}
 			})
 		)
