@@ -10,6 +10,7 @@ import {
 } from '@appbaseio/reactivebase';
 import {config, onDataTweets, onDataUsers} from './config.js';
 import {personalTweets} from './tweets.js'
+import {navBar} from './navbar.js'
 const appbaseRef = new Appbase({
 	url: config.credential_tweets.url,
 	appname: config.credential_tweets.app,
@@ -20,7 +21,7 @@ const appbaseRef = new Appbase({
 const date = new Date();
 const txtstyle={width:'100%', backgroundColor:'rgba(128, 128, 128, 0.07)'};
 
-var val = '';
+
 // const uname = 'a'
 export const Dashboard = withRouter( 
 	React.createClass({
@@ -62,32 +63,7 @@ export const Dashboard = withRouter(
 			const u = this.props.params.uname
 			
 			// debugger;
-			const CustomQueryTweets=function(value){
-				// HACK: Check if the value is changed will again mounting the TextField component.
-				if(val===value){
-					value="";
-				}
-				if(value === undefined || value===""){
-					return{
-						query:{
-							match_all:{}
-						}
-					}
-				}
-				else{
-					val=value;
-					return {
-							query: {
-								"bool": { 
-									"must": [
-										{match_all:{}}, 
-										{ "match": { msg: value}}
-									],
-								}
-							}
-						};	
-				}
-				};
+			
 			const CustomQueryUsers=function(){
 					return {
 							query: {
@@ -95,88 +71,14 @@ export const Dashboard = withRouter(
 							}
 						};	
 				};
-			const CustomQueryT=function(data){
-				// debugger;
-				if(data!=undefined){
-					if(data[0].value===''){
-
-					}
-					else{
-						return{
-							query : {
-								match: {by:data[0].value}
-							}
-						}
-					}
-				}
-				return {
-						query: {
-							match_all: {}
-						}
-					};	
-				
-				};
+			
 			// console.log(uname);
 			// debugger;
+			const pflg = 0;
 			return (
 
 			<div className ="row" >
-				<div className="navbar-fixed">
-				<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
-				<div className="nav-wrapper" >
-				
-				<ReactiveBase
-						app={config.credential_tweets.app}
-						username= {config.credential_tweets.username}
-						password= {config.credential_tweets.password}
-						type = {config.credential_tweets.type}
-					>
-					
-					
-					<div style={{float:'left',fontSize:'125%',width:'15%',marginLeft:'1% 2% auto 2%'}}>
-					Twitter on Appbase
-					</div>
-					<div style={{widh:'10%',float:'left'}}>
-					<TextField
-						componentId = "SearchMyTweet"
-						appbaseField = "msg"
-						placeholder = "Search tweet here..."
-						customQuery= {CustomQueryTweets}
-						defaultSelected = {this.txtDefault}
-					/>
-					
-					
-					</div>
-					<div className="z-depth-0" style={{width:'30%',float:'left',marginLeft:'2%'}}>
-					
-					<ToggleButton
-						componentId = "SwitchTweet"
-						appbaseField = "by"
-						multiSelect = {false}
-						data = {[
-							{
-								'label':'Global',
-								'value':''
-							},
-							{
-								'label':'Personal',
-								'value':this.props.params.uname
-							}
-							]}
-						customQuery = {CustomQueryT}
-						defaultSelected = {this.props.params.uname}
-					/>
-					</div>
-					
-				
-				<div style={{float:'right',margin: '0px'}}>
-					<button value="Profile" onClick={this.goProfile} className="waves-effect waves-light btn" >Profile</button>
-					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn" >Logout</button>
-				</div>
-				</ReactiveBase>
-				</div>
-				</nav>	
-				</div>
+				{navBar(this.props.params.uname, this.goProfile, this.logOut,pflg)}
 					<div className="col s2" style={{margin:'auto 5% 0 2%'}}>
 					<ReactiveBase
 						app={config.credential_users.app}
@@ -228,7 +130,7 @@ export const Dashboard = withRouter(
 					<div className="col s6 z-depth-1">
 					
 			
-					{personalTweets(u,["SwitchTweet","SearchMyTweet"])}
+					{personalTweets(u,["SwitchTweet"+u,"SearchMyTweet"])}
 					</div>
 				</div>
 			</div>

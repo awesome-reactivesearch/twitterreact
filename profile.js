@@ -11,7 +11,7 @@ import {
 import {config,onDataUsers, User} from './config.js';
 import {personalTweets} from './tweets.js'
 import {listFollowing, listFollowers} from './users.js'
-
+import {navBar} from './navbar.js'
 const appbaseRef = new Appbase({
 	url: config.credential_users.url,
 	appname: config.credential_users.app,
@@ -231,56 +231,6 @@ export const Profile = withRouter(
 			u = this.props.params.uname
 			console.log('username now is', u)
 
-			var CustomQueryTweets=function(value){
-				// HACK: Check if the value is changed will again mounting the TextField component.
-				// debugger;
-				if(val===value){
-					value="";
-				}
-				if(value === undefined || value===""){
-					return{
-						query:{
-							match_all: {}
-						}
-					}
-				}
-				else{
-					val=value;
-					return {
-							query: {
-								"bool": { 
-									"must": [
-										{ match_all: {}}, 
-										{ "match": { msg: value}}
-									],
-								}
-							}
-						};	
-				}
-				};
-			const CustomQueryT=function(data){
-				// debugger;
-				if(data!=undefined){
-					if(data[0].value===''){
-
-					}
-					else{
-						return{
-							query : {
-								match: {by:data[0].value}
-							}
-						}
-					}
-				}
-				return {
-						query: {
-							match_all: {}
-						}
-					};	
-				
-				};
-			const navStyle = {textAlign:'right',margin: '0'};
-			
 			let loggedin = localStorage.user;
 			let getUser = "GetUser" + u;
 			let followerActuator = "FollowerActuator"+u;
@@ -288,65 +238,10 @@ export const Profile = withRouter(
 			// debugger;
 			const msgStyles = {maxWidth: 800, marginLeft:'10%', marginTop:'5%'};
 			// debugger;
+			const pflg = 1;
 			return (
 			<div className ="row" >
-				<div className="navbar-fixed">
-				<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
-				<div className="nav-wrapper">
-				<ReactiveBase
-					app={config.credential_tweets.app}
-					username= {config.credential_tweets.username}
-					password= {config.credential_tweets.password}
-					type = {config.credential_tweets.type}
-				>
-				
-					<div style={{float:'left',fontSize:'125%',width:'15%',marginLeft:'2%'}}>
-					Twitter on Appbase
-					</div>
-					
-				
-					<div style={{widh:'10%',float:'left'}}>
-				
-				<TextField
-					componentId = {"SearchUserTweet"}
-					appbaseField = "msg"
-					placeholder = "Search tweet here..."
-					customQuery= {CustomQueryTweets}
-					defaultSelected = ""
-
-				/>
-				
-				
-				</div>
-				<div className="z-depth-0" style={{width:'30%',float:'left',marginLeft:'2%'}}>
-					
-					<ToggleButton
-						componentId = "SwitchTweet"
-						appbaseField = "by"
-						multiSelect = {false}
-						data = {[
-							{
-								'label':'Global',
-								'value':''
-							},
-							{
-								'label':'Personal',
-								'value':this.props.params.uname
-							}
-							]}
-						customQuery = {CustomQueryT}
-					/>
-					
-					
-				</div>
-				<div style={{float:'right',margin: '0px'}}>
-					<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
-					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
-				</div>
-				</ReactiveBase>
-				</div>
-				</nav>
-				</div>
+				{navBar(this.props.params.uname, this.goLocal, this.logOut, pflg)}
 					{(this.tryMe())?
 
 					(<div className="col s12 m2 l2" >
@@ -388,7 +283,7 @@ export const Profile = withRouter(
 							</div>)}
 						</div>
 						<div className = "z-depth-1">
-						{personalTweets(this.props.params.uname, ["SearchUserTweet","SwitchTweet"])}
+						{personalTweets(this.props.params.uname, ["SearchUserTweet","SwitchTweet"+u])}
 						</div>
 					</div>
 				</div>
