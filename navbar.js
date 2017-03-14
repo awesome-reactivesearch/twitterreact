@@ -46,19 +46,23 @@ const navBar=function(user, goProfile, logOut, pflg){
 				// debugger;
 				if(data!=undefined){
 					if(data[0].value===''){
-
+						return{
+							query : {
+									match_all : {}
+								}
+							};
 					}
 					else{
 						return{
 							query : {
 								match: {by:data[0].value}
 							}
-						}
+						};
 					}
 				}
 				return {
 						query: {
-							match_all: {}
+							match: {by : user}
 						}
 					};	
 				

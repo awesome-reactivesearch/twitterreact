@@ -41528,7 +41528,13 @@ var navBar = function navBar(user, goProfile, logOut, pflg) {
 	var CustomQueryT = function CustomQueryT(data) {
 		// debugger;
 		if (data != undefined) {
-			if (data[0].value === '') {} else {
+			if (data[0].value === '') {
+				return {
+					query: {
+						match_all: {}
+					}
+				};
+			} else {
 				return {
 					query: {
 						match: { by: data[0].value }
@@ -41538,7 +41544,7 @@ var navBar = function navBar(user, goProfile, logOut, pflg) {
 		}
 		return {
 			query: {
-				match_all: {}
+				match: { by: user }
 			}
 		};
 	};
