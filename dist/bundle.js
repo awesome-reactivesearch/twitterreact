@@ -41553,7 +41553,7 @@ var navBar = function navBar(user, goProfile, logOut, pflg) {
 		{ className: 'navbar-fixed' },
 		_react2.default.createElement(
 			'nav',
-			{ style: { color: 'black', backgroundColor: '#dadada', height: '60px', position: 'fixed' } },
+			{ style: { color: 'black', backgroundColor: '#dadada', height: '60px' } },
 			_react2.default.createElement(
 				'div',
 				{ className: 'nav-wrapper' },
@@ -41572,7 +41572,7 @@ var navBar = function navBar(user, goProfile, logOut, pflg) {
 					),
 					_react2.default.createElement(
 						'div',
-						{ style: { widh: '10%', float: 'left' } },
+						{ style: { widh: '8%', float: 'left' } },
 						_react2.default.createElement(_reactivebase.TextField, {
 							componentId: "SearchMyTweet" + user,
 							appbaseField: 'msg',
@@ -41583,7 +41583,25 @@ var navBar = function navBar(user, goProfile, logOut, pflg) {
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'z-depth-0', style: { width: '30%', float: 'left', marginLeft: '2%' } },
+						{ style: { float: 'right', margin: '0px' } },
+						pflg === 0 ? _react2.default.createElement(
+							'button',
+							{ className: 'left hide-on-med-and-down waves-effect waves-light btn', value: 'Profile', onClick: goProfile },
+							'Profile'
+						) : _react2.default.createElement(
+							'button',
+							{ className: 'left hide-on-med-and-down waves-effect waves-light btn', value: 'Profile', onClick: goProfile },
+							'Personal Feed'
+						),
+						_react2.default.createElement(
+							'button',
+							{ value: 'Logout', onClick: logOut, className: 'waves-effect waves-light btn' },
+							'Logout'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'right hide-on-med-and-down z-depth-0', style: { width: '30%', float: 'left', marginLeft: '2%' } },
 						_react2.default.createElement(_reactivebase.ToggleButton, {
 							componentId: "SwitchTweet" + user,
 							appbaseField: 'by',
@@ -41598,24 +41616,6 @@ var navBar = function navBar(user, goProfile, logOut, pflg) {
 							customQuery: CustomQueryT
 
 						})
-					),
-					_react2.default.createElement(
-						'div',
-						{ style: { float: 'right', margin: '0px' } },
-						pflg === 0 ? _react2.default.createElement(
-							'button',
-							{ value: 'Profile', onClick: goProfile, className: 'waves-effect waves-light btn' },
-							'Profile'
-						) : _react2.default.createElement(
-							'button',
-							{ value: 'Profile', onClick: goProfile, className: 'waves-effect waves-light btn' },
-							'Personal Feed'
-						),
-						_react2.default.createElement(
-							'button',
-							{ value: 'Logout', onClick: logOut, className: 'waves-effect waves-light btn' },
-							'Logout'
-						)
 					)
 				)
 			)
@@ -84966,21 +84966,13 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 			'div',
 			{ className: 'row' },
 			(0, _navbar.navBar)(this.props.params.uname, this.goLocal, this.logOut, pflg),
-			this.tryMe() ? _react2.default.createElement(
+			_react2.default.createElement(
 				'div',
-				{ className: 'col s12 m2 l2' },
-				'Broom',
-				this.state.x,
-				(0, _users.listFollowers)(this.props.params.uname, this.onDataFollowers, followerActuator, getUser),
-				(0, _users.listFollowing)(this.props.params.uname, this.onDataFollowing, followingActuator, getUser)
-			) : _react2.default.createElement(
-				'div',
-				{ className: 'col s12 m2 l2' },
-				'Breed',
-				this.state.x,
+				{ className: 'col s12 m2 l2', style: { marginTop: '3%' } },
 				(0, _users.listFollowers)(this.props.params.uname, this.onDataFollowers, followerActuator, getUser),
 				(0, _users.listFollowing)(this.props.params.uname, this.onDataFollowing, followingActuator, getUser)
 			),
+			') }',
 			_react2.default.createElement(
 				'div',
 				{ className: 'col s12 m8 l91', style: msgStyles },

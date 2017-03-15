@@ -70,7 +70,7 @@ const navBar=function(user, goProfile, logOut, pflg){
 	return(
 	
 		<div className="navbar-fixed">
-		<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
+		<nav style={{color:'black',backgroundColor:'#dadada', height:'60px'}}>
 		<div className="nav-wrapper" >
 		
 		<ReactiveBase
@@ -84,7 +84,7 @@ const navBar=function(user, goProfile, logOut, pflg){
 			<div style={{float:'left',fontSize:'125%',width:'15%',marginLeft:'1% 2% auto 2%'}}>
 			Twitter on Appbase
 			</div>
-			<div style={{widh:'10%',float:'left'}}>
+			<div style={{widh:'8%',float:'left'}}>
 			<TextField
 				componentId = {"SearchMyTweet"+user}
 				appbaseField = "msg"
@@ -95,7 +95,17 @@ const navBar=function(user, goProfile, logOut, pflg){
 			
 			
 			</div>
-			<div className="z-depth-0" style={{width:'30%',float:'left',marginLeft:'2%'}}>
+			
+		<div style={{float:'right',margin: '0px'}}>
+		{(pflg===0)?(
+			<button className="left hide-on-med-and-down waves-effect waves-light btn"  value="Profile" onClick={goProfile} >Profile</button>
+			):(
+			<button className="left hide-on-med-and-down waves-effect waves-light btn"  value="Profile" onClick={goProfile}>Personal Feed</button>
+			)}
+			<button value="Logout" onClick={logOut} className="waves-effect waves-light btn" >Logout</button>
+		</div>
+
+		<div className="right hide-on-med-and-down z-depth-0" style={{width:'30%',float:'left',marginLeft:'2%'}}>
 			
 			<ToggleButton
 				componentId = {"SwitchTweet"+user}
@@ -115,16 +125,6 @@ const navBar=function(user, goProfile, logOut, pflg){
 				
 			/>
 			</div>
-			
-		
-		<div style={{float:'right',margin: '0px'}}>
-		{(pflg===0)?(
-			<button value="Profile" onClick={goProfile} className="waves-effect waves-light btn" >Profile</button>
-			):(
-			<button value="Profile" onClick={goProfile} className="waves-effect waves-light btn" >Personal Feed</button>
-			)}
-			<button value="Logout" onClick={logOut} className="waves-effect waves-light btn" >Logout</button>
-		</div>
 		</ReactiveBase>
 		</div>
 		</nav>	

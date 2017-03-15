@@ -242,19 +242,12 @@ export const Profile = withRouter(
 			return (
 			<div className ="row" >
 				{navBar(this.props.params.uname, this.goLocal, this.logOut, pflg)}
-					{(this.tryMe())?
-
-					(<div className="col s12 m2 l2" >
-						Broom
-						{this.state.x}
+					
+					<div className="col s12 m2 l2" style={{marginTop:'3%'}}>
 						{listFollowers(this.props.params.uname,this.onDataFollowers,followerActuator,getUser)}
+						
 						{listFollowing(this.props.params.uname,this.onDataFollowing,followingActuator,getUser)}
-					</div>):(
-					<div className="col s12 m2 l2" >
-						Breed
-						{this.state.x}
-						{listFollowers(this.props.params.uname,this.onDataFollowers,followerActuator,getUser)}
-						{listFollowing(this.props.params.uname,this.onDataFollowing,followingActuator,getUser)}
+						
 					</div>)
 					}
 					
