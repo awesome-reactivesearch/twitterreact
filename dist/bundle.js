@@ -41574,7 +41574,7 @@ var navBar = function navBar(user, goProfile, logOut, pflg) {
 						'div',
 						{ style: { widh: '10%', float: 'left' } },
 						_react2.default.createElement(_reactivebase.TextField, {
-							componentId: 'SearchMyTweet',
+							componentId: "SearchMyTweet" + user,
 							appbaseField: 'msg',
 							placeholder: 'Search tweet here...',
 							customQuery: CustomQueryTweets,
@@ -84714,7 +84714,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 				_react2.default.createElement(
 					'div',
 					{ className: 'col s6 z-depth-1' },
-					(0, _tweets.personalTweets)(u, ["SwitchTweet" + u, "SearchMyTweet"])
+					(0, _tweets.personalTweets)(u, ["SwitchTweet" + u, "SearchMyTweet" + u])
 				)
 			)
 		);
@@ -85022,7 +85022,7 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 				_react2.default.createElement(
 					'div',
 					{ className: 'z-depth-1' },
-					(0, _tweets.personalTweets)(this.props.params.uname, ["SearchUserTweet", "SwitchTweet" + u])
+					(0, _tweets.personalTweets)(this.props.params.uname, ["SearchMyTweet" + u, "SwitchTweet" + u])
 				)
 			)
 		);

@@ -283,7 +283,7 @@ export const Profile = withRouter(
 							</div>)}
 						</div>
 						<div className = "z-depth-1">
-						{personalTweets(this.props.params.uname, ["SearchUserTweet","SwitchTweet"+u])}
+						{personalTweets(this.props.params.uname, ["SearchMyTweet"+u,"SwitchTweet"+u])}
 						</div>
 					</div>
 				</div>

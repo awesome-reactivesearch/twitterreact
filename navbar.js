@@ -86,7 +86,7 @@ const navBar=function(user, goProfile, logOut, pflg){
 			</div>
 			<div style={{widh:'10%',float:'left'}}>
 			<TextField
-				componentId = "SearchMyTweet"
+				componentId = {"SearchMyTweet"+user}
 				appbaseField = "msg"
 				placeholder = "Search tweet here..."
 				customQuery= {CustomQueryTweets}

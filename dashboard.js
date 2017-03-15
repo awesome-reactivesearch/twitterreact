@@ -130,7 +130,7 @@ export const Dashboard = withRouter(
 					<div className="col s6 z-depth-1">
 					
 			
-					{personalTweets(u,["SwitchTweet"+u,"SearchMyTweet"])}
+					{personalTweets(u,["SwitchTweet"+u,"SearchMyTweet"+u])}
 					</div>
 				</div>
 			</div>
