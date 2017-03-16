@@ -67,6 +67,8 @@ const navBar=function(user, goProfile, logOut, pflg){
 					};	
 				
 				};
+	const SearchTweetActuator = (pflg==0)?"SearchMyTweet"+user:"SearchUserTweet"+user
+	const SwitchTweetActuator = (pflg==0)?"SwitchMyTweet"+user:"SwitchUserTweet"+user
 	return(
 	
 		<div className="navbar-fixed">
@@ -86,7 +88,7 @@ const navBar=function(user, goProfile, logOut, pflg){
 			</div>
 			<div style={{widh:'8%',float:'left'}}>
 			<TextField
-				componentId = {"SearchMyTweet"+user}
+				componentId = {SearchTweetActuator}
 				appbaseField = "msg"
 				placeholder = "Search tweet here..."
 				customQuery= {CustomQueryTweets}
@@ -108,7 +110,7 @@ const navBar=function(user, goProfile, logOut, pflg){
 		<div className="right hide-on-med-and-down z-depth-0" style={{width:'30%',float:'left',marginLeft:'2%'}}>
 			
 			<ToggleButton
-				componentId = {"SwitchTweet"+user}
+				componentId = {SwitchTweetActuator}
 				appbaseField = "by"
 				multiSelect = {false}
 				data = {[
