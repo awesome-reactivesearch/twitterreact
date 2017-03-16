@@ -41548,6 +41548,8 @@ var navBar = function navBar(user, goProfile, logOut, pflg) {
 			}
 		};
 	};
+	var SearchTweetActuator = pflg == 0 ? "SearchMyTweet" + user : "SearchUserTweet" + user;
+	var SwitchTweetActuator = pflg == 0 ? "SwitchMyTweet" + user : "SwitchUserTweet" + user;
 	return _react2.default.createElement(
 		'div',
 		{ className: 'navbar-fixed' },
@@ -41574,7 +41576,7 @@ var navBar = function navBar(user, goProfile, logOut, pflg) {
 						'div',
 						{ style: { widh: '8%', float: 'left' } },
 						_react2.default.createElement(_reactivebase.TextField, {
-							componentId: "SearchMyTweet" + user,
+							componentId: SearchTweetActuator,
 							appbaseField: 'msg',
 							placeholder: 'Search tweet here...',
 							customQuery: CustomQueryTweets,
@@ -41603,7 +41605,7 @@ var navBar = function navBar(user, goProfile, logOut, pflg) {
 						'div',
 						{ className: 'right hide-on-med-and-down z-depth-0', style: { width: '30%', float: 'left', marginLeft: '2%' } },
 						_react2.default.createElement(_reactivebase.ToggleButton, {
-							componentId: "SwitchTweet" + user,
+							componentId: SwitchTweetActuator,
 							appbaseField: 'by',
 							multiSelect: false,
 							data: [{
@@ -84714,7 +84716,7 @@ var Dashboard = exports.Dashboard = (0, _reactRouter.withRouter)(_react2.default
 				_react2.default.createElement(
 					'div',
 					{ className: 'col s6 z-depth-1' },
-					(0, _tweets.personalTweets)(u, ["SwitchTweet" + u, "SearchMyTweet" + u])
+					(0, _tweets.personalTweets)(u, ["SwitchMyTweet" + u, "SearchMyTweet" + u])
 				)
 			)
 		);
@@ -85014,7 +85016,7 @@ var Profile = exports.Profile = (0, _reactRouter.withRouter)(_react2.default.cre
 				_react2.default.createElement(
 					'div',
 					{ className: 'z-depth-1' },
-					(0, _tweets.personalTweets)(this.props.params.uname, ["SearchMyTweet" + u, "SwitchTweet" + u])
+					(0, _tweets.personalTweets)(this.props.params.uname, ["SearchUserTweet" + u, "SwitchUserTweet" + u])
 				)
 			)
 		);
