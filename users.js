@@ -17,18 +17,19 @@ var usr;
 
 
 
-var listFollowers = function(user, onDataFollowers){
+var listFollowers = function(user, onDataFollowers, followerActuator, getUser){
 	
-	usr=user;
-	// var CustomQueryUsers=function(){
-	// 	// debugger;
-	// 				return {
-	// 						query: {
-	// 							match: {name:usr}
-	// 						}
-	// 					};	
-	// 			};
+	// usr=user;
 	// debugger;
+	const customQuery=function(){
+		return (
+			{
+				query: {
+					match: {name: user}
+				}
+			}
+			)
+	}
 	return (
 		<div>
 		<ReactiveBase
@@ -39,17 +40,13 @@ var listFollowers = function(user, onDataFollowers){
 		>
 		<DataController
 		
-			componentId="GetUser"
-			customQuery= {()=>({
-							query: {
-								match: {name:user}
-							}
-						})}
+			componentId={getUser}
+			customQuery= {customQuery}
 			showUI = {false}
 		/>
 		<ReactiveList
 			title= "Followers"
-			componentId="FollowersActuators"
+			componentId={followerActuator}
 			appbaseField="followers"
 			from={config.ReactiveList.from}
 			size={config.ReactiveList.size}
@@ -57,7 +54,7 @@ var listFollowers = function(user, onDataFollowers){
 			requestOnScroll={true}
 			onData = {onDataFollowers}
 			react={{
-				'and': ["GetUser"]
+				'and': [getUser]
 			}}
 			/>
 		</ReactiveBase>
@@ -65,10 +62,19 @@ var listFollowers = function(user, onDataFollowers){
 		)
 }
 
-var listFollowing = function(user, onDataFollowing){
+var listFollowing = function(user, onDataFollowing, followingActuator, getUser){
 	// debugger;
-	usr=user;
-
+	// usr=user;
+	// debugger; 
+	const customQuery=function(){
+		return (
+			{
+				query: {
+					match: {name: user}
+				}
+			}
+			)
+	}
 	return (
 		<div>
 		<ReactiveBase
@@ -78,17 +84,13 @@ var listFollowing = function(user, onDataFollowing){
 			type = {config.credential_users.type}
 		>
 		<DataController
-			componentId="GetUser"
-			customQuery= {()=>({
-							query: {
-								match: {name:user}
-							}
-						})}
+			componentId={getUser}
+			customQuery= {customQuery}
 			showUI = {false}
 		/>
 		<ReactiveList
 			title= "Following"
-			componentId="FollowingActuators"
+			componentId={followingActuator}
 			appbaseField="following"
 			from={config.ReactiveList.from}
 			size={config.ReactiveList.size}
@@ -96,7 +98,7 @@ var listFollowing = function(user, onDataFollowing){
 			requestOnScroll={true}
 			onData = {onDataFollowing}
 			react={{
-				'and': ["GetUser"]
+				'and': [getUser]
 			}}
 			/>
 		</ReactiveBase>

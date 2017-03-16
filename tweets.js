@@ -13,15 +13,8 @@ const appbaseRef = new Appbase({
 	password: config.credential_tweets.password
 });
 var usr;
-const CustomQueryTweets=function(){
-		// debugger;
-					return {
-							query: {
-								match: {by:usr}
-							}
-						};	
-				};
-const personalTweets = function(user){
+
+const personalTweets = function(user, reactOn){
 	// debugger;
 	usr=user;
 	return (
@@ -32,14 +25,9 @@ const personalTweets = function(user){
 			password= {config.credential_tweets.password}
 			type = {config.credential_tweets.type}
 		>
-		<DataController
-			componentId="GetTweets"
-			customQuery= {CustomQueryTweets}
-			showUI = {false}
-		/>
+
 		<ReactivePaginatedList
-			
-			componentId="TweetsActuator"
+			componentId={"TweetsActuator"+user}
 			appbaseField="msg"
 			from={config.ReactiveList.from}
 			size={config.ReactiveList.size}
@@ -48,7 +36,7 @@ const personalTweets = function(user){
 			onData = {onDataTweets}
 			sortOptions = {config.tweetsSortOptions}
 			react={{
-			'and': ["GetTweets"]
+				'and': reactOn
 			}}
 			/>
 		</ReactiveBase>

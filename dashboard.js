@@ -5,26 +5,33 @@ import {
 	ReactiveBase,
 	ReactiveList,
 	DataController,
+	ToggleButton,
 	TextField
 } from '@appbaseio/reactivebase';
 import {config, onDataTweets, onDataUsers} from './config.js';
 import {personalTweets} from './tweets.js'
+import {navBar} from './navbar.js'
 const appbaseRef = new Appbase({
 	url: config.credential_tweets.url,
 	appname: config.credential_tweets.app,
 	username: config.credential_tweets.username,
 	password: config.credential_tweets.password
 });
+
 const date = new Date();
 const txtstyle={width:'100%', backgroundColor:'rgba(128, 128, 128, 0.07)'};
+
+
 // const uname = 'a'
 export const Dashboard = withRouter( 
 	React.createClass({
-
+		componentWillMount() {
+			this.txtDefault = "";
+		},
 		logOut(event){
 			// debugger;
 			console.log("logging out!")
-			this.props.router.replace('/')
+			this.props.router.push('/')
 			delete localStorage.user;
 		},
 		goProfile(event){
@@ -35,30 +42,28 @@ export const Dashboard = withRouter(
 			event.preventDefault()
 			console.log('newTweet')
 			var msg= this.refs.newtweet.value
-			// console.log(by)
-			appbaseRef.index({
-				type: config.credential_tweets.type,
-				body: {"by": this.props.params.uname, "createdAt":date.getTime(), "msg":msg}
-			}).on('data', function(response) {
-				console.log(response);
-			}).on('error', function(error) {
-				console.log(error);
-			});
+			// debugger;
+			if(msg!=""){
+				// console.log(by)
+				appbaseRef.index({
+					type: config.credential_tweets.type,
+					body: {"by": this.props.params.uname, "createdAt":date.getTime(), "msg":msg}
+				}).on('data', function(response) {
+					console.log(response);
+				}).on('error', function(error) {
+					console.log(error);
+				});
+			}
 		},
+		
 	 	render() {
 			const uStyles = {maxWidth: 400, margin: '30px auto 10px', textAlign:'center', fontSize:'16px'};
 			const msgStyles = {maxWidth: 800};
 			const s = {margin:'10px auto 10px'}
 			const u = this.props.params.uname
-			const navStyle = {textAlign:'right',margin: '0px'};
+			
 			// debugger;
-			const CustomQueryTweets=function(){
-					return {
-							query: {
-								match: {by:u}
-							}
-						};	
-				};
+			
 			const CustomQueryUsers=function(){
 					return {
 							query: {
@@ -66,29 +71,27 @@ export const Dashboard = withRouter(
 							}
 						};	
 				};
+			
 			// console.log(uname);
 			// debugger;
+			const pflg = 0;
 			return (
 
 			<div className ="row" >
-				<nav className="nav-wrapper grey lighten-3 z-depth-100" style={{height:'50px', position:'fixed', top:0}}>
-				<div style={navStyle}>
-					<button value="Profile" onClick={this.goProfile} className="waves-effect waves-light btn" >Profile</button>
-					<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn" >Logout</button>
-				</div>
-				
-				</nav>	
-		
-					<div className="col s2" style={{margin:'5% 5% 0 2%'}}>
+				{navBar(this.props.params.uname, this.goProfile, this.logOut,pflg)}
+					<div className="col s2" style={{margin:'auto 5% 0 2%'}}>
 					<ReactiveBase
 						app={config.credential_users.app}
 						username= {config.credential_users.username}
 						password= {config.credential_users.password}
 						type = {config.credential_users.type}
 					>
-					<div className="z-depth-1">
-					<img style={{height:'100px', margin:'0 25% 15% 15%'}} src="user@2x.png" />
-					<h3 style={{textAlign:'center', marginTop:'10px'}}>{this.props.params.uname}</h3><br/>
+
+					<div style={{height:'25%'}}>
+					<div style={{margin:'0 auto 0 auto'}}>
+					<img style={{height:'65%',padding:'3%',margin:'0 0 0 14%'}} src="user@2x.png" />
+					<h3 style={{textAlign:'center', marginTop:'auto'}}>{this.props.params.uname}</h3><br/>
+					</div>
 					</div>
 					<DataController
 						componentId="GetUsers"
@@ -115,7 +118,8 @@ export const Dashboard = withRouter(
 					</div>
 				
 				<div className="row">
-					<div className="col s6" style={{margin:'10% 10% 0% 5%'}}>
+
+					<div className="col s6" style={{margin:'3% 10% 0% 5%'}}>
 					<form id="login" onSubmit={this.newTweet}>
 						
 						<input ref="newtweet" type="text" placeholder="Your tweet here..." style={txtstyle}/>
@@ -128,7 +132,7 @@ export const Dashboard = withRouter(
 					<div className="col s6 z-depth-1">
 					
 			
-					{personalTweets(u)}
+					{personalTweets(u,["SwitchTweet"+u,"SearchMyTweet"+u])}
 					</div>
 				</div>
 			</div>

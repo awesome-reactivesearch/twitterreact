@@ -11,17 +11,18 @@ import {
 import {config,onDataUsers, User} from './config.js';
 import {personalTweets} from './tweets.js'
 import {listFollowing, listFollowers} from './users.js'
-
+import {navBar} from './navbar.js'
 const appbaseRef = new Appbase({
 	url: config.credential_users.url,
 	appname: config.credential_users.app,
 	username: config.credential_users.username,
 	password: config.credential_users.password
 });
-var u = ''
-
+var u = '';
+var val='';
 export const Profile = withRouter( 
 	React.createClass({
+		
 		logOut(event){
 			// debugger;
 			console.log("logging out!")
@@ -134,37 +135,6 @@ export const Profile = withRouter(
 			})
 		},
 
-		onDataFollowing(response, err){
-			let result = null;
-			console.log(response)
-			if (err){
-				console.log(err)
-			}
-			else if(response) {
-				let combineData = response.currentData;
-
-				if(response.mode === 'historic') {
-					combineData = response.currentData.concat(response.newData);
-				}
-				else if(response.mode === 'streaming') {
-					console.log('got streaming')
-					combineData.unshift(response.newData)
-				}
-				console.log("combineData is:")
-				console.log(combineData)
-				if(combineData.length!=0){
-					var following = combineData[0]._source.following
-					if(following!=undefined){
-						result = following.map((markerData, index) => {
-							return (<User name={markerData} />)	
-						});
-					}
-				}
-				// debugger;
-				return result;
-			}
-		},
-
 		onDataFollowers(response, err){
 			let result = null;
 			console.log(response)
@@ -184,7 +154,38 @@ export const Profile = withRouter(
 				console.log("combineData is:")
 				console.log(combineData)
 				if(combineData.length!=0){
-					var followers = combineData[0]._source.followers
+					var following = combineData[0]._source.followers
+					if(following!=undefined){
+						result = following.map((markerData, index) => {
+							return (<User name={markerData} />)	
+						});
+					}
+				}
+				// debugger;
+				return result;
+			}
+		},
+
+		onDataFollowing(response, err){
+			let result = null;
+			console.log(response)
+			if (err){
+				console.log(err)
+			}
+			else if(response) {
+				let combineData = response.currentData;
+
+				if(response.mode === 'historic') {
+					combineData = response.currentData.concat(response.newData);
+				}
+				else if(response.mode === 'streaming') {
+					console.log('got streaming')
+					combineData.unshift(response.newData)
+				}
+				console.log("combineData is:")
+				console.log(combineData)
+				if(combineData.length!=0){
+					var followers = combineData[0]._source.following
 					var name = combineData[0]._source.name
 					var unfollowflg=false
 					if(name == localStorage.user){
@@ -212,59 +213,75 @@ export const Profile = withRouter(
 			}
 			return false
 		},
-
+		tryMe(){
+			return !this.state.b
+		},
+		getComponents(nextState, callback){
+			console.log("woah!!")
+		},
+		componentDidUpdate(prevProps, prevState) {
+			console.log("wohooo!!")
+		},
+		
+		componentWillMount() {
+			console.log('hey11!')
+			this.state = {x:1, b:true}
+		},
 		render(){
-			const navStyle = {textAlign:'right',margin: '0'};
 			u = this.props.params.uname
+			console.log('username now is', u)
+
 			let loggedin = localStorage.user;
+			let getUser = "GetUser" + u;
+			let followerActuator = "FollowerActuator"+u;
+			let followingActuator = "FollowingActuator"+u;
+			// debugger;
 			const msgStyles = {maxWidth: 800, marginLeft:'10%', marginTop:'5%'};
 			// debugger;
+			const pflg = 1;
 			return (
-				<div className ="row" >
-				<nav className="nav-wrapper grey lighten-3 z-depth-100" style={{height:'50px', position:'fixed', top:0}}>
-					<div className="nav-wrapper grey lighten-3">
-						<div style={navStyle}>
-							<button value="GoLocal" onClick={this.goLocal} className="waves-effect waves-light btn">Personal Feed</button>
-							<button value="Logout" onClick={this.logOut} className="waves-effect waves-light btn">Logout</button>
-						</div>
-					</div>
-				</nav>
+			<div className ="row" >
+				{navBar(this.props.params.uname, this.goLocal, this.logOut, pflg)}
 					
-					<div className="col s12 m4 l3" >
+					<div className="col s12 m2 l2" style={{marginTop:'3%'}}>
+						{listFollowers(this.props.params.uname,this.onDataFollowers,followerActuator,getUser)}
 						
+						{listFollowing(this.props.params.uname,this.onDataFollowing,followingActuator,getUser)}
+						
+					</div>)
+					}
+					
+					
+					<div className="col s12 m8 l91" style={msgStyles}>
+						<div style={{float:'left', width:'20%'}}>
+							<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
+						</div>
+						<div style={{float:'left',width:'25%'}}>
+						<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 						{(localStorage.user != u)?(
 							<div style={{textAlign:'center'}}>
 							{(this.chkFollowing())?(
-							<div>
+							<div style={{float:'left'}}>
 								<button value="Follow" onClick={this.followUser}>Follow</button>
-								{listFollowers(u,this.onDataFollowers)}
-								{listFollowing(u,this.onDataFollowing)}
+								
 							</div>
 							):(
-							<div>
-							<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>
-							{listFollowers(u,this.onDataFollowers)}
-							{listFollowing(u,this.onDataFollowing)}
+							<div style={{float:'left'}}>
+								<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>
+								
 							</div>)}
 
 							</div>):(<div>
 							
-							{listFollowers(u,this.onDataFollowers)}
-							{listFollowing(u,this.onDataFollowing)}
 							</div>)}
-					</div>
-					<div className="col s12 m8 l91" style={msgStyles}>
-						<div className="z-depth-1" style={{width:'25%'}}>
-							<img style={{height:'15%',margin:'15% 15% 15% 15%'}} src="../user@2x.png" />
-							<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 						</div>
 						<div className = "z-depth-1">
-						{personalTweets(this.props.params.uname)}
+						{personalTweets(this.props.params.uname, ["SearchMyTweet"+u,"SwitchTweet"+u])}
 						</div>
 					</div>
-			</div>
+				</div>
 				)
 			
-		}
+			}
 	})
 )
