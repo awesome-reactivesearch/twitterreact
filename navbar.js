@@ -77,8 +77,7 @@ const navBar=function(user, goProfile, logOut, pflg){
 		
 		<ReactiveBase
 				app={config.credential_tweets.app}
-				username= {config.credential_tweets.username}
-				password= {config.credential_tweets.password}
+				credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
 				type = {config.credential_tweets.type}
 			>
 			
