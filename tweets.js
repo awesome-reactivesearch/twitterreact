@@ -19,11 +19,7 @@ const personalTweets = function(user, reactOn){
 	usr=user;
 	return (
 		<div className="z-depth-1">
-		<ReactiveBase
-			app={config.credential_tweets.app}
-			credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-			type = {config.credential_tweets.type}
-		>
+		
 
 		<ReactivePaginatedList
 			componentId={"TweetsActuator"+user}
@@ -38,7 +34,7 @@ const personalTweets = function(user, reactOn){
 				'and': reactOn
 			}}
 			/>
-		</ReactiveBase>
+			
 		</div>
 		)
 }

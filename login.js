@@ -118,11 +118,7 @@ const Login = withRouter(
 			console.log("STATE", this.txtDefault);
 			return(
 			<div>
-			<ReactiveBase
-				app={config.credential_tweets.app}
-				credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-				type = {config.credential_tweets.type}
-			>
+			
 			<div className="navbar-fixed">
 			<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
 			<div className="nav-wrapper">
@@ -169,7 +165,7 @@ const Login = withRouter(
 				/>
 			</div>
 			</div>
-			</ReactiveBase>
+			
 			</div>
 			)
 		}
@@ -189,9 +185,17 @@ function enteringLogin(nextState, replace){
 }
 
 ReactDom.render((
+	<ReactiveBase
+		app={config.credential_tweets.app}
+		credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
+		type = {config.credential_tweets.type}
+	>
+	
 	<Router history={browserHistory}>
+
 		<Route path="/" component={Login} onEnter={enteringLogin}/>
 		<Route path=":uname" component={Dashboard} onEnter={requireAuth}/>
 		<Route path="profile/:uname" component={Profile}  addHandlerKey={true} />
 	</Router>
+	</ReactiveBase>
 ), document.getElementById('app'));

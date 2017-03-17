@@ -75,12 +75,7 @@ const navBar=function(user, goProfile, logOut, pflg){
 		<nav style={{color:'black',backgroundColor:'#dadada', height:'60px'}}>
 		<div className="nav-wrapper" >
 		
-		<ReactiveBase
-				app={config.credential_tweets.app}
-				credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-				type = {config.credential_tweets.type}
-			>
-			
+		
 			
 			<div style={{float:'left',fontSize:'125%',width:'15%',marginLeft:'1% 2% auto 2%'}}>
 			Twitter on Appbase
@@ -126,7 +121,8 @@ const navBar=function(user, goProfile, logOut, pflg){
 				
 			/>
 			</div>
-		</ReactiveBase>
+
+		
 		</div>
 		</nav>	
 		</div>

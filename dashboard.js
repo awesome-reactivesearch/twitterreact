@@ -76,7 +76,7 @@ export const Dashboard = withRouter(
 			// debugger;
 			const pflg = 0;
 			return (
-
+				
 			<div className ="row" >
 				{navBar(this.props.params.uname, this.goProfile, this.logOut,pflg)}
 					<div className="col s2" style={{margin:'auto 5% 0 2%'}}>

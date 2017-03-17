@@ -253,6 +253,8 @@ export const Profile = withRouter(
 			// debugger;
 			const pflg = 1;
 			return (
+				
+			
 			<div className ="row" >
 				{navBar(this.props.params.uname, this.goLocal, this.logOut, pflg)}
 					
