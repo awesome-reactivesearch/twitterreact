@@ -20,6 +20,8 @@ const appbaseRef = new Appbase({
 });
 var u = '';
 var val='';
+var nfollowers = 0;
+var nfollowing = 0;
 export const Profile = withRouter( 
 	React.createClass({
 		
@@ -51,7 +53,7 @@ export const Profile = withRouter(
 			if(username===undefined){
 				username = u
 			}
-			debugger;
+			// debugger;
 			let me = localStorage.user
 			console.log('following user')
 			appbaseRef.search(
@@ -113,7 +115,7 @@ export const Profile = withRouter(
 				var ufollowers = res.hits.hits[0]._source.followers
 				if(follow){
 					ufollowers.push(me)
-					debugger;
+					// debugger;
 				}
 				else{
 					var index = ufollowers.indexOf(me)
@@ -161,6 +163,7 @@ export const Profile = withRouter(
 				console.log(combineData)
 				if(combineData.length!=0){
 					var following = combineData[0]._source.followers
+					nfollowing = following.length
 					if(following!=undefined){
 						result = following.map((markerData, index) => {
 							return (<User name={markerData} />)	
@@ -168,12 +171,14 @@ export const Profile = withRouter(
 					}
 				}
 				// debugger;
+				this.setState({nfollowers:nfollowers, nfollowing:nfollowing})
 				return result;
 			}
 		},
 
 		onDataFollowing(response, err){
 			let result = null;
+			
 			console.log(response)
 			if (err){
 				console.log(err)
@@ -197,14 +202,17 @@ export const Profile = withRouter(
 					if(name == localStorage.user)
 						unfollowflg=true;
 					}
+					nfollowers = followers.length
+					
 					if(followers!=undefined){
 						result = followers.map((markerData, index) => {
 							return (<User name={markerData} unfollowflg={unfollowflg} onunfollowClick={this.updateUser}/>)	
 						});
+
 					}	
 					
 				}
-				
+				this.setState({nfollowers:nfollowers, nfollowing:nfollowing})
 				return result;
 			},
 
@@ -230,7 +238,7 @@ export const Profile = withRouter(
 		
 		componentWillMount() {
 			console.log('hey11!')
-			this.state = {x:1, b:true}
+			this.state = {nfollowers:0, nfollowing:0}
 		},
 		render(){
 			u = this.props.params.uname
@@ -261,8 +269,11 @@ export const Profile = withRouter(
 						<div style={{float:'left', width:'20%'}}>
 							<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
 						</div>
-						<div style={{float:'left',width:'25%'}}>
+						<div style={{float:'left',width:'50%'}}>
+						<div style={{float:'left'}}>
 						<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
+						</div>
+						<div style={{width:'100%',float:'left'}}>
 						{(localStorage.user != u)?(
 							<div style={{textAlign:'center'}}>
 							{(this.chkFollowing())?(
@@ -279,6 +290,15 @@ export const Profile = withRouter(
 							</div>):(<div>
 							
 							</div>)}
+							
+
+						<div style={{float:'left'}}>
+						<button className="btn disabled" style={{backgroundColor:'blue'}}>Followers {this.state.nfollowers}</button>
+						</div>
+						<div style={{float:'left'}}>
+						<button className="btn disabled" style={{backgroundColor:'blue'}}>Following {this.state.nfollowing}</button>
+						</div>
+						</div>
 						</div>
 						<div className = "z-depth-1">
 						{personalTweets(this.props.params.uname, ["SearchUserTweet"+u,"SwitchUserTweet"+u])}
