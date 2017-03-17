@@ -41,12 +41,17 @@ export const Profile = withRouter(
 		},
 
 		followUser(event){
-			this.updateUser(event,true)
+			this.updateUser(true)
 		},
 		unfollowUser(event){
-			this.updateUser(event,false)
+			this.updateUser(false)
 		},
-		updateUser(event, follow){
+		updateUser(follow, username){
+			
+			if(username===undefined){
+				username = u
+			}
+			debugger;
 			let me = localStorage.user
 			console.log('following user')
 			appbaseRef.search(
@@ -65,10 +70,10 @@ export const Profile = withRouter(
 				var mefollowers = res.hits.hits[0]._source.followers
 				// debugger;
 				if(follow){
-					mefollowing.push(u)
+					mefollowing.push(username)
 				}
 				else{
-					var index = mefollowing.indexOf(u)
+					var index = mefollowing.indexOf(username)
 					mefollowing.splice(index,1)
 					// debugger;
 				}
@@ -97,7 +102,7 @@ export const Profile = withRouter(
 				type: "users",
 				body:{
 					query: {
-						match: {name : u}
+						match: {name : username}
 					}
 				}
 			}).on('data', function(res){
@@ -108,10 +113,11 @@ export const Profile = withRouter(
 				var ufollowers = res.hits.hits[0]._source.followers
 				if(follow){
 					ufollowers.push(me)
+					debugger;
 				}
 				else{
-					var index = ufollowers.indexOf(u)
-					ufollowing.splice(index,1)
+					var index = ufollowers.indexOf(me)
+					ufollowers.splice(index,1)
 					// debugger;
 				}
 				// debugger;
@@ -120,7 +126,7 @@ export const Profile = withRouter(
 					type: "users",
 					id: uId,
 					body:{
-						"name":u,
+						"name":username,
 						"followers": ufollowers,
 						"following":ufollowing
 					}
@@ -188,20 +194,19 @@ export const Profile = withRouter(
 					var followers = combineData[0]._source.following
 					var name = combineData[0]._source.name
 					var unfollowflg=false
-					if(name == localStorage.user){
+					if(name == localStorage.user)
 						unfollowflg=true;
 					}
 					if(followers!=undefined){
 						result = followers.map((markerData, index) => {
-							return (<User name={markerData} unfollowflg={unfollowflg}/>)	
+							return (<User name={markerData} unfollowflg={unfollowflg} onunfollowClick={this.updateUser}/>)	
 						});
 					}	
 					
 				}
 				
 				return result;
-			}
-		},
+			},
 
 		chkFollowing(){
 			u = this.props.params.uname
