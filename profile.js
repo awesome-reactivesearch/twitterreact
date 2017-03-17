@@ -261,10 +261,7 @@ export const Profile = withRouter(
 						
 						{listFollowing(this.props.params.uname,this.onDataFollowing,followingActuator,getUser)}
 						
-					</div>)
-					}
-					
-					
+					</div>
 					<div className="col s12 m8 l91" style={msgStyles}>
 						<div style={{float:'left', width:'20%'}}>
 							<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
@@ -276,7 +273,7 @@ export const Profile = withRouter(
 						<div style={{width:'100%',float:'left'}}>
 						{(localStorage.user != u)?(
 							<div style={{textAlign:'center'}}>
-							{(this.chkFollowing())?(
+							{this.chkFollowing()?(
 							<div style={{float:'left'}}>
 								<button value="Follow" onClick={this.followUser}>Follow</button>
 								
