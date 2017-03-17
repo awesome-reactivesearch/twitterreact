@@ -21,15 +21,14 @@ const personalTweets = function(user, reactOn){
 		<div className="z-depth-1">
 		<ReactiveBase
 			app={config.credential_tweets.app}
-			username= {config.credential_tweets.username}
-			password= {config.credential_tweets.password}
+			credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
 			type = {config.credential_tweets.type}
 		>
 		<ReactivePaginatedList
 			componentId={"TweetsActuator"+user}
 			appbaseField="msg"
-			from={config.ReactiveList.from}
-			size={config.ReactiveList.size}
+			from={config.ReactivePaginatedList.from}
+			size={config.ReactivePaginatedList.size}
 			stream={true}
 			requestOnScroll={true}
 			onData = {onDataTweets}

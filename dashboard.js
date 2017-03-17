@@ -82,8 +82,7 @@ export const Dashboard = withRouter(
 					<div className="col s2" style={{margin:'auto 5% 0 2%'}}>
 					<ReactiveBase
 						app={config.credential_users.app}
-						username= {config.credential_users.username}
-						password= {config.credential_users.password}
+						credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
 						type = {config.credential_users.type}
 					>
 					<div style={{height:'25%'}}>

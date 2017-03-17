@@ -34,8 +34,7 @@ var listFollowers = function(user, onDataFollowers, followerActuator, getUser){
 		<div>
 		<ReactiveBase
 			app={config.credential_users.app}
-			username= {config.credential_users.username}
-			password= {config.credential_users.password}
+			credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
 			type = {config.credential_users.type}
 		>
 		<DataController
@@ -79,8 +78,7 @@ var listFollowing = function(user, onDataFollowing, followingActuator, getUser){
 		<div>
 		<ReactiveBase
 			app={config.credential_users.app}
-			username= {config.credential_users.username}
-			password= {config.credential_users.password}
+			credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
 			type = {config.credential_users.type}
 		>
 		<DataController

@@ -14,6 +14,8 @@ import {config, onDataTweets} from './config.js';
 import {Dashboard} from './dashboard.js'
 import {Profile} from './profile.js'
 
+require("@appbaseio/reactivebase/dist/css/style.min.css");
+
 var flg=0;
 const uStyles = {maxWidth: 400, margin: '10px auto 10px'};
 const msgStyles = {maxWidth: 600, margin: '30px auto 50px'};
@@ -118,8 +120,7 @@ const Login = withRouter(
 			<div>
 			<ReactiveBase
 				app={config.credential_tweets.app}
-				username= {config.credential_tweets.username}
-				password= {config.credential_tweets.password}
+				credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
 				type = {config.credential_tweets.type}
 			>
 			<div className="navbar-fixed">
