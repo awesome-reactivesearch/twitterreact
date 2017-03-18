@@ -135,6 +135,7 @@ class User extends Component{
 	render(){
 		const u = this.props.name
 		const unFollowfunc = this.props.onunfollowClick
+		const buttonStyle= {backgroundColor:'#d2322d' ,color:'white', borderRadius:'3px', border:'none',padding:'6%'};
 		const unfollow =  function(event){
 			console.log(unFollowfunc)
 			debugger;
@@ -147,7 +148,7 @@ class User extends Component{
 			<Link to={`/profile/${this.props.name}`}>{this.props.name}</Link>
 			{(this.props.unfollowflg!=undefined)?(
 				<div style={{color:'white', float:'right',width:'25%', height:'4%', margin:'1% 25% 1% 0'}}>
-				<button className="red" style={{ textAlign:'center'}} onClick={unfollow} >Unfollow</button>
+				<button style={buttonStyle} onClick={unfollow} >Unfollow</button>
 				</div>
 			):(<label></label>
 			)}
