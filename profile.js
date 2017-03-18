@@ -252,6 +252,8 @@ export const Profile = withRouter(
 			const msgStyles = {maxWidth: 800, marginLeft:'10%', marginTop:'5%'};
 			// debugger;
 			const pflg = 1;
+			const followbStyle= {backgroundColor:'#428bfc', color:'white', borderRadius:'3px', border:'none',padding:'6%'};
+			const unfollowbStyle= {backgroundColor:'#d2322d', color:'white', borderRadius:'3px', border:'none',padding:'6%'};
 			return (
 			<div className ="row" >
 				{navBar(this.props.params.uname, this.goLocal, this.logOut, pflg)}
@@ -266,35 +268,33 @@ export const Profile = withRouter(
 						<div style={{float:'left', width:'20%'}}>
 							<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
 						</div>
-						<div style={{float:'left',width:'50%'}}>
+						<div style={{float:'left',width:'80%'}}>
 						<div style={{float:'left'}}>
 						<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 						</div>
 						<div style={{width:'100%',float:'left'}}>
+						
+						
 						{(localStorage.user != u)?(
-							<div style={{textAlign:'center'}}>
+							<div >
 							{this.chkFollowing()?(
-							<div style={{float:'left'}}>
-								<button value="Follow" onClick={this.followUser}>Follow</button>
+							<div className = "col s2"  >
+								<button value="Follow" style={followbStyle} onClick={this.followUser} >FOLLOW</button>
 								
 							</div>
 							):(
-							<div style={{float:'left'}}>
-								<button value="Unfollow" onClick={this.unfollowUser}>Unfollow</button>
-								
+							<div  className = "col s2">
+								<button value="Unfollow" style={unfollowbStyle} onClick={this.unfollowUser}>UNFOLLOW</button>
 							</div>)}
 
 							</div>):(<div>
 							
 							</div>)}
-							
-
-						<div style={{float:'left'}}>
-						<button className="btn disabled" style={{backgroundColor:'blue'}}>Followers {this.state.nfollowers}</button>
-						</div>
-						<div style={{float:'left'}}>
-						<button className="btn disabled" style={{backgroundColor:'blue'}}>Following {this.state.nfollowing}</button>
-						</div>
+						
+						<button className="col s4 btn disabled" style={{backgroundColor:'blue',marginLeft:'2%'}}>Followers {this.state.nfollowers}</button>
+						<button className="col s4 btn disabled" style={{backgroundColor:'blue'}}>Following {this.state.nfollowing}</button>
+						
+						
 						</div>
 						</div>
 						<div className = "z-depth-1">
