@@ -32,11 +32,6 @@ export const Profile = withRouter(
 			delete localStorage.user;
 		},
 
-		goProfile(event){
-			let u = localStorage.user;
-			this.props.router.replace(`/profile/${u}`)	
-		},
-
 		goLocal(event){
 			let u = localStorage.user;
 			this.props.router.replace(`/${u}`)	
@@ -258,7 +253,7 @@ export const Profile = withRouter(
 				
 			
 			<div className ="row" >
-				{navBar(this.props.params.uname, this.goLocal, this.logOut, pflg)}
+				{navBar(this.props.params.uname, this.logOut, pflg)}
 					
 					<div className="col s12 m2 l2" style={{marginTop:'3%'}}>
 						{listFollowers(this.props.params.uname,this.onDataFollowers,followerActuator,getUser)}

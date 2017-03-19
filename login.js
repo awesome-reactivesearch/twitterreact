@@ -13,6 +13,7 @@ import {
 import {config, onDataTweets} from './config.js';
 import {Dashboard} from './dashboard.js'
 import {Profile} from './profile.js'
+import {SearchPg} from './searchpg.js'
 
 require("@appbaseio/reactivebase/dist/css/style.min.css");
 
@@ -196,6 +197,7 @@ ReactDom.render((
 		<Route path="/" component={Login} onEnter={enteringLogin}/>
 		<Route path=":uname" component={Dashboard} onEnter={requireAuth}/>
 		<Route path="profile/:uname" component={Profile}  addHandlerKey={true} />
+		<Route path="search/:txt" component={SearchPg} />
 	</Router>
 	</ReactiveBase>
 ), document.getElementById('app'));

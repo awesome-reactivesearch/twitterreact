@@ -15,7 +15,11 @@ const appbaseRef = new Appbase({
 	password: config.credential_tweets.password
 });
 var val = '';
-const navBar=function(user, goProfile, logOut, pflg){
+const navBar=function(user, logOut, pflg){
+	const goProfile=function(event){
+			let u = localStorage.user;
+			this.props.router.replace(`/profile/${u}`)	
+		};
 	const CustomQueryTweets=function(value){
 				// HACK: Check if the value is changed will again mounting the TextField component.
 				if(val===value){
@@ -67,6 +71,11 @@ const navBar=function(user, goProfile, logOut, pflg){
 					};	
 				
 				};
+
+	const onSubmit = function(){
+		this.props.router.replace(`search/${uname}`)
+		return;
+	}
 	const SearchTweetActuator = (pflg==0)?"SearchMyTweet"+user:"SearchUserTweet"+user
 	const SwitchTweetActuator = (pflg==0)?"SwitchMyTweet"+user:"SwitchUserTweet"+user
 	return(
@@ -81,24 +90,16 @@ const navBar=function(user, goProfile, logOut, pflg){
 			Twitter on Appbase
 			</div>
 			<div style={{widh:'8%',float:'left'}}>
-			<TextField
-				componentId = {SearchTweetActuator}
-				appbaseField = "msg"
-				placeholder = "Search tweet here..."
-				customQuery= {CustomQueryTweets}
-				defaultSelected = ""
-			/>
-			
+			<form onSubmit={onSubmit}>
+			<input type="text blue accent-2" placeholder="Name" ref="username" style={txtstyle}/><br/>
+			<input type="submit" value="Search" className="waves-effect waves-light btn"/>
+			</form>
 			
 			</div>
 			
 		<div style={{float:'right',margin: '0px'}}>
-		{(pflg===0)?(
-			<button className="left hide-on-med-and-down waves-effect waves-light btn"  value="Profile" onClick={goProfile} >Profile</button>
-			):(
-			<button className="left hide-on-med-and-down waves-effect waves-light btn"  value="Profile" onClick={goProfile}>Personal Feed</button>
-			)}
-			<button value="Logout" onClick={logOut} className="waves-effect waves-light btn" >Logout</button>
+		<button className="left hide-on-med-and-down waves-effect waves-light btn"  value="Profile" onClick={goProfile} >Profile</button>
+		<button value="Logout" onClick={logOut} className="waves-effect waves-light btn" >Logout</button>
 		</div>
 
 		<div className="right hide-on-med-and-down z-depth-0" style={{width:'30%',float:'left',marginLeft:'2%'}}>
