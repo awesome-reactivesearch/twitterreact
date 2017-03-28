@@ -14,15 +14,15 @@ const appbaseRef = new Appbase({
 });
 var usr;
 
-const personalTweets = function(user, reactOn){
+const PersonalTweets = (props) => {
 	// debugger;
-	usr=user;
+	usr=props.user;
 	return (
 		<div className="z-depth-1">
 		
 
 		<ReactivePaginatedList
-			componentId={"TweetsActuator"+user}
+			componentId={"TweetsActuator"+props.user}
 			appbaseField="msg"
 			from={config.ReactivePaginatedList.from}
 			size={config.ReactivePaginatedList.size}
@@ -31,7 +31,7 @@ const personalTweets = function(user, reactOn){
 			onData = {onDataTweets}
 			sortOptions = {config.tweetsSortOptions}
 			react={{
-				'and': reactOn
+				'and': props.reactOn
 			}}
 			/>
 			
@@ -40,5 +40,5 @@ const personalTweets = function(user, reactOn){
 }
 
 module.exports = {
-	personalTweets: personalTweets
+	PersonalTweets
 };

@@ -9,8 +9,8 @@ import {
 	ToggleButton
 } from '@appbaseio/reactivebase';
 import {config,onDataUsers, User} from './config.js';
-import {personalTweets} from './tweets.js'
-import {listFollowing, listFollowers} from './users.js'
+import {PersonalTweets} from './tweets.js'
+import {ListFollowing, ListFollowers} from './users.js'
 import {NavBar} from './navbar.js'
 const appbaseRef = new Appbase({
 	url: config.credential_users.url,
@@ -271,9 +271,15 @@ export const Profile = withRouter(
 				<NavBar user={this.props.params.uname} logOut={this.logOut} pflg={pflg} onSearch={this.onSearch} goProfile={this.goProfile} />
 					
 					<div className="col s12 m2 l2" style={{marginTop:'3%'}}>
-						{listFollowers(this.props.params.uname,this.onDataFollowers,followerActuator,getUser)}
+						<ListFollowers
+							user={this.props.params.uname}
+							onDataFollowers={this.onDataFollowers}
+						/>
+						<ListFollowing
+							user={this.props.params.uname}
+							onDataFollowing={this.onDataFollowing}
+						/>
 						
-						{listFollowing(this.props.params.uname,this.onDataFollowing,followingActuator,getUser)}
 						
 					</div>
 					<div className="col s12 m8 l91" style={msgStyles}>
@@ -302,15 +308,18 @@ export const Profile = withRouter(
 							</div>):(<div>
 							
 							</div>)}
-						
+						<div key={this.props.params.uname}>
 						<button className="col s4 btn disabled" style={{backgroundColor:'blue',marginLeft:'2%'}}>Followers {this.state.nfollowers}</button>
 						<button className="col s4 btn disabled" style={{backgroundColor:'blue'}}>Following {this.state.nfollowing}</button>
-						
+						</div>
 						
 						</div>
 						</div>
 						<div className = "z-depth-1">
-						{personalTweets(this.props.params.uname, ["SearchUserTweet"+u,"SwitchUserTweet"+u])}
+						<PersonalTweets
+							user={this.props.params.uname} 
+							reactOn={["SwitchUserTweet"+u]}
+						/>
 						</div>
 					</div>
 				</div>

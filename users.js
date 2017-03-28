@@ -16,96 +16,94 @@ var usr;
 
 
 
+const ListFollowers = (props) => {
 
-var listFollowers = function(user, onDataFollowers, followerActuator, getUser){
-	
-	// usr=user;
-	// debugger;
 	const customQuery=function(){
 		return (
 			{
 				query: {
-					match: {name: user}
+					match: {name: props.user}
 				}
 			}
 			)
 	}
+
 	return (
-		<div>
+		<div key={props.user+"Followers"}>
 		<ReactiveBase
 			app={config.credential_users.app}
 			credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
 			type = {config.credential_users.type}
 		>
 		<DataController
-		
-			componentId={getUser}
+			componentId={"UserFollowers"}
 			customQuery= {customQuery}
 			showUI = {false}
 		/>
 		<ReactiveList
 			title= "Followers"
-			componentId={followerActuator}
+			componentId={"FollowerActuator"}
 			appbaseField="followers"
 			from={config.ReactiveList.from}
 			size={config.ReactiveList.size}
 			stream={true}
 			requestOnScroll={true}
-			onData = {onDataFollowers}
+			onData = {props.onDataFollowers}
 			react={{
-				'and': [getUser]
+				'and': ["UserFollowers"]
 			}}
+			showResultStats={false}
 			/>
 		</ReactiveBase>
 		</div>
 		)
-}
+};
 
-var listFollowing = function(user, onDataFollowing, followingActuator, getUser){
-	// debugger;
+const ListFollowing = (props) => {
+
 	// usr=user;
-	// debugger; 
-	const customQuery=function(){
+	const customQuery=function(value){
 		return (
 			{
 				query: {
-					match: {name: user}
+					match: {name: props.user}
 				}
 			}
 			)
 	}
 	return (
-		<div>
-		<ReactiveBase
-			app={config.credential_users.app}
-			credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-			type = {config.credential_users.type}
-		>
-		<DataController
-			componentId={getUser}
-			customQuery= {customQuery}
-			showUI = {false}
-		/>
-		<ReactiveList
-			title= "Following"
-			componentId={followingActuator}
-			appbaseField="following"
-			from={config.ReactiveList.from}
-			size={config.ReactiveList.size}
-			stream={true}
-			requestOnScroll={true}
-			onData = {onDataFollowing}
-			react={{
-				'and': [getUser]
-			}}
+		<div key={props.user+"Following"} >
+			<ReactiveBase
+				app={config.credential_users.app}
+				credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
+				type = {config.credential_users.type}
+			>
+			<DataController
+				componentId="UserFollowing"
+				customQuery= {customQuery}
+				showUI = {false}
 			/>
-		</ReactiveBase>
+			<ReactiveList
+				title= "Following"
+				componentId={"FollowingActuator"}
+				appbaseField="following"
+				from={config.ReactiveList.from}
+				size={config.ReactiveList.size}
+				stream={true}
+				requestOnScroll={true}
+				onData = {props.onDataFollowing}
+				react={{
+					'and': ["UserFollowing"]
+				}}
+				showResultStats={false}
+				/>
+			</ReactiveBase>
 		</div>
 		)
 };
 
 
 module.exports = {
-	listFollowing: listFollowing,
-	listFollowers: listFollowers
-};
+	ListFollowing,
+	ListFollowers
+}

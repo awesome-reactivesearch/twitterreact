@@ -81,7 +81,6 @@ class NavBar extends Component{
 		const goProfile = this.props.goProfile
 		const onSearch = this.props.onSearch
 		const pflg = this.props.pflg
-		// const SearchTweetActuator = (pflg==1)?"SearchUserTweet"+user:"SearchMyTweet"+user
 		const SwitchTweetActuator = (pflg==1)?"SwitchUserTweet"+user:"SwitchMyTweet"+user
 
 		// debugger;

@@ -50,7 +50,8 @@ export const SearchPg = withRouter(
 
 				<div className="row">
 				<NavBar user={this.props.params.uname} pflg={pflg} onSearch={this.onSearch}/>
-					<div className="col s6">
+
+					<div className="col s4 offset-s1">
 						<DataController
 							componentId="SearchTweet"
 							customQuery= {this.CustomQueryTweets}
@@ -71,7 +72,7 @@ export const SearchPg = withRouter(
 						/>
 					</div>
 
-					<div className="col s6">
+					<div className="col s4 offset-s1">
 					<ReactiveBase
 						app={config.credential_users.app}
 						credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}

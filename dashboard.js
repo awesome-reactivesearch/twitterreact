@@ -9,7 +9,7 @@ import {
 	TextField
 } from '@appbaseio/reactivebase';
 import {config, onDataTweets, onDataUsers} from './config.js';
-import {personalTweets} from './tweets.js'
+import {PersonalTweets} from './tweets.js'
 import {NavBar} from './navbar.js'
 const appbaseRef = new Appbase({
 	url: config.credential_tweets.url,
@@ -38,6 +38,7 @@ export const Dashboard = withRouter(
 			this.props.router.push(`search/${t}`)
 			return;
 		},
+
 		logOut(event){
 			// debugger;
 			console.log("logging out!")
@@ -141,7 +142,10 @@ export const Dashboard = withRouter(
 					<div className="col s6 z-depth-1">
 					
 			
-					{personalTweets(u,["SwitchMyTweet"+u])}
+					<PersonalTweets
+						user={u}
+						reactOn={["SwitchMyTweet"+u]}
+					/>
 					</div>
 				</div>
 			</div>
