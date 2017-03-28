@@ -194,8 +194,8 @@ ReactDom.render((
 	
 	<Router history={browserHistory}>
 
-		<Route path="/" component={Login} onEnter={enteringLogin}/>
-		<Route path=":uname" component={Dashboard} onEnter={requireAuth}/>
+		<Route path="/twitterreact" component={Login} onEnter={enteringLogin}/>
+		<Route path="/twitterreact/:uname" component={Dashboard} onEnter={requireAuth}/>
 		<Route path="profile/:uname" component={Profile}  addHandlerKey={true} />
 		<Route path="search/:txt" component={SearchPg} />
 	</Router>
