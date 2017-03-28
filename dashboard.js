@@ -10,7 +10,7 @@ import {
 } from '@appbaseio/reactivebase';
 import {config, onDataTweets, onDataUsers} from './config.js';
 import {personalTweets} from './tweets.js'
-import {navBar} from './navbar.js'
+import {NavBar} from './navbar.js'
 const appbaseRef = new Appbase({
 	url: config.credential_tweets.url,
 	appname: config.credential_tweets.app,
@@ -27,6 +27,16 @@ export const Dashboard = withRouter(
 	React.createClass({
 		componentWillMount() {
 			this.txtDefault = "";
+		},
+
+		onSearch(event){
+			event.preventDefault();
+			let t = event.target[0].value;
+			debugger;
+			// console.log('bitch please', t)
+			// debugger;
+			this.props.router.replace(`search/${t}`)
+			return;
 		},
 		logOut(event){
 			// debugger;
@@ -78,7 +88,7 @@ export const Dashboard = withRouter(
 			return (
 				
 			<div className ="row" >
-				{navBar(this.props.params.uname, this.goProfile, this.logOut,pflg)}
+				<NavBar user={this.props.params.uname} logOut={this.logOut} pflg={pflg} onSearch={this.onSearch} goProfile={this.goProfile} />
 					<div className="col s2" style={{margin:'auto 5% 0 2%'}}>
 					<ReactiveBase
 						app={config.credential_users.app}

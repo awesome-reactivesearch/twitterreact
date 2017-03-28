@@ -15,71 +15,75 @@ const appbaseRef = new Appbase({
 	password: config.credential_tweets.password
 });
 var val = '';
-const navBar=function(user, logOut, pflg){
-	const goProfile=function(event){
-			let u = localStorage.user;
-			this.props.router.replace(`/profile/${u}`)	
-		};
-	const CustomQueryTweets=function(value){
-				// HACK: Check if the value is changed will again mounting the TextField component.
-				if(val===value){
-					value="";
-				}
-				if(value === undefined || value===""){
-					return{
-						query:{
-							match_all:{}
-						}
-					}
-				}
-				else{
-					val=value;
-					return {
-							query: {
-								"bool": { 
-									"must": [
-										{match_all:{}}, 
-										{ "match": { msg: value}}
-									],
-								}
-							}
-						};	
-				}
-				};
-	const CustomQueryT=function(data){
-				// debugger;
-				if(data!=undefined){
-					if(data[0].value===''){
-						return{
-							query : {
-									match_all : {}
-								}
-							};
-					}
-					else{
-						return{
-							query : {
-								match: {by:data[0].value}
-							}
-						};
-					}
-				}
-				return {
-						query: {
-							match: {by : user}
-						}
-					};	
-				
-				};
+class NavBar extends Component{
 
-	const onSubmit = function(){
-		this.props.router.replace(`search/${uname}`)
-		return;
-	}
-	const SearchTweetActuator = (pflg==0)?"SearchMyTweet"+user:"SearchUserTweet"+user
-	const SwitchTweetActuator = (pflg==0)?"SwitchMyTweet"+user:"SwitchUserTweet"+user
-	return(
+	constructor(props) {
+	    super(props);
+	};
 	
+	CustomQueryTweets(value){
+		if(val===value){
+			value="";
+		}
+		if(value === undefined || value===""){
+			return{
+				query:{
+					match_all:{}
+				}
+			}
+		}
+		else{
+			val=value;
+			return {
+					query: {
+						"bool": { 
+							"must": [
+								{match_all:{}}, 
+								{ "match": { msg: value}}
+							],
+						}
+					}
+				};	
+		}
+	};
+
+	CustomQueryT(data){
+		// debugger;
+		if(data!=undefined){
+			if(data[0].value===''){
+				return{
+					query : {
+							match_all : {}
+						}
+					};
+			}
+			else{
+				return{
+					query : {
+						match: {by:data[0].value}
+					}
+				};
+			}
+		}
+		return {
+				query: {
+					match: {by : user}
+				}
+			};	
+		
+		};
+
+	render(){
+		const user = this.props.user
+		const SearchTweetActuator = (pflg==0)?"SearchMyTweet"+user:"SearchUserTweet"+user
+		const SwitchTweetActuator = (pflg==0)?"SwitchMyTweet"+user:"SwitchUserTweet"+user
+
+		const logOut = this.props.logOut
+		const goProfile = this.props.goProfile
+		const onSearch = this.props.onSearch
+		const pflg = this.props.pflg
+		debugger;
+		return(
 		<div className="navbar-fixed">
 		<nav style={{color:'black',backgroundColor:'#dadada', height:'60px'}}>
 		<div className="nav-wrapper" >
@@ -90,8 +94,8 @@ const navBar=function(user, logOut, pflg){
 			Twitter on Appbase
 			</div>
 			<div style={{widh:'8%',float:'left'}}>
-			<form onSubmit={onSubmit}>
-			<input type="text blue accent-2" placeholder="Name" ref="username" style={txtstyle}/><br/>
+			<form id="searchbar" onSubmit={onSearch}>
+			<input type="text blue accent-2" ref="searchtxt"/><br/>
 			<input type="submit" value="Search" className="waves-effect waves-light btn"/>
 			</form>
 			
@@ -118,7 +122,7 @@ const navBar=function(user, logOut, pflg){
 						'value':user
 					}
 					]}
-				customQuery = {CustomQueryT}
+				customQuery = {this.CustomQueryT}
 				
 			/>
 			</div>
@@ -128,8 +132,9 @@ const navBar=function(user, logOut, pflg){
 		</nav>	
 		</div>
 		);
+	}
 }
 
 module.exports = {
-	navBar: navBar
+	NavBar : NavBar
 };

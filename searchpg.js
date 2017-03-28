@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {Router, Route, Link, browserHistory, withRouter} from 'react-router'
 import {
+	ReactiveList,
 	ReactiveBase,
 	ReactivePaginatedList,
 	DataController,
@@ -7,7 +9,7 @@ import {
 	ToggleButton
 } from '@appbaseio/reactivebase';
 import {config, onDataTweets, onDataUsers} from './config.js';
-
+import {NavBar} from './navbar.js'
 export const SearchPg = withRouter(
 	React.createClass({
 		
@@ -25,12 +27,15 @@ export const SearchPg = withRouter(
 			}
 		},
 		render(){
+			debugger;
 			return(
+
 				<div className="row">
+				<NavBar user={this.props.params.uname} logOut={this.logOut} pflg={pflg} onSearch={this.onSearch} goProfile={this.goProfile} />
 					<div className="col s6">
 						<DataController
 							componentId="SearchTweet"
-							customQuery= {CustomQueryTweets}
+							customQuery= {this.CustomQueryTweets}
 							showUI = {false}
 						/>
 						<ReactiveList
