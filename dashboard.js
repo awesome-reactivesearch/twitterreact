@@ -35,7 +35,7 @@ export const Dashboard = withRouter(
 			debugger;
 			// console.log('bitch please', t)
 			// debugger;
-			this.props.router.replace(`search/${t}`)
+			this.props.router.push(`search/${t}`)
 			return;
 		},
 		logOut(event){
@@ -141,7 +141,7 @@ export const Dashboard = withRouter(
 					<div className="col s6 z-depth-1">
 					
 			
-					{personalTweets(u,["SwitchMyTweet"+u,"SearchMyTweet"+u])}
+					{personalTweets(u,["SwitchMyTweet"+u])}
 					</div>
 				</div>
 			</div>

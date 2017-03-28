@@ -107,7 +107,7 @@ const Login = withRouter(
 			localStorage.user = uname;
 			
 			// console.log('hey!!')
-		this.props.router.replace(`/${uname}`)
+		this.props.router.push(`/${uname}`)
 		// console.log(this.props.router)
 		return;
 		},

@@ -11,7 +11,7 @@ import {
 import {config,onDataUsers, User} from './config.js';
 import {personalTweets} from './tweets.js'
 import {listFollowing, listFollowers} from './users.js'
-import {navBar} from './navbar.js'
+import {NavBar} from './navbar.js'
 const appbaseRef = new Appbase({
 	url: config.credential_users.url,
 	appname: config.credential_users.app,
@@ -235,6 +235,21 @@ export const Profile = withRouter(
 			console.log('hey11!')
 			this.state = {nfollowers:0, nfollowing:0}
 		},
+		onSearch(event){
+			event.preventDefault();
+			let t = event.target[0].value;
+			debugger;
+			// console.log('bitch please', t)
+			// debugger;
+			this.props.router.push(`search/${t}`)
+			return;
+		},
+		logOut(event){
+			// debugger;
+			console.log("logging out!")
+			this.props.router.push('/')
+			delete localStorage.user;
+		},
 		render(){
 			u = this.props.params.uname
 			console.log('username now is', u)
@@ -253,7 +268,7 @@ export const Profile = withRouter(
 				
 			
 			<div className ="row" >
-				{navBar(this.props.params.uname, this.logOut, pflg)}
+				<NavBar user={this.props.params.uname} logOut={this.logOut} pflg={pflg} onSearch={this.onSearch} goProfile={this.goProfile} />
 					
 					<div className="col s12 m2 l2" style={{marginTop:'3%'}}>
 						{listFollowers(this.props.params.uname,this.onDataFollowers,followerActuator,getUser)}

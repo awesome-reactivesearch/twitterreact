@@ -12,26 +12,44 @@ import {config, onDataTweets, onDataUsers} from './config.js';
 import {NavBar} from './navbar.js'
 export const SearchPg = withRouter(
 	React.createClass({
-		
+		onSearch(event){
+			event.preventDefault();
+			let t = event.target[0].value;
+			debugger;
+			// console.log('bitch please', t)
+			// debugger;
+			this.props.router.replace(`/search/${t}`)
+			return;
+		},
 		CustomQueryTweets(){
 			const phrase = this.props.params.txt
+			debugger;
 			return {
 				query: {
-					"text" : {
-						"message"  :{
-							"query": {phrase},
-							"type": "phrase"
-						}
-					}
+					"match": {
+					"msg": phrase
+				}
+				}
+			}
+		},
+		CustomQueryUsers(){
+			const phrase = this.props.params.txt
+			debugger;
+			return {
+				query: {
+					"match": {
+					"name": phrase
+				}
 				}
 			}
 		},
 		render(){
-			debugger;
+			// debugger;
+			const pflg=-1;
 			return(
 
 				<div className="row">
-				<NavBar user={this.props.params.uname} logOut={this.logOut} pflg={pflg} onSearch={this.onSearch} goProfile={this.goProfile} />
+				<NavBar user={this.props.params.uname} pflg={pflg} onSearch={this.onSearch}/>
 					<div className="col s6">
 						<DataController
 							componentId="SearchTweet"
@@ -51,6 +69,33 @@ export const SearchPg = withRouter(
 								'and': ["SearchTweet"]
 							}}
 						/>
+					</div>
+
+					<div className="col s6">
+					<ReactiveBase
+						app={config.credential_users.app}
+						credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
+						type = {config.credential_users.type}
+					>
+						<DataController
+							componentId="SearchUser"
+							customQuery= {this.CustomQueryUsers}
+							showUI = {false}
+						/>
+						<ReactiveList
+							title="Users"
+							componentId="UsersFound"
+							appbaseField="name"
+							from={config.ReactiveList.from}
+							size={config.ReactiveList.size}
+							stream={true}
+							requestOnScroll={true}
+							onData = {onDataUsers}
+							react={{
+								'and': ["SearchUser"]
+							}}
+						/>
+					</ReactiveBase>
 					</div>
 				</div>
 				)

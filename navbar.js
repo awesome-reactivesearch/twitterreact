@@ -15,6 +15,7 @@ const appbaseRef = new Appbase({
 	password: config.credential_tweets.password
 });
 var val = '';
+var user = '';
 class NavBar extends Component{
 
 	constructor(props) {
@@ -74,15 +75,16 @@ class NavBar extends Component{
 		};
 
 	render(){
-		const user = this.props.user
-		const SearchTweetActuator = (pflg==0)?"SearchMyTweet"+user:"SearchUserTweet"+user
-		const SwitchTweetActuator = (pflg==0)?"SwitchMyTweet"+user:"SwitchUserTweet"+user
-
+		user = this.props.user
+		
 		const logOut = this.props.logOut
 		const goProfile = this.props.goProfile
 		const onSearch = this.props.onSearch
 		const pflg = this.props.pflg
-		debugger;
+		// const SearchTweetActuator = (pflg==1)?"SearchUserTweet"+user:"SearchMyTweet"+user
+		const SwitchTweetActuator = (pflg==1)?"SwitchUserTweet"+user:"SwitchMyTweet"+user
+
+		// debugger;
 		return(
 		<div className="navbar-fixed">
 		<nav style={{color:'black',backgroundColor:'#dadada', height:'60px'}}>
@@ -100,7 +102,8 @@ class NavBar extends Component{
 			</form>
 			
 			</div>
-			
+		{(pflg==-1)?(<div></div>):(
+		<div>
 		<div style={{float:'right',margin: '0px'}}>
 		<button className="left hide-on-med-and-down waves-effect waves-light btn"  value="Profile" onClick={goProfile} >Profile</button>
 		<button value="Logout" onClick={logOut} className="waves-effect waves-light btn" >Logout</button>
@@ -126,7 +129,7 @@ class NavBar extends Component{
 				
 			/>
 			</div>
-
+			</div>)}
 		
 		</div>
 		</nav>	
