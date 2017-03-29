@@ -49,16 +49,20 @@ export const Profile = withRouter(
 			this.props.router.replace('/')
 			delete localStorage.user;
 		},
+
 		goLocal(event) {
 			let u = localStorage.user;
 			this.props.router.replace(`/${u}`)
 		},
+
 		followUser(event) {
 			this.updateUser(true)
 		},
+
 		unfollowUser(event) {
 			this.updateUser(false)
 		},
+
 		updateUser(follow, username) {
 			if (username === undefined) {
 				username = u
@@ -148,6 +152,7 @@ export const Profile = withRouter(
 				console.log(err)
 			})
 		},
+
 		onDataFollowers(response, err) {
 			let result = null;
 			console.log(response)
@@ -180,6 +185,7 @@ export const Profile = withRouter(
 				return result;
 			}
 		},
+
 		onDataFollowing(response, err) {
 			let result = null;
 			console.log(response)
@@ -215,6 +221,7 @@ export const Profile = withRouter(
 			})
 			return result;
 		},
+
 		chkFollowing() {
 			u = this.props.params.uname
 			let followingList = localStorage.ufollowing
@@ -225,15 +232,7 @@ export const Profile = withRouter(
 			}
 			return false
 		},
-		tryMe() {
-			return !this.state.b
-		},
-		getComponents(nextState, callback) {
-			console.log("woah!!")
-		},
-		componentDidUpdate(prevProps, prevState) {
-			console.log("wohooo!!")
-		},
+
 		componentWillMount() {
 			console.log('hey11!')
 			this.state = {
@@ -241,6 +240,7 @@ export const Profile = withRouter(
 				nfollowing: 0
 			}
 		},
+
 		onSearch(event) {
 			event.preventDefault();
 			let t = event.target[0].value;
@@ -250,12 +250,23 @@ export const Profile = withRouter(
 			this.props.router.push(`search/${t}`)
 			return;
 		},
+
 		logOut(event) {
 			// debugger;
 			console.log("logging out!")
 			this.props.router.push('/')
 			delete localStorage.user;
 		},
+
+		goGlobalFeed(event){
+			event.preventDefault();
+
+		},
+
+		goPresonalFeed(event){
+			event.preventDefault();
+		},
+
 		render() {
 			u = this.props.params.uname
 			console.log('username now is', u)
@@ -287,7 +298,14 @@ export const Profile = withRouter(
 			};
 			return (
 				<div className ="row" >
-					<NavBar user={this.props.params.uname} logOut={this.logOut} pflg={pflg} onSearch={this.onSearch} goProfile={this.goProfile} />
+					<NavBar 
+						user={this.props.params.uname}
+						logOut={this.logOut}
+						pflg={pflg}
+						onSearch={this.onSearch}
+						goGlobalFeed={this.goGlobalFeed}
+						goPresonalFeed={this.goPresonalFeed}
+					/>
 		
 					<div className="col s12 m2 l2" style={{marginTop:'3%'}}>
 						<ListFollowers
@@ -336,7 +354,7 @@ export const Profile = withRouter(
 						<div className = "z-depth-1">
 							<PersonalTweets
 								user={this.props.params.uname}
-								reactOn={["SwitchUserTweet"+u]}
+								reactOn={["UserTweet"]}
 							/>
 						</div>
 					</div>

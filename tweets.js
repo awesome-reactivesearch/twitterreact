@@ -21,8 +21,9 @@ var usr;
 const PersonalTweets = (props) => {
 	// debugger;
 	usr = props.user;
+	debugger;
 	return (
-		<div className="z-depth-1">
+		<div className="z-depth-1" key={props.user+"Tweets"}>
 	
 			<ReactivePaginatedList
 				componentId={"TweetsActuator"+props.user}

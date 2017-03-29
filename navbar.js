@@ -19,49 +19,21 @@ const appbaseRef = new Appbase({
 	username: config.credential_tweets.username,
 	password: config.credential_tweets.password
 });
-var val = '';
+
 var user = '';
-class NavBar extends Component {
-	constructor(props) {
-		super(props);
-	};
-	CustomQueryTweets(value) {
-		if (val === value) {
-			value = "";
-		}
-		if (value === undefined || value === "") {
-			return {
-				query: {
-					match_all: {}
-				}
-			}
-		} else {
-			val = value;
-			return {
-				query: {
-					"bool": {
-						"must": [{
-							match_all: {}
-						}, {
-							"match": {
-								msg: value
-							}
-						}],
-					}
-				}
-			};
-		}
-	};
-	CustomQueryT(data) {
+const NavBar = (props) => {
+
+	const CustomQueryT = function(data) {
 		// debugger;
-		if (data != undefined) {
+		if (data != undefined && props.pflg!=1) {
 			if (data[0].value === '') {
 				return {
 					query: {
 						match_all: {}
 					}
 				};
-			} else {
+			}
+			else {
 				return {
 					query: {
 						match: {
@@ -74,66 +46,73 @@ class NavBar extends Component {
 		return {
 			query: {
 				match: {
-					by: user
+					by: props.user
 				}
 			}
 		};
 	};
-	render() {
-		user = this.props.user
-		const logOut = this.props.logOut
-		const goProfile = this.props.goProfile
-		const onSearch = this.props.onSearch
-		const pflg = this.props.pflg
-		const SwitchTweetActuator = (pflg == 1) ? "SwitchUserTweet" + user : "SwitchMyTweet" + user
-			// debugger;
-		return (
-			<div className="navbar-fixed">
-				<nav style={{color:'black',backgroundColor:'#dadada', height:'60px'}}>
-					<div className="nav-wrapper" >
-						<div style={{float:'left',fontSize:'125%',width:'15%',marginLeft:'1% 2% auto 2%'}}>
-							Twitter on Appbase
+
+		// debugger;
+	return (
+		<div className="navbar-fixed">
+			<nav style={{color:'black',backgroundColor:'#dadada', height:'60px'}}>
+				<div className="nav-wrapper" >
+					<div style={{float:'left',fontSize:'125%',width:'15%',marginLeft:'1% 2% auto 2%'}}>
+						Twitter on Appbase
+					</div>
+					<div style={{widh:'8%',float:'left'}}>
+						<form id="searchbar" onSubmit={props.onSearch}>
+							<input type="text blue accent-2"/><br/>
+							<input type="submit" value="Search" className="waves-effect waves-light btn"/>
+						</form>
+						
+					</div>
+					{(props.pflg==-1)?(<div></div>):(
+					<div>
+						<div style={{float:'right',margin: '0px'}}>
+							<button className="left hide-on-med-and-down waves-effect waves-light btn"  value="Profile" onClick={props.goProfile} >Profile</button>
+							<button value="Logout" onClick={props.logOut} className="waves-effect waves-light btn" >Logout</button>
 						</div>
-						<div style={{widh:'8%',float:'left'}}>
-							<form id="searchbar" onSubmit={onSearch}>
-								<input type="text blue accent-2" ref="searchtxt"/><br/>
-								<input type="submit" value="Search" className="waves-effect waves-light btn"/>
-							</form>
+						<div className="right hide-on-med-and-down z-depth-0" style={{width:'30%',float:'left',marginLeft:'2%'}}>
 							
-						</div>
-						{(pflg==-1)?(<div></div>):(
-						<div>
-							<div style={{float:'right',margin: '0px'}}>
-								<button className="left hide-on-med-and-down waves-effect waves-light btn"  value="Profile" onClick={goProfile} >Profile</button>
-								<button value="Logout" onClick={logOut} className="waves-effect waves-light btn" >Logout</button>
-							</div>
-							<div className="right hide-on-med-and-down z-depth-0" style={{width:'30%',float:'left',marginLeft:'2%'}}>
-								
+							{(props.pflg==1)?(
+								<div>
+									<button className="waves-effect waves-light btn" value="Global" onClick={props.goGlobalFeed}>Global</button>
+									<button className="waves-effect waves-light btn" value="Personal" onClick={props.goPresonalFeed}>Personal</button>
+									<div key={props.user}>
+										<DataController
+											componentId="UserTweet"
+											customQuery= {CustomQueryT}
+											showUI = {false}
+										/>
+									</div>
+								</div>):(
 								<ToggleButton
-									componentId = {SwitchTweetActuator}
+									componentId = "UserTweet"
 									appbaseField = "by"
 									multiSelect = {false}
 									data = {[
-									{
-									'label':'Global',
-									'value':''
-									},
-									{
-									'label':'Personal',
-									'value':user
-									}
+										{
+											'label':'Global',
+											'value':''
+										},
+										{
+											'label':'Personal',
+											'value':props.user
+										}
 									]}
-									customQuery = {this.CustomQueryT}
+									customQuery = {CustomQueryT}
 									
 								/>
-							</div>
-						</div>)}
-						
-					</div>
-				</nav>
-			</div>
-		);
-	}
+							)}
+						</div>
+					</div>)}
+					
+				</div>
+			</nav>
+		</div>
+	);
+	
 }
 module.exports = {
 	NavBar: NavBar

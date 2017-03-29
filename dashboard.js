@@ -111,7 +111,13 @@ export const Dashboard = withRouter(
 			const pflg = 0;
 			return (
 				<div className ="row" >
-					<NavBar user={this.props.params.uname} logOut={this.logOut} pflg={pflg} onSearch={this.onSearch} goProfile={this.goProfile} />
+					<NavBar 
+						user={this.props.params.uname} 
+						logOut={this.logOut} 
+						pflg={pflg} 
+						onSearch={this.onSearch} 
+						goProfile={this.goProfile} 
+					/>
 					<div className="col s2" style={{margin:'auto 5% 0 2%'}}>
 						<ReactiveBase
 							app={config.credential_users.app}
@@ -162,7 +168,7 @@ export const Dashboard = withRouter(
 						<div className="col s6 z-depth-1">
 							<PersonalTweets
 								user={u}
-								reactOn={["SwitchMyTweet"+u]}
+								reactOn={["UserTweet"]}
 							/>
 						</div>
 					</div>
