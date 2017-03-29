@@ -15,7 +15,7 @@ export const SearchPg = withRouter(
 		onSearch(event){
 			event.preventDefault();
 			let t = event.target[0].value;
-			debugger;
+			// debugger;
 			// console.log('bitch please', t)
 			// debugger;
 			this.props.router.replace(`/search/${t}`)
@@ -23,7 +23,7 @@ export const SearchPg = withRouter(
 		},
 		CustomQueryTweets(){
 			const phrase = this.props.params.txt
-			debugger;
+			// debugger;
 			return {
 				query: {
 					"match": {
@@ -34,7 +34,7 @@ export const SearchPg = withRouter(
 		},
 		CustomQueryUsers(){
 			const phrase = this.props.params.txt
-			debugger;
+			// debugger;
 			return {
 				query: {
 					"match": {
@@ -48,8 +48,13 @@ export const SearchPg = withRouter(
 			const pflg=-1;
 			return(
 
-				<div className="row">
-				<NavBar user={this.props.params.uname} pflg={pflg} onSearch={this.onSearch}/>
+				<div className="row" key={this.props.params.txt}>
+					<NavBar 
+						user={this.props.params.uname} 
+						pflg={pflg} 
+						onSearch={this.onSearch}
+						path={this.props.location.pathname}
+					/>
 
 					<div className="col s4 offset-s1">
 						<DataController

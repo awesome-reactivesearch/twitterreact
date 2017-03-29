@@ -30,6 +30,8 @@ import {
 import {
 	SearchPg
 } from './searchpg.js'
+import {NavBar} from './navbar.js'
+
 require("@appbaseio/reactivebase/dist/css/style.min.css");
 var flg = 0;
 const uStyles = {
@@ -55,6 +57,7 @@ var uname = '';
 var val = '';
 const Login = withRouter(
 	React.createClass({
+		
 		CustomQuery(value) {
 			// HACK: Check if the value is changed will again mounting the TextField component.
 			if (val === value) {
@@ -79,12 +82,13 @@ const Login = withRouter(
 				};
 			}
 		},
+
 		onLogin(event) {
 			event.preventDefault();
-			const {
-				location
-			} = this.props;
+			const { location } = this.props;
 			uname = this.refs.username.value
+			if(uname=="")
+				return;
 				// var chk=1;
 			appbaseRef.search({
 				type: "users",
@@ -103,7 +107,8 @@ const Login = withRouter(
 				if (chk != 0) {
 					localStorage.ufollowing = (res.hits.hits[0]._source.following)
 						// debugger;
-				} else {
+				}
+				else {
 					localStorage.ufollowing = []
 				}
 				if (chk == 0) {
@@ -129,6 +134,17 @@ const Login = withRouter(
 				// console.log(this.props.router)
 			return;
 		},
+
+		onSearch(event) {
+			event.preventDefault();
+			let t = event.target[0].value;
+			// debugger;
+			// console.log('bitch please', t)
+			// debugger;
+			this.props.router.push(`search/${t}`)
+			return;
+		},
+
 		render() {
 			// debugger;
 			flg = 0;
@@ -139,27 +155,19 @@ const Login = withRouter(
 				fontSize: "20px"
 			};
 			console.log("STATE", this.txtDefault);
+			const pflg=-1;
 			return (
 				<div>
-	
-					<div className="navbar-fixed">
-						<nav style={{color:'black',backgroundColor:'#dadada', height:'60px', position:'fixed'}}>
-							<div className="nav-wrapper">
-								<div style={{ margin:'3px 3px 3px 3px'}}>
-									<div style={{float:'left',fontSize:'175%',width:'20%',marginLeft:'2%'}}>
-										Twitter on Appbase
-									</div>
-									<TextField
-										componentId = "SearchTweet"
-										appbaseField = "msg"
-										placeholder = "Search tweet here..."
-										customQuery= {this.CustomQuery}
-									/>
-								</div>
-							</div>
-						</nav>
-					</div>
-					
+					<NavBar 
+						user={this.props.params.uname} 
+						pflg={pflg} 
+						onSearch={this.onSearch}
+						path={this.props.location.pathname}
+						query={{
+							'show' : 1
+						}
+						}
+					/>
 					<div className="z-depth-1 grey lighten-2" style={{width:'25%',margin:'3% auto 0 auto',textAlign:'center'}}>
 						<form id="login" onSubmit={this.onLogin}>
 							<div style={{margin:'5%'}}>
@@ -171,7 +179,7 @@ const Login = withRouter(
 					
 					<div className="row" style={{margin:'0 10% 0 10%'}}>
 						<div className="col s10">
-							<ReactivePaginatedList
+							<ReactiveList
 								componentId="GlobalTweets"
 								appbaseField="msg"
 								title="Public Tweets"
@@ -181,7 +189,7 @@ const Login = withRouter(
 								onData={onDataTweets}
 								requestOnScroll={true}
 								react={{
-								'and':['SearchTweet']
+									'and':['GlobalTweet']
 								}}
 								stream = {true}
 							/>

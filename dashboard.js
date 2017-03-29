@@ -47,7 +47,7 @@ export const Dashboard = withRouter(
 		onSearch(event) {
 			event.preventDefault();
 			let t = event.target[0].value;
-			debugger;
+			// debugger;
 			// console.log('bitch please', t)
 			// debugger;
 			this.props.router.push(`search/${t}`)
@@ -117,6 +117,7 @@ export const Dashboard = withRouter(
 						pflg={pflg} 
 						onSearch={this.onSearch} 
 						goProfile={this.goProfile} 
+						query={this.props.location.query}
 					/>
 					<div className="col s2" style={{margin:'auto 5% 0 2%'}}>
 						<ReactiveBase

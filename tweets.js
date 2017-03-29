@@ -21,7 +21,7 @@ var usr;
 const PersonalTweets = (props) => {
 	// debugger;
 	usr = props.user;
-	debugger;
+	// debugger;
 	return (
 		<div className="z-depth-1" key={props.user+"Tweets"}>
 	

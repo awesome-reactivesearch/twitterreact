@@ -234,7 +234,7 @@ export const Profile = withRouter(
 		},
 
 		componentWillMount() {
-			console.log('hey11!')
+			// console.log('hey11!')
 			this.state = {
 				nfollowers: 0,
 				nfollowing: 0
@@ -244,7 +244,7 @@ export const Profile = withRouter(
 		onSearch(event) {
 			event.preventDefault();
 			let t = event.target[0].value;
-			debugger;
+			// debugger;
 			// console.log('bitch please', t)
 			// debugger;
 			this.props.router.push(`search/${t}`)
@@ -260,11 +260,12 @@ export const Profile = withRouter(
 
 		goGlobalFeed(event){
 			event.preventDefault();
-
+			this.props.router.push({pathname:`/${u}`, query:{show:1}})
 		},
 
 		goPresonalFeed(event){
 			event.preventDefault();
+			this.props.router.push({pathname:`/${u}`, query:{show:0}})
 		},
 
 		render() {
