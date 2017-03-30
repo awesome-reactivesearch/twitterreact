@@ -149,6 +149,7 @@ export const Dashboard = withRouter(
 									react={{
 									'and': ["GetUsers"]
 									}}
+									showResultStats={false}
 								/>
 							</div>
 						</ReactiveBase>
@@ -166,7 +167,7 @@ export const Dashboard = withRouter(
 								
 							</form>
 						</div>
-						<div className="col s6 z-depth-1">
+						<div className="col s6">
 							<PersonalTweets
 								user={u}
 								reactOn={["UserTweet"]}

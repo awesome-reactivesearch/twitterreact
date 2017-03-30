@@ -260,12 +260,14 @@ export const Profile = withRouter(
 
 		goGlobalFeed(event){
 			event.preventDefault();
-			this.props.router.push({pathname:`/${u}`, query:{show:1}})
+			let loggedUser = localStorage.user
+			this.props.router.push({pathname:`/${loggedUser}`, query:{show:1}})
 		},
 
 		goPresonalFeed(event){
 			event.preventDefault();
-			this.props.router.push({pathname:`/${u}`, query:{show:0}})
+			let loggedUser = localStorage.user
+			this.props.router.push({pathname:`/${loggedUser}`, query:{show:0}})
 		},
 
 		render() {
@@ -352,7 +354,7 @@ export const Profile = withRouter(
 								
 							</div>
 						</div>
-						<div className = "z-depth-1">
+						<div className = "z-depth-1" key={this.props.params.uname}>
 							<PersonalTweets
 								user={this.props.params.uname}
 								reactOn={["UserTweet"]}

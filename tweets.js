@@ -4,6 +4,7 @@ import React, {
 import {
 	ReactiveBase,
 	ReactivePaginatedList,
+	ReactiveList,
 	DataController,
 } from '@appbaseio/reactivebase';
 import {
@@ -23,10 +24,10 @@ const PersonalTweets = (props) => {
 	usr = props.user;
 	// debugger;
 	return (
-		<div className="z-depth-1" key={props.user+"Tweets"}>
+		<div className="z-depth-0" key={props.user+"Tweets"}>
 	
-			<ReactivePaginatedList
-				componentId={"TweetsActuator"+props.user}
+			<ReactiveList
+				componentId={"TweetsActuator"}
 				appbaseField="msg"
 				from={config.ReactivePaginatedList.from}
 				size={config.ReactivePaginatedList.size}
@@ -35,8 +36,9 @@ const PersonalTweets = (props) => {
 				onData = {onDataTweets}
 				sortOptions = {config.tweetsSortOptions}
 				react={{
-				'and': props.reactOn
+					'and': props.reactOn
 				}}
+				showResultStats={false}
 			/>
 			
 		</div>
