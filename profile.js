@@ -261,13 +261,13 @@ export const Profile = withRouter(
 		goGlobalFeed(event){
 			event.preventDefault();
 			let loggedUser = localStorage.user
-			this.props.router.push({pathname:`/${loggedUser}`, query:{show:1}})
+			this.props.router.replace({pathname:`/${loggedUser}`, query:{show:1}})
 		},
 
 		goPresonalFeed(event){
 			event.preventDefault();
 			let loggedUser = localStorage.user
-			this.props.router.push({pathname:`/${loggedUser}`, query:{show:0}})
+			this.props.router.replace({pathname:`/${loggedUser}`, query:{show:0}})
 		},
 
 		render() {
@@ -310,7 +310,7 @@ export const Profile = withRouter(
 						goPresonalFeed={this.goPresonalFeed}
 					/>
 		
-					<div className="col s12 m2 l2" style={{marginTop:'3%'}}>
+					<div className="col m2 s6 offset-s1 offset-m1" style={{marginTop:'3%'}}>
 						<ListFollowers
 							user={this.props.params.uname}
 							onDataFollowers={this.onDataFollowers}
@@ -322,7 +322,7 @@ export const Profile = withRouter(
 						
 						
 					</div>
-						<div className="col s12 m8 l91" style={msgStyles}>
+						<div className="col s12 m7 l91" style={msgStyles}>
 							<div style={{float:'left', width:'20%'}}>
 								<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
 							</div>
@@ -337,12 +337,12 @@ export const Profile = withRouter(
 									<div >
 										{this.chkFollowing()?(
 										<div className = "col s2"  >
-											<button value="Follow" style={followbStyle} onClick={this.followUser} >FOLLOW</button>
+											<button value="Follow" style={followbStyle} onClick={this.followUser} >Follow</button>
 											
 										</div>
 										):(
 										<div  className = "col s2">
-											<button value="Unfollow" style={unfollowbStyle} onClick={this.unfollowUser}>UNFOLLOW</button>
+											<button value="Unfollow" style={unfollowbStyle} onClick={this.unfollowUser}>Unfollow</button>
 										</div>)}
 									</div>):(<div>
 									
@@ -354,10 +354,10 @@ export const Profile = withRouter(
 								
 							</div>
 						</div>
-						<div className = "z-depth-1" key={this.props.params.uname}>
+						<div className="col s8">
 							<PersonalTweets
-								user={this.props.params.uname}
-								reactOn={["UserTweet"]}
+								user={u}
+								reactOn={["UserProfileTweet"]}
 							/>
 						</div>
 					</div>

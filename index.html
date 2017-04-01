@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Twitter React</title>
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
@@ -16,8 +14,8 @@
         height: 4% !important;
     }
     
-    .rbc.rbc-reactivelist .rbc-reactivelist-scroll-container {
-        height: auto !important;
+    .rbc-sortoptions.input-field.col {
+        visibility: hidden;
     }
     
     .rbc.rbc-textfield {
@@ -72,10 +70,10 @@
         font-size: 25px;
         margin: 4%;
     }
-
-    .rbc-btn{
-    	padding: 1%;
-    	width: 30%;
+    
+    .rbc-btn {
+        padding: 1%;
+        width: 30%;
     }
     
     .btn {
@@ -87,34 +85,35 @@
     }
     
     .waves-effect.waves-light.btn {
-    	height: 40px;
+        height: 40px;
     }
-
-    .waves-effect.waves-light.grey.lighten-4.btn{
-    	color:#777;
-    	padding: 1%;
+    
+    .waves-effect.waves-light.grey.lighten-4.btn {
+        color: #777;
+        padding: 1%;
     }
-
-    .waves-button-input{
-		border-radius: 1%;
-		padding: 1%;
-		text-transform: capitalize;
-		font-family: sans-serif;	
+    
+    .waves-button-input {
+        border-radius: 1%;
+        padding: 1%;
+        text-transform: capitalize;
+        font-family: sans-serif;
     }
-
-    .input.waves-button-input{
-    	height: 30px;
+    
+    .input.waves-button-input {
+        height: 30px;
     }
-
+    
     .btn:hover {
         background-color: #428bfc;
         color: white;
     }
     
-    .btn.disabled {
+    .col.s4.btn.disabled {
         background-color: #5bc0de !important;
         color: #fff !important;
-        padding: 2px 10px 2px 10px;
+        padding: 0.4% 0.4% 0.4% 0.4%;
+        text-transform: capitalize;
     }
     </style>
 </head>

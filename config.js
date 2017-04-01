@@ -8,6 +8,7 @@ import {
 	browserHistory,
 	withRouter
 } from 'react-router'
+
 const values = [{
 	"label": "Local",
 	"value": "Local"
@@ -50,13 +51,8 @@ const config = {
 		data: values
 	},
 	tweetsSortOptions: [{
-		"label": "newest first",
 		"appbaseField": "createdAt",
 		"sortBy": "desc"
-	}, {
-		"label": "oldest first",
-		"appbaseField": "createdAt",
-		"sortBy": "asc"
 	}]
 
 }
@@ -86,7 +82,7 @@ var onDataUsers = function(response, err) {
 	}
 }
 var onDataTweets = function(response, err) {
-
+	
 	let result = null;
 	console.log(response)
 	if (err) {
@@ -101,9 +97,10 @@ var onDataTweets = function(response, err) {
 			console.log('got streaming')
 			combineData.unshift(response.newData)
 		}
-		console.log(combineData)
+		console.log('combineData', combineData)
 		if (combineData) {
 			result = combineData.map((markerData, index) => {
+				// debugger;
 				let marker = markerData._source;
 				return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt}/>);
 			});
@@ -122,11 +119,15 @@ class Tweet extends Component {
 			margin: 'auto',
 			color: '#0000aa'
 		};
+		// debugger;
 		return (
 			<div className="collection">
 				<div className="collecton-item">
 					<p style={{margin:'1% 3% 1% 3%'}}>{this.props.usr}:
-						<br/>
+						<label style={{float:'right'}}>
+							{new Date(this.props.date).toDateString()}
+						</label>
+						<br />
 						{this.props.msg}
 					</p>
 				</div>
@@ -137,31 +138,11 @@ class Tweet extends Component {
 class User extends Component {
 
 	render() {
-		const u = this.props.name
-		const unFollowfunc = this.props.onunfollowClick
-		const buttonStyle = {
-			backgroundColor: '#d2322d',
-			color: 'white',
-			borderRadius: '3px',
-			border: 'none',
-			padding: '6%'
-		};
-		const unfollow = function(event) {
-			console.log(unFollowfunc)
-			debugger;
-			unFollowfunc(false, u)
-		}
 		return (
 			<div className="collection">
 				<div className="collecton-item">
 					<p style={{margin:'1% 2% 1% 2%'}}>
 						<Link to={`/profile/${this.props.name}`}>{this.props.name}</Link>
-						{(this.props.unfollowflg!=undefined)?(
-						<div style={{color:'white', float:'right',width:'25%', height:'4%', margin:'1% 25% 1% 0'}}>
-							<button style={buttonStyle} onClick={unfollow} >Unfollow</button>
-						</div>
-						):(<label></label>
-						)}
 					</p>
 				</div>
 			</div>

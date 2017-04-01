@@ -130,7 +130,7 @@ const Login = withRouter(
 			});
 			localStorage.user = uname;
 			// console.log('hey!!')
-			this.props.router.push(`/${uname}`)
+			this.props.router.push({pathname:`/${uname}`, query:{show:0}})
 				// console.log(this.props.router)
 			return;
 		},
@@ -168,17 +168,17 @@ const Login = withRouter(
 						}
 						}
 					/>
-					<div className="z-depth-1 grey lighten-2" style={{width:'25%',margin:'3% auto 0 auto',textAlign:'center'}}>
-						<form id="login" onSubmit={this.onLogin}>
-							<div style={{margin:'5%'}}>
-								<input type="text blue accent-2" placeholder="Name" ref="username" style={txtstyle}/><br/>
-								<input type="submit" style={{width:'85%', margin:'0 0 3% 0',padding:'2px'}} value="Enter your name" className="waves-effect waves-light btn"/>
-							</div>
-						</form>
+					<div className="row" >
+						<div style={{margin:'2%'}}>
+							<form className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={this.onLogin}>
+									<input type="text blue accent-2" placeholder="Name" ref="username" style={txtstyle}/><br/>
+									<input type="submit" style={{width:'85%', margin:'0 0 3% 2%',padding:'2px'}} value="Enter your name" className="waves-effect waves-light btn"/>
+							</form>
+						</div>
 					</div>
 					
 					<div className="row" style={{margin:'0 10% 0 10%'}}>
-						<div className="col s10">
+						<div className="col s10 offset-s1">
 							<ReactiveList
 								componentId="GlobalTweets"
 								appbaseField="msg"

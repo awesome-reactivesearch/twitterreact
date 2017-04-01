@@ -119,7 +119,7 @@ export const Dashboard = withRouter(
 						goProfile={this.goProfile} 
 						query={this.props.location.query}
 					/>
-					<div className="col s2" style={{margin:'auto 5% 0 2%'}}>
+					<div className="col s6 m2 offset-s2 offset-m1">
 						<ReactiveBase
 							app={config.credential_users.app}
 							credentials= {`${config.credential_tweets.username}:${config.credential_tweets.password}`}
@@ -156,23 +156,18 @@ export const Dashboard = withRouter(
 						
 					</div>
 					
-					<div className="row">
-						<div className="col s6" style={{margin:'3% 10% 0% 5%'}}>
-							<form id="login" onSubmit={this.newTweet}>
-								
-								<input ref="newtweet" type="text" placeholder="Your tweet here..." style={txtstyle}/>
-								<div style={{textAlign:'right'}}>
-									<input type="submit" value="Tweet" className="waves-effect waves-light btn"/>
-								</div>
-								
+					<div className="col s8 m6 offset-m1">
+							<form id="newtweet" onSubmit={this.newTweet}>
+								<input ref="newtweet" type="text accent-2" placeholder="Your tweet here..." style={{width:'80%',height:'8%',margin:'5% 0 0 0'}}/>
+								<input type="submit" value="Tweet" className="waves-effect waves-light btn" />
 							</form>
-						</div>
-						<div className="col s6">
+						
+						
 							<PersonalTweets
 								user={u}
 								reactOn={["UserTweet"]}
 							/>
-						</div>
+						
 					</div>
 				</div>
 			);

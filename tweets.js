@@ -24,13 +24,13 @@ const PersonalTweets = (props) => {
 	usr = props.user;
 	// debugger;
 	return (
-		<div className="z-depth-0" key={props.user+"Tweets"}>
+		<div key={props.user+"Tweets"}>
 	
 			<ReactiveList
-				componentId={"TweetsActuator"}
+				componentId="TweetsActuator"
 				appbaseField="msg"
-				from={config.ReactivePaginatedList.from}
-				size={config.ReactivePaginatedList.size}
+				from={config.ReactiveList.from}
+				size={config.ReactiveList.size}
 				stream={true}
 				requestOnScroll={true}
 				onData = {onDataTweets}
@@ -43,7 +43,7 @@ const PersonalTweets = (props) => {
 			
 		</div>
 	)
-}
+};
 module.exports = {
 	PersonalTweets
 };

@@ -24,7 +24,7 @@ const NavBar = (props) => {
 	var showGlobalPersonal = (props.query === undefined) ? -1 : props.query.show
 	const CustomQueryT = function(data) {
 		debugger;
-		if (data != undefined && data != 'default' && props.pflg != 1) {
+		if (data != 'default' && props.pflg != 1) {
 			if (data[0].value === '') {
 				return {
 					query: {
@@ -33,7 +33,7 @@ const NavBar = (props) => {
 				};
 			}
 			else {
-				showGlobalPersonal = 0;
+				
 				return {
 					query: {
 						match: {
@@ -51,7 +51,7 @@ const NavBar = (props) => {
 				}
 			};
 		}
-		debugger;
+		// debugger;
 		return {
 
 			query: {
@@ -71,7 +71,7 @@ const NavBar = (props) => {
 					</div>
 					<div style={{width:'35%',float:'left'}}>
 						<form id="searchbar" onSubmit={props.onSearch}>
-							<input type="text blue accent-2" style={{height:'65%',width:'45%',margin:'2px 0 0 0'}} placeholder="Search Tweets..."/>
+							<input type="text blue accent-2" style={{height:'65%',width:'45%',margin:'1% 0 0 0'}} placeholder="Search Tweets..."/>
 							<input type="submit" value="Search" style={{width:'20%', textTransform: 'capitalize'}} className="waves-effect waves-light btn" />
 						</form>
 						
@@ -96,34 +96,53 @@ const NavBar = (props) => {
 						<div style={{float:'left',width:'50%'}} className="right hide-on-med-and-down z-depth-0" >
 							
 							{(props.pflg==1)?(
-							<div>
+							<div key={props.user}>
 								<button style={{width:'35%'}} className="waves-effect waves-light grey lighten-4 btn" value="Global" onClick={props.goGlobalFeed}>Global</button>
 								<button style={{width:'35%'}} className="waves-effect waves-light grey lighten-4 btn" value="Personal" onClick={props.goPresonalFeed}>Personal</button>
-								<div key={props.user}>
+								<div >
 									<DataController
-										componentId="UserTweet"
+										componentId={"UserProfileTweet"}
 										customQuery= {CustomQueryT}
 										showUI = {false}
 									/>
 								</div>
 							</div>):(
 							<div key={props.user}>
-							<ToggleButton
-								componentId = "UserTweet"
-								appbaseField = "by"
-								multiSelect = {false}
-								data = {[
-								{
-									'label':'Global',
-									'value':''
-								},
-								{
-									'label':'Personal',
-									'value':props.user
-								}
-								]}
-								customQuery = {CustomQueryT}
-							/>
+							{(props.query.show==1)?(
+								<ToggleButton
+									componentId = "UserTweet"
+									appbaseField = "by"
+									multiSelect = {false}
+									data = {[
+									{
+										'label':'Global',
+										'value':''
+									},
+									{
+										'label':'Personal',
+										'value':props.user
+									}
+									]}
+									customQuery = {CustomQueryT}
+									defaultSelected = {['Global']}
+								/>):(
+								<ToggleButton
+									componentId = "UserTweet"
+									appbaseField = "by"
+									multiSelect = {false}
+									data = {[
+									{
+										'label':'Global',
+										'value':''
+									},
+									{
+										'label':'Personal',
+										'value':props.user
+									}
+									]}
+									customQuery = {CustomQueryT}
+									defaultSelected = {['Personal']}
+								/>)}
 							</div>
 							)}
 						</div>
