@@ -55,7 +55,8 @@ const config = {
 		"sortBy": "desc"
 	}]
 
-}
+};
+// on REceiving the user data 
 var onDataUsers = function(response, err) {
 	let result = null;
 	console.log(response)
@@ -74,13 +75,14 @@ var onDataUsers = function(response, err) {
 		console.log(combineData)
 		if (combineData) {
 			result = combineData.map((markerData, index) => {
-				let marker = markerData._source;
-				return (<User name={marker.name}/>);
-			});
+				let marker = markerData._source
+				return (<User name={marker.name}/>)
+			})
 		}
-		return result;
+		return result
 	}
-}
+};
+// on REceiving the tweets 
 var onDataTweets = function(response, err) {
 	
 	let result = null;
@@ -100,14 +102,29 @@ var onDataTweets = function(response, err) {
 		console.log('combineData', combineData)
 		if (combineData) {
 			result = combineData.map((markerData, index) => {
-				// debugger;
-				let marker = markerData._source;
-				return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt}/>);
+				let marker = markerData._source
+				return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt}/>)
 			});
 		}
-		return result;
+		return result
 	}
-};
+}
+const LoginForm = (props) => {
+	const txtstyle = {
+				width: '85%',
+				backgroundColor: '#fafafa',
+				margin: '3%',
+				fontSize: "20px"
+			};
+	return (
+		<form className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}>
+			<input type="text blue accent-2" placeholder="Name" style={txtstyle}/><br/>
+			<input type="submit" style={{width:'85%', margin:'0 0 3% 2%',padding:'2px'}} value="Enter your name" className="waves-effect waves-light btn"/>
+		</form>
+	)
+}
+
+//Tweet Component
 class Tweet extends Component {
 	render() {
 		var tweetStyle = {
@@ -119,11 +136,11 @@ class Tweet extends Component {
 			margin: 'auto',
 			color: '#0000aa'
 		};
-		// debugger;
+		
 		return (
 			<div className="collection">
 				<div className="collecton-item">
-					<p style={{margin:'1% 3% 1% 3%'}}>{this.props.usr}:
+					<p style={{margin:'1% 3% 1% 3%'}}>{this.props.usr}
 						<label style={{float:'right'}}>
 							{new Date(this.props.date).toDateString()}
 						</label>
@@ -135,8 +152,8 @@ class Tweet extends Component {
 		)
 	}
 }
+//User Component
 class User extends Component {
-
 	render() {
 		return (
 			<div className="collection">
@@ -150,8 +167,9 @@ class User extends Component {
 	}
 }
 module.exports = {
-	config: config,
-	onDataTweets: onDataTweets,
-	onDataUsers: onDataUsers,
-	User: User
+	config,
+	onDataTweets,
+	onDataUsers,
+	User,
+	LoginForm
 };

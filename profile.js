@@ -151,6 +151,7 @@ export const Profile = withRouter(
 			}).on('error', function(err) {
 				console.log(err)
 			})
+			this.props.router.replace(`/profile/${u}`)
 		},
 
 		onDataFollowers(response, err) {
@@ -234,7 +235,7 @@ export const Profile = withRouter(
 		},
 
 		componentWillMount() {
-			// console.log('hey11!')
+			console.log('hey11!')
 			this.state = {
 				nfollowers: 0,
 				nfollowing: 0
@@ -322,36 +323,30 @@ export const Profile = withRouter(
 						
 						
 					</div>
-						<div className="col s12 m7 l91" style={msgStyles}>
-							<div style={{float:'left', width:'20%'}}>
-								<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
+					<div className="col s12 m7 l91" style={msgStyles}>
+						<div style={{float:'left', width:'20%'}}>
+							<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
+						</div>
+						<div style={{float:'left',width:'80%'}}>
+							<div style={{float:'left'}}>
+								<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 							</div>
-							<div style={{float:'left',width:'80%'}}>
-								<div style={{float:'left'}}>
-									<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
-								</div>
-								<div style={{width:'100%',float:'left'}}>
-									
-									
-									{(localStorage.user != u)?(
-									<div >
-										{this.chkFollowing()?(
-										<div className = "col s2"  >
-											<button value="Follow" style={followbStyle} onClick={this.followUser} >Follow</button>
-											
-										</div>
-										):(
-										<div  className = "col s2">
-											<button value="Unfollow" style={unfollowbStyle} onClick={this.unfollowUser}>Unfollow</button>
-										</div>)}
-									</div>):(<div>
-									
+							<div style={{width:'100%',float:'left'}}>
+								{(localStorage.user != u)?(
+								<div className = "col s2"  >
+									{this.chkFollowing()?(
+									<button value="Follow" style={followbStyle} onClick={this.followUser} >Follow</button>
+									):(
+									<button value="Unfollow" style={unfollowbStyle} onClick={this.unfollowUser}>Unfollow</button>
+									)}
+								</div>):(
+								<div>
 								</div>)}
+
 								<div key={this.props.params.uname}>
 									<button className="col s4 btn disabled" style={{backgroundColor:'blue',marginLeft:'2%'}}>Followers {this.state.nfollowers}</button>
 									<button className="col s4 btn disabled" style={{backgroundColor:'blue'}}>Following {this.state.nfollowing}</button>
 								</div>
-								
 							</div>
 						</div>
 						<div className="col s8">

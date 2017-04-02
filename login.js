@@ -19,7 +19,8 @@ import {
 } from '@appbaseio/reactivebase';
 import {
 	config,
-	onDataTweets
+	onDataTweets,
+	LoginForm
 } from './config.js';
 import {
 	Dashboard
@@ -86,7 +87,7 @@ const Login = withRouter(
 		onLogin(event) {
 			event.preventDefault();
 			const { location } = this.props;
-			uname = this.refs.username.value
+			uname = event.target[0].value
 			if(uname=="")
 				return;
 				// var chk=1;
@@ -170,10 +171,9 @@ const Login = withRouter(
 					/>
 					<div className="row" >
 						<div style={{margin:'2%'}}>
-							<form className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={this.onLogin}>
-									<input type="text blue accent-2" placeholder="Name" ref="username" style={txtstyle}/><br/>
-									<input type="submit" style={{width:'85%', margin:'0 0 3% 2%',padding:'2px'}} value="Enter your name" className="waves-effect waves-light btn"/>
-							</form>
+							<LoginForm 
+								onLogin= {this.onLogin}
+							/>
 						</div>
 					</div>
 					
@@ -213,7 +213,6 @@ function requireAuth(nextState, replace) {
 	}
 }
 
-function enteringLogin(nextState, replace) {}
 ReactDom.render((
 	<ReactiveBase
 		app={config.credential_tweets.app}
@@ -221,7 +220,7 @@ ReactDom.render((
 		type = {config.credential_tweets.type}
 	>
 		<Router history={browserHistory}>
-			<Route path="/" component={Login} onEnter={enteringLogin}/>
+			<Route path="/" component={Login}/>
 			<Route path=":uname" component={Dashboard} onEnter={requireAuth}/>
 			<Route path="profile/:uname" component={Profile}  addHandlerKey={true} />
 			<Route path="search/:txt" component={SearchPg} />

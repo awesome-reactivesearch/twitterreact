@@ -23,7 +23,7 @@ var user = '';
 const NavBar = (props) => {
 	var showGlobalPersonal = (props.query === undefined) ? -1 : props.query.show
 	const CustomQueryT = function(data) {
-		debugger;
+		// debugger;
 		if (data != 'default' && props.pflg != 1) {
 			if (data[0].value === '') {
 				return {
