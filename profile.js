@@ -145,13 +145,16 @@ export const Profile = withRouter(
 					}
 				}).on('data', function(response) {
 					console.log(response);
+					this.setState({
+							nfollowers: ufollowing.length,
+							nfollowing: ufollowers.length
+					})
 				}).on('error', function(error) {
 					console.log(error);
 				});
 			}).on('error', function(err) {
 				console.log(err)
 			})
-			this.props.router.replace(`/profile/${u}`)
 		},
 
 		onDataFollowers(response, err) {
@@ -205,14 +208,11 @@ export const Profile = withRouter(
 				if (combineData.length != 0) {
 					var followers = combineData[0]._source.following
 					var name = combineData[0]._source.name
-					var unfollowflg = false
-					if (name == localStorage.user)
-						unfollowflg = true;
 				}
 				nfollowers = followers.length
 				if (followers != undefined) {
 					result = followers.map((markerData, index) => {
-						return (<User name={markerData} unfollowflg={unfollowflg} onunfollowClick={this.updateUser}/>)
+						return (<User name={markerData}/>)
 					});
 				}
 			}
@@ -321,17 +321,17 @@ export const Profile = withRouter(
 							onDataFollowing={this.onDataFollowing}
 						/>
 						
-						
+
 					</div>
 					<div className="col s12 m7 l91" style={msgStyles}>
 						<div style={{float:'left', width:'20%'}}>
 							<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
 						</div>
-						<div style={{float:'left',width:'80%'}}>
+						<div style={{float:'left',width:'80%'}} >
 							<div style={{float:'left'}}>
 								<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 							</div>
-							<div style={{width:'100%',float:'left'}}>
+							<div style={{width:'100%',float:'left'}} key={this.state}>
 								{(localStorage.user != u)?(
 								<div className = "col s2"  >
 									{this.chkFollowing()?(
@@ -342,10 +342,9 @@ export const Profile = withRouter(
 								</div>):(
 								<div>
 								</div>)}
-
 								<div key={this.props.params.uname}>
-									<button className="col s4 btn disabled" style={{backgroundColor:'blue',marginLeft:'2%'}}>Followers {this.state.nfollowers}</button>
-									<button className="col s4 btn disabled" style={{backgroundColor:'blue'}}>Following {this.state.nfollowing}</button>
+									<button className="col s4 btn disabled" style={{backgroundColor:'blue',marginLeft:'2%'}}>Followers {this.state.nfollowing}</button>
+									<button className="col s4 btn disabled" style={{backgroundColor:'blue'}}>Following {this.state.nfollowers}</button>
 								</div>
 							</div>
 						</div>

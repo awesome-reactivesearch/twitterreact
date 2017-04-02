@@ -136,7 +136,7 @@ export const Dashboard = withRouter(
 								customQuery= {CustomQueryUsers}
 								showUI = {false}
 							/>
-							<div className = "z-depth-1" style={{marginTop:'5%'}}>
+							<div className = "z-depth-1" style={{marginTop:'5%', height:'auto'}}>
 								<ReactiveList
 									title="Users"
 									componentId="UsersActuator"
@@ -147,7 +147,7 @@ export const Dashboard = withRouter(
 									requestOnScroll={true}
 									onData = {onDataUsers}
 									react={{
-									'and': ["GetUsers"]
+										'and': ["GetUsers"]
 									}}
 									showResultStats={false}
 								/>
