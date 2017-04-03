@@ -20,10 +20,13 @@ const appbaseRef = new Appbase({
 	password: config.credential_tweets.password
 });
 var user = '';
+// `NavBar` component that returns navigation bar component
 const NavBar = (props) => {
-	var showGlobalPersonal = (props.query === undefined) ? -1 : props.query.show
+	// `showGlobal` flg set to show Global Tweets or cleared to show Personal Tweets
+	var showGlobal = (props.query === undefined) ? -1 : props.query.show
+	// `CustomQueryT` function is used by `DataController` or `ToggleButton` sensor.
+	// For `ToggleButton` sensor will set default data value paramters while `DataController` will set data=`default`
 	const CustomQueryT = function(data) {
-		// debugger;
 		if (data != 'default' && props.pflg != 1) {
 			if (data[0].value === '') {
 				return {
@@ -43,15 +46,13 @@ const NavBar = (props) => {
 				};
 			}
 		}
-		if (showGlobalPersonal == 1) {
-			// debugger;
+		if (showGlobal == 1) {
 			return {
 				query: {
 					match_all: {}
 				}
 			};
 		}
-		// debugger;
 		return {
 
 			query: {
@@ -61,7 +62,7 @@ const NavBar = (props) => {
 			}
 		};
 	};
-	// debugger;
+
 	return (
 		<div className="navbar-fixed">
 			<nav style={{color:'black',backgroundColor:'#dadada', height:'60px'}}>
@@ -70,12 +71,14 @@ const NavBar = (props) => {
 						Twitter on Appbase
 					</div>
 					<div style={{width:'35%',float:'left'}}>
+						// Search Form
 						<form id="searchbar" onSubmit={props.onSearch}>
 							<input type="text blue accent-2" style={{height:'65%',width:'45%',margin:'1% 0 0 0'}} placeholder="Search Tweets..."/>
 							<input type="submit" value="Search" style={{width:'20%', textTransform: 'capitalize'}} className="waves-effect waves-light btn" />
 						</form>
 						
 					</div>
+					// `pflg` when set `-1` denotes that the page is either loginPg or searchPg it won't require button to route to `Profile` view or `Logout`
 					{(props.pflg==-1)?(
 					<div>
 						{(props.path=='/')?(
@@ -94,8 +97,8 @@ const NavBar = (props) => {
 							<button style={{width:'30%'}} value="Logout" onClick={props.logOut} className="waves-effect waves-light btn" >Logout</button>
 						</div>
 						<div style={{float:'left',width:'50%'}} className="right hide-on-med-and-down z-depth-0" >
-							
 							{(props.pflg==1)?(
+							// `pflg` set to 1 denotes that the page is proflie view of any user. Only Tweets of that user are to be displayed, hence `DataController` sensor is required to generate Personal Tweet.
 							<div key={props.user}>
 								<button style={{width:'35%'}} className="waves-effect waves-light grey lighten-4 btn" value="Global" onClick={props.goGlobalFeed}>Global</button>
 								<button style={{width:'35%'}} className="waves-effect waves-light grey lighten-4 btn" value="Personal" onClick={props.goPresonalFeed}>Personal</button>
@@ -107,8 +110,10 @@ const NavBar = (props) => {
 									/>
 								</div>
 							</div>):(
+							// `pflg` set to 0 shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible, `ToggleButton` is required
 							<div key={props.user}>
 							{(props.query.show==1)?(
+								// For `query.show` is set to 1 when user switches from profilePg to dashboard to see Global Feed first, `defaultSelected` is `Global` here.
 								<ToggleButton
 									componentId = "UserTweet"
 									appbaseField = "by"
@@ -126,6 +131,7 @@ const NavBar = (props) => {
 									customQuery = {CustomQueryT}
 									defaultSelected = {['Global']}
 								/>):(
+								// For `query.show` is set to 0 when user switches from any page to dashboard to see Personal Feed first, `defaultSelected` is `Personal` here.
 								<ToggleButton
 									componentId = "UserTweet"
 									appbaseField = "by"

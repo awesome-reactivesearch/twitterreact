@@ -43,33 +43,33 @@ var nfollowers = 0;
 var nfollowing = 0;
 export const Profile = withRouter(
 	React.createClass({
+		// on logout pressed this function is called
 		logOut(event) {
-			// debugger;
 			console.log("logging out!")
 			this.props.router.replace('/')
 			delete localStorage.user;
 		},
-
+		// on press profile go to present logged user's profile page
 		goLocal(event) {
 			let u = localStorage.user;
 			this.props.router.replace(`/${u}`)
 		},
-
+		// on Follow pressed
 		followUser(event) {
 			this.updateUser(true)
 		},
-
+		// on Unfollow pressed
 		unfollowUser(event) {
 			this.updateUser(false)
 		},
-
+		// Update users following/followers list, where `follow` bool is `true` when logged user wants to follow the user while `false` when loogged user wants to unfollow the user
 		updateUser(follow, username) {
 			if (username === undefined) {
 				username = u
 			}
-			// debugger;
 			let me = localStorage.user
 			console.log('following user')
+			// search loggedIn user in app
 			appbaseRef.search({
 				type: "users",
 				body: {
@@ -85,16 +85,15 @@ export const Profile = withRouter(
 				var meId = res.hits.hits[0]._id
 				var mefollowing = res.hits.hits[0]._source.following
 				var mefollowers = res.hits.hits[0]._source.followers
-					// debugger;
+				// if `follow` is true, add user to logged user following list else remove the user from the list
 				if (follow) {
 					mefollowing.push(username)
 				} else {
 					var index = mefollowing.indexOf(username)
 					mefollowing.splice(index, 1)
-						// debugger;
 				}
 				localStorage.ufollowing = mefollowing;
-				// debugger;
+				// Index the updated list to app				
 				appbaseRef.index({
 					type: "users",
 					id: meId,
@@ -111,6 +110,7 @@ export const Profile = withRouter(
 			}).on('error', function(err) {
 				console.log(err)
 			})
+			// Search for other user in app
 			appbaseRef.search({
 				type: "users",
 				body: {
@@ -126,15 +126,14 @@ export const Profile = withRouter(
 				var uId = res.hits.hits[0]._id
 				var ufollowing = res.hits.hits[0]._source.following
 				var ufollowers = res.hits.hits[0]._source.followers
+				// if `follow` is true add logged user to followers list else remove it from the list
 				if (follow) {
 					ufollowers.push(me)
-						// debugger;
 				} else {
 					var index = ufollowers.indexOf(me)
 					ufollowers.splice(index, 1)
-						// debugger;
 				}
-				// debugger;
+				//Index the updated entry to the app
 				appbaseRef.index({
 					type: "users",
 					id: uId,
@@ -156,7 +155,7 @@ export const Profile = withRouter(
 				console.log(err)
 			})
 		},
-
+		// Function called when the `ListFollowers` component gets data
 		onDataFollowers(response, err) {
 			let result = null;
 			console.log(response)
@@ -177,11 +176,12 @@ export const Profile = withRouter(
 					nfollowing = following.length
 					if (following != undefined) {
 						result = following.map((markerData, index) => {
+							// On every data element return `User` component that *links* to `/profile/:user`
 							return (<User name={markerData} />)
 						});
 					}
 				}
-				// debugger;
+				// setState with number of followers, number of following
 				this.setState({
 					nfollowers: nfollowers,
 					nfollowing: nfollowing
@@ -189,7 +189,7 @@ export const Profile = withRouter(
 				return result;
 			}
 		},
-
+		// Function called when the `ListFollowing` component gets data
 		onDataFollowing(response, err) {
 			let result = null;
 			console.log(response)
@@ -212,79 +212,67 @@ export const Profile = withRouter(
 				nfollowers = followers.length
 				if (followers != undefined) {
 					result = followers.map((markerData, index) => {
+						// On every data element return `User` component that *links* to `/profile/:user`
 						return (<User name={markerData}/>)
 					});
 				}
 			}
+			// setState with number of followers, number of following
 			this.setState({
 				nfollowers: nfollowers,
 				nfollowing: nfollowing
 			})
 			return result;
 		},
-
+		// check if the user is followed by logged user or not
 		chkFollowing() {
 			u = this.props.params.uname
 			let followingList = localStorage.ufollowing
-				// debugger;
-				// console.log(followingList.indexOf(u))
 			if (followingList.indexOf(u) == -1) {
 				return true;
 			}
 			return false
 		},
-
+		// Initialize state with number of followers=0, number of following=0
 		componentWillMount() {
-			console.log('hey11!')
 			this.state = {
 				nfollowers: 0,
 				nfollowing: 0
 			}
 		},
 
+		// Function called when Search is pressed
 		onSearch(event) {
 			event.preventDefault();
 			let t = event.target[0].value;
-			// debugger;
-			// console.log('bitch please', t)
-			// debugger;
 			this.props.router.push(`search/${t}`)
 			return;
 		},
-
-		logOut(event) {
-			// debugger;
-			console.log("logging out!")
-			this.props.router.push('/')
-			delete localStorage.user;
-		},
-
+		// on Global pessed function called to switch to logged user dashboard with showing Global tweets
 		goGlobalFeed(event){
 			event.preventDefault();
 			let loggedUser = localStorage.user
+			// `show` flag is set to show Global Tweets
 			this.props.router.replace({pathname:`/${loggedUser}`, query:{show:1}})
 		},
-
+		// on PersonalFeed pessed function called to switch to logged user dashboard with showing Personal Tweets
 		goPresonalFeed(event){
 			event.preventDefault();
 			let loggedUser = localStorage.user
+			// `show` flag is clear to show Personal Tweets
 			this.props.router.replace({pathname:`/${loggedUser}`, query:{show:0}})
 		},
 
 		render() {
 			u = this.props.params.uname
 			console.log('username now is', u)
-			let loggedin = localStorage.user;
-			let getUser = "GetUser" + u;
-			let followerActuator = "FollowerActuator" + u;
-			let followingActuator = "FollowingActuator" + u;
-			// debugger;
+			let loggedin = localStorage.user;			
 			const msgStyles = {
 				maxWidth: 800,
 				marginLeft: '10%',
 				marginTop: '5%'
 			};
-			// debugger;
+			// `pflg` set to `1` i.e flage for navbar for profile page
 			const pflg = 1;
 			const followbStyle = {
 				backgroundColor: '#428bfc',
@@ -302,6 +290,7 @@ export const Profile = withRouter(
 			};
 			return (
 				<div className ="row" >
+					// `NavBar` component to render navigation bar for profile page
 					<NavBar 
 						user={this.props.params.uname}
 						logOut={this.logOut}
@@ -310,7 +299,7 @@ export const Profile = withRouter(
 						goGlobalFeed={this.goGlobalFeed}
 						goPresonalFeed={this.goPresonalFeed}
 					/>
-		
+					// `ListFollowers`, `ListFollowing` components to show list of followers and following respectively
 					<div className="col m2 s6 offset-s1 offset-m1" style={{marginTop:'3%'}}>
 						<ListFollowers
 							user={this.props.params.uname}
@@ -320,17 +309,20 @@ export const Profile = withRouter(
 							user={this.props.params.uname}
 							onDataFollowing={this.onDataFollowing}
 						/>
-						
 
 					</div>
 					<div className="col s12 m7 l91" style={msgStyles}>
+						// Display User image
 						<div style={{float:'left', width:'20%'}}>
 							<img style={{height:'15%',margin:'15% 10% 15% 15%'}} src="../user@2x.png" />
 						</div>
 						<div style={{float:'left',width:'80%'}} >
 							<div style={{float:'left'}}>
+								// Display User name
 								<h3 style={{textAlign:'center'}}>{this.props.params.uname}</h3>
 							</div>
+							// For user that are not logged in show Unfollow button if the logged user follows him else show Follow buton
+							// This block will re-render with change in state(i.e change in followers/following number) which will change when logged user tries to follow/unfollow the current user 
 							<div style={{width:'100%',float:'left'}} key={this.state}>
 								{(localStorage.user != u)?(
 								<div className = "col s2"  >
@@ -342,6 +334,7 @@ export const Profile = withRouter(
 								</div>):(
 								<div>
 								</div>)}
+								// Display number of followers, following
 								<div key={this.props.params.uname}>
 									<button className="col s4 btn disabled" style={{backgroundColor:'blue',marginLeft:'2%'}}>Followers {this.state.nfollowing}</button>
 									<button className="col s4 btn disabled" style={{backgroundColor:'blue'}}>Following {this.state.nfollowers}</button>
@@ -349,6 +342,7 @@ export const Profile = withRouter(
 							</div>
 						</div>
 						<div className="col s8">
+							// `PersonalTweets` actuator component that receives tweets from `UserProfileTweet` DataController sensor in `NavBar`
 							<PersonalTweets
 								user={u}
 								reactOn={["UserProfileTweet"]}
