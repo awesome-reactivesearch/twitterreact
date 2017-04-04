@@ -18,7 +18,8 @@ const appbaseRef = new Appbase({
 	password: config.credential_tweets.password
 });
 let uname = "";
-let val = "";
+
+// `Login` Component to render the login page of app
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -26,13 +27,13 @@ export default class Login extends Component {
 		this.onSearch = this.onSearch.bind(this);
 	}
 
+	// Function called when user submits Login form
 	onLogin(event) {
 		event.preventDefault();
-			// debugger;
 		uname = event.target[0].value;
 
 		if (uname === "")			{ return; }
-				// var chk=1;
+		// Search for existing username
 		appbaseRef.search({
 			type: "users",
 			body: {
@@ -44,16 +45,14 @@ export default class Login extends Component {
 			}
 		}).on("data", (res) => {
 			const chk = res.hits.total;
-					// console.log(chk)
-					// console.log('query result', res.hits.total);
-					// debugger;
 			if (chk !== 0) {
+				// store user details in localStorage
 				localStorage.ufollowing = (res.hits.hits[0]._source.following);
-						// debugger;
-			}				else {
+			}			else {
 				localStorage.ufollowing = [];
 			}
 			if (chk === 0) {
+				// If user not found, index new user
 				appbaseRef.index({
 					type: "users",
 					body: {
@@ -69,46 +68,21 @@ export default class Login extends Component {
 			console.error(err);
 		});
 		localStorage.user = uname;
-			// console.log('hey!!')
 		this.props.router.push({ pathname: `/${uname}`, query: { show: 0 } });
 	}
 
+	// Function called when search is called
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
-			// debugger;
-			// console.log('bitch please', t)
-			// debugger;
 		this.props.router.push(`search/${t}`);
 	}
 
-
-	CustomQuery(value) {
-			// HACK: Check if the value is changed will again mounting the TextField component.
-		if (val === value) {
-			value = "";
-		}
-			// debugger;
-		if (value === undefined || value === "") {
-				// debugger;
-			return {
-				query: {
-					match_all: {}
-				}
-			};
-		}
-				// debugger;
-		val = value;
-		return {
-			term: {
-				msg: value
-			}
-		};
-	}
-
-
+	// `render()` renders the Login component. <br />
+	// `pflg` flag is set to `-1` to get navigation bar of homepg.<br />
+	//  here, `LoginForm` is used to render Login form.<br />
+	// `ReactiveList` actuator component to render tweets received from `GlobalTweets` sensor component.<br />
 	render() {
-			// debugger;
 		const pflg = -1;
 		return (
 			<div>

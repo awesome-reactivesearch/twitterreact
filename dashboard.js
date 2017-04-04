@@ -23,8 +23,7 @@ const appbaseRef = new Appbase({
 	password: config.credential_tweets.password
 });
 const date = new Date();
-
-// const uname = 'a'
+// `Dashboarad` component to render the dashboard page of app
 export default class Dashboard extends Component {
 	constructor(props) {
 		super(props);
@@ -34,21 +33,28 @@ export default class Dashboard extends Component {
 		this.newTweet = this.newTweet.bind(this);
 	}
 
+	// Function called when Search is called
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
 		this.props.router.push(`search/${t}`);
 	}
+
+	// on logout pressed to logout the loggedIn user
 	logOut(event) {
 		event.preventDefault();
 		this.props.router.push("/");
 		delete localStorage.user;
 	}
+
+	// on Profile pressed this function is called to go to loggedIn user profile
 	goProfile(event) {
 		event.preventDefault();
 		const u = this.props.params.uname;
 		this.props.router.replace(`/profile/${u}`);
 	}
+
+	// when new tweet form is submitted with non-empty string
 	newTweet(event) {
 		event.preventDefault();
 		const msg = event.target[0].value;
@@ -65,18 +71,25 @@ export default class Dashboard extends Component {
 			document.getElementById("inputtweet").value = "";
 		}
 	}
-	render() {
-		const u = this.props.params.uname;
-				// debugger;
-		const CustomQueryUsers = function () {
-			return {
-				query: {
-					match_all: {}
-				}
-			};
+
+	// CustomQuery that returns `match_all` query
+	CustomQueryUsers() {
+		return {
+			query: {
+				match_all: {}
+			}
 		};
-			// console.log(uname);
-			// debugger;
+	}
+
+	// `render()` renders the dashboard page with `Navbar` on top and other components like user icons and feed.<br /><br />
+	// the flag `pflg` is set to zero and passed to NavBar to get navigation bar for dashboard.<br />
+	// Here, `NavBar` component is used to render navigation bar. <br /><br />
+	// `DataController` sensor component is used that creates a list of users in app. <br />
+	// `ReactiveList` actuator component that reacts on the list of users received by the `GetUsers` DataController sensor. <br /><br />
+	//  This componenet includes a form for submiting new tweet. <br />
+	// `PersonalTweets` actuator component to render User/Global Tweets that are received from `UserTweet` sensor in `NavBar` component.<br />
+
+	render() {
 		const pflg = 0;
 		return (
 			<div className="row" >
@@ -102,7 +115,7 @@ export default class Dashboard extends Component {
 						</div>
 						<DataController
 							componentId="GetUsers"
-							customQuery={CustomQueryUsers}
+							customQuery={this.CustomQueryUsers}
 							showUI={false}
 						/>
 						<div className="z-depth-1" style={{ marginTop: "5%", height: "auto" }}>
@@ -133,7 +146,7 @@ export default class Dashboard extends Component {
 
 
 					<PersonalTweets
-						user={u}
+						user={this.props.params.uname}
 						reactOn={["UserTweet"]}
 					/>
 
@@ -141,5 +154,5 @@ export default class Dashboard extends Component {
 			</div>
 		);
 	}
-	}
+}
 

@@ -19,8 +19,9 @@ const appbaseRef = new Appbase({
 let u = "";
 let nfollowers = 0;
 let nfollowing = 0;
-export default class Profile extends Component {
 
+// `Profile` component renders profile page of the app
+export default class Profile extends Component {
 	constructor(props) {
 		super(props);
 		this.logOut = this.logOut.bind(this);
@@ -41,15 +42,24 @@ export default class Profile extends Component {
 		};
 	}
 
+	// Initialize state with number of followers=0, number of following=0
+	componentWillMount() {
+		this.state = {
+			nfollowers: 0,
+			nfollowing: 0
+		};
+	}
+
+	// Function called when Search is pressed
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
-			// debugger;
 
-			// debugger;
+
 		this.props.router.push(`search/${t}`);
 	}
 
+	// Function called when the `ListFollowers` component gets data
 	onDataFollowers(response, err) {
 		let result = null;
 		if (err) {
@@ -76,6 +86,7 @@ export default class Profile extends Component {
 		return result;
 	}
 
+	// Function called when the `ListFollowing` component gets data
 	onDataFollowing(response, err) {
 		let result = null;
 		if (err) {
@@ -103,12 +114,14 @@ export default class Profile extends Component {
 		return result;
 	}
 
+	// Update users following/followers list, where `follow` bool is `true` when logged user wants to follow the user while `false` when loogged user wants to unfollow the user
 	updateUser(follow, username) {
 		if (username === undefined) {
 			username = u;
 		}
-			// debugger;
+
 		const me = localStorage.user;
+		// search loggedIn user in app
 		appbaseRef.search({
 			type: "users",
 			body: {
@@ -122,16 +135,16 @@ export default class Profile extends Component {
 			const meId = res.hits.hits[0]._id;
 			const mefollowing = res.hits.hits[0]._source.following;
 			const mefollowers = res.hits.hits[0]._source.followers;
-					// debugger;
+
+			// if `follow` is true, add user to logged user following list else remove the user from the list
 			if (follow) {
 				mefollowing.push(username);
 			} else {
 				const index = mefollowing.indexOf(username);
 				mefollowing.splice(index, 1);
-						// debugger;
 			}
 			localStorage.ufollowing = mefollowing;
-				// debugger;
+			// Index the updated list to app
 			appbaseRef.index({
 				type: "users",
 				id: meId,
@@ -146,6 +159,7 @@ export default class Profile extends Component {
 		}).on("error", (err) => {
 			console.error(err);
 		});
+		// Search for other user in app
 		appbaseRef.search({
 			type: "users",
 			body: {
@@ -159,15 +173,14 @@ export default class Profile extends Component {
 			const uId = res.hits.hits[0]._id;
 			const ufollowing = res.hits.hits[0]._source.following;
 			const ufollowers = res.hits.hits[0]._source.followers;
+			// if `follow` is true add logged user to followers list else remove it from the list
 			if (follow) {
 				ufollowers.push(me);
-						// debugger;
 			} else {
 				const index = ufollowers.indexOf(me);
 				ufollowers.splice(index, 1);
-						// debugger;
 			}
-				// debugger;
+			// Index the updated entry to the app
 			appbaseRef.index({
 				type: "users",
 				id: uId,
@@ -189,10 +202,11 @@ export default class Profile extends Component {
 		});
 	}
 
+	// check if the user is followed by logged user or not
 	chkFollowing() {
 		u = this.props.params.uname;
 		const followingList = localStorage.ufollowing;
-				// debugger;
+
 
 		if (followingList.indexOf(u) === -1) {
 			return true;
@@ -200,35 +214,40 @@ export default class Profile extends Component {
 		return false;
 	}
 
+	// on Follow pressed
 	followUser(event) {
 		event.preventDefault();
 		this.updateUser(true);
 	}
 
+	// on Unfollow pressed
 	unfollowUser(event) {
 		event.preventDefault();
 		this.updateUser(false);
 	}
 
+	// on press profile go to present logged user's profile page
 	goLocal(event) {
 		event.preventDefault();
 		u = localStorage.user;
 		this.props.router.replace(`/${u}`);
 	}
 
-
+	// on logout pressed this function is called
 	logOut(event) {
 		event.preventDefault();
 		this.props.router.push("/");
 		delete localStorage.user;
 	}
 
+	// on `Global` button pessed, function called to switch to logged user dashboard with showing Global tweets
 	goGlobalFeed(event) {
 		event.preventDefault();
 		const loggedUser = localStorage.user;
 		this.props.router.replace({ pathname: `/${loggedUser}`, query: { show: 1 } });
 	}
 
+	// on `PersonalFeed` button pressed, function called to switch to logged user dashboard with showing Personal Tweets
 	goPresonalFeed(event) {
 		event.preventDefault();
 		const loggedUser = localStorage.user;
@@ -241,15 +260,14 @@ export default class Profile extends Component {
 		this.props.router.replace(`/profile/${loggedUser}`);
 	}
 
+	// renders the profile component
 	render() {
-		u = this.props.params.uname;
-			// debugger;
 		const msgStyles = {
 			maxWidth: 800,
 			marginLeft: "10%",
 			marginTop: "5%"
 		};
-			// debugger;
+		// `pflg` set to `1` i.e flage for navbar for profile page
 		const pflg = 1;
 		const followbStyle = {
 			backgroundColor: "#428bfc",
@@ -265,6 +283,11 @@ export default class Profile extends Component {
 			border: "none",
 			padding: "6%"
 		};
+		// `NavBar` component to render navigation bar for profile page.<br />
+		// `ListFollowers`, `ListFollowing` components to show list of followers and following respectively.<br /><br />
+		// The `userinfo` element shows user image, username and number of following,followers. <br />
+		// It also gives the option to *follow* or *unfollow* the user.<br />
+		// It contains `PersonalTweets` actuator component that receives tweets from `UserProfileTweet` DataController sensor in `NavBar`.
 		return (
 			<div className="row" >
 				<NavBar
@@ -289,7 +312,7 @@ export default class Profile extends Component {
 
 
 				</div>
-				<div className="col s12 m7 l91" style={msgStyles}>
+				<div id="userinfo" className="col s12 m7 l91" style={msgStyles}>
 					<div style={{ float: "left", width: "20%" }}>
 						<img style={{ height: "15%", margin: "15% 10% 15% 15%" }} src="../user@2x.png" alt="UserImage" />
 					</div>
@@ -298,7 +321,7 @@ export default class Profile extends Component {
 							<h3 style={{ textAlign: "center" }}>{this.props.params.uname}</h3>
 						</div>
 						<div style={{ width: "100%", float: "left" }} key={this.state}>
-							{(localStorage.user !== u) ? (
+							{(localStorage.user !== this.props.params.uname) ? (
 								<div className="col s2" >
 									{this.chkFollowing() ? (
 										<button value="Follow" style={followbStyle} onClick={this.followUser} >Follow</button>
@@ -315,7 +338,7 @@ export default class Profile extends Component {
 					</div>
 					<div className="col s8">
 						<PersonalTweets
-							user={u}
+							user={this.props.params.uname}
 							reactOn={["UserProfileTweet"]}
 						/>
 					</div>

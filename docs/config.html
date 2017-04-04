@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>config.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="config.html">
+                  config.js
+                </a>
+              
+                
+                <a class="source" href="dashboard.html">
+                  dashboard.js
+                </a>
+              
+                
+                <a class="source" href="index.html">
+                  index.js
+                </a>
+              
+                
+                <a class="source" href="login.html">
+                  login.js
+                </a>
+              
+                
+                <a class="source" href="navbar.html">
+                  navbar.js
+                </a>
+              
+                
+                <a class="source" href="profile.html">
+                  profile.js
+                </a>
+              
+                
+                <a class="source" href="searchpg.html">
+                  searchpg.js
+                </a>
+              
+                
+                <a class="source" href="tweets.html">
+                  tweets.js
+                </a>
+              
+                
+                <a class="source" href="users.html">
+                  users.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>config.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> { Link } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router"</span>;
+
+<span class="hljs-keyword">const</span> values = [{
+	<span class="hljs-attr">label</span>: <span class="hljs-string">"Local"</span>,
+	<span class="hljs-attr">value</span>: <span class="hljs-string">"Local"</span>
+}, {
+	<span class="hljs-attr">label</span>: <span class="hljs-string">"Global"</span>,
+	<span class="hljs-attr">value</span>: <span class="hljs-string">"Global"</span>
+}];
+<span class="hljs-keyword">const</span> config = {
+	<span class="hljs-attr">credential_tweets</span>: {
+		<span class="hljs-attr">url</span>: <span class="hljs-string">"https://scalr.api.appbase.io"</span>,
+		<span class="hljs-attr">app</span>: <span class="hljs-string">"Twitter"</span>,
+		<span class="hljs-attr">username</span>: <span class="hljs-string">"0z092JD6X"</span>,
+		<span class="hljs-attr">password</span>: <span class="hljs-string">"e559dc6b-8c12-40b8-b308-b2c4b6b7b972"</span>,
+		<span class="hljs-attr">type</span>: <span class="hljs-string">"tweets"</span>
+	},
+	<span class="hljs-attr">credential_users</span>: {
+		<span class="hljs-attr">url</span>: <span class="hljs-string">"https://scalr.api.appbase.io"</span>,
+		<span class="hljs-attr">app</span>: <span class="hljs-string">"Twitter"</span>,
+		<span class="hljs-attr">username</span>: <span class="hljs-string">"0z092JD6X"</span>,
+		<span class="hljs-attr">password</span>: <span class="hljs-string">"e559dc6b-8c12-40b8-b308-b2c4b6b7b972"</span>,
+		<span class="hljs-attr">type</span>: <span class="hljs-string">"users"</span>
+	},
+	<span class="hljs-attr">DataController</span>: {
+		<span class="hljs-attr">customQuery</span>: {
+			<span class="hljs-attr">query</span>: {
+				<span class="hljs-attr">match_all</span>: {}
+			}
+		}
+	},
+	<span class="hljs-attr">ReactiveList</span>: {
+		<span class="hljs-attr">size</span>: <span class="hljs-number">100</span>,
+		<span class="hljs-attr">from</span>: <span class="hljs-number">0</span>
+	},
+	<span class="hljs-attr">ReactivePaginatedList</span>: {
+		<span class="hljs-attr">size</span>: <span class="hljs-number">10</span>,
+		<span class="hljs-attr">from</span>: <span class="hljs-number">0</span>
+	},
+	<span class="hljs-attr">ToggleButton</span>: {
+		<span class="hljs-attr">defaultSelected</span>: [values[<span class="hljs-number">0</span>].value],
+		<span class="hljs-attr">data</span>: values
+	},
+	<span class="hljs-attr">tweetsSortOptions</span>: [{
+		<span class="hljs-attr">appbaseField</span>: <span class="hljs-string">"createdAt"</span>,
+		<span class="hljs-attr">sortBy</span>: <span class="hljs-string">"desc"</span>
+	}]
+
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>on Receiving the user data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> onDataUsers = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">response, err</span>) </span>{
+	<span class="hljs-keyword">let</span> result = <span class="hljs-literal">null</span>;
+	<span class="hljs-keyword">if</span> (err) {
+		<span class="hljs-keyword">return</span> result;
+	}	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (response) {
+		<span class="hljs-keyword">let</span> combineData = response.currentData;
+		<span class="hljs-keyword">if</span> (response.mode === <span class="hljs-string">"historic"</span>) {
+			combineData = response.currentData.concat(response.newData);
+		}		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (response.mode === <span class="hljs-string">"streaming"</span>) {
+			combineData.unshift(response.newData);
+		}
+		<span class="hljs-keyword">if</span> (combineData) {
+			result = combineData.map(<span class="hljs-function">(<span class="hljs-params">markerData, index</span>) =&gt;</span> {
+				<span class="hljs-keyword">const</span> marker = markerData._source;
+				<span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">User</span> <span class="hljs-attr">name</span>=<span class="hljs-string">{marker.name}</span> /&gt;</span>);
+			});
+		}
+	}
+	return result;
+};
+</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>on Receiving the tweets</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> onDataTweets = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">response, err</span>) </span>{
+	<span class="hljs-keyword">let</span> result = <span class="hljs-literal">null</span>;
+	<span class="hljs-keyword">if</span> (err) {
+		<span class="hljs-keyword">return</span> result;
+	}	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (response) {
+		<span class="hljs-keyword">let</span> combineData = response.currentData;
+		<span class="hljs-keyword">if</span> (response.mode === <span class="hljs-string">"historic"</span>) {
+			combineData = response.currentData.concat(response.newData);
+		}		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (response.mode === <span class="hljs-string">"streaming"</span>) {
+			combineData.unshift(response.newData);
+		}
+		<span class="hljs-keyword">if</span> (combineData) {
+			result = combineData.map(<span class="hljs-function">(<span class="hljs-params">markerData, index</span>) =&gt;</span> {
+				<span class="hljs-keyword">const</span> marker = markerData._source;
+				<span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Tweet</span> <span class="hljs-attr">msg</span>=<span class="hljs-string">{marker.msg}</span> <span class="hljs-attr">usr</span>=<span class="hljs-string">{marker.by}</span> <span class="hljs-attr">date</span>=<span class="hljs-string">{marker.createdAt}</span> /&gt;</span>);
+			});
+		}
+	}
+	return result;
+};
+
+</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p><code>LoginForm</code> returns form with a text input field.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> LoginForm = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
+	<span class="hljs-keyword">const</span> txtstyle = {
+		<span class="hljs-attr">width</span>: <span class="hljs-string">"85%"</span>,
+		<span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"#fafafa"</span>,
+		<span class="hljs-attr">margin</span>: <span class="hljs-string">"3%"</span>,
+		<span class="hljs-attr">fontSize</span>: <span class="hljs-string">"20px"</span>
+	};
+	<span class="hljs-keyword">return</span> (
+		&lt;form className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}&gt;
+			&lt;input type="text blue accent-2" placeholder="Name" style={txtstyle} /&gt;&lt;br /&gt;
+			&lt;input type="submit" style={{ width: "85%", margin: "0 0 3% 2%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" /&gt;
+		&lt;/form&gt;
+	);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Tweet Component</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> Tweet = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collection"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collecton-item"</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"tweet"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">margin:</span> "<span class="hljs-attr">1</span>% <span class="hljs-attr">3</span>% <span class="hljs-attr">1</span>% <span class="hljs-attr">3</span>%" }}&gt;</span>{props.usr}
+				<span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">htmlFor</span>=<span class="hljs-string">"tweet"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">float:</span> "<span class="hljs-attr">right</span>" }}&gt;</span>
+					{new Date(props.date).toDateString()}
+				<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+				{props.msg}
+			<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+		);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>User Component</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> User = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collection"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collecton-item"</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">margin:</span> "<span class="hljs-attr">1</span>% <span class="hljs-attr">2</span>% <span class="hljs-attr">1</span>% <span class="hljs-attr">2</span>%" }}&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">{</span>`/<span class="hljs-attr">profile</span>/${<span class="hljs-attr">props.name</span>}`}&gt;</span>{props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+		);
+<span class="hljs-built_in">module</span>.exports = {
+	config,
+	onDataTweets,
+	onDataUsers,
+	User,
+	LoginForm
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

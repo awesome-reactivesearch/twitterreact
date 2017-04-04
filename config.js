@@ -48,7 +48,7 @@ const config = {
 	}]
 
 };
-// on REceiving the user data
+// on Receiving the user data
 const onDataUsers = function (response, err) {
 	let result = null;
 	if (err) {
@@ -69,7 +69,7 @@ const onDataUsers = function (response, err) {
 	}
 	return result;
 };
-// on REceiving the tweets
+// on Receiving the tweets
 const onDataTweets = function (response, err) {
 	let result = null;
 	if (err) {
@@ -90,6 +90,8 @@ const onDataTweets = function (response, err) {
 	}
 	return result;
 };
+
+// `LoginForm` returns form with a text input field.
 const LoginForm = (props) => {
 	const txtstyle = {
 		width: "85%",
@@ -119,6 +121,7 @@ const Tweet = props => (
 		</div>
 	</div>
 		);
+
 // User Component
 const User = props => (
 	<div className="collection">

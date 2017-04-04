@@ -7,6 +7,7 @@ import {
 import { config, onDataTweets, onDataUsers } from "./config";
 import { NavBar } from "./navbar";
 
+// `SearchPg` component is rendered when user searches for tweets or users
 export default class SearchPg extends Component {
 	constructor(props) {
 		super(props);
@@ -14,15 +15,20 @@ export default class SearchPg extends Component {
 		this.CustomQueryTweets = this.CustomQueryTweets.bind(this);
 		this.CustomQueryUsers = this.CustomQueryUsers.bind(this);
 	}
+
+	// Function is called on pressed search which routess to `/search/:txt`
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
 		this.props.router.replace(`/search/${t}`);
 	}
+
+	// `CustomQueryTweets` function to return `match` query for `tweets` type
 	CustomQueryTweets() {
 		const phrase = this.props.params.txt;
-			// debugger;
+		// `pflg` set to -1 that shows that the current page is searchpage
 		return {
+			// Here, // NavBar component to render navigation bar
 			query: {
 				match: {
 					msg: phrase
@@ -30,10 +36,13 @@ export default class SearchPg extends Component {
 			}
 		};
 	}
+
+	// `CustomQueryUsers` function to return `match` query for 'users' type
 	CustomQueryUsers() {
 		const phrase = this.props.params.txt;
-			// debugger;
+		// `pflg` set to -1 that shows that the current page is searchpage
 		return {
+			// Here, // NavBar component to render navigation bar
 			query: {
 				match: {
 					name: phrase
@@ -41,9 +50,14 @@ export default class SearchPg extends Component {
 			}
 		};
 	}
+
+	// `render()` renders the component with top `NavBar` and `ReactiveList`s for displaying matched tweets and users
 	render() {
-			// debugger;
+		// `pflg` set to -1 that shows that the current page is searchpage
 		const pflg = -1;
+		// Here, `NavBar` component to render navigation bar.
+		// `DataController` sensor component that creates a list of tweets/users that matches the searchtext.
+		// `ReactiveList` to render tweets/users matched
 		return (
 
 			<div className="row" key={this.props.params.txt}>

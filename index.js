@@ -9,6 +9,7 @@ import Dashboard from "./dashboard";
 import Profile from "./profile";
 import SearchPg from "./searchpg";
 
+// Render Router elements into the DOM
 ReactDom.render((
 	<ReactiveBase
 		app={config.credential_tweets.app}

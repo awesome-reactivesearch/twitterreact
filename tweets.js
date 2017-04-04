@@ -5,7 +5,7 @@ import {
 	onDataTweets
 } from "./config";
 
-
+// `PersonalTweets` component to return the `ReactiveList` actuator component that renders tweets
 const PersonalTweets = props => (
 	<div key={`${props.user}Tweets`}>
 

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>dashboard.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="config.html">
+                  config.js
+                </a>
+              
+                
+                <a class="source" href="dashboard.html">
+                  dashboard.js
+                </a>
+              
+                
+                <a class="source" href="index.html">
+                  index.js
+                </a>
+              
+                
+                <a class="source" href="login.html">
+                  login.js
+                </a>
+              
+                
+                <a class="source" href="navbar.html">
+                  navbar.js
+                </a>
+              
+                
+                <a class="source" href="profile.html">
+                  profile.js
+                </a>
+              
+                
+                <a class="source" href="searchpg.html">
+                  searchpg.js
+                </a>
+              
+                
+                <a class="source" href="tweets.html">
+                  tweets.js
+                </a>
+              
+                
+                <a class="source" href="users.html">
+                  users.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>dashboard.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+
+<span class="hljs-keyword">import</span> {
+	ReactiveBase,
+	ReactiveList,
+	DataController
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
+<span class="hljs-keyword">import</span> {
+	config,
+	onDataUsers
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"./config"</span>;
+<span class="hljs-keyword">import</span> {
+	PersonalTweets
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"./tweets"</span>;
+<span class="hljs-keyword">import</span> {
+	NavBar
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"./navbar"</span>;
+
+<span class="hljs-keyword">const</span> appbaseRef = <span class="hljs-keyword">new</span> Appbase({
+	<span class="hljs-attr">url</span>: config.credential_tweets.url,
+	<span class="hljs-attr">appname</span>: config.credential_tweets.app,
+	<span class="hljs-attr">username</span>: config.credential_tweets.username,
+	<span class="hljs-attr">password</span>: config.credential_tweets.password
+});
+<span class="hljs-keyword">const</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p><code>Dashboarad</code> component to render the dashboard page of app</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dashboard</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+	<span class="hljs-keyword">constructor</span>(props) {
+		<span class="hljs-keyword">super</span>(props);
+		<span class="hljs-keyword">this</span>.onSearch = <span class="hljs-keyword">this</span>.onSearch.bind(<span class="hljs-keyword">this</span>);
+		<span class="hljs-keyword">this</span>.goProfile = <span class="hljs-keyword">this</span>.goProfile.bind(<span class="hljs-keyword">this</span>);
+		<span class="hljs-keyword">this</span>.logOut = <span class="hljs-keyword">this</span>.logOut.bind(<span class="hljs-keyword">this</span>);
+		<span class="hljs-keyword">this</span>.newTweet = <span class="hljs-keyword">this</span>.newTweet.bind(<span class="hljs-keyword">this</span>);
+	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Function called when Search is called</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	onSearch(event) {
+		event.preventDefault();
+		<span class="hljs-keyword">const</span> t = event.target[<span class="hljs-number">0</span>].value;
+		<span class="hljs-keyword">this</span>.props.router.push(<span class="hljs-string">`search/<span class="hljs-subst">${t}</span>`</span>);
+	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>on logout pressed to logout the loggedIn user</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	logOut(event) {
+		event.preventDefault();
+		<span class="hljs-keyword">this</span>.props.router.push(<span class="hljs-string">"/"</span>);
+		<span class="hljs-keyword">delete</span> localStorage.user;
+	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>on Profile pressed this function is called to go to loggedIn user profile</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	goProfile(event) {
+		event.preventDefault();
+		<span class="hljs-keyword">const</span> u = <span class="hljs-keyword">this</span>.props.params.uname;
+		<span class="hljs-keyword">this</span>.props.router.replace(<span class="hljs-string">`/profile/<span class="hljs-subst">${u}</span>`</span>);
+	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>when new tweet form is submitted with non-empty string</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	newTweet(event) {
+		event.preventDefault();
+		<span class="hljs-keyword">const</span> msg = event.target[<span class="hljs-number">0</span>].value;
+
+		<span class="hljs-keyword">if</span> (msg !== <span class="hljs-string">""</span>) {
+			appbaseRef.index({
+				<span class="hljs-attr">type</span>: config.credential_tweets.type,
+				<span class="hljs-attr">body</span>: {
+					<span class="hljs-attr">by</span>: <span class="hljs-keyword">this</span>.props.params.uname,
+					<span class="hljs-attr">createdAt</span>: date.getTime(),
+					msg
+				}
+			});
+			<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"inputtweet"</span>).value = <span class="hljs-string">""</span>;
+		}
+	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>CustomQuery that returns <code>match_all</code> query</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	CustomQueryUsers() {
+		<span class="hljs-keyword">return</span> {
+			<span class="hljs-attr">query</span>: {
+				<span class="hljs-attr">match_all</span>: {}
+			}
+		};
+	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p><code>render()</code> renders the dashboard page with <code>Navbar</code> on top and other components like user icons and feed.<br /><br />
+the flag <code>pflg</code> is set to zero and passed to NavBar to get navigation bar for dashboard.<br />
+Here, <code>NavBar</code> component is used to render navigation bar. <br /><br />
+<code>DataController</code> sensor component is used that creates a list of users in app. <br />
+<code>ReactiveList</code> actuator component that reacts on the list of users received by the <code>GetUsers</code> DataController sensor. <br /><br />
+ This componenet includes a form for submiting new tweet. <br />
+<code>PersonalTweets</code> actuator component to render User/Global Tweets that are received from <code>UserTweet</code> sensor in <code>NavBar</code> component.<br /></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+	render() {
+		<span class="hljs-keyword">const</span> pflg = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">return</span> (
+			&lt;div className="row" &gt;
+				&lt;NavBar
+					user={this.props.params.uname}
+					logOut={this.logOut}
+					pflg={pflg}
+					onSearch={this.onSearch}
+					goProfile={this.goProfile}
+					query={this.props.location.query}
+				/&gt;
+				&lt;div className="col s6 m2 offset-s2 offset-m1"&gt;
+					&lt;ReactiveBase
+						app={config.credential_users.app}
+						credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}
+						type={config.credential_users.type}
+					&gt;
+						&lt;div style={{ height: "25%" }}&gt;
+							&lt;div style={{ margin: "0 auto 0 auto" }}&gt;
+								&lt;img style={{ height: "65%", padding: "3%", margin: "0 0 0 14%" }} src="user@2x.png" alt="UserImage" /&gt;
+								&lt;h3 style={{ textAlign: "center", marginTop: "auto" }}&gt;{this.props.params.uname}&lt;/h3&gt;&lt;br /&gt;
+							&lt;/div&gt;
+						&lt;/div&gt;
+						&lt;DataController
+							componentId="GetUsers"
+							customQuery={this.CustomQueryUsers}
+							showUI={false}
+						/&gt;
+						&lt;div className="z-depth-1" style={{ marginTop: "5%", height: "auto" }}&gt;
+							&lt;ReactiveList
+								title="Users"
+								componentId="UsersActuator"
+								appbaseField="name"
+								from={config.ReactiveList.from}
+								size={config.ReactiveList.size}
+								stream={true}
+								requestOnScroll={true}
+								onData={onDataUsers}
+								react={{
+									and: ["GetUsers"]
+								}}
+								showResultStats={false}
+							/&gt;
+						&lt;/div&gt;
+					&lt;/ReactiveBase&gt;
+
+				&lt;/div&gt;
+
+				&lt;div className="col s8 m6 offset-m1"&gt;
+					&lt;form id="newtweet" onSubmit={this.newTweet}&gt;
+						&lt;input id="inputtweet" type="text accent-2" placeholder="Your tweet here..." style={{ width: "80%", height: "8%", margin: "5% 0 0 0" }} /&gt;
+						&lt;input type="submit" value="Tweet" className="waves-effect waves-light btn" /&gt;
+					&lt;/form&gt;
+
+
+					&lt;PersonalTweets
+						user={this.props.params.uname}
+						reactOn={["UserTweet"]}
+					/&gt;
+
+				&lt;/div&gt;
+			&lt;/div&gt;
+		);
+	}
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

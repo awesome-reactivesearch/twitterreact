@@ -6,6 +6,7 @@ import {
 } from "@appbaseio/reactivebase";
 import { config } from "./config";
 
+//`ListFollowers` component renders the list of followers
 const ListFollowers = (props) => {
 	const customQuery = function () {
 		return ({
@@ -46,8 +47,9 @@ const ListFollowers = (props) => {
 		</div>
 	);
 };
+
+//`ListFollowing` component renders the list of following users
 const ListFollowing = (props) => {
-	// usr=user;
 	const customQuery = function () {
 		return ({
 			query: {
