@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router";
 
 const values = [{
 	label: "Local",
@@ -8,6 +7,7 @@ const values = [{
 	label: "Global",
 	value: "Global"
 }];
+// `config` object contains all the app credentials
 const config = {
 	credential_tweets: {
 		url: "https://scalr.api.appbase.io",
@@ -48,48 +48,7 @@ const config = {
 	}]
 
 };
-// on Receiving the user data
-const onDataUsers = function (response, err) {
-	let result = null;
-	if (err) {
-		return result;
-	}	else if (response) {
-		let combineData = response.currentData;
-		if (response.mode === "historic") {
-			combineData = response.currentData.concat(response.newData);
-		}		else if (response.mode === "streaming") {
-			combineData.unshift(response.newData);
-		}
-		if (combineData) {
-			result = combineData.map((markerData, index) => {
-				const marker = markerData._source;
-				return (<User name={marker.name} />);
-			});
-		}
-	}
-	return result;
-};
-// on Receiving the tweets
-const onDataTweets = function (response, err) {
-	let result = null;
-	if (err) {
-		return result;
-	}	else if (response) {
-		let combineData = response.currentData;
-		if (response.mode === "historic") {
-			combineData = response.currentData.concat(response.newData);
-		}		else if (response.mode === "streaming") {
-			combineData.unshift(response.newData);
-		}
-		if (combineData) {
-			result = combineData.map((markerData, index) => {
-				const marker = markerData._source;
-				return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt} />);
-			});
-		}
-	}
-	return result;
-};
+
 
 // `LoginForm` returns form with a text input field.
 const LoginForm = (props) => {
@@ -107,35 +66,7 @@ const LoginForm = (props) => {
 	);
 };
 
-// Tweet Component
-const Tweet = props => (
-	<div className="collection">
-		<div className="collecton-item">
-			<p id="tweet" style={{ margin: "1% 3% 1% 3%" }}>{props.usr}
-				<label htmlFor="tweet" style={{ float: "right" }}>
-					{new Date(props.date).toDateString()}
-				</label>
-				<br />
-				{props.msg}
-			</p>
-		</div>
-	</div>
-		);
-
-// User Component
-const User = props => (
-	<div className="collection">
-		<div className="collecton-item">
-			<p style={{ margin: "1% 2% 1% 2%" }}>
-				<Link to={`/profile/${props.name}`}>{props.name}</Link>
-			</p>
-		</div>
-	</div>
-		);
 module.exports = {
 	config,
-	onDataTweets,
-	onDataUsers,
-	User,
 	LoginForm
 };

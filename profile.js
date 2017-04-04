@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import {
-	config,
-	User
-} from "./config";
+import { config } from "./config";
 import { PersonalTweets } from "./tweets";
 import {
 	ListFollowing,
-	ListFollowers
+	ListFollowers,
+	User
 } from "./users";
 import { NavBar } from "./navbar";
 

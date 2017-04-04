@@ -139,6 +139,7 @@ For <code>ToggleButton</code> sensor will set default data value paramters while
             </div>
             
             <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">const</span> CustomQueryT = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
+		<span class="hljs-keyword">debugger</span>;
 		<span class="hljs-keyword">if</span> (data !== <span class="hljs-string">"default"</span> &amp;&amp; props.pflg !== <span class="hljs-number">1</span>) {
 			<span class="hljs-keyword">if</span> (data[<span class="hljs-number">0</span>].value === <span class="hljs-string">""</span>) {
 				<span class="hljs-keyword">return</span> {
@@ -206,7 +207,7 @@ When <code>query.show</code> is set to <code>1</code> when user switches from pr
 
 					&lt;/div&gt;
 					{(props.pflg === -1) ? (
-						&lt;div&gt;
+						&lt;div style={{ float: "right", margin: "0 2% 0 0", width: "15%" }}&gt;
 							{(props.path === "/") ? (
 								&lt;div&gt;
 									&lt;DataController
@@ -214,6 +215,8 @@ When <code>query.show</code> is set to <code>1</code> when user switches from pr
 										customQuery={CustomQueryT}
 										showUI={false}
 									/&gt;
+									&lt;a href="./docs/login.html" style={{ color: "white" }} className="waves-effect waves-light btn blue lighten-2"&gt;View Code
+									&lt;/a&gt;
 								&lt;/div&gt;
 							) : (&lt;div /&gt;)}
 						&lt;/div&gt;) : (
@@ -237,7 +240,7 @@ When <code>query.show</code> is set to <code>1</code> when user switches from pr
 											&lt;/div&gt;
 										&lt;/div&gt;) : (
 											&lt;div key={props.user}&gt;
-												{(props.query.show === 1) ? (
+												{(props.query.show == 1) ? (
 													&lt;ToggleButton
 														componentId="UserTweet"
 														appbaseField="by"

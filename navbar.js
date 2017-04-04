@@ -11,6 +11,7 @@ const NavBar = (props) => {
 	// `CustomQueryT` function is used by `DataController` or `ToggleButton` sensor.
 	// For `ToggleButton` sensor will set default data value paramters while `DataController` will set data=`default`
 	const CustomQueryT = function (data) {
+		debugger;
 		if (data !== "default" && props.pflg !== 1) {
 			if (data[0].value === "") {
 				return {
@@ -66,7 +67,7 @@ const NavBar = (props) => {
 
 					</div>
 					{(props.pflg === -1) ? (
-						<div style={{float:"right",margin:"0 2% 0 0", width:"15%"}}>
+						<div style={{ float: "right", margin: "0 2% 0 0", width: "15%" }}>
 							{(props.path === "/") ? (
 								<div>
 									<DataController
@@ -74,7 +75,7 @@ const NavBar = (props) => {
 										customQuery={CustomQueryT}
 										showUI={false}
 									/>
-									<a href="./docs/login.html" style={{color:"white"}} className="waves-effect waves-light btn blue lighten-2">View Code
+									<a href="./docs/login.html" style={{ color: "white" }} className="waves-effect waves-light btn blue lighten-2">View Code
 									</a>
 								</div>
 							) : (<div />)}
@@ -99,7 +100,7 @@ const NavBar = (props) => {
 											</div>
 										</div>) : (
 											<div key={props.user}>
-												{(props.query.show === 1) ? (
+												{(props.query.show == 1) ? (
 													<ToggleButton
 														componentId="UserTweet"
 														appbaseField="by"

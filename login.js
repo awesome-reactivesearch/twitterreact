@@ -4,10 +4,10 @@ import React, {
 import { ReactiveList } from "@appbaseio/reactivebase";
 import {
 	config,
-	onDataTweets,
 	LoginForm
 } from "./config";
 import { NavBar } from "./navbar";
+import { onDataTweets } from "./tweets";
 
 require("@appbaseio/reactivebase/dist/css/style.min.css");
 

@@ -4,7 +4,9 @@ import {
 	ReactiveBase,
 	DataController
 } from "@appbaseio/reactivebase";
-import { config, onDataTweets, onDataUsers } from "./config";
+import { config } from "./config";
+import { onDataTweets } from "./tweets";
+import { onDataUsers } from "./users";
 import { NavBar } from "./navbar";
 
 // `SearchPg` component is rendered when user searches for tweets or users
