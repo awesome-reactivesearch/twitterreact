@@ -4,10 +4,10 @@ import {
 	ReactiveBase,
 	DataController
 } from "@appbaseio/reactivebase";
-import { config } from "./config";
-import { onDataTweets } from "./tweets";
-import { onDataUsers } from "./users";
-import { NavBar } from "./navbar";
+import { config } from "../config/config";
+import { onDataTweets } from "../helper/tweets";
+import { onDataUsers } from "../helper/users";
+import { NavBar } from "../nav/navbar";
 
 // `SearchPg` component is rendered when user searches for tweets or users
 export default class SearchPg extends Component {

@@ -5,10 +5,10 @@ import {
 	ReactiveList,
 	DataController
 } from "@appbaseio/reactivebase";
-import { config } from "./config";
-import { PersonalTweets } from "./tweets";
-import { NavBar } from "./navbar";
-import { onDataUsers } from "./users";
+import { config } from "../config/config";
+import { PersonalTweets } from "../helper/tweets";
+import { NavBar } from "../nav/navbar";
+import { onDataUsers } from "../helper/users";
 
 const appbaseRef = new Appbase({
 	url: config.credential_tweets.url,

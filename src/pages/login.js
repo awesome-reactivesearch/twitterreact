@@ -2,9 +2,9 @@ import React, {
 	Component
 } from "react";
 import { ReactiveList } from "@appbaseio/reactivebase";
-import { config } from "./config";
-import { NavBar } from "./navbar";
-import { onDataTweets } from "./tweets";
+import { config } from "../config/config";
+import { NavBar } from "../nav/navbar";
+import { onDataTweets } from "../helper/tweets";
 
 require("@appbaseio/reactivebase/dist/css/style.min.css");
 

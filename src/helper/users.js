@@ -5,7 +5,7 @@ import {
 	DataController
 } from "@appbaseio/reactivebase";
 import { Link } from "react-router";
-import { config } from "./config";
+import { config } from "../config/config";
 
 const u = "";
 const appbaseRef = new Appbase({

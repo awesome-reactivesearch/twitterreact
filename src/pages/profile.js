@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { PersonalTweets } from "./tweets";
+import { PersonalTweets } from "../helper/tweets";
 import {
 	ListFollowing,
 	ListFollowers,
 	User,
 	updateUser
-} from "./users";
-import { NavBar } from "./navbar";
+} from "../helper/users";
+import { NavBar } from "../nav/navbar";
 
 let u = "";
 let nfollowers = 0;

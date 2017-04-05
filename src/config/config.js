@@ -1,10 +1,3 @@
-const values = [{
-	label: "Local",
-	value: "Local"
-}, {
-	label: "Global",
-	value: "Global"
-}];
 // `config` object contains all the app credentials
 const config = {
 	credential_tweets: {
@@ -35,10 +28,6 @@ const config = {
 	ReactivePaginatedList: {
 		size: 10,
 		from: 0
-	},
-	ToggleButton: {
-		defaultSelected: [values[0].value],
-		data: values
 	},
 	tweetsSortOptions: [{
 		appbaseField: "createdAt",

@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactiveList } from "@appbaseio/reactivebase";
-import { config } from "./config";
+import { config } from "../config/config";
 
 // on Receiving the tweets
 const onDataTweets = function (response, err) {
