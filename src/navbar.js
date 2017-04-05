@@ -1,8 +1,5 @@
 import React from "react";
-import {
-	DataController,
-	ToggleButton
-} from "@appbaseio/reactivebase";
+import { NavOptions } from "./navoptions"
 
 // `NavBar` component that returns navigation bar component
 const NavBar = (props) => {
@@ -66,79 +63,16 @@ const NavBar = (props) => {
 						</form>
 
 					</div>
-					{(props.pflg === -1) ? (
-						<div style={{ float: "right", margin: "0 2% 0 0", width: "15%" }}>
-							{(props.path === "/") ? (
-								<div>
-									<DataController
-										componentId="GlobalTweet"
-										customQuery={CustomQueryT}
-										showUI={false}
-									/>
-									<a href="./docs/login.html" style={{ color: "white" }} className="waves-effect waves-light btn blue lighten-2">View Code
-									</a>
-								</div>
-							) : (<div />)}
-						</div>) : (
-							<div style={{ float: "right", width: "50%" }}>
-								<div style={{ float: "right", width: "50%" }}>
-									<button style={{ width: "30%" }} className="left hide-on-med-and-down waves-effect waves-light btn" value="Profile" onClick={props.goProfile} >Profile</button>
-									<button style={{ width: "30%" }} value="Logout" onClick={props.logOut} className="waves-effect waves-light btn" >Logout</button>
-								</div>
-								<div style={{ float: "left", width: "50%" }} className="right hide-on-med-and-down z-depth-0" >
-
-									{(props.pflg === 1) ? (
-										<div key={props.user}>
-											<button style={{ width: "35%" }} className="waves-effect waves-light grey lighten-4 btn" value="Global" onClick={props.goGlobalFeed}>Global</button>
-											<button style={{ width: "35%" }} className="waves-effect waves-light grey lighten-4 btn" value="Personal" onClick={props.goPresonalFeed}>Personal</button>
-											<div >
-												<DataController
-													componentId={"UserProfileTweet"}
-													customQuery={CustomQueryT}
-													showUI={false}
-												/>
-											</div>
-										</div>) : (
-											<div key={props.user}>
-												{(props.query.show == 1) ? (
-													<ToggleButton
-														componentId="UserTweet"
-														appbaseField="by"
-														multiSelect={false}
-														data={[
-															{
-																label: "Global",
-																value: ""
-															},
-															{
-																label: "Personal",
-																value: props.user
-															}
-														]}
-														customQuery={CustomQueryT}
-														defaultSelected={["Global"]}
-													/>) : (
-														<ToggleButton
-															componentId="UserTweet"
-															appbaseField="by"
-															multiSelect={false}
-															data={[
-																{
-																	label: "Global",
-																	value: ""
-																},
-																{
-																	label: "Personal",
-																	value: props.user
-																}
-															]}
-															customQuery={CustomQueryT}
-															defaultSelected={["Personal"]}
-														/>)}
-											</div>
-							)}
-								</div>
-							</div>)}
+					<NavOptions
+						pflg={props.pflg}
+						path={props.path}
+						user={props.user}
+						query={props.query}
+						goProfile={props.goProfile}
+						goGlobalFeed={props.goGlobalFeed}
+						goPresonalFeed={props.goPresonalFeed}
+						CustomQueryT={CustomQueryT}
+					/>
 
 				</div>
 			</nav>
