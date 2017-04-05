@@ -2,10 +2,7 @@ import React, {
 	Component
 } from "react";
 import { ReactiveList } from "@appbaseio/reactivebase";
-import {
-	config,
-	LoginForm
-} from "./config";
+import { config } from "./config";
 import { NavBar } from "./navbar";
 import { onDataTweets } from "./tweets";
 
@@ -18,6 +15,22 @@ const appbaseRef = new Appbase({
 	password: config.credential_tweets.password
 });
 let uname = "";
+
+// `LoginForm` returns form with a text input field.
+const LoginForm = (props) => {
+	const txtstyle = {
+		width: "85%",
+		backgroundColor: "#fafafa",
+		margin: "3%",
+		fontSize: "20px"
+	};
+	return (
+		<form className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}>
+			<input type="text blue accent-2" placeholder="Name" style={txtstyle} /><br />
+			<input type="submit" style={{ width: "85%", margin: "0 0 3% 2%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" />
+		</form>
+	);
+};
 
 // `Login` Component to render the login page of app
 export default class Login extends Component {
