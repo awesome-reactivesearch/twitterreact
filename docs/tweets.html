@@ -30,11 +30,6 @@
                 </a>
               
                 
-                <a class="source" href="index.html">
-                  index.js
-                </a>
-              
-                
                 <a class="source" href="login.html">
                   login.js
                 </a>
@@ -47,11 +42,6 @@
                 
                 <a class="source" href="profile.html">
                   profile.js
-                </a>
-              
-                
-                <a class="source" href="searchpg.html">
-                  searchpg.js
                 </a>
               
                 
@@ -117,7 +107,7 @@
 			combineData.unshift(response.newData);
 		}
 		<span class="hljs-keyword">if</span> (combineData) {
-			result = combineData.map(<span class="hljs-function">(<span class="hljs-params">markerData, index</span>) =&gt;</span> {
+			result = combineData.map(<span class="hljs-function">(<span class="hljs-params">markerData</span>) =&gt;</span> {
 				<span class="hljs-keyword">const</span> marker = markerData._source;
 				<span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Tweet</span> <span class="hljs-attr">msg</span>=<span class="hljs-string">{marker.msg}</span> <span class="hljs-attr">usr</span>=<span class="hljs-string">{marker.by}</span> <span class="hljs-attr">date</span>=<span class="hljs-string">{marker.createdAt}</span> /&gt;</span>);
 			});

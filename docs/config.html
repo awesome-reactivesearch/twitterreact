@@ -30,11 +30,6 @@
                 </a>
               
                 
-                <a class="source" href="index.html">
-                  index.js
-                </a>
-              
-                
                 <a class="source" href="login.html">
                   login.js
                 </a>
@@ -47,11 +42,6 @@
                 
                 <a class="source" href="profile.html">
                   profile.js
-                </a>
-              
-                
-                <a class="source" href="searchpg.html">
-                  searchpg.js
                 </a>
               
                 
@@ -88,9 +78,7 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
-
-<span class="hljs-keyword">const</span> values = [{
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> values = [{
 	<span class="hljs-attr">label</span>: <span class="hljs-string">"Local"</span>,
 	<span class="hljs-attr">value</span>: <span class="hljs-string">"Local"</span>
 }, {
@@ -150,39 +138,10 @@
 		<span class="hljs-attr">sortBy</span>: <span class="hljs-string">"desc"</span>
 	}]
 
-};</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-3">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-3">&#182;</a>
-              </div>
-              <p><code>LoginForm</code> returns form with a text input field.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> LoginForm = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
-	<span class="hljs-keyword">const</span> txtstyle = {
-		<span class="hljs-attr">width</span>: <span class="hljs-string">"85%"</span>,
-		<span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"#fafafa"</span>,
-		<span class="hljs-attr">margin</span>: <span class="hljs-string">"3%"</span>,
-		<span class="hljs-attr">fontSize</span>: <span class="hljs-string">"20px"</span>
-	};
-	<span class="hljs-keyword">return</span> (
-		&lt;form className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}&gt;
-			&lt;input type="text blue accent-2" placeholder="Name" style={txtstyle} /&gt;&lt;br /&gt;
-			&lt;input type="submit" style={{ width: "85%", margin: "0 0 3% 2%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" /&gt;
-		&lt;/form&gt;
-	);
 };
 
-module.exports = {
-	config,
-	LoginForm
+<span class="hljs-built_in">module</span>.exports = {
+	config
 };</pre></div></div>
             
         </li>

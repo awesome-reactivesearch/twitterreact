@@ -42,8 +42,8 @@ const NavBar = (props) => {
 		};
 	};
 
-	// NavBar contains Search Form<br /><br />
-	// NavBar uses NavOptions to add buttons depending upon the current page.
+	// NavBar contains Search Form<br />
+	// NavBar uses NavOptions to add buttons depending upon the current page.<br /><br />
 	// Here, `pflg` when set `-1` denotes that the page is either loginPg or searchPg it won't require button to route to `Profile` view or `Logout` button<br />
 	// `pflg` set to `1` denotes that the page is proflie view of any user. Only Tweets of that user are to be displayed, hence `DataController` sensor is required to generate Personal Tweet.<br />
 	// `pflg` set to `0` shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible, `ToggleButton` is required.<br /><br />

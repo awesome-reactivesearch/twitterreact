@@ -11,64 +11,6 @@
   <div id="container">
     <div id="background"></div>
     
-      <ul id="jump_to">
-        <li>
-          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
-          <a class="small" href="javascript:void(0);">+</a>
-          <div id="jump_wrapper">
-          <div id="jump_page_wrapper">
-            <div id="jump_page">
-              
-                
-                <a class="source" href="config.html">
-                  config.js
-                </a>
-              
-                
-                <a class="source" href="dashboard.html">
-                  dashboard.js
-                </a>
-              
-                
-                <a class="source" href="index.html">
-                  index.js
-                </a>
-              
-                
-                <a class="source" href="login.html">
-                  login.js
-                </a>
-              
-                
-                <a class="source" href="navbar.html">
-                  navbar.js
-                </a>
-              
-                
-                <a class="source" href="profile.html">
-                  profile.js
-                </a>
-              
-                
-                <a class="source" href="searchpg.html">
-                  searchpg.js
-                </a>
-              
-                
-                <a class="source" href="tweets.html">
-                  tweets.js
-                </a>
-              
-                
-                <a class="source" href="users.html">
-                  users.js
-                </a>
-              
-            </div>
-          </div>
-        </li>
-      </ul>
-    
     <ul class="sections">
         
           <li id="title">
@@ -89,10 +31,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
-<span class="hljs-keyword">import</span> {
-	DataController,
-	ToggleButton
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;</pre></div></div>
+<span class="hljs-keyword">import</span> { NavOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">"./navoptions"</span>;</pre></div></div>
             
         </li>
         
@@ -139,7 +78,6 @@ For <code>ToggleButton</code> sensor will set default data value paramters while
             </div>
             
             <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">const</span> CustomQueryT = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
-		<span class="hljs-keyword">debugger</span>;
 		<span class="hljs-keyword">if</span> (data !== <span class="hljs-string">"default"</span> &amp;&amp; props.pflg !== <span class="hljs-number">1</span>) {
 			<span class="hljs-keyword">if</span> (data[<span class="hljs-number">0</span>].value === <span class="hljs-string">""</span>) {
 				<span class="hljs-keyword">return</span> {
@@ -183,7 +121,8 @@ For <code>ToggleButton</code> sensor will set default data value paramters while
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>NavBar contains Search Form<br /><br />
+              <p>NavBar contains Search Form<br />
+NavBar uses NavOptions to add buttons depending upon the current page.<br /><br />
 Here, <code>pflg</code> when set <code>-1</code> denotes that the page is either loginPg or searchPg it won’t require button to route to <code>Profile</code> view or <code>Logout</code> button<br />
 <code>pflg</code> set to <code>1</code> denotes that the page is proflie view of any user. Only Tweets of that user are to be displayed, hence <code>DataController</code> sensor is required to generate Personal Tweet.<br />
 <code>pflg</code> set to <code>0</code> shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible, <code>ToggleButton</code> is required.<br /><br />
@@ -206,79 +145,17 @@ When <code>query.show</code> is set to <code>1</code> when user switches from pr
 						&lt;/form&gt;
 
 					&lt;/div&gt;
-					{(props.pflg === -1) ? (
-						&lt;div style={{ float: "right", margin: "0 2% 0 0", width: "15%" }}&gt;
-							{(props.path === "/") ? (
-								&lt;div&gt;
-									&lt;DataController
-										componentId="GlobalTweet"
-										customQuery={CustomQueryT}
-										showUI={false}
-									/&gt;
-									&lt;a href="./docs/login.html" style={{ color: "white" }} className="waves-effect waves-light btn blue lighten-2"&gt;View Code
-									&lt;/a&gt;
-								&lt;/div&gt;
-							) : (&lt;div /&gt;)}
-						&lt;/div&gt;) : (
-							&lt;div style={{ float: "right", width: "50%" }}&gt;
-								&lt;div style={{ float: "right", width: "50%" }}&gt;
-									&lt;button style={{ width: "30%" }} className="left hide-on-med-and-down waves-effect waves-light btn" value="Profile" onClick={props.goProfile} &gt;Profile&lt;/button&gt;
-									&lt;button style={{ width: "30%" }} value="Logout" onClick={props.logOut} className="waves-effect waves-light btn" &gt;Logout&lt;/button&gt;
-								&lt;/div&gt;
-								&lt;div style={{ float: "left", width: "50%" }} className="right hide-on-med-and-down z-depth-0" &gt;
-
-									{(props.pflg === 1) ? (
-										&lt;div key={props.user}&gt;
-											&lt;button style={{ width: "35%" }} className="waves-effect waves-light grey lighten-4 btn" value="Global" onClick={props.goGlobalFeed}&gt;Global&lt;/button&gt;
-											&lt;button style={{ width: "35%" }} className="waves-effect waves-light grey lighten-4 btn" value="Personal" onClick={props.goPresonalFeed}&gt;Personal&lt;/button&gt;
-											&lt;div &gt;
-												&lt;DataController
-													componentId={"UserProfileTweet"}
-													customQuery={CustomQueryT}
-													showUI={false}
-												/&gt;
-											&lt;/div&gt;
-										&lt;/div&gt;) : (
-											&lt;div key={props.user}&gt;
-												{(props.query.show == 1) ? (
-													&lt;ToggleButton
-														componentId="UserTweet"
-														appbaseField="by"
-														multiSelect={false}
-														data={[
-															{
-																label: "Global",
-																value: ""
-															},
-															{
-																label: "Personal",
-																value: props.user
-															}
-														]}
-														customQuery={CustomQueryT}
-														defaultSelected={["Global"]}
-													/&gt;) : (
-														&lt;ToggleButton
-															componentId="UserTweet"
-															appbaseField="by"
-															multiSelect={false}
-															data={[
-																{
-																	label: "Global",
-																	value: ""
-																},
-																{
-																	label: "Personal",
-																	value: props.user
-																}
-															]}
-															customQuery={CustomQueryT}
-															defaultSelected={["Personal"]}
-														/&gt;)}
-											&lt;/div&gt;
-							)}
-								&lt;/div&gt;
-							&lt;/div&gt;)}
+					&lt;NavOptions
+						pflg={props.pflg}
+						path={props.path}
+						user={props.user}
+						query={props.query}
+						goProfile={props.goProfile}
+						goGlobalFeed={props.goGlobalFeed}
+						goPresonalFeed={props.goPresonalFeed}
+						logOut={props.logOut}
+						CustomQueryT={CustomQueryT}
+					/&gt;
 
 				&lt;/div&gt;
 			&lt;/nav&gt;
