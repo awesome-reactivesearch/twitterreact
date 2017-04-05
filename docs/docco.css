@@ -295,6 +295,12 @@ ul.sections > li > div {
     z-index: -1;
   }
 
+
+  pre {
+    width: 350px;
+    word-wrap: break-word;
+  }
+
   ul.sections > li > div.annotation ul, ul.sections > li > div.annotation ol {
     padding-left: 40px;
   }
@@ -368,6 +374,12 @@ ul.sections > li > div {
   #background {
     width: 525px;
   }
+
+  pre {
+    width: 650px;
+    word-wrap: break-word ;
+  }
+
   ul.sections > li > div.annotation {
     max-width: 525px;
     min-width: 525px;
