@@ -1,19 +1,13 @@
 import React, { Component } from "react";
-import { config } from "./config";
 import { PersonalTweets } from "./tweets";
 import {
 	ListFollowing,
 	ListFollowers,
-	User
+	User,
+	updateUser
 } from "./users";
 import { NavBar } from "./navbar";
 
-const appbaseRef = new Appbase({
-	url: config.credential_users.url,
-	appname: config.credential_users.app,
-	username: config.credential_users.username,
-	password: config.credential_users.password
-});
 let u = "";
 let nfollowers = 0;
 let nfollowing = 0;
@@ -26,7 +20,6 @@ export default class Profile extends Component {
 		this.goLocal = this.goLocal.bind(this);
 		this.followUser = this.followUser.bind(this);
 		this.unfollowUser = this.unfollowUser.bind(this);
-		this.updateUser = this.updateUser.bind(this);
 		this.chkFollowing = this.chkFollowing.bind(this);
 		this.onSearch = this.onSearch.bind(this);
 		this.goGlobalFeed = this.goGlobalFeed.bind(this);
@@ -73,7 +66,7 @@ export default class Profile extends Component {
 				const following = combineData[0]._source.followers;
 				nfollowing = following.length;
 				if (following !== undefined) {
-					result = following.map((markerData, index) => (<User name={markerData} />));
+					result = following.map(markerData => (<User name={markerData} />));
 				}
 			}
 			this.setState({
@@ -102,7 +95,7 @@ export default class Profile extends Component {
 			}
 			nfollowers = followers.length;
 			if (followers !== undefined) {
-				result = followers.map((markerData, index) => (<User name={markerData} />));
+				result = followers.map(markerData => (<User name={markerData} />));
 			}
 		}
 		this.setState({
@@ -110,94 +103,6 @@ export default class Profile extends Component {
 			nfollowing
 		});
 		return result;
-	}
-
-	// Update users following/followers list, where `follow` bool is `true` when logged user wants to follow the user while `false` when loogged user wants to unfollow the user
-	updateUser(follow, username) {
-		if (username === undefined) {
-			username = u;
-		}
-
-		const me = localStorage.user;
-		// search loggedIn user in app
-		appbaseRef.search({
-			type: "users",
-			body: {
-				query: {
-					match: {
-						name: me
-					}
-				}
-			}
-		}).on("data", (res) => {
-			const meId = res.hits.hits[0]._id;
-			const mefollowing = res.hits.hits[0]._source.following;
-			const mefollowers = res.hits.hits[0]._source.followers;
-
-			// if `follow` is true, add user to logged user following list else remove the user from the list
-			if (follow) {
-				mefollowing.push(username);
-			} else {
-				const index = mefollowing.indexOf(username);
-				mefollowing.splice(index, 1);
-			}
-			localStorage.ufollowing = mefollowing;
-			// Index the updated list to app
-			appbaseRef.index({
-				type: "users",
-				id: meId,
-				body: {
-					name: me,
-					followers: mefollowers,
-					following: mefollowing
-				}
-			}).on("error", (error) => {
-				console.error(error);
-			});
-		}).on("error", (err) => {
-			console.error(err);
-		});
-		// Search for other user in app
-		appbaseRef.search({
-			type: "users",
-			body: {
-				query: {
-					match: {
-						name: username
-					}
-				}
-			}
-		}).on("data", (res) => {
-			const uId = res.hits.hits[0]._id;
-			const ufollowing = res.hits.hits[0]._source.following;
-			const ufollowers = res.hits.hits[0]._source.followers;
-			// if `follow` is true add logged user to followers list else remove it from the list
-			if (follow) {
-				ufollowers.push(me);
-			} else {
-				const index = ufollowers.indexOf(me);
-				ufollowers.splice(index, 1);
-			}
-			// Index the updated entry to the app
-			appbaseRef.index({
-				type: "users",
-				id: uId,
-				body: {
-					name: username,
-					followers: ufollowers,
-					following: ufollowing
-				}
-			}).on("data", function (response) {
-				this.setState({
-					nfollowers: ufollowing.length,
-					nfollowing: ufollowers.length
-				});
-			}).on("error", (error) => {
-				console.error(error);
-			});
-		}).on("error", (err) => {
-			console.error(err);
-		});
 	}
 
 	// check if the user is followed by logged user or not
@@ -215,13 +120,13 @@ export default class Profile extends Component {
 	// on Follow pressed
 	followUser(event) {
 		event.preventDefault();
-		this.updateUser(true);
+		updateUser(true, u);
 	}
 
 	// on Unfollow pressed
 	unfollowUser(event) {
 		event.preventDefault();
-		this.updateUser(false);
+		updateUser(false, u);
 	}
 
 	// on press profile go to present logged user's profile page

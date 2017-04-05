@@ -4,9 +4,16 @@ import {
 	ReactiveList,
 	DataController
 } from "@appbaseio/reactivebase";
-import { config } from "./config";
 import { Link } from "react-router";
+import { config } from "./config";
 
+const u = "";
+const appbaseRef = new Appbase({
+	url: config.credential_users.url,
+	appname: config.credential_users.app,
+	username: config.credential_users.username,
+	password: config.credential_users.password
+});
 // `ListFollowers` component renders the list of followers
 const ListFollowers = (props) => {
 	const customQuery = function () {
@@ -91,6 +98,94 @@ const ListFollowing = (props) => {
 	);
 };
 
+// Update users following/followers list, where `follow` bool is `true` when logged user wants to follow the user while `false` when loogged user wants to unfollow the user
+const updateUser = function (follow, username) {
+	debugger;
+	if (username === undefined) {
+		username = u;
+	}
+
+	const me = localStorage.user;
+		// search loggedIn user in app
+	appbaseRef.search({
+		type: "users",
+		body: {
+			query: {
+				match: {
+					name: me
+				}
+			}
+		}
+	}).on("data", (res) => {
+		const meId = res.hits.hits[0]._id;
+		const mefollowing = res.hits.hits[0]._source.following;
+		const mefollowers = res.hits.hits[0]._source.followers;
+
+			// if `follow` is true, add user to logged user following list else remove the user from the list
+		if (follow) {
+			mefollowing.push(username);
+		} else {
+			const index = mefollowing.indexOf(username);
+			mefollowing.splice(index, 1);
+		}
+		localStorage.ufollowing = mefollowing;
+			// Index the updated list to app
+		appbaseRef.index({
+			type: "users",
+			id: meId,
+			body: {
+				name: me,
+				followers: mefollowers,
+				following: mefollowing
+			}
+		}).on("error", (error) => {
+			console.error(error);
+		});
+	}).on("error", (err) => {
+		console.error(err);
+	});
+		// Search for other user in app
+	appbaseRef.search({
+		type: "users",
+		body: {
+			query: {
+				match: {
+					name: username
+				}
+			}
+		}
+	}).on("data", (res) => {
+		const uId = res.hits.hits[0]._id;
+		const ufollowing = res.hits.hits[0]._source.following;
+		const ufollowers = res.hits.hits[0]._source.followers;
+			// if `follow` is true add logged user to followers list else remove it from the list
+		if (follow) {
+			ufollowers.push(me);
+		} else {
+			const index = ufollowers.indexOf(me);
+			ufollowers.splice(index, 1);
+		}
+			// Index the updated entry to the app
+		appbaseRef.index({
+			type: "users",
+			id: uId,
+			body: {
+				name: username,
+				followers: ufollowers,
+				following: ufollowing
+			}
+		}).on("data", function () {
+			this.setState({
+				nfollowers: ufollowing.length,
+				nfollowing: ufollowers.length
+			});
+		}).on("error", (error) => {
+			console.error(error);
+		});
+	}).on("error", (err) => {
+		console.error(err);
+	});
+};
 // on Receiving the user data
 const onDataUsers = function (response, err) {
 	let result = null;
@@ -104,7 +199,7 @@ const onDataUsers = function (response, err) {
 			combineData.unshift(response.newData);
 		}
 		if (combineData) {
-			result = combineData.map((markerData, index) => {
+			result = combineData.map((markerData) => {
 				const marker = markerData._source;
 				return (<User name={marker.name} />);
 			});
@@ -129,5 +224,6 @@ module.exports = {
 	ListFollowing,
 	ListFollowers,
 	onDataUsers,
-	User
+	User,
+	updateUser
 };

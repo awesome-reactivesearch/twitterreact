@@ -1,5 +1,5 @@
 import React from "react";
-import { NavOptions } from "./navoptions"
+import { NavOptions } from "./navoptions";
 
 // `NavBar` component that returns navigation bar component
 const NavBar = (props) => {
@@ -8,7 +8,6 @@ const NavBar = (props) => {
 	// `CustomQueryT` function is used by `DataController` or `ToggleButton` sensor.
 	// For `ToggleButton` sensor will set default data value paramters while `DataController` will set data=`default`
 	const CustomQueryT = function (data) {
-		debugger;
 		if (data !== "default" && props.pflg !== 1) {
 			if (data[0].value === "") {
 				return {
@@ -44,6 +43,7 @@ const NavBar = (props) => {
 	};
 
 	// NavBar contains Search Form<br /><br />
+	// NavBar uses NavOptions to add buttons depending upon the current page.
 	// Here, `pflg` when set `-1` denotes that the page is either loginPg or searchPg it won't require button to route to `Profile` view or `Logout` button<br />
 	// `pflg` set to `1` denotes that the page is proflie view of any user. Only Tweets of that user are to be displayed, hence `DataController` sensor is required to generate Personal Tweet.<br />
 	// `pflg` set to `0` shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible, `ToggleButton` is required.<br /><br />
@@ -71,6 +71,7 @@ const NavBar = (props) => {
 						goProfile={props.goProfile}
 						goGlobalFeed={props.goGlobalFeed}
 						goPresonalFeed={props.goPresonalFeed}
+						logOut={props.logOut}
 						CustomQueryT={CustomQueryT}
 					/>
 

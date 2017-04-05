@@ -5,24 +5,24 @@ import {
 } from "@appbaseio/reactivebase";
 
 const NavOptions = (props) => {
-if(props.pflg === -1){
-	return(
-	<div style={{ float: "right", margin: "0 2% 0 0", width: "15%" }}>
-		{(props.path === "/") ? (
-			<div>
-				<DataController
-					componentId="GlobalTweet"
-					customQuery={props.CustomQueryT}
-					showUI={false}
-				/>
-				<a href="./docs/login.html" style={{ color: "white" }} className="waves-effect waves-light btn blue lighten-2">View Code
+	if (props.pflg === -1) {
+		return (
+			<div style={{ float: "right", margin: "0 2% 0 0", width: "15%" }}>
+				{(props.path === "/") ? (
+					<div>
+						<DataController
+							componentId="GlobalTweet"
+							customQuery={props.CustomQueryT}
+							showUI={false}
+						/>
+						<a href="./docs/login.html" style={{ color: "white" }} className="waves-effect waves-light btn blue lighten-2">View Code
 				</a>
-			</div>
+					</div>
 		) : (<div />)}
-	</div>) 
+			</div>);
 	}
-	else{
-		return(
+
+	return (
 		<div style={{ float: "right", width: "50%" }}>
 			<div style={{ float: "right", width: "50%" }}>
 				<button style={{ width: "30%" }} className="left hide-on-med-and-down waves-effect waves-light btn" value="Profile" onClick={props.goProfile} >Profile</button>
@@ -81,9 +81,9 @@ if(props.pflg === -1){
 						</div>
 				)}
 			</div>
-	</div>)}
-}
+		</div>);
+};
 
 module.exports = {
 	NavOptions
-}
+};

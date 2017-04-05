@@ -15,7 +15,7 @@ const onDataTweets = function (response, err) {
 			combineData.unshift(response.newData);
 		}
 		if (combineData) {
-			result = combineData.map((markerData, index) => {
+			result = combineData.map((markerData) => {
 				const marker = markerData._source;
 				return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt} />);
 			});
