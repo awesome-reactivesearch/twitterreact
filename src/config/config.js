@@ -25,6 +25,14 @@ const config = {
 
 };
 
+const appbaseRef = new Appbase({
+	url: config.credential_tweets.url,
+	appname: config.credential_tweets.app,
+	username: config.credential_tweets.username,
+	password: config.credential_tweets.password
+});
+
 module.exports = {
-	config
+	config,
+	appbaseRef
 };

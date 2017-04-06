@@ -1,21 +1,14 @@
 import React, { Component } from "react";
-
 import {
 	ReactiveBase,
 	ReactiveList,
 	DataController
 } from "@appbaseio/reactivebase";
-import { config } from "../config/config";
+import { config, appbaseRef } from "../config/config";
 import { PersonalTweets } from "../helper/tweets";
 import { NavBar } from "../nav/navbar";
 import { onDataUsers } from "../helper/users";
 
-const appbaseRef = new Appbase({
-	url: config.credential_tweets.url,
-	appname: config.credential_tweets.app,
-	username: config.credential_tweets.username,
-	password: config.credential_tweets.password
-});
 const date = new Date();
 // `Dashboarad` component to render the dashboard page of app
 export default class Dashboard extends Component {

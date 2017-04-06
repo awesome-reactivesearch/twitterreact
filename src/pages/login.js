@@ -1,20 +1,8 @@
-import React, {
-	Component
-} from "react";
+import React, { Component } from "react";
 import { ReactiveList } from "@appbaseio/reactivebase";
-import { config } from "../config/config";
+import { config, appbaseRef } from "../config/config";
 import { NavBar } from "../nav/navbar";
 import { onDataTweets } from "../helper/tweets";
-
-require("@appbaseio/reactivebase/dist/css/style.min.css");
-
-const appbaseRef = new Appbase({
-	url: config.credential_tweets.url,
-	appname: config.credential_tweets.app,
-	username: config.credential_tweets.username,
-	password: config.credential_tweets.password
-});
-let uname = "";
 
 // `LoginForm` returns form with a text input field.
 const LoginForm = (props) => {
@@ -43,9 +31,9 @@ export default class Login extends Component {
 	// Function called when user submits Login form
 	onLogin(event) {
 		event.preventDefault();
-		uname = event.target[0].value;
+		const uname = event.target[0].value;
 
-		if (uname === "")			{ return; }
+		if (uname === "")	{ return; }
 		// Search for existing username
 		appbaseRef.search({
 			type: "users",

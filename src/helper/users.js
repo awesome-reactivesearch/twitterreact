@@ -5,15 +5,8 @@ import {
 	DataController
 } from "@appbaseio/reactivebase";
 import { Link } from "react-router";
-import { config } from "../config/config";
+import { config, appbaseRef } from "../config/config";
 
-const u = "";
-const appbaseRef = new Appbase({
-	url: config.credential_users.url,
-	appname: config.credential_users.app,
-	username: config.credential_users.username,
-	password: config.credential_users.password
-});
 // `ListFollowers` component renders the list of followers
 const ListFollowers = (props) => {
 	const customQuery = function () {
@@ -100,10 +93,6 @@ const ListFollowing = (props) => {
 
 // Update users following/followers list, where `follow` bool is `true` when logged user wants to follow the user while `false` when loogged user wants to unfollow the user
 const updateUser = function (follow, username) {
-	if (username === undefined) {
-		username = u;
-	}
-
 	const me = localStorage.user;
 		// search loggedIn user in app
 	appbaseRef.search({

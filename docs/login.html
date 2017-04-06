@@ -83,23 +83,11 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React, {
-	Component
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
 <span class="hljs-keyword">import</span> { ReactiveList } <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
-<span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;
+<span class="hljs-keyword">import</span> { config, appbaseRef } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;
 <span class="hljs-keyword">import</span> { NavBar } <span class="hljs-keyword">from</span> <span class="hljs-string">"../nav/navbar"</span>;
-<span class="hljs-keyword">import</span> { onDataTweets } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/tweets"</span>;
-
-<span class="hljs-built_in">require</span>(<span class="hljs-string">"@appbaseio/reactivebase/dist/css/style.min.css"</span>);
-
-<span class="hljs-keyword">const</span> appbaseRef = <span class="hljs-keyword">new</span> Appbase({
-	<span class="hljs-attr">url</span>: config.credential_tweets.url,
-	<span class="hljs-attr">appname</span>: config.credential_tweets.app,
-	<span class="hljs-attr">username</span>: config.credential_tweets.username,
-	<span class="hljs-attr">password</span>: config.credential_tweets.password
-});
-<span class="hljs-keyword">let</span> uname = <span class="hljs-string">""</span>;</pre></div></div>
+<span class="hljs-keyword">import</span> { onDataTweets } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/tweets"</span>;</pre></div></div>
             
         </li>
         
@@ -164,9 +152,9 @@
             
             <div class="content"><div class='highlight'><pre>	onLogin(event) {
 		event.preventDefault();
-		uname = event.target[<span class="hljs-number">0</span>].value;
+		<span class="hljs-keyword">const</span> uname = event.target[<span class="hljs-number">0</span>].value;
 
-		<span class="hljs-keyword">if</span> (uname === <span class="hljs-string">""</span>)			{ <span class="hljs-keyword">return</span>; }</pre></div></div>
+		<span class="hljs-keyword">if</span> (uname === <span class="hljs-string">""</span>)	{ <span class="hljs-keyword">return</span>; }</pre></div></div>
             
         </li>
         

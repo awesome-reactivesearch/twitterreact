@@ -90,15 +90,7 @@
 	DataController
 } <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
 <span class="hljs-keyword">import</span> { Link } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router"</span>;
-<span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;
-
-<span class="hljs-keyword">const</span> u = <span class="hljs-string">""</span>;
-<span class="hljs-keyword">const</span> appbaseRef = <span class="hljs-keyword">new</span> Appbase({
-	<span class="hljs-attr">url</span>: config.credential_users.url,
-	<span class="hljs-attr">appname</span>: config.credential_users.app,
-	<span class="hljs-attr">username</span>: config.credential_users.username,
-	<span class="hljs-attr">password</span>: config.credential_users.password
-});</pre></div></div>
+<span class="hljs-keyword">import</span> { config, appbaseRef } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;</pre></div></div>
             
         </li>
         
@@ -222,10 +214,6 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> updateUser = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">follow, username</span>) </span>{
-	<span class="hljs-keyword">if</span> (username === <span class="hljs-literal">undefined</span>) {
-		username = u;
-	}
-
 	<span class="hljs-keyword">const</span> me = localStorage.user;</pre></div></div>
             
         </li>

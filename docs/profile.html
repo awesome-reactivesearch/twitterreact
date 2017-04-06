@@ -91,11 +91,7 @@
 	User,
 	updateUser
 } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/users"</span>;
-<span class="hljs-keyword">import</span> { NavBar } <span class="hljs-keyword">from</span> <span class="hljs-string">"../nav/navbar"</span>;
-
-<span class="hljs-keyword">let</span> u = <span class="hljs-string">""</span>;
-<span class="hljs-keyword">let</span> nfollowers = <span class="hljs-number">0</span>;
-<span class="hljs-keyword">let</span> nfollowing = <span class="hljs-number">0</span>;</pre></div></div>
+<span class="hljs-keyword">import</span> { NavBar } <span class="hljs-keyword">from</span> <span class="hljs-string">"../nav/navbar"</span>;</pre></div></div>
             
         </li>
         
@@ -199,6 +195,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>	onDataFollowers(response, err) {
+		<span class="hljs-keyword">let</span> nfollowing = <span class="hljs-number">0</span>;
 		<span class="hljs-keyword">let</span> result = <span class="hljs-literal">null</span>;
 		<span class="hljs-keyword">if</span> (err) {
 			<span class="hljs-keyword">return</span> result;
@@ -217,7 +214,7 @@
 				}
 			}
 			this.setState({
-				nfollowers,
+				nfollowers: this.state.nfollowers,
 				nfollowing
 			});
 		}
@@ -241,6 +238,7 @@
             
             <div class="content"><div class='highlight'><pre>	onDataFollowing(response, err) {
 		<span class="hljs-keyword">let</span> result = <span class="hljs-literal">null</span>;
+		<span class="hljs-keyword">let</span> nfollowers = <span class="hljs-number">0</span>;
 		<span class="hljs-keyword">if</span> (err) {
 			<span class="hljs-keyword">return</span> result;
 		} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (response) {
@@ -261,7 +259,7 @@
 		}
 		this.setState({
 			nfollowers,
-			nfollowing
+			nfollowing: this.state.nfollowing
 		});
 		return result;
 	}
@@ -332,7 +330,7 @@
             
             <div class="content"><div class='highlight'><pre>	goLocal(event) {
 		event.preventDefault();
-		u = localStorage.user;
+		<span class="hljs-keyword">const</span> u = localStorage.user;
 		<span class="hljs-keyword">this</span>.props.router.replace(<span class="hljs-string">`/<span class="hljs-subst">${u}</span>`</span>);
 	}</pre></div></div>
             

@@ -8,10 +8,6 @@ import {
 } from "../helper/users";
 import { NavBar } from "../nav/navbar";
 
-let u = "";
-let nfollowers = 0;
-let nfollowing = 0;
-
 // `ChkFollowing` chks logged user follows the current user and returns *Follow/Unfollow* as required
 const ChkFollowing = (props) => {
 	const followingList = localStorage.ufollowing;
@@ -53,6 +49,7 @@ export default class Profile extends Component {
 
 	// Function called when the `ListFollowers` component gets data
 	onDataFollowers(response, err) {
+		let nfollowing = 0;
 		let result = null;
 		if (err) {
 			return result;
@@ -71,7 +68,7 @@ export default class Profile extends Component {
 				}
 			}
 			this.setState({
-				nfollowers,
+				nfollowers: this.state.nfollowers,
 				nfollowing
 			});
 		}
@@ -81,6 +78,7 @@ export default class Profile extends Component {
 	// Function called when the `ListFollowing` component gets data
 	onDataFollowing(response, err) {
 		let result = null;
+		let nfollowers = 0;
 		if (err) {
 			return result;
 		} else if (response) {
@@ -101,7 +99,7 @@ export default class Profile extends Component {
 		}
 		this.setState({
 			nfollowers,
-			nfollowing
+			nfollowing: this.state.nfollowing
 		});
 		return result;
 	}
@@ -123,7 +121,7 @@ export default class Profile extends Component {
 	// on press profile go to present logged user's profile page
 	goLocal(event) {
 		event.preventDefault();
-		u = localStorage.user;
+		const u = localStorage.user;
 		this.props.router.replace(`/${u}`);
 	}
 
