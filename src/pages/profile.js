@@ -12,29 +12,30 @@ let u = "";
 let nfollowers = 0;
 let nfollowing = 0;
 
+// `ChkFollowing` chks logged user follows the current user and returns *Follow/Unfollow* as required
+const ChkFollowing = (props) => {
+	const followingList = localStorage.ufollowing;
+	if (followingList.indexOf(props.uname) === -1) {
+		return (<button value="Follow" id="followbutton" onClick={props.followUser} >Follow</button>);
+	}
+	return (<button value="Unfollow" id="unfollowbutton" onClick={props.unfollowUser}>Unfollow</button>);
+};
+
 // `Profile` component renders profile page of the app
 export default class Profile extends Component {
+	// Initialize state with number of followers=0, number of following=0
 	constructor(props) {
 		super(props);
 		this.logOut = this.logOut.bind(this);
 		this.goLocal = this.goLocal.bind(this);
 		this.followUser = this.followUser.bind(this);
 		this.unfollowUser = this.unfollowUser.bind(this);
-		this.chkFollowing = this.chkFollowing.bind(this);
 		this.onSearch = this.onSearch.bind(this);
 		this.goGlobalFeed = this.goGlobalFeed.bind(this);
 		this.goPresonalFeed = this.goPresonalFeed.bind(this);
 		this.onDataFollowers = this.onDataFollowers.bind(this);
 		this.onDataFollowing = this.onDataFollowing.bind(this);
 		this.goProfile = this.goProfile.bind(this);
-		this.state = {
-			nfollowers: 0,
-			nfollowing: 0
-		};
-	}
-
-	// Initialize state with number of followers=0, number of following=0
-	componentWillMount() {
 		this.state = {
 			nfollowers: 0,
 			nfollowing: 0
@@ -106,27 +107,17 @@ export default class Profile extends Component {
 	}
 
 	// check if the user is followed by logged user or not
-	chkFollowing() {
-		u = this.props.params.uname;
-		const followingList = localStorage.ufollowing;
-
-
-		if (followingList.indexOf(u) === -1) {
-			return true;
-		}
-		return false;
-	}
 
 	// on Follow pressed
 	followUser(event) {
 		event.preventDefault();
-		updateUser(true, u);
+		updateUser(true, this.props.params.uname);
 	}
 
 	// on Unfollow pressed
 	unfollowUser(event) {
 		event.preventDefault();
-		updateUser(false, u);
+		updateUser(false, this.props.params.uname);
 	}
 
 	// on press profile go to present logged user's profile page
@@ -163,6 +154,7 @@ export default class Profile extends Component {
 		this.props.router.replace(`/profile/${loggedUser}`);
 	}
 
+
 	// renders the profile component
 	render() {
 		const msgStyles = {
@@ -170,22 +162,9 @@ export default class Profile extends Component {
 			marginLeft: "10%",
 			marginTop: "5%"
 		};
+
 		// `pflg` set to `1` i.e flage for navbar for profile page
 		const pflg = 1;
-		const followbStyle = {
-			backgroundColor: "#428bfc",
-			color: "white",
-			borderRadius: "3px",
-			border: "none",
-			padding: "6%"
-		};
-		const unfollowbStyle = {
-			backgroundColor: "#d2322d",
-			color: "white",
-			borderRadius: "3px",
-			border: "none",
-			padding: "6%"
-		};
 		// `NavBar` component to render navigation bar for profile page.<br />
 		// `ListFollowers`, `ListFollowing` components to show list of followers and following respectively.<br /><br />
 		// The `userinfo` element shows user image, username and number of following,followers. <br />
@@ -212,9 +191,8 @@ export default class Profile extends Component {
 						user={this.props.params.uname}
 						onDataFollowing={this.onDataFollowing}
 					/>
-
-
 				</div>
+
 				<div id="userinfo" className="col s12 m7 l91" style={msgStyles}>
 					<div style={{ float: "left", width: "20%" }}>
 						<img style={{ height: "15%", margin: "15% 10% 15% 15%" }} src="../user@2x.png" alt="UserImage" />
@@ -226,14 +204,14 @@ export default class Profile extends Component {
 						<div style={{ width: "100%", float: "left" }} key={this.state}>
 							{(localStorage.user !== this.props.params.uname) ? (
 								<div className="col s2" >
-									{this.chkFollowing() ? (
-										<button value="Follow" style={followbStyle} onClick={this.followUser} >Follow</button>
-									) : (
-										<button value="Unfollow" style={unfollowbStyle} onClick={this.unfollowUser}>Unfollow</button>
-									)}
+									<ChkFollowing
+										uname={this.props.params.uname}
+										followUser={this.followUser}
+										unfollowUser={this.unfollowUser}
+									/>
 								</div>) : (
 									<div />)}
-							<div key={this.props.params.uname}>
+							<div id="followstats" key={this.props.params.uname}>
 								<button className="col s4 btn disabled" style={{ backgroundColor: "blue", marginLeft: "2%" }}>Followers {this.state.nfollowing}</button>
 								<button className="col s4 btn disabled" style={{ backgroundColor: "blue" }}>Following {this.state.nfollowers}</button>
 							</div>

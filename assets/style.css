@@ -1,3 +1,19 @@
+#followbutton {
+    background-color: #428bfc;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    padding: 6%;
+}
+
+#unfollowbutton {
+    background-color: #d2322d;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    padding: 6%;   
+}
+
 .rbc-img-responsive {
     height: 4% !important;
 }

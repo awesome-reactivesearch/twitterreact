@@ -67,7 +67,7 @@ export default class Dashboard extends Component {
 	}
 
 	// CustomQuery that returns `match_all` query
-	CustomQueryUsers() {
+	customQueryUsers() {
 		return {
 			query: {
 				match_all: {}
@@ -109,7 +109,7 @@ export default class Dashboard extends Component {
 						</div>
 						<DataController
 							componentId="GetUsers"
-							customQuery={this.CustomQueryUsers}
+							customQuery={this.customQueryUsers}
 							showUI={false}
 						/>
 						<div className="z-depth-1" style={{ marginTop: "5%", height: "auto" }}>

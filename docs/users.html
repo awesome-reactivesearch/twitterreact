@@ -20,8 +20,23 @@
             <div id="jump_page">
               
                 
-                <a class="source" href="config.html">
-                  config.js
+                <a class="source" href="tweets.html">
+                  tweets.js
+                </a>
+              
+                
+                <a class="source" href="users.html">
+                  users.js
+                </a>
+              
+                
+                <a class="source" href="index.html">
+                  index.js
+                </a>
+              
+                
+                <a class="source" href="navbar.html">
+                  navbar.js
                 </a>
               
                 
@@ -35,23 +50,13 @@
                 </a>
               
                 
-                <a class="source" href="navbar.html">
-                  navbar.js
-                </a>
-              
-                
                 <a class="source" href="profile.html">
                   profile.js
                 </a>
               
                 
-                <a class="source" href="tweets.html">
-                  tweets.js
-                </a>
-              
-                
-                <a class="source" href="users.html">
-                  users.js
+                <a class="source" href="searchpg.html">
+                  searchpg.js
                 </a>
               
             </div>
@@ -85,7 +90,7 @@
 	DataController
 } <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
 <span class="hljs-keyword">import</span> { Link } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router"</span>;
-<span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">"./config"</span>;
+<span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;
 
 <span class="hljs-keyword">const</span> u = <span class="hljs-string">""</span>;
 <span class="hljs-keyword">const</span> appbaseRef = <span class="hljs-keyword">new</span> Appbase({
@@ -217,7 +222,6 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> updateUser = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">follow, username</span>) </span>{
-	<span class="hljs-keyword">debugger</span>;
 	<span class="hljs-keyword">if</span> (username === <span class="hljs-literal">undefined</span>) {
 		username = u;
 	}
@@ -368,11 +372,6 @@
 				<span class="hljs-attr">followers</span>: ufollowers,
 				<span class="hljs-attr">following</span>: ufollowing
 			}
-		}).on(<span class="hljs-string">"data"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-			<span class="hljs-keyword">this</span>.setState({
-				<span class="hljs-attr">nfollowers</span>: ufollowing.length,
-				<span class="hljs-attr">nfollowing</span>: ufollowers.length
-			});
 		}).on(<span class="hljs-string">"error"</span>, (error) =&gt; {
 			<span class="hljs-built_in">console</span>.error(error);
 		});

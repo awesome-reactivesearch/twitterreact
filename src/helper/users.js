@@ -100,7 +100,6 @@ const ListFollowing = (props) => {
 
 // Update users following/followers list, where `follow` bool is `true` when logged user wants to follow the user while `false` when loogged user wants to unfollow the user
 const updateUser = function (follow, username) {
-	debugger;
 	if (username === undefined) {
 		username = u;
 	}
@@ -174,11 +173,6 @@ const updateUser = function (follow, username) {
 				followers: ufollowers,
 				following: ufollowing
 			}
-		}).on("data", function () {
-			this.setState({
-				nfollowers: ufollowing.length,
-				nfollowing: ufollowers.length
-			});
 		}).on("error", (error) => {
 			console.error(error);
 		});

@@ -20,8 +20,23 @@
             <div id="jump_page">
               
                 
-                <a class="source" href="config.html">
-                  config.js
+                <a class="source" href="tweets.html">
+                  tweets.js
+                </a>
+              
+                
+                <a class="source" href="users.html">
+                  users.js
+                </a>
+              
+                
+                <a class="source" href="index.html">
+                  index.js
+                </a>
+              
+                
+                <a class="source" href="navbar.html">
+                  navbar.js
                 </a>
               
                 
@@ -35,23 +50,13 @@
                 </a>
               
                 
-                <a class="source" href="navbar.html">
-                  navbar.js
-                </a>
-              
-                
                 <a class="source" href="profile.html">
                   profile.js
                 </a>
               
                 
-                <a class="source" href="tweets.html">
-                  tweets.js
-                </a>
-              
-                
-                <a class="source" href="users.html">
-                  users.js
+                <a class="source" href="searchpg.html">
+                  searchpg.js
                 </a>
               
             </div>
@@ -85,10 +90,10 @@
 	ReactiveList,
 	DataController
 } <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
-<span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">"./config"</span>;
-<span class="hljs-keyword">import</span> { PersonalTweets } <span class="hljs-keyword">from</span> <span class="hljs-string">"./tweets"</span>;
-<span class="hljs-keyword">import</span> { NavBar } <span class="hljs-keyword">from</span> <span class="hljs-string">"./navbar"</span>;
-<span class="hljs-keyword">import</span> { onDataUsers } <span class="hljs-keyword">from</span> <span class="hljs-string">"./users"</span>;
+<span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;
+<span class="hljs-keyword">import</span> { PersonalTweets } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/tweets"</span>;
+<span class="hljs-keyword">import</span> { NavBar } <span class="hljs-keyword">from</span> <span class="hljs-string">"../nav/navbar"</span>;
+<span class="hljs-keyword">import</span> { onDataUsers } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/users"</span>;
 
 <span class="hljs-keyword">const</span> appbaseRef = <span class="hljs-keyword">new</span> Appbase({
 	<span class="hljs-attr">url</span>: config.credential_tweets.url,
@@ -220,7 +225,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	CustomQueryUsers() {
+            <div class="content"><div class='highlight'><pre>	customQueryUsers() {
 		<span class="hljs-keyword">return</span> {
 			<span class="hljs-attr">query</span>: {
 				<span class="hljs-attr">match_all</span>: {}
@@ -274,7 +279,7 @@ Here, <code>NavBar</code> component is used to render navigation bar. <br /><br 
 						&lt;/div&gt;
 						&lt;DataController
 							componentId="GetUsers"
-							customQuery={this.CustomQueryUsers}
+							customQuery={this.customQueryUsers}
 							showUI={false}
 						/&gt;
 						&lt;div className="z-depth-1" style={{ marginTop: "5%", height: "auto" }}&gt;

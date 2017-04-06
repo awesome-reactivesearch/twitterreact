@@ -122,8 +122,8 @@ export default class Login extends Component {
 							componentId="GlobalTweets"
 							appbaseField="msg"
 							title="Public Tweets"
-							from={config.ReactivePaginatedList.from}
-							size={config.ReactivePaginatedList.size}
+							from={config.ReactiveList.from}
+							size={config.ReactiveList.size}
 							sortOptions={config.tweetsSortOptions}
 							onData={onDataTweets}
 							requestOnScroll={true}
