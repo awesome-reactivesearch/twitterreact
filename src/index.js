@@ -2,11 +2,11 @@ import React from "react";
 import ReactDom from "react-dom";
 import { Router, Route, browserHistory } from "react-router";
 import { ReactiveBase } from "@appbaseio/reactivebase";
-import { config } from "./src/config/config";
-import Login from "./src/pages/login";
-import Dashboard from "./src/pages/dashboard";
-import Profile from "./src/pages/profile";
-import SearchPg from "./src/pages/searchpg";
+import { config } from "./config/config";
+import Login from "./pages/login";
+import Dashboard from "./pages/dashboard";
+import Profile from "./pages/profile";
+import SearchPg from "./pages/searchpg";
 
 // Render Router elements into the DOM
 ReactDom.render((
