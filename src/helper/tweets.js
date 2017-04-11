@@ -37,7 +37,6 @@ const PersonalTweets = props => (
 			stream={true}
 			requestOnScroll={true}
 			onData={onDataTweets}
-			sortOptions={config.tweetsSortOptions}
 			react={{
 				and: props.reactOn
 			}}

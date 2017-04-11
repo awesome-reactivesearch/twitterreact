@@ -112,7 +112,6 @@ export default class Login extends Component {
 							title="Public Tweets"
 							from={config.ReactiveList.from}
 							size={config.ReactiveList.size}
-							sortOptions={config.tweetsSortOptions}
 							onData={onDataTweets}
 							requestOnScroll={true}
 							react={{
