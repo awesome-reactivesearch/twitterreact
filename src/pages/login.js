@@ -114,6 +114,7 @@ export default class Login extends Component {
 							size={config.ReactiveList.size}
 							onData={onDataTweets}
 							requestOnScroll={true}
+							sortOptions={config.tweetsSortOptions}
 							react={{
 								and: ["GlobalTweet"]
 							}}

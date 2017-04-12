@@ -17,8 +17,11 @@ const config = {
 	ReactiveList: {
 		size: 100,
 		from: 0
-	}
-
+	},
+	tweetsSortOptions: [{
+		appbaseField: "createdAt",
+		sortBy: "desc"
+	}]
 };
 
 const appbaseRef = new Appbase({
