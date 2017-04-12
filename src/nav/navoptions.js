@@ -2,7 +2,7 @@ import React from "react";
 import {
 	DataController,
 	ToggleButton
-} from "@appbaseio/reactivebase";
+} from "@appbaseio/reactivesearch";
 
 const NavOptions = (props) => {
 	if (props.pflg === -1) {

@@ -3,7 +3,7 @@ import {
 	ReactiveBase,
 	ReactiveList,
 	DataController
-} from "@appbaseio/reactivebase";
+} from "@appbaseio/reactivesearch";
 import { config, appbaseRef } from "../config/config";
 import { PersonalTweets } from "../helper/tweets";
 import { NavBar } from "../nav/navbar";

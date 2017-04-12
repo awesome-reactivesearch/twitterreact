@@ -3,7 +3,7 @@ import {
 	ReactiveBase,
 	ReactiveList,
 	DataController
-} from "@appbaseio/reactivebase";
+} from "@appbaseio/reactivesearch";
 import { Link } from "react-router";
 import { config, appbaseRef } from "../config/config";
 
@@ -170,25 +170,9 @@ const updateUser = function (follow, username) {
 	});
 };
 // on Receiving the user data
-const onDataUsers = function (response, err) {
-	let result = null;
-	if (err) {
-		return result;
-	}	else if (response) {
-		let combineData = response.currentData;
-		if (response.mode === "historic") {
-			combineData = response.currentData.concat(response.newData);
-		}		else if (response.mode === "streaming") {
-			combineData.unshift(response.newData);
-		}
-		if (combineData) {
-			result = combineData.map((markerData) => {
-				const marker = markerData._source;
-				return (<User name={marker.name} />);
-			});
-		}
-	}
-	return result;
+const onDataUsers = function (markerData) {
+	const marker = markerData._source;
+	return (<User name={marker.name} />);
 };
 
 // User Component

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { ReactiveList } from "@appbaseio/reactivebase";
-import { config, appbaseRef } from "../config/config";
+import { appbaseRef } from "../config/config";
 import { NavBar } from "../nav/navbar";
-import { onDataTweets } from "../helper/tweets";
+import { PersonalTweets } from "../helper/tweets";
 
 // `LoginForm` returns form with a text input field.
 const LoginForm = (props) => {
@@ -106,19 +105,9 @@ export default class Login extends Component {
 
 				<div className="row" style={{ margin: "0 10% 0 10%" }}>
 					<div className="col s10 offset-s1">
-						<ReactiveList
-							componentId="GlobalTweets"
-							appbaseField="msg"
-							title="Public Tweets"
-							from={config.ReactiveList.from}
-							size={config.ReactiveList.size}
-							onData={onDataTweets}
-							requestOnScroll={true}
-							sortOptions={config.tweetsSortOptions}
-							react={{
-								and: ["GlobalTweet"]
-							}}
-							stream={true}
+						<PersonalTweets
+							user={"$all"}
+							reactOn={["GlobalTweet"]}
 						/>
 					</div>
 				</div>

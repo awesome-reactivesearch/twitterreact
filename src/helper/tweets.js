@@ -1,27 +1,11 @@
 import React from "react";
-import { ReactiveList } from "@appbaseio/reactivebase";
+import { ReactiveList } from "@appbaseio/reactivesearch";
 import { config } from "../config/config";
 
 // on Receiving the tweets
-const onDataTweets = function (response, err) {
-	let result = null;
-	if (err) {
-		return result;
-	}	else if (response) {
-		let combineData = response.currentData;
-		if (response.mode === "historic") {
-			combineData = response.currentData.concat(response.newData);
-		}		else if (response.mode === "streaming") {
-			combineData.unshift(response.newData);
-		}
-		if (combineData) {
-			result = combineData.map((markerData) => {
-				const marker = markerData._source;
-				return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt} />);
-			});
-		}
-	}
-	return result;
+const onDataTweets = function (markerData) {
+	const marker = markerData._source;
+	return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt} />);
 };
 
 
@@ -30,6 +14,7 @@ const PersonalTweets = props => (
 	<div key={`${props.user}Tweets`}>
 
 		<ReactiveList
+			title="Tweets"
 			componentId="TweetsActuator"
 			appbaseField="msg"
 			from={config.ReactiveList.from}

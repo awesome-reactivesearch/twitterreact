@@ -48,20 +48,13 @@ export default class Profile extends Component {
 	}
 
 	// Function called when the `ListFollowers` component gets data
-	onDataFollowers(response, err) {
+	onDataFollowers(response) {
 		let nfollowing = 0;
 		let result = null;
-		if (err) {
-			return result;
-		} else if (response) {
-			let combineData = response.currentData;
-			if (response.mode === "historic") {
-				combineData = response.currentData.concat(response.newData);
-			} else if (response.mode === "streaming") {
-				combineData.unshift(response.newData);
-			}
+		if (response) {
+			const combineData = response;
 			if (combineData.length !== 0) {
-				const following = combineData[0]._source.followers;
+				const following = combineData._source.followers;
 				nfollowing = following.length;
 				if (following !== undefined) {
 					result = following.map(markerData => (<User name={markerData} />));
@@ -76,21 +69,14 @@ export default class Profile extends Component {
 	}
 
 	// Function called when the `ListFollowing` component gets data
-	onDataFollowing(response, err) {
+	onDataFollowing(response) {
 		let result = null;
 		let nfollowers = 0;
-		if (err) {
-			return result;
-		} else if (response) {
-			let combineData = response.currentData;
-			if (response.mode === "historic") {
-				combineData = response.currentData.concat(response.newData);
-			} else if (response.mode === "streaming") {
-				combineData.unshift(response.newData);
-			}
+		if (response) {
+			const combineData = response;
 			let followers = [];
 			if (combineData.length !== 0) {
-				followers = combineData[0]._source.following;
+				followers = combineData._source.following;
 			}
 			nfollowers = followers.length;
 			if (followers !== undefined) {

@@ -5,6 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "@appbaseio/reactivebase": "^1.0.0-alpha8",
+    "@appbaseio/reactivesearch": "^0.4.2",
     "react": "^15.4.2",
     "react-addons-shallow-compare": "^15.4.2",
     "react-bootstrap": "^0.30.7",

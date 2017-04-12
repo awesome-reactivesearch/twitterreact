@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import { Router, Route, browserHistory } from "react-router";
-import { ReactiveBase } from "@appbaseio/reactivebase";
+import { ReactiveBase } from "@appbaseio/reactivesearch";
 import { config } from "./config/config";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
