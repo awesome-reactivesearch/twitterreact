@@ -180,7 +180,7 @@ const User = props => (
 	<div className="collection">
 		<div className="collecton-item">
 			<p style={{ margin: "1% 2% 1% 2%" }}>
-				<Link to={`twitterreact/profile/${props.name}`}>{props.name}</Link>
+				<Link to={`/twitterreact/profile/${props.name}`}>{props.name}</Link>
 			</p>
 		</div>
 	</div>

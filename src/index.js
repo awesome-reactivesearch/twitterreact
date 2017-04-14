@@ -8,17 +8,6 @@ import Dashboard from "./pages/dashboard";
 import Profile from "./pages/profile";
 import SearchPg from "./pages/searchpg";
 
-
-function requireAuth(nextState, replace) {
-	if (localStorage.user === undefined) {
-		replace({
-			pathname: "twitterreact/",
-			state: {
-				nextPathname: nextState.location.pathname
-			}
-		});
-	}
-}
 // Render Router elements into the DOM
 ReactDom.render((
 	<ReactiveBase
@@ -29,7 +18,7 @@ ReactDom.render((
 
 		<Router history={browserHistory}>
 			<Route path="/twitterreact/" component={Login} />
-			<Route path="/twitterreact/:uname" component={Dashboard} onEnter={requireAuth} />
+			<Route path="/twitterreact/:uname" component={Dashboard} />
 			<Route path="/twitterreact/profile/:uname" component={Profile} />
 			<Route path="/twitterreact/search/:txt" component={SearchPg} />
 		</Router>
