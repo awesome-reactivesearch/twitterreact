@@ -4,8 +4,8 @@ module.exports = {
 	entry: ["./src/index.js"],
 
 	output: {
-		path: path.join(__dirname, "dist"),
-		publicPath: "dist/",
+		path: path.join("/twitterreact/dist"),
+		publicPath: "twitterreact/dist/",
 		filename: "bundle.js"
 	},
 	devtool: "inline-sourcemap",
