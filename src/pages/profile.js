@@ -179,7 +179,7 @@ export default class Profile extends Component {
 
 				<div id="userinfo" className="col s12 m7 l91" style={msgStyles}>
 					<div style={{ float: "left", width: "20%" }}>
-						<img style={{ height: "15%", margin: "15% 10% 15% 15%" }} src="/twitterreact/user@2x.png" alt="UserImage" />
+						<img style={{ height: "100px", margin: "15% 10% 15% 15%" }} src="/twitterreact/user@2x.png" alt="UserImage" />
 					</div>
 					<div style={{ float: "left", width: "80%" }} >
 						<div style={{ float: "left" }}>

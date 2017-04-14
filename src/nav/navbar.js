@@ -53,13 +53,13 @@ const NavBar = (props) => {
 		<div className="navbar-fixed">
 			<nav style={{ color: "black", backgroundColor: "#dadada", height: "60px" }}>
 				<div className="nav-wrapper" style={{ margin: "0.4% auto auto auto" }} >
-					<div style={{ float: "left", fontSize: "125%", width: "15%" }}>
+					<div style={{ float: "left", fontSize: "125%", width: "15%", margin: "-0.5% auto 2% 2.5%" }}>
 						Twitter on Appbase
 					</div>
-					<div style={{ width: "35%", float: "left" }}>
+					<div style={{ width: "30%", float: "left" }}>
 						<form id="searchbar" onSubmit={props.onSearch}>
 							<input type="text blue accent-2" style={{ height: "65%", width: "45%", margin: "1% 0 0 0" }} placeholder="Search Tweets..." />
-							<input type="submit" value="Search" style={{ width: "20%", textTransform: "capitalize" }} className="waves-effect waves-light btn" />
+							<input type="submit" value="Search" style={{ width: "20%", textTransform: "capitalize", marginTop: "-1%" }} className="waves-effect waves-light btn" />
 						</form>
 
 					</div>

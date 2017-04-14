@@ -16,7 +16,7 @@ const NavOptions = (props) => {
 							showUI={false}
 						/>
 						<a href="./docs/login.html" style={{ color: "white" }} className="waves-effect waves-light btn blue lighten-2">View Code
-				</a>
+						</a>
 					</div>
 		) : (<div />)}
 			</div>);
