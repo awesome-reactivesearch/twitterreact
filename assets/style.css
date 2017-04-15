@@ -91,7 +91,7 @@
 .waves-effect.waves-light.btn {
     height: 40px;
     text-transform: capitalize;
-    padding: 1%;
+    padding: 2% 5% 2% 5%;
 }
 
 .waves-effect.waves-light.grey.lighten-4.btn {
