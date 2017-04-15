@@ -10,16 +10,15 @@ import { NavBar } from "../nav/navbar";
 
 // `ChkFollowing` chks logged user follows the current user and returns *Follow/Unfollow* as required
 const ChkFollowing = (props) => {
-	const followingList = localStorage.ufollowing;
-	if (followingList.indexOf(props.uname) === -1) {
-		return (<button value="Follow" id="followbutton" onClick={props.followUser} >Follow</button>);
+	if (props.setKey) {
+		return (<button value="Unfollow" id="unfollowbutton" onClick={props.unfollowUser} key={props.setKey}>Unfollow</button>);
 	}
-	return (<button value="Unfollow" id="unfollowbutton" onClick={props.unfollowUser}>Unfollow</button>);
+	return (<button value="Follow" id="followbutton" onClick={props.followUser} key={props.setKey}>Follow</button>);
 };
 
 // `Profile` component renders profile page of the app
 export default class Profile extends Component {
-	// Initialize state with number of followers=0, number of following=0
+	// Initialize state with number of followers=0, number of following=0, followingFlg=false
 	constructor(props) {
 		super(props);
 		this.logOut = this.logOut.bind(this);
@@ -34,7 +33,8 @@ export default class Profile extends Component {
 		this.goProfile = this.goProfile.bind(this);
 		this.state = {
 			nfollowers: 0,
-			nfollowing: 0
+			nfollowing: 0,
+			followingFlg: false
 		};
 	}
 
@@ -51,6 +51,8 @@ export default class Profile extends Component {
 	onDataFollowers(response) {
 		let nfollowing = 0;
 		let result = null;
+		let followingFlg = false;
+		const followingList = localStorage.ufollowing;
 		if (response) {
 			const combineData = response;
 			if (combineData.length !== 0) {
@@ -60,9 +62,13 @@ export default class Profile extends Component {
 					result = following.map(markerData => (<User name={markerData} />));
 				}
 			}
+			if (followingList.indexOf(this.props.params.uname) !== -1) {
+				followingFlg = true
+			}
 			this.setState({
 				nfollowers: this.state.nfollowers,
-				nfollowing
+				nfollowing,
+				followingFlg
 			});
 		}
 		return result;
@@ -85,7 +91,8 @@ export default class Profile extends Component {
 		}
 		this.setState({
 			nfollowers,
-			nfollowing: this.state.nfollowing
+			nfollowing: this.state.nfollowing,
+			followingFlg: this.state.followingFlg
 		});
 		return result;
 	}
@@ -187,15 +194,16 @@ export default class Profile extends Component {
 						</div>
 						<div style={{ width: "100%", float: "left" }} key={this.state}>
 							{(localStorage.user !== this.props.params.uname) ? (
-								<div className="col s2" >
+								<div className="col s2" key={this.state}>
 									<ChkFollowing
 										uname={this.props.params.uname}
 										followUser={this.followUser}
 										unfollowUser={this.unfollowUser}
+										setKey={this.state.followingFlg}
 									/>
 								</div>) : (
 									<div />)}
-							<div id="followstats" key={this.props.params.uname}>
+							<div id="followstats" key={this.state.followingFlg}>
 								<button className="col s4 btn disabled" style={{ backgroundColor: "blue", marginLeft: "2%" }}>Followers {this.state.nfollowing}</button>
 								<button className="col s4 btn disabled" style={{ backgroundColor: "blue" }}>Following {this.state.nfollowers}</button>
 							</div>

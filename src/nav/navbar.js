@@ -59,7 +59,7 @@ const NavBar = (props) => {
 					<div style={{ width: "30%", float: "left" }}>
 						<form id="searchbar" onSubmit={props.onSearch}>
 							<input type="text blue accent-2" style={{ height: "65%", width: "45%", margin: "1% 0 0 0" }} placeholder="Search Tweets..." />
-							<input type="submit" value="Search" style={{ width: "20%", textTransform: "capitalize", marginTop: "-1%" }} className="waves-effect waves-light btn" />
+							<input type="submit" value="Search" style={{ width: "20%", fontSize: "16px", height:"40px", padding: "2% 1.5% 1.5% 1.5%", textTransform: "capitalize", marginTop: "-1%" }} className="waves-effect waves-light btn" />
 						</form>
 
 					</div>
