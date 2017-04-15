@@ -53,7 +53,7 @@ const NavBar = (props) => {
 		<div className="navbar-fixed">
 			<nav style={{ color: "black", backgroundColor: "#dadada", height: "60px" }}>
 				<div className="nav-wrapper" style={{ margin: "0.4% auto auto auto" }} >
-					<div style={{ float: "left", fontSize: "125%", width: "15%", margin: "-0.5% auto 2% 2.5%" }}>
+					<div style={{ float: "left", fontSize: "125%", width: "15%", margin: "-0.6% auto 2% 2.5%", fontSize: "130%" }}>
 						Twitter on Appbase
 					</div>
 					<div style={{ width: "30%", float: "left" }}>

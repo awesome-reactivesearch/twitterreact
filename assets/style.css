@@ -78,6 +78,7 @@
 .rbc-btn {
     padding: 1%;
     width: 30%;
+    height: 40px;
 }
 
 .btn {
@@ -86,12 +87,13 @@
     color: 'white';
     margin: 5px 20px 0 20px;
     padding: 1%;
+    height: 40px;
+    line-height: 4px;
+    
 }
 
 .waves-effect.waves-light.btn {
-    height: 40px;
     text-transform: capitalize;
-    padding: 2% 5% 2% 5%;
 }
 
 .waves-effect.waves-light.grey.lighten-4.btn {

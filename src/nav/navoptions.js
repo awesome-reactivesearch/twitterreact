@@ -15,7 +15,7 @@ const NavOptions = (props) => {
 							customQuery={props.CustomQueryT}
 							showUI={false}
 						/>
-						<a href="./docs/login.html" style={{ color: "white" }} className="waves-effect waves-light btn blue lighten-2">View Code
+						<a href="./docs/login.html" style={{ color: "white", lineHeight: "36px", padding: "0 4% 0 4%"}} className="waves-effect waves-light btn blue lighten-2">View Code
 						</a>
 					</div>
 		) : (<div />)}
