@@ -44,7 +44,7 @@ export default class Profile extends Component {
 		const t = event.target[0].value;
 
 
-		this.props.router.push(`/twitterreact/search/${t}`);
+		this.props.router.push(`/search/${t}`);
 	}
 
 	// Function called when the `ListFollowers` component gets data
@@ -115,13 +115,13 @@ export default class Profile extends Component {
 	goLocal(event) {
 		event.preventDefault();
 		const u = localStorage.user;
-		this.props.router.replace(`/twitterreact/${u}`);
+		this.props.router.replace(`/${u}`);
 	}
 
 	// on logout pressed this function is called
 	logOut(event) {
 		event.preventDefault();
-		this.props.router.push("/twitterreact/");
+		this.props.router.push("/");
 		delete localStorage.user;
 	}
 
@@ -129,20 +129,20 @@ export default class Profile extends Component {
 	goGlobalFeed(event) {
 		event.preventDefault();
 		const loggedUser = localStorage.user;
-		this.props.router.replace({ pathname: `/twitterreact/${loggedUser}`, query: { show: 1 } });
+		this.props.router.replace({ pathname: `/${loggedUser}`, query: { show: 1 } });
 	}
 
 	// on `PersonalFeed` button pressed, function called to switch to logged user dashboard with showing Personal Tweets
 	goPresonalFeed(event) {
 		event.preventDefault();
 		const loggedUser = localStorage.user;
-		this.props.router.replace({ pathname: `/twitterreact/${loggedUser}`, query: { show: 0 } });
+		this.props.router.replace({ pathname: `/${loggedUser}`, query: { show: 0 } });
 	}
 
 	goProfile(event) {
 		event.preventDefault();
 		const loggedUser = localStorage.user;
-		this.props.router.replace(`/twitterreact/profile/${loggedUser}`);
+		this.props.router.replace(`/profile/${loggedUser}`);
 	}
 
 
@@ -186,7 +186,7 @@ export default class Profile extends Component {
 
 				<div id="userinfo" className="col s12 m7 l91" style={msgStyles}>
 					<div style={{ float: "left", width: "20%" }}>
-						<img style={{ height: "100px", margin: "15% 10% 15% 15%" }} src="/twitterreact/user@2x.png" alt="UserImage" />
+						<img style={{ height: "100px", margin: "15% 10% 15% 15%" }} src="/user@2x.png" alt="UserImage" />
 					</div>
 					<div style={{ float: "left", width: "80%" }} >
 						<div style={{ float: "left" }}>

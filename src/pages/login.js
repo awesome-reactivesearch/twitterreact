@@ -68,14 +68,14 @@ export default class Login extends Component {
 			console.error(err);
 		});
 		localStorage.user = uname;
-		this.props.router.push({ pathname: `/twitterreact/${uname}`, query: { show: 0 } });
+		this.props.router.push({ pathname: `/${uname}`, query: { show: 0 } });
 	}
 
 	// Function called when search is called
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
-		this.props.router.push(`/twitterreact/search/${t}`);
+		this.props.router.push(`/search/${t}`);
 	}
 
 	// `render()` renders the Login component. <br />

@@ -8,7 +8,7 @@ const NavOptions = (props) => {
 	if (props.pflg === -1) {
 		return (
 			<div style={{ float: "right", margin: "0 2% 0 0", width: "15%" }}>
-				{(props.path === "/twitterreact/") ? (
+				{(props.path === "/") ? (
 					<div>
 						<DataController
 							componentId="GlobalTweet"

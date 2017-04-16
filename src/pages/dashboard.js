@@ -24,13 +24,13 @@ export default class Dashboard extends Component {
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
-		this.props.router.push(`/twitterreact/search/${t}`);
+		this.props.router.push(`/search/${t}`);
 	}
 
 	// on logout pressed to logout the loggedIn user
 	logOut(event) {
 		event.preventDefault();
-		this.props.router.push("/twitterreact/");
+		this.props.router.push("/");
 		delete localStorage.user;
 	}
 
@@ -38,7 +38,7 @@ export default class Dashboard extends Component {
 	goProfile(event) {
 		event.preventDefault();
 		const u = this.props.params.uname;
-		this.props.router.replace(`/twitterreact/profile/${u}`);
+		this.props.router.replace(`/profile/${u}`);
 	}
 
 	// when new tweet form is submitted with non-empty string
@@ -96,7 +96,7 @@ export default class Dashboard extends Component {
 					>
 						<div style={{ height: "25%" }}>
 							<div style={{ margin: "0 auto 0 auto" }}>
-								<img style={{ height: "100px", padding: "3%", margin: "0 0 0 25%" }} src="/twitterreact/user@2x.png" alt="UserImage" />
+								<img style={{ height: "100px", padding: "3%", margin: "0 0 0 25%" }} src="/user@2x.png" alt="UserImage" />
 								<h3 style={{ textAlign: "center", marginTop: "auto" }}>{this.props.params.uname}</h3><br />
 							</div>
 						</div>

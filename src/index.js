@@ -17,10 +17,10 @@ ReactDom.render((
 	>
 
 		<Router history={browserHistory}>
-			<Route path="/twitterreact/" component={Login} />
-			<Route path="/twitterreact/:uname" component={Dashboard} />
-			<Route path="/twitterreact/profile/:uname" component={Profile} />
-			<Route path="/twitterreact/search/:txt" component={SearchPg} />
+			<Route path="/" component={Login} />
+			<Route path="/:uname" component={Dashboard} />
+			<Route path="/profile/:uname" component={Profile} />
+			<Route path="/search/:txt" component={SearchPg} />
 		</Router>
 	</ReactiveBase>
 ), document.getElementById("app"));
