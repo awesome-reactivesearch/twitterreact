@@ -14,7 +14,7 @@ const LoginForm = (props) => {
 	return (
 		<form className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}>
 			<input type="text blue accent-2" placeholder="Name" style={txtstyle} /><br />
-			<input type="submit" style={{ width: "85%", margin: "0 0 3% 2%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" />
+			<input type="submit" style={{ width: "50%", margin: "0px 25% 2% 25%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" />
 		</form>
 	);
 };
@@ -75,7 +75,7 @@ export default class Login extends Component {
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
-		this.props.router.push(`search/${t}`);
+		this.props.router.push(`/search/${t}`);
 	}
 
 	// `render()` renders the Login component. <br />

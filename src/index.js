@@ -18,9 +18,9 @@ ReactDom.render((
 
 		<Router history={browserHistory}>
 			<Route path="/" component={Login} />
-			<Route path=":uname" component={Dashboard} />
-			<Route path="profile/:uname" component={Profile} />
-			<Route path="search/:txt" component={SearchPg} />
+			<Route path="/:uname" component={Dashboard} />
+			<Route path="/profile/:uname" component={Profile} />
+			<Route path="/search/:txt" component={SearchPg} />
 		</Router>
 	</ReactiveBase>
 ), document.getElementById("app"));

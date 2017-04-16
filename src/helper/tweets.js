@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactiveList } from "@appbaseio/reactivesearch";
+import moment from 'moment';
 import { config } from "../config/config";
 
 // on Receiving the tweets
@@ -38,7 +39,7 @@ const Tweet = props => (
 		<div className="collecton-item">
 			<p id="tweet" style={{ margin: "1% 3% 1% 3%" }}>{props.usr}
 				<label htmlFor="tweet" style={{ float: "right" }}>
-					{new Date(props.date).toDateString()}
+					{(new moment(props.date)).fromNow()}
 				</label>
 				<br />
 				{props.msg}

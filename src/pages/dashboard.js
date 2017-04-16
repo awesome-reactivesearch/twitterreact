@@ -24,7 +24,7 @@ export default class Dashboard extends Component {
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
-		this.props.router.push(`search/${t}`);
+		this.props.router.push(`/search/${t}`);
 	}
 
 	// on logout pressed to logout the loggedIn user
@@ -96,7 +96,7 @@ export default class Dashboard extends Component {
 					>
 						<div style={{ height: "25%" }}>
 							<div style={{ margin: "0 auto 0 auto" }}>
-								<img style={{ height: "65%", padding: "3%", margin: "0 0 0 14%" }} src="user@2x.png" alt="UserImage" />
+								<img style={{ height: "100px", padding: "3%", margin: "0 0 0 25%" }} src="/user@2x.png" alt="UserImage" />
 								<h3 style={{ textAlign: "center", marginTop: "auto" }}>{this.props.params.uname}</h3><br />
 							</div>
 						</div>
@@ -127,7 +127,7 @@ export default class Dashboard extends Component {
 
 				<div className="col s8 m6 offset-m1">
 					<form id="newtweet" onSubmit={this.newTweet}>
-						<input id="inputtweet" type="text accent-2" placeholder="Your tweet here..." style={{ width: "80%", height: "8%", margin: "5% 0 0 0" }} />
+						<input id="inputtweet" type="text accent-2" placeholder="Your tweet here..." style={{ width: "80%", height: "45px", margin: "5% 0 0 0" }} />
 						<input type="submit" value="Tweet" className="waves-effect waves-light btn" />
 					</form>
 
