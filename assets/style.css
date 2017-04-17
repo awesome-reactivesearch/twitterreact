@@ -4,6 +4,8 @@
     border-radius: 3px;
     border: none;
     padding: 6%;
+    margin-top: 10%;
+    width:120%;
 }
 
 #unfollowbutton {
@@ -11,7 +13,9 @@
     color: white;
     border-radius: 3px;
     border: none;
-    padding: 6%;   
+    padding: 6%;
+    margin-top: 10%;
+    width:120%;
 }
 
 .rbc-img-responsive {
@@ -121,6 +125,7 @@
 .col.s4.btn.disabled {
     background-color: #5bc0de !important;
     color: #fff !important;
-    padding: 0.4% 0.4% 0.4% 0.4%;
+    padding: 3%;
     text-transform: capitalize;
+    width: auto;
 }
