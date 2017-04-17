@@ -70,7 +70,7 @@ export default class SearchPg extends Component {
 					path={this.props.location.pathname}
 				/>
 
-				<div className="col s4 offset-s1">
+				<div className="col s4 offset-s1" style={{marginTop: "2%"}} >
 					<DataController
 						componentId="SearchTweet"
 						customQuery={this.CustomQueryTweets}
@@ -91,7 +91,7 @@ export default class SearchPg extends Component {
 					/>
 				</div>
 
-				<div className="col s4 offset-s1">
+				<div className="col s4 offset-s1" style={{marginTop: "2%"}} >
 					<ReactiveBase
 						app={config.credential_users.app}
 						credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}
