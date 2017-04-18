@@ -72,6 +72,7 @@ const ListFollowing = (props) => {
 					customQuery={customQuery}
 					showUI={false}
 				/>
+				<div style={{marginTop:"15%"}}>
 				<ReactiveList
 					title="Following"
 					componentId={"FollowingActuator"}
@@ -86,6 +87,7 @@ const ListFollowing = (props) => {
 					}}
 					showResultStats={false}
 				/>
+				</div>
 			</ReactiveBase>
 		</div>
 	);

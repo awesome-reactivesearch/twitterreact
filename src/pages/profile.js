@@ -151,7 +151,7 @@ export default class Profile extends Component {
 		const msgStyles = {
 			maxWidth: 800,
 			marginLeft: "10%",
-			marginTop: "5%"
+			marginTop: "2%"
 		};
 
 		// `pflg` set to `1` i.e flage for navbar for profile page
@@ -204,12 +204,12 @@ export default class Profile extends Component {
 								</div>) : (
 									<div />)}
 							<div id="followstats" key={this.state.followingFlg}>
-								<button className="col s4 btn disabled" style={{ backgroundColor: "blue", marginLeft: "2%" }}>Followers {this.state.nfollowing}</button>
+								<button className="col s4 btn disabled" style={{ backgroundColor: "blue", marginLeft: "2%", marginRight: "1%" }}>Followers {this.state.nfollowing}</button>
 								<button className="col s4 btn disabled" style={{ backgroundColor: "blue" }}>Following {this.state.nfollowers}</button>
 							</div>
 						</div>
 					</div>
-					<div className="col s8">
+					<div className="col s8" style={{marginTop: "3%"}}>
 						<PersonalTweets
 							user={this.props.params.uname}
 							reactOn={["UserProfileTweet"]}
