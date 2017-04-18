@@ -18,6 +18,10 @@
     width:120%;
 }
 
+.rbc-blue a {
+    color: #039BFA; 
+}
+
 .rbc-img-responsive {
     height: 4% !important;
 }
