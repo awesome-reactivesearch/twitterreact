@@ -8,6 +8,9 @@ const NavBar = (props) => {
 	// `CustomQueryT` function is used by `DataController` or `ToggleButton` sensor.
 	// For `ToggleButton` sensor will set default data value paramters while `DataController` will set data=`default`
 	const CustomQueryT = function (data) {
+		if(!data[0]){
+			return null;
+		}
 		if (data !== "default" && props.pflg !== 1) {
 			if (data[0].value === "") {
 				return {
