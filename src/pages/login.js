@@ -8,13 +8,13 @@ const LoginForm = (props) => {
 	const txtstyle = {
 		width: "85%",
 		backgroundColor: "#fafafa",
-		margin: "3% 3% 4% 5%",
+		margin: "3% 3% 4% 7%",
 		fontSize: "20px"
 	};
 	return (
 		<form style={{padding: "0.5%"}} className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}>
 			<input type="text blue accent-2" placeholder="Name" style={txtstyle} /><br />
-			<input type="submit" style={{ width: "50%", margin: "0% auto 2% 20%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" />
+			<input type="submit" style={{ width: "50%", margin: "0% auto 2% 23%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" />
 		</form>
 	);
 };

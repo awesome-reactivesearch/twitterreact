@@ -33,10 +33,14 @@
     float: left;
 }
 
+.rbc.rbc-togglebutton .rbc-btn{
+    width: 35%;
+}
 .rbc.rbc-togglebutton {
     background-color: #dadada;
     height: 50px;
     box-shadow: none;
+    width: 35%;
 }
 
 .rbc-buttongroup {
