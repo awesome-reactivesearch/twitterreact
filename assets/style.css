@@ -22,6 +22,10 @@
     color: #039BFA; 
 }
 
+.waves-input-wrapper .waves-button-input{
+    line-height: 32px !important;
+}
+
 .rbc-img-responsive {
     height: 4% !important;
 }
