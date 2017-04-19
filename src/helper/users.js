@@ -181,7 +181,7 @@ const onDataUsers = function (markerData) {
 const User = props => (
 	<div className="collection">
 		<div className="collecton-item">
-			<p style={{ margin: "1% 2% 1% 2%" }}>
+			<p style={{ margin: "3% auto 3% 5%" }}>
 				<Link to={`/profile/${props.name}`}>{props.name}</Link>
 			</p>
 		</div>
