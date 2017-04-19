@@ -18,6 +18,15 @@ export default class Dashboard extends Component {
 		this.goProfile = this.goProfile.bind(this);
 		this.logOut = this.logOut.bind(this);
 		this.newTweet = this.newTweet.bind(this);
+		this.goGlobalFeed = this.goGlobalFeed.bind(this);
+		this.goPresonalFeed = this.goPresonalFeed.bind(this);
+		this.CustomQuerytweets = this.CustomQuerytweets.bind(this);
+		if (this.props.location.query) {
+			if (this.props.location.query.show == 1) {
+				this.state = { show: "Global" };
+			}
+		}
+		this.state = { show: "Perosnal" };
 	}
 
 	// Function called when Search is called
@@ -40,6 +49,29 @@ export default class Dashboard extends Component {
 		const u = this.props.params.uname;
 		this.props.router.replace(`/profile/${u}`);
 	}
+	// set background color button
+	setBgCOlor(active, inactive){
+		const b = document.getElementById(active);
+		b.className="waves-effect waves-light btn";
+		const p = document.getElementById(inactive);
+		p.className="waves-effect waves-light grey lighten-4 btn";
+	}
+
+	// on `Global` button pessed, function called to switch to logged user dashboard with showing Global tweets
+	goGlobalFeed(event) {
+		event.preventDefault();
+		this.setBgCOlor("globalButton","personalButton");
+		this.setState({ show: "Global" });
+		// debugger;
+	}
+
+	// on `PersonalFeed` button pressed, function called to switch to logged user dashboard with showing Personal Tweets
+	goPresonalFeed(event) {
+		event.preventDefault();
+		this.setBgCOlor("personalButton","globalButton");
+		this.setState({ show: "Personal" });
+		// debugger;
+	}
 
 	// when new tweet form is submitted with non-empty string
 	newTweet(event) {
@@ -60,10 +92,43 @@ export default class Dashboard extends Component {
 	}
 
 	// CustomQuery that returns `match_all` query
-	customQueryUsers() {
+
+	customQueryGlobal() {
 		return {
 			query: {
 				match_all: {}
+			}
+		};
+	}
+
+	CustomQuerytweets() {
+		if (this.props.location.query) {
+			if (this.props.location.query.show == 1) {
+				this.setBgCOlor("globalButton","personalButton");
+				this.props.location.query = null;
+				this.setState({ show: "Global" });
+			}
+			else if(this.props.location.query.show == 0){
+				this.setBgCOlor("personalButton","globalButton");
+				this.props.location.query = null;
+				this.setState({ show: "Personal" });
+			}
+		}
+		
+		if (this.state.show === "Global") {
+			// debugger;
+			return {
+				query: {
+					match_all: {}
+				}
+			};
+		}
+
+		return {
+			query: {
+				match: {
+					by: this.props.params.uname
+				}
 			}
 		};
 	}
@@ -86,6 +151,8 @@ export default class Dashboard extends Component {
 					pflg={pflg}
 					onSearch={this.onSearch}
 					goProfile={this.goProfile}
+					goGlobalFeed={this.goGlobalFeed}
+					goPresonalFeed={this.goPresonalFeed}
 					query={this.props.location.query}
 				/>
 				<div className="col s6 m2 offset-s2 offset-m1">
@@ -102,7 +169,7 @@ export default class Dashboard extends Component {
 						</div>
 						<DataController
 							componentId="GetUsers"
-							customQuery={this.customQueryUsers}
+							customQuery={this.customQueryGlobal}
 							showUI={false}
 						/>
 						<div className="z-depth-1" style={{ marginTop: "5%", height: "auto" }}>
@@ -130,13 +197,18 @@ export default class Dashboard extends Component {
 						<input id="inputtweet" type="text accent-2" placeholder="Your tweet here..." style={{ width: "80%", height: "45px", margin: "5% 0 0 0" }} />
 						<input type="submit" value="Tweet" className="waves-effect waves-light btn" />
 					</form>
-
-
-					<PersonalTweets
-						user={this.props.params.uname}
-						reactOn={["UserTweet"]}
+					<DataController
+						componentId={"DashboardTweet"}
+						defaultSelected={this.state.show}
+						customQuery={this.CustomQuerytweets}
+						showUI={false}
 					/>
-
+					<div>
+						<PersonalTweets
+							user={this.props.params.uname + this.state.show}
+							reactOn={["DashboardTweet"]}
+						/>
+					</div>
 				</div>
 			</div>
 		);

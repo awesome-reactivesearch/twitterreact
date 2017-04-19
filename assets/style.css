@@ -110,6 +110,7 @@
 
 .waves-effect.waves-light.btn {
     text-transform: capitalize;
+    background-color: #428bfc;
 }
 
 .waves-effect.waves-light.grey.lighten-4.btn {

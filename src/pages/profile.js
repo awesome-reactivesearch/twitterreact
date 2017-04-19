@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { DataController } from "@appbaseio/reactivesearch";
 import { PersonalTweets } from "../helper/tweets";
 import {
 	ListFollowing,
@@ -63,7 +64,7 @@ export default class Profile extends Component {
 				}
 			}
 			if (followingList.indexOf(this.props.params.uname) !== -1) {
-				followingFlg = true
+				followingFlg = true;
 			}
 			this.setState({
 				nfollowers: this.state.nfollowers,
@@ -145,7 +146,6 @@ export default class Profile extends Component {
 		this.props.router.replace(`/profile/${loggedUser}`);
 	}
 
-
 	// renders the profile component
 	render() {
 		const msgStyles = {
@@ -209,7 +209,13 @@ export default class Profile extends Component {
 							</div>
 						</div>
 					</div>
-					<div className="col s8" style={{marginTop: "3%"}}>
+					<div className="col s8" style={{ marginTop: "3%" }}>
+						<DataController
+							componentId={"UserProfileTweet"}
+							appbaseField="by"
+							defaultSelected={this.props.params.uname}
+							showUI={false}
+						/>
 						<PersonalTweets
 							user={this.props.params.uname}
 							reactOn={["UserProfileTweet"]}

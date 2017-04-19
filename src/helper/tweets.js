@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactiveList } from "@appbaseio/reactivesearch";
-import moment from 'moment';
+import moment from "moment";
 import { config } from "../config/config";
 
 // on Receiving the tweets

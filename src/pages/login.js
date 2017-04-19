@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { DataController } from "@appbaseio/reactivesearch";
 import { appbaseRef } from "../config/config";
 import { NavBar } from "../nav/navbar";
 import { PersonalTweets } from "../helper/tweets";
@@ -12,7 +13,7 @@ const LoginForm = (props) => {
 		fontSize: "20px"
 	};
 	return (
-		<form style={{padding: "0.5%"}} className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}>
+		<form style={{ padding: "0.5%" }} className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}>
 			<input type="text blue accent-2" placeholder="Name" style={txtstyle} /><br />
 			<input type="submit" style={{ width: "50%", margin: "0% auto 2% 23%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" />
 		</form>
@@ -105,6 +106,20 @@ export default class Login extends Component {
 
 				<div className="row" style={{ margin: "0 10% 0 10%" }}>
 					<div className="col s10 offset-s1">
+						<DataController
+							componentId="GlobalTweet"
+							appbaseField="by"
+							customQuery={
+								function () {
+									return {
+										query: {
+											match_all: {}
+										}
+									};
+								}
+							}
+							showUI={false}
+						/>
 						<PersonalTweets
 							user={"$all"}
 							reactOn={["GlobalTweet"]}
