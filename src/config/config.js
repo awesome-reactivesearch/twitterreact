@@ -2,16 +2,16 @@
 const config = {
 	credential_tweets: {
 		url: "https://scalr.api.appbase.io",
-		app: "Twitter",
-		username: "0z092JD6X",
-		password: "e559dc6b-8c12-40b8-b308-b2c4b6b7b972",
+		app: "twitter-app",
+		username: "p1KdUffK0",
+		password: "9040f694-9f71-408b-8ce2-573de67fb0c4",
 		type: "tweets"
 	},
 	credential_users: {
 		url: "https://scalr.api.appbase.io",
-		app: "Twitter",
-		username: "0z092JD6X",
-		password: "e559dc6b-8c12-40b8-b308-b2c4b6b7b972",
+		app: "twitter-app",
+		username: "p1KdUffK0",
+		password: "9040f694-9f71-408b-8ce2-573de67fb0c4",
 		type: "users"
 	},
 	ReactiveList: {

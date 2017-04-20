@@ -20,6 +20,11 @@
             <div id="jump_page">
               
                 
+                <a class="source" href="config.html">
+                  config.js
+                </a>
+              
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -37,6 +42,11 @@
                 
                 <a class="source" href="navbar.html">
                   navbar.js
+                </a>
+              
+                
+                <a class="source" href="navoptions.html">
+                  navoptions.js
                 </a>
               
                 
@@ -88,7 +98,7 @@
 	ReactiveBase,
 	ReactiveList,
 	DataController
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivesearch"</span>;
 <span class="hljs-keyword">import</span> { Link } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router"</span>;
 <span class="hljs-keyword">import</span> { config, appbaseRef } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;</pre></div></div>
             
@@ -181,20 +191,22 @@
 					customQuery={customQuery}
 					showUI={false}
 				/&gt;
-				&lt;ReactiveList
-					title="Following"
-					componentId={"FollowingActuator"}
-					appbaseField="following"
-					from={config.ReactiveList.from}
-					size={config.ReactiveList.size}
-					stream={true}
-					requestOnScroll={true}
-					onData={props.onDataFollowing}
-					react={{
-						and: ["UserFollowing"]
-					}}
-					showResultStats={false}
-				/&gt;
+				&lt;div style={{ marginTop: "15%" }}&gt;
+					&lt;ReactiveList
+						title="Following"
+						componentId={"FollowingActuator"}
+						appbaseField="following"
+						from={config.ReactiveList.from}
+						size={config.ReactiveList.size}
+						stream={true}
+						requestOnScroll={true}
+						onData={props.onDataFollowing}
+						react={{
+							and: ["UserFollowing"]
+						}}
+						showResultStats={false}
+					/&gt;
+				&lt;/div&gt;
 			&lt;/ReactiveBase&gt;
 		&lt;/div&gt;
 	);
@@ -381,25 +393,9 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> onDataUsers = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">response, err</span>) </span>{
-	<span class="hljs-keyword">let</span> result = <span class="hljs-literal">null</span>;
-	<span class="hljs-keyword">if</span> (err) {
-		<span class="hljs-keyword">return</span> result;
-	}	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (response) {
-		<span class="hljs-keyword">let</span> combineData = response.currentData;
-		<span class="hljs-keyword">if</span> (response.mode === <span class="hljs-string">"historic"</span>) {
-			combineData = response.currentData.concat(response.newData);
-		}		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (response.mode === <span class="hljs-string">"streaming"</span>) {
-			combineData.unshift(response.newData);
-		}
-		<span class="hljs-keyword">if</span> (combineData) {
-			result = combineData.map(<span class="hljs-function">(<span class="hljs-params">markerData</span>) =&gt;</span> {
-				<span class="hljs-keyword">const</span> marker = markerData._source;
-				<span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">User</span> <span class="hljs-attr">name</span>=<span class="hljs-string">{marker.name}</span> /&gt;</span>);
-			});
-		}
-	}
-	return result;
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> onDataUsers = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">markerData</span>) </span>{
+	<span class="hljs-keyword">const</span> marker = markerData._source;
+	<span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">User</span> <span class="hljs-attr">name</span>=<span class="hljs-string">{marker.name}</span> /&gt;</span>);
 };
 
 </span></pre></div></div>
@@ -420,7 +416,7 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> User = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
 	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collection"</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collecton-item"</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">margin:</span> "<span class="hljs-attr">1</span>% <span class="hljs-attr">2</span>% <span class="hljs-attr">1</span>% <span class="hljs-attr">2</span>%" }}&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">margin:</span> "<span class="hljs-attr">3</span>% <span class="hljs-attr">auto</span> <span class="hljs-attr">3</span>% <span class="hljs-attr">5</span>%" }}&gt;</span>
 				<span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">{</span>`/<span class="hljs-attr">profile</span>/${<span class="hljs-attr">props.name</span>}`}&gt;</span>{props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
 			<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>

@@ -20,6 +20,11 @@
             <div id="jump_page">
               
                 
+                <a class="source" href="config.html">
+                  config.js
+                </a>
+              
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -37,6 +42,11 @@
                 
                 <a class="source" href="navbar.html">
                   navbar.js
+                </a>
+              
+                
+                <a class="source" href="navoptions.html">
+                  navoptions.js
                 </a>
               
                 
@@ -88,9 +98,9 @@
 	ReactiveList,
 	ReactiveBase,
 	DataController
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivesearch"</span>;
 <span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;
-<span class="hljs-keyword">import</span> { onDataTweets } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/tweets"</span>;
+<span class="hljs-keyword">import</span> { PersonalTweets } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/tweets"</span>;
 <span class="hljs-keyword">import</span> { onDataUsers } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/users"</span>;
 <span class="hljs-keyword">import</span> { NavBar } <span class="hljs-keyword">from</span> <span class="hljs-string">"../nav/navbar"</span>;</pre></div></div>
             
@@ -293,28 +303,20 @@
 					path={this.props.location.pathname}
 				/&gt;
 
-				&lt;div className="col s4 offset-s1"&gt;
+				&lt;div className="col s4 offset-s1" style={{ marginTop: "2%" }} &gt;
 					&lt;DataController
 						componentId="SearchTweet"
 						customQuery={this.CustomQueryTweets}
 						showUI={false}
 					/&gt;
-					&lt;ReactiveList
-						title="Tweets"
-						componentId="TweetsFound"
-						appbaseField="msg"
-						from={config.ReactiveList.from}
-						size={config.ReactiveList.size}
-						stream={true}
-						requestOnScroll={true}
-						onData={onDataTweets}
-						react={{
-							and: ["SearchTweet"]
-						}}
+					&lt;PersonalTweets
+						user={"$all"}
+						path={"/"}
+						reactOn={["SearchTweet"]}
 					/&gt;
 				&lt;/div&gt;
 
-				&lt;div className="col s4 offset-s1"&gt;
+				&lt;div className="col s4 offset-s1" style={{ marginTop: "2%" }} &gt;
 					&lt;ReactiveBase
 						app={config.credential_users.app}
 						credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}

@@ -50,17 +50,17 @@ export default class Dashboard extends Component {
 		this.props.router.replace(`/profile/${u}`);
 	}
 	// set background color button
-	setBgCOlor(active, inactive){
+	setBgCOlor(active, inactive) {
 		const b = document.getElementById(active);
-		b.className="waves-effect waves-light btn";
+		b.className = "waves-effect waves-light btn";
 		const p = document.getElementById(inactive);
-		p.className="waves-effect waves-light grey lighten-4 btn";
+		p.className = "waves-effect waves-light grey lighten-4 btn";
 	}
 
 	// on `Global` button pessed, function called to switch to logged user dashboard with showing Global tweets
 	goGlobalFeed(event) {
 		event.preventDefault();
-		this.setBgCOlor("globalButton","personalButton");
+		this.setBgCOlor("globalButton", "personalButton");
 		this.setState({ show: "Global" });
 		// debugger;
 	}
@@ -68,7 +68,7 @@ export default class Dashboard extends Component {
 	// on `PersonalFeed` button pressed, function called to switch to logged user dashboard with showing Personal Tweets
 	goPresonalFeed(event) {
 		event.preventDefault();
-		this.setBgCOlor("personalButton","globalButton");
+		this.setBgCOlor("personalButton", "globalButton");
 		this.setState({ show: "Personal" });
 		// debugger;
 	}
@@ -76,7 +76,7 @@ export default class Dashboard extends Component {
 	// when new tweet form is submitted with non-empty string
 	newTweet(event) {
 		event.preventDefault();
-		const msg = event.target[0].value;
+		const msg = event.target[0].value.trim();
 
 		if (msg !== "") {
 			appbaseRef.index({
@@ -92,7 +92,6 @@ export default class Dashboard extends Component {
 	}
 
 	// CustomQuery that returns `match_all` query
-
 	customQueryGlobal() {
 		return {
 			query: {
@@ -104,17 +103,16 @@ export default class Dashboard extends Component {
 	CustomQuerytweets() {
 		if (this.props.location.query) {
 			if (this.props.location.query.show == 1) {
-				this.setBgCOlor("globalButton","personalButton");
+				this.setBgCOlor("globalButton", "personalButton");
 				this.props.location.query = null;
 				this.setState({ show: "Global" });
-			}
-			else if(this.props.location.query.show == 0){
-				this.setBgCOlor("personalButton","globalButton");
+			}			else if (this.props.location.query.show == 0) {
+				this.setBgCOlor("personalButton", "globalButton");
 				this.props.location.query = null;
 				this.setState({ show: "Personal" });
 			}
 		}
-		
+
 		if (this.state.show === "Global") {
 			// debugger;
 			return {
@@ -134,13 +132,12 @@ export default class Dashboard extends Component {
 	}
 
 	// `render()` renders the dashboard page with `Navbar` on top and other components like user icons and feed.<br /><br />
-	// the flag `pflg` is set to zero and passed to NavBar to get navigation bar for dashboard.<br />
+	// the flag `pflg` is set to `1` and passed to NavBar to get navigation bar for dashboard.<br />
 	// Here, `NavBar` component is used to render navigation bar. <br /><br />
 	// `DataController` sensor component is used that creates a list of users in app. <br />
 	// `ReactiveList` actuator component that reacts on the list of users received by the `GetUsers` DataController sensor. <br /><br />
 	//  This componenet includes a form for submiting new tweet. <br />
-	// `PersonalTweets` actuator component to render User/Global Tweets that are received from `UserTweet` sensor in `NavBar` component.<br />
-
+	// `PersonalTweets` actuator component to render User/Global Tweets that are received from `DashboardTweet` DataController sensor.<br />
 	render() {
 		const pflg = 0;
 		return (

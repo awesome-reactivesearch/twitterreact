@@ -97,23 +97,26 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> config = {
 	<span class="hljs-attr">credential_tweets</span>: {
 		<span class="hljs-attr">url</span>: <span class="hljs-string">"https://scalr.api.appbase.io"</span>,
-		<span class="hljs-attr">app</span>: <span class="hljs-string">"Twitter"</span>,
-		<span class="hljs-attr">username</span>: <span class="hljs-string">"0z092JD6X"</span>,
-		<span class="hljs-attr">password</span>: <span class="hljs-string">"e559dc6b-8c12-40b8-b308-b2c4b6b7b972"</span>,
+		<span class="hljs-attr">app</span>: <span class="hljs-string">"twitter-app"</span>,
+		<span class="hljs-attr">username</span>: <span class="hljs-string">"p1KdUffK0"</span>,
+		<span class="hljs-attr">password</span>: <span class="hljs-string">"9040f694-9f71-408b-8ce2-573de67fb0c4"</span>,
 		<span class="hljs-attr">type</span>: <span class="hljs-string">"tweets"</span>
 	},
 	<span class="hljs-attr">credential_users</span>: {
 		<span class="hljs-attr">url</span>: <span class="hljs-string">"https://scalr.api.appbase.io"</span>,
-		<span class="hljs-attr">app</span>: <span class="hljs-string">"Twitter"</span>,
-		<span class="hljs-attr">username</span>: <span class="hljs-string">"0z092JD6X"</span>,
-		<span class="hljs-attr">password</span>: <span class="hljs-string">"e559dc6b-8c12-40b8-b308-b2c4b6b7b972"</span>,
+		<span class="hljs-attr">app</span>: <span class="hljs-string">"twitter-app"</span>,
+		<span class="hljs-attr">username</span>: <span class="hljs-string">"p1KdUffK0"</span>,
+		<span class="hljs-attr">password</span>: <span class="hljs-string">"9040f694-9f71-408b-8ce2-573de67fb0c4"</span>,
 		<span class="hljs-attr">type</span>: <span class="hljs-string">"users"</span>
 	},
 	<span class="hljs-attr">ReactiveList</span>: {
 		<span class="hljs-attr">size</span>: <span class="hljs-number">100</span>,
 		<span class="hljs-attr">from</span>: <span class="hljs-number">0</span>
-	}
-
+	},
+	<span class="hljs-attr">tweetsSortOptions</span>: [{
+		<span class="hljs-attr">appbaseField</span>: <span class="hljs-string">"createdAt"</span>,
+		<span class="hljs-attr">sortBy</span>: <span class="hljs-string">"desc"</span>
+	}]
 };
 
 <span class="hljs-keyword">const</span> appbaseRef = <span class="hljs-keyword">new</span> Appbase({

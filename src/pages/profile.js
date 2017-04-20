@@ -98,8 +98,6 @@ export default class Profile extends Component {
 		return result;
 	}
 
-	// check if the user is followed by logged user or not
-
 	// on Follow pressed
 	followUser(event) {
 		event.preventDefault();
@@ -154,8 +152,8 @@ export default class Profile extends Component {
 			marginTop: "2%"
 		};
 
-		// `pflg` set to `1` i.e flage for navbar for profile page
 		const pflg = 1;
+		// `pflg` set to `1` i.e flage for navbar for profile page
 		// `NavBar` component to render navigation bar for profile page.<br />
 		// `ListFollowers`, `ListFollowing` components to show list of followers and following respectively.<br /><br />
 		// The `userinfo` element shows user image, username and number of following,followers. <br />

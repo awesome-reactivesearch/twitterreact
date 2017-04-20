@@ -20,6 +20,11 @@
             <div id="jump_page">
               
                 
+                <a class="source" href="config.html">
+                  config.js
+                </a>
+              
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -37,6 +42,11 @@
                 
                 <a class="source" href="navbar.html">
                   navbar.js
+                </a>
+              
+                
+                <a class="source" href="navoptions.html">
+                  navoptions.js
                 </a>
               
                 
@@ -88,7 +98,7 @@
 	ReactiveBase,
 	ReactiveList,
 	DataController
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivesearch"</span>;
 <span class="hljs-keyword">import</span> { config, appbaseRef } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;
 <span class="hljs-keyword">import</span> { PersonalTweets } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/tweets"</span>;
 <span class="hljs-keyword">import</span> { NavBar } <span class="hljs-keyword">from</span> <span class="hljs-string">"../nav/navbar"</span>;
@@ -116,6 +126,15 @@
 		<span class="hljs-keyword">this</span>.goProfile = <span class="hljs-keyword">this</span>.goProfile.bind(<span class="hljs-keyword">this</span>);
 		<span class="hljs-keyword">this</span>.logOut = <span class="hljs-keyword">this</span>.logOut.bind(<span class="hljs-keyword">this</span>);
 		<span class="hljs-keyword">this</span>.newTweet = <span class="hljs-keyword">this</span>.newTweet.bind(<span class="hljs-keyword">this</span>);
+		<span class="hljs-keyword">this</span>.goGlobalFeed = <span class="hljs-keyword">this</span>.goGlobalFeed.bind(<span class="hljs-keyword">this</span>);
+		<span class="hljs-keyword">this</span>.goPresonalFeed = <span class="hljs-keyword">this</span>.goPresonalFeed.bind(<span class="hljs-keyword">this</span>);
+		<span class="hljs-keyword">this</span>.CustomQuerytweets = <span class="hljs-keyword">this</span>.CustomQuerytweets.bind(<span class="hljs-keyword">this</span>);
+		<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.location.query) {
+			<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.location.query.show == <span class="hljs-number">1</span>) {
+				<span class="hljs-keyword">this</span>.state = { <span class="hljs-attr">show</span>: <span class="hljs-string">"Global"</span> };
+			}
+		}
+		<span class="hljs-keyword">this</span>.state = { <span class="hljs-attr">show</span>: <span class="hljs-string">"Perosnal"</span> };
 	}</pre></div></div>
             
         </li>
@@ -134,7 +153,7 @@
             <div class="content"><div class='highlight'><pre>	onSearch(event) {
 		event.preventDefault();
 		<span class="hljs-keyword">const</span> t = event.target[<span class="hljs-number">0</span>].value;
-		<span class="hljs-keyword">this</span>.props.router.push(<span class="hljs-string">`search/<span class="hljs-subst">${t}</span>`</span>);
+		<span class="hljs-keyword">this</span>.props.router.push(<span class="hljs-string">`/search/<span class="hljs-subst">${t}</span>`</span>);
 	}</pre></div></div>
             
         </li>
@@ -184,13 +203,99 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
+              <p>set background color button</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	setBgCOlor(active, inactive) {
+		<span class="hljs-keyword">const</span> b = <span class="hljs-built_in">document</span>.getElementById(active);
+		b.className = <span class="hljs-string">"waves-effect waves-light btn"</span>;
+		<span class="hljs-keyword">const</span> p = <span class="hljs-built_in">document</span>.getElementById(inactive);
+		p.className = <span class="hljs-string">"waves-effect waves-light grey lighten-4 btn"</span>;
+	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>on <code>Global</code> button pessed, function called to switch to logged user dashboard with showing Global tweets</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	goGlobalFeed(event) {
+		event.preventDefault();
+		<span class="hljs-keyword">this</span>.setBgCOlor(<span class="hljs-string">"globalButton"</span>, <span class="hljs-string">"personalButton"</span>);
+		<span class="hljs-keyword">this</span>.setState({ <span class="hljs-attr">show</span>: <span class="hljs-string">"Global"</span> });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>debugger;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>on <code>PersonalFeed</code> button pressed, function called to switch to logged user dashboard with showing Personal Tweets</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	goPresonalFeed(event) {
+		event.preventDefault();
+		<span class="hljs-keyword">this</span>.setBgCOlor(<span class="hljs-string">"personalButton"</span>, <span class="hljs-string">"globalButton"</span>);
+		<span class="hljs-keyword">this</span>.setState({ <span class="hljs-attr">show</span>: <span class="hljs-string">"Personal"</span> });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>debugger;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
               <p>when new tweet form is submitted with non-empty string</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>	newTweet(event) {
 		event.preventDefault();
-		<span class="hljs-keyword">const</span> msg = event.target[<span class="hljs-number">0</span>].value;
+		<span class="hljs-keyword">const</span> msg = event.target[<span class="hljs-number">0</span>].value.trim();
 
 		<span class="hljs-keyword">if</span> (msg !== <span class="hljs-string">""</span>) {
 			appbaseRef.index({
@@ -208,20 +313,64 @@
         </li>
         
         
-        <li id="section-7">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>CustomQuery that returns <code>match_all</code> query</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	customQueryUsers() {
+            <div class="content"><div class='highlight'><pre>	customQueryGlobal() {
 		<span class="hljs-keyword">return</span> {
 			<span class="hljs-attr">query</span>: {
 				<span class="hljs-attr">match_all</span>: {}
+			}
+		};
+	}
+
+	CustomQuerytweets() {
+		<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.location.query) {
+			<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.location.query.show == <span class="hljs-number">1</span>) {
+				<span class="hljs-keyword">this</span>.setBgCOlor(<span class="hljs-string">"globalButton"</span>, <span class="hljs-string">"personalButton"</span>);
+				<span class="hljs-keyword">this</span>.props.location.query = <span class="hljs-literal">null</span>;
+				<span class="hljs-keyword">this</span>.setState({ <span class="hljs-attr">show</span>: <span class="hljs-string">"Global"</span> });
+			}			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.location.query.show == <span class="hljs-number">0</span>) {
+				<span class="hljs-keyword">this</span>.setBgCOlor(<span class="hljs-string">"personalButton"</span>, <span class="hljs-string">"globalButton"</span>);
+				<span class="hljs-keyword">this</span>.props.location.query = <span class="hljs-literal">null</span>;
+				<span class="hljs-keyword">this</span>.setState({ <span class="hljs-attr">show</span>: <span class="hljs-string">"Personal"</span> });
+			}
+		}
+
+		<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.state.show === <span class="hljs-string">"Global"</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>debugger;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			<span class="hljs-keyword">return</span> {
+				<span class="hljs-attr">query</span>: {
+					<span class="hljs-attr">match_all</span>: {}
+				}
+			};
+		}
+
+		<span class="hljs-keyword">return</span> {
+			<span class="hljs-attr">query</span>: {
+				<span class="hljs-attr">match</span>: {
+					<span class="hljs-attr">by</span>: <span class="hljs-keyword">this</span>.props.params.uname
+				}
 			}
 		};
 	}</pre></div></div>
@@ -229,24 +378,23 @@
         </li>
         
         
-        <li id="section-8">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p><code>render()</code> renders the dashboard page with <code>Navbar</code> on top and other components like user icons and feed.<br /><br />
-the flag <code>pflg</code> is set to zero and passed to NavBar to get navigation bar for dashboard.<br />
+the flag <code>pflg</code> is set to <code>1</code> and passed to NavBar to get navigation bar for dashboard.<br />
 Here, <code>NavBar</code> component is used to render navigation bar. <br /><br />
 <code>DataController</code> sensor component is used that creates a list of users in app. <br />
 <code>ReactiveList</code> actuator component that reacts on the list of users received by the <code>GetUsers</code> DataController sensor. <br /><br />
  This componenet includes a form for submiting new tweet. <br />
-<code>PersonalTweets</code> actuator component to render User/Global Tweets that are received from <code>UserTweet</code> sensor in <code>NavBar</code> component.<br /></p>
+<code>PersonalTweets</code> actuator component to render User/Global Tweets that are received from <code>DashboardTweet</code> DataController sensor.<br /></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-	render() {
+            <div class="content"><div class='highlight'><pre>	render() {
 		<span class="hljs-keyword">const</span> pflg = <span class="hljs-number">0</span>;
 		<span class="hljs-keyword">return</span> (
 			&lt;div className="row" &gt;
@@ -256,6 +404,8 @@ Here, <code>NavBar</code> component is used to render navigation bar. <br /><br 
 					pflg={pflg}
 					onSearch={this.onSearch}
 					goProfile={this.goProfile}
+					goGlobalFeed={this.goGlobalFeed}
+					goPresonalFeed={this.goPresonalFeed}
 					query={this.props.location.query}
 				/&gt;
 				&lt;div className="col s6 m2 offset-s2 offset-m1"&gt;
@@ -266,13 +416,13 @@ Here, <code>NavBar</code> component is used to render navigation bar. <br /><br 
 					&gt;
 						&lt;div style={{ height: "25%" }}&gt;
 							&lt;div style={{ margin: "0 auto 0 auto" }}&gt;
-								&lt;img style={{ height: "65%", padding: "3%", margin: "0 0 0 14%" }} src="user@2x.png" alt="UserImage" /&gt;
+								&lt;img style={{ height: "100px", padding: "3%", margin: "0 0 0 25%" }} src="/user@2x.png" alt="UserImage" /&gt;
 								&lt;h3 style={{ textAlign: "center", marginTop: "auto" }}&gt;{this.props.params.uname}&lt;/h3&gt;&lt;br /&gt;
 							&lt;/div&gt;
 						&lt;/div&gt;
 						&lt;DataController
 							componentId="GetUsers"
-							customQuery={this.customQueryUsers}
+							customQuery={this.customQueryGlobal}
 							showUI={false}
 						/&gt;
 						&lt;div className="z-depth-1" style={{ marginTop: "5%", height: "auto" }}&gt;
@@ -297,16 +447,21 @@ Here, <code>NavBar</code> component is used to render navigation bar. <br /><br 
 
 				&lt;div className="col s8 m6 offset-m1"&gt;
 					&lt;form id="newtweet" onSubmit={this.newTweet}&gt;
-						&lt;input id="inputtweet" type="text accent-2" placeholder="Your tweet here..." style={{ width: "80%", height: "8%", margin: "5% 0 0 0" }} /&gt;
+						&lt;input id="inputtweet" type="text accent-2" placeholder="Your tweet here..." style={{ width: "80%", height: "45px", margin: "5% 0 0 0" }} /&gt;
 						&lt;input type="submit" value="Tweet" className="waves-effect waves-light btn" /&gt;
 					&lt;/form&gt;
-
-
-					&lt;PersonalTweets
-						user={this.props.params.uname}
-						reactOn={["UserTweet"]}
+					&lt;DataController
+						componentId={"DashboardTweet"}
+						defaultSelected={this.state.show}
+						customQuery={this.CustomQuerytweets}
+						showUI={false}
 					/&gt;
-
+					&lt;div&gt;
+						&lt;PersonalTweets
+							user={this.props.params.uname + this.state.show}
+							reactOn={["DashboardTweet"]}
+						/&gt;
+					&lt;/div&gt;
 				&lt;/div&gt;
 			&lt;/div&gt;
 		);

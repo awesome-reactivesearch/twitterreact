@@ -31,7 +31,7 @@ export default class Login extends Component {
 	// Function called when user submits Login form
 	onLogin(event) {
 		event.preventDefault();
-		const uname = event.target[0].value;
+		const uname = event.target[0].value.trim();
 
 		if (uname === "")	{ return; }
 		// Search for existing username
@@ -122,6 +122,7 @@ export default class Login extends Component {
 						/>
 						<PersonalTweets
 							user={"$all"}
+							path={this.props.location.pathname}
 							reactOn={["GlobalTweet"]}
 						/>
 					</div>

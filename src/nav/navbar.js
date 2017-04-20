@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import { NavOptions } from "./navoptions";
 
 // `NavBar` component that returns navigation bar component
@@ -7,7 +8,7 @@ const NavBar = props =>
 	// NavBar uses NavOptions to add buttons depending upon the current page.<br /><br />
 	// Here, `pflg` when set `-1` denotes that the page is either loginPg or searchPg it won't require button to route to `Profile` view or `Logout` button<br />
 	// `pflg` set to `1` denotes that the page is proflie view of any user. Only Tweets of that user are to be displayed, hence `DataController` sensor is required to generate Personal Tweet.<br />
-	// `pflg` set to `0` shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible, `ToggleButton` is required.<br /><br />
+	// `pflg` set to `1` also shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible in dashboard.<br /><br />
 	// When `query.show` is set to `1` when user switches from profilePg to dashboard to see Global Feed first, `defaultSelected` is `Global` here.<br />
 	// `query.show` is set to `0` when user switches from any page to dashboard to see Personal Feed first, `defaultSelected` is `Personal` here.<br />
 	(
@@ -15,7 +16,7 @@ const NavBar = props =>
 			<nav style={{ color: "black", backgroundColor: "#dadada", height: "60px" }}>
 				<div className="nav-wrapper" style={{ margin: "0.4% auto auto auto" }} >
 					<div style={{ float: "left", fontSize: "130%", width: "15%", margin: "-0.6% auto 2% 2.5%" }}>
-						Twitter on Appbase
+						<Link to={"/"} style={{ color: "black" }}>Twitter on Appbase</Link>
 					</div>
 					<div style={{ width: "30%", float: "left" }}>
 						<form id="searchbar" onSubmit={props.onSearch}>

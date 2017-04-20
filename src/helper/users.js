@@ -72,21 +72,21 @@ const ListFollowing = (props) => {
 					customQuery={customQuery}
 					showUI={false}
 				/>
-				<div style={{marginTop:"15%"}}>
-				<ReactiveList
-					title="Following"
-					componentId={"FollowingActuator"}
-					appbaseField="following"
-					from={config.ReactiveList.from}
-					size={config.ReactiveList.size}
-					stream={true}
-					requestOnScroll={true}
-					onData={props.onDataFollowing}
-					react={{
-						and: ["UserFollowing"]
-					}}
-					showResultStats={false}
-				/>
+				<div style={{ marginTop: "15%" }}>
+					<ReactiveList
+						title="Following"
+						componentId={"FollowingActuator"}
+						appbaseField="following"
+						from={config.ReactiveList.from}
+						size={config.ReactiveList.size}
+						stream={true}
+						requestOnScroll={true}
+						onData={props.onDataFollowing}
+						react={{
+							and: ["UserFollowing"]
+						}}
+						showResultStats={false}
+					/>
 				</div>
 			</ReactiveBase>
 		</div>

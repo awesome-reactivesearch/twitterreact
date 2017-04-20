@@ -20,6 +20,11 @@
             <div id="jump_page">
               
                 
+                <a class="source" href="config.html">
+                  config.js
+                </a>
+              
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -37,6 +42,11 @@
                 
                 <a class="source" href="navbar.html">
                   navbar.js
+                </a>
+              
+                
+                <a class="source" href="navoptions.html">
+                  navoptions.js
                 </a>
               
                 
@@ -84,6 +94,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> { Link } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router"</span>;
 <span class="hljs-keyword">import</span> { NavOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">"./navoptions"</span>;</pre></div></div>
             
         </li>
@@ -99,7 +110,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> NavBar = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> NavBar = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span></pre></div></div>
             
         </li>
         
@@ -110,91 +121,27 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p><code>showGlobal</code> flg set to show Global Tweets or cleared to show Personal Tweets</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">const</span> showGlobalPersonal = (props.query === <span class="hljs-literal">undefined</span>) ? <span class="hljs-number">-1</span> : props.query.show;</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <p><code>CustomQueryT</code> function is used by <code>DataController</code> or <code>ToggleButton</code> sensor.
-For <code>ToggleButton</code> sensor will set default data value paramters while <code>DataController</code> will set data=<code>default</code></p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">const</span> CustomQueryT = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
-		<span class="hljs-keyword">if</span> (data !== <span class="hljs-string">"default"</span> &amp;&amp; props.pflg !== <span class="hljs-number">1</span>) {
-			<span class="hljs-keyword">if</span> (data[<span class="hljs-number">0</span>].value === <span class="hljs-string">""</span>) {
-				<span class="hljs-keyword">return</span> {
-					<span class="hljs-attr">query</span>: {
-						<span class="hljs-attr">match_all</span>: {}
-					}
-				};
-			}
-
-			<span class="hljs-keyword">return</span> {
-				<span class="hljs-attr">query</span>: {
-					<span class="hljs-attr">match</span>: {
-						<span class="hljs-attr">by</span>: data[<span class="hljs-number">0</span>].value
-					}
-				}
-			};
-		}
-		<span class="hljs-keyword">if</span> (showGlobalPersonal === <span class="hljs-number">1</span>) {
-			<span class="hljs-keyword">return</span> {
-				<span class="hljs-attr">query</span>: {
-					<span class="hljs-attr">match_all</span>: {}
-				}
-			};
-		}
-		<span class="hljs-keyword">return</span> {
-
-			<span class="hljs-attr">query</span>: {
-				<span class="hljs-attr">match</span>: {
-					<span class="hljs-attr">by</span>: props.user
-				}
-			}
-		};
-	};</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-5">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
-              </div>
               <p>NavBar contains Search Form<br />
 NavBar uses NavOptions to add buttons depending upon the current page.<br /><br />
 Here, <code>pflg</code> when set <code>-1</code> denotes that the page is either loginPg or searchPg it won’t require button to route to <code>Profile</code> view or <code>Logout</code> button<br />
 <code>pflg</code> set to <code>1</code> denotes that the page is proflie view of any user. Only Tweets of that user are to be displayed, hence <code>DataController</code> sensor is required to generate Personal Tweet.<br />
-<code>pflg</code> set to <code>0</code> shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible, <code>ToggleButton</code> is required.<br /><br />
+<code>pflg</code> set to <code>1</code> also shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible in dashboard.<br /><br />
 When <code>query.show</code> is set to <code>1</code> when user switches from profilePg to dashboard to see Global Feed first, <code>defaultSelected</code> is <code>Global</code> here.<br />
 <code>query.show</code> is set to <code>0</code> when user switches from any page to dashboard to see Personal Feed first, <code>defaultSelected</code> is <code>Personal</code> here.<br /></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">return</span> (
+            <div class="content"><div class='highlight'><pre>	(
 		&lt;div className="navbar-fixed"&gt;
 			&lt;nav style={{ color: "black", backgroundColor: "#dadada", height: "60px" }}&gt;
 				&lt;div className="nav-wrapper" style={{ margin: "0.4% auto auto auto" }} &gt;
-					&lt;div style={{ float: "left", fontSize: "125%", width: "15%" }}&gt;
-						Twitter on Appbase
+					&lt;div style={{ float: "left", fontSize: "130%", width: "15%", margin: "-0.6% auto 2% 2.5%" }}&gt;
+						&lt;Link to={"/"} style={{ color: "black" }}&gt;Twitter on Appbase&lt;/Link&gt;
 					&lt;/div&gt;
-					&lt;div style={{ width: "35%", float: "left" }}&gt;
+					&lt;div style={{ width: "30%", float: "left" }}&gt;
 						&lt;form id="searchbar" onSubmit={props.onSearch}&gt;
 							&lt;input type="text blue accent-2" style={{ height: "65%", width: "45%", margin: "1% 0 0 0" }} placeholder="Search Tweets..." /&gt;
-							&lt;input type="submit" value="Search" style={{ width: "20%", textTransform: "capitalize" }} className="waves-effect waves-light btn" /&gt;
+							&lt;input type="submit" value="Search" style={{ width: "20%", fontSize: "16px", height: "40px", textTransform: "capitalize", marginTop: "-1%" }} className="waves-effect waves-light btn" /&gt;
 						&lt;/form&gt;
 
 					&lt;/div&gt;
@@ -207,14 +154,12 @@ When <code>query.show</code> is set to <code>1</code> when user switches from pr
 						goGlobalFeed={props.goGlobalFeed}
 						goPresonalFeed={props.goPresonalFeed}
 						logOut={props.logOut}
-						CustomQueryT={CustomQueryT}
 					/&gt;
 
 				&lt;/div&gt;
 			&lt;/nav&gt;
 		&lt;/div&gt;
 	);
-};
 module.exports = {
 	NavBar
 };</pre></div></div>

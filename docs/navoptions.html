@@ -93,93 +93,53 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
-<span class="hljs-keyword">import</span> {
-	DataController,
-	ToggleButton
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Checks if the page is on Dashboard/Profile or on SearchPage/Login
+For Dashboard/Profile returns <code>Global</code> and <code>Personal</code> buttons with <code>Profile</code> and <code>LogOut</code> buttons.
+For Login returns only ViewCode button which links to Docs.</p>
 
-<span class="hljs-keyword">const</span> NavOptions = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> NavOptions = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
 	<span class="hljs-keyword">if</span> (props.pflg === <span class="hljs-number">-1</span>) {
 		<span class="hljs-keyword">return</span> (
-			&lt;div style={{ float: "right", margin: "0 2% 0 0", width: "15%" }}&gt;
+			<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">float:</span> "<span class="hljs-attr">right</span>", <span class="hljs-attr">margin:</span> "<span class="hljs-attr">0</span> <span class="hljs-attr">2</span>% <span class="hljs-attr">0</span> <span class="hljs-attr">0</span>", <span class="hljs-attr">width:</span> "<span class="hljs-attr">15</span>%" }}&gt;</span>
 				{(props.path === "/") ? (
-					&lt;div&gt;
-						&lt;DataController
-							componentId="GlobalTweet"
-							customQuery={props.CustomQueryT}
-							showUI={false}
-						/&gt;
-						&lt;a href="./docs/login.html" style={{ color: "white" }} className="waves-effect waves-light btn blue lighten-2"&gt;View Code
-				&lt;/a&gt;
-					&lt;/div&gt;
-		) : (&lt;div /&gt;)}
-			&lt;/div&gt;);
+					<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"./docs/login.html"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">color:</span> "<span class="hljs-attr">white</span>", <span class="hljs-attr">lineHeight:</span> "<span class="hljs-attr">250</span>%", <span class="hljs-attr">padding:</span> "<span class="hljs-attr">0</span> <span class="hljs-attr">4</span>% <span class="hljs-attr">0</span> <span class="hljs-attr">4</span>%" }} <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light btn blue lighten-2"</span>&gt;</span>View Code
+						<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+					<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		) : (<span class="hljs-tag">&lt;<span class="hljs-name">div</span> /&gt;</span>)}
+			<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>);
 	}
 
-	return (
-		&lt;div style={{ float: "right", width: "50%" }}&gt;
-			&lt;div style={{ float: "right", width: "50%" }}&gt;
-				&lt;button style={{ width: "30%" }} className="left hide-on-med-and-down waves-effect waves-light btn" value="Profile" onClick={props.goProfile} &gt;Profile&lt;/button&gt;
-				&lt;button style={{ width: "30%" }} value="Logout" onClick={props.logOut} className="waves-effect waves-light btn" &gt;Logout&lt;/button&gt;
-			&lt;/div&gt;
-			&lt;div style={{ float: "left", width: "50%" }} className="right hide-on-med-and-down z-depth-0" &gt;
+	<span class="hljs-keyword">return</span> (
+		<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">float:</span> "<span class="hljs-attr">right</span>", <span class="hljs-attr">width:</span> "<span class="hljs-attr">50</span>%" }}&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">float:</span> "<span class="hljs-attr">right</span>", <span class="hljs-attr">width:</span> "<span class="hljs-attr">50</span>%" }}&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">width:</span> "<span class="hljs-attr">30</span>%" }} <span class="hljs-attr">className</span>=<span class="hljs-string">"left hide-on-med-and-down waves-effect waves-light btn"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Profile"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.goProfile}</span> &gt;</span>Profile<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">width:</span> "<span class="hljs-attr">30</span>%" }} <span class="hljs-attr">value</span>=<span class="hljs-string">"Logout"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.logOut}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light btn"</span> &gt;</span>Logout<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">float:</span> "<span class="hljs-attr">left</span>", <span class="hljs-attr">width:</span> "<span class="hljs-attr">50</span>%" }} <span class="hljs-attr">className</span>=<span class="hljs-string">"right hide-on-med-and-down z-depth-0"</span> &gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{props.user}</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">width:</span> "<span class="hljs-attr">35</span>%" }} <span class="hljs-attr">id</span>=<span class="hljs-string">"globalButton"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light grey lighten-4 btn"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Global"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.goGlobalFeed}</span>&gt;</span>Global<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">width:</span> "<span class="hljs-attr">35</span>%" }} <span class="hljs-attr">id</span>=<span class="hljs-string">"personalButton"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light grey lighten-4 btn"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Personal"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.goPresonalFeed}</span>&gt;</span>Personal<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+				<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-				{(props.pflg === 1) ? (
-					&lt;div key={props.user}&gt;
-						&lt;button style={{ width: "35%" }} className="waves-effect waves-light grey lighten-4 btn" value="Global" onClick={props.goGlobalFeed}&gt;Global&lt;/button&gt;
-						&lt;button style={{ width: "35%" }} className="waves-effect waves-light grey lighten-4 btn" value="Personal" onClick={props.goPresonalFeed}&gt;Personal&lt;/button&gt;
-						&lt;div &gt;
-							&lt;DataController
-								componentId={"UserProfileTweet"}
-								customQuery={props.CustomQueryT}
-								showUI={false}
-							/&gt;
-						&lt;/div&gt;
-					&lt;/div&gt;) : (
-						&lt;div key={props.user}&gt;
-							{(props.query.show == 1) ? (
-								&lt;ToggleButton
-									componentId="UserTweet"
-									appbaseField="by"
-									multiSelect={false}
-									data={[
-										{
-											label: "Global",
-											value: ""
-										},
-										{
-											label: "Personal",
-											value: props.user
-										}
-									]}
-									customQuery={props.CustomQueryT}
-									defaultSelected={["Global"]}
-								/&gt;) : (
-									&lt;ToggleButton
-										componentId="UserTweet"
-										appbaseField="by"
-										multiSelect={false}
-										data={[
-											{
-												label: "Global",
-												value: ""
-											},
-											{
-												label: "Personal",
-												value: props.user
-											}
-										]}
-										customQuery={props.CustomQueryT}
-										defaultSelected={["Personal"]}
-									/&gt;)}
-						&lt;/div&gt;
-				)}
-			&lt;/div&gt;
-		&lt;/div&gt;);
+			<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>);
 };
 
-module.exports = {
+<span class="hljs-built_in">module</span>.exports = {
 	NavOptions
 };</pre></div></div>
             

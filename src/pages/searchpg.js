@@ -5,7 +5,7 @@ import {
 	DataController
 } from "@appbaseio/reactivesearch";
 import { config } from "../config/config";
-import { onDataTweets } from "../helper/tweets";
+import { PersonalTweets } from "../helper/tweets";
 import { onDataUsers } from "../helper/users";
 import { NavBar } from "../nav/navbar";
 
@@ -70,28 +70,20 @@ export default class SearchPg extends Component {
 					path={this.props.location.pathname}
 				/>
 
-				<div className="col s4 offset-s1" style={{marginTop: "2%"}} >
+				<div className="col s4 offset-s1" style={{ marginTop: "2%" }} >
 					<DataController
 						componentId="SearchTweet"
 						customQuery={this.CustomQueryTweets}
 						showUI={false}
 					/>
-					<ReactiveList
-						title="Tweets"
-						componentId="TweetsFound"
-						appbaseField="msg"
-						from={config.ReactiveList.from}
-						size={config.ReactiveList.size}
-						stream={true}
-						requestOnScroll={true}
-						onData={onDataTweets}
-						react={{
-							and: ["SearchTweet"]
-						}}
+					<PersonalTweets
+						user={"$all"}
+						path={"/"}
+						reactOn={["SearchTweet"]}
 					/>
 				</div>
 
-				<div className="col s4 offset-s1" style={{marginTop: "2%"}} >
+				<div className="col s4 offset-s1" style={{ marginTop: "2%" }} >
 					<ReactiveBase
 						app={config.credential_users.app}
 						credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}

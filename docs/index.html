@@ -20,6 +20,11 @@
             <div id="jump_page">
               
                 
+                <a class="source" href="config.html">
+                  config.js
+                </a>
+              
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -37,6 +42,11 @@
                 
                 <a class="source" href="navbar.html">
                   navbar.js
+                </a>
+              
+                
+                <a class="source" href="navoptions.html">
+                  navoptions.js
                 </a>
               
                 
@@ -86,7 +96,7 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
 <span class="hljs-keyword">import</span> ReactDom <span class="hljs-keyword">from</span> <span class="hljs-string">"react-dom"</span>;
 <span class="hljs-keyword">import</span> { Router, Route, browserHistory } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router"</span>;
-<span class="hljs-keyword">import</span> { ReactiveBase } <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
+<span class="hljs-keyword">import</span> { ReactiveBase } <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivesearch"</span>;
 <span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">"./config/config"</span>;
 <span class="hljs-keyword">import</span> Login <span class="hljs-keyword">from</span> <span class="hljs-string">"./pages/login"</span>;
 <span class="hljs-keyword">import</span> Dashboard <span class="hljs-keyword">from</span> <span class="hljs-string">"./pages/dashboard"</span>;
@@ -115,9 +125,9 @@
 
 		&lt;Router history={browserHistory}&gt;
 			&lt;Route path="/" component={Login} /&gt;
-			&lt;Route path=":uname" component={Dashboard} /&gt;
-			&lt;Route path="profile/:uname" component={Profile} /&gt;
-			&lt;Route path="search/:txt" component={SearchPg} /&gt;
+			&lt;Route path="/:uname" component={Dashboard} /&gt;
+			&lt;Route path="/profile/:uname" component={Profile} /&gt;
+			&lt;Route path="/search/:txt" component={SearchPg} /&gt;
 		&lt;/Router&gt;
 	&lt;/ReactiveBase&gt;
 ), document.getElementById("app"));</pre></div></div>

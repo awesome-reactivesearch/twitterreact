@@ -20,6 +20,11 @@
             <div id="jump_page">
               
                 
+                <a class="source" href="config.html">
+                  config.js
+                </a>
+              
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -37,6 +42,11 @@
                 
                 <a class="source" href="navbar.html">
                   navbar.js
+                </a>
+              
+                
+                <a class="source" href="navoptions.html">
+                  navoptions.js
                 </a>
               
                 
@@ -84,10 +94,10 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
-<span class="hljs-keyword">import</span> { ReactiveList } <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivebase"</span>;
-<span class="hljs-keyword">import</span> { config, appbaseRef } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;
+<span class="hljs-keyword">import</span> { DataController } <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivesearch"</span>;
+<span class="hljs-keyword">import</span> { appbaseRef } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;
 <span class="hljs-keyword">import</span> { NavBar } <span class="hljs-keyword">from</span> <span class="hljs-string">"../nav/navbar"</span>;
-<span class="hljs-keyword">import</span> { onDataTweets } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/tweets"</span>;</pre></div></div>
+<span class="hljs-keyword">import</span> { PersonalTweets } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/tweets"</span>;</pre></div></div>
             
         </li>
         
@@ -106,13 +116,13 @@
 	<span class="hljs-keyword">const</span> txtstyle = {
 		<span class="hljs-attr">width</span>: <span class="hljs-string">"85%"</span>,
 		<span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"#fafafa"</span>,
-		<span class="hljs-attr">margin</span>: <span class="hljs-string">"3%"</span>,
+		<span class="hljs-attr">margin</span>: <span class="hljs-string">"3% 3% 4% 7%"</span>,
 		<span class="hljs-attr">fontSize</span>: <span class="hljs-string">"20px"</span>
 	};
 	<span class="hljs-keyword">return</span> (
-		&lt;form className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}&gt;
+		&lt;form style={{ padding: "0.5%" }} className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}&gt;
 			&lt;input type="text blue accent-2" placeholder="Name" style={txtstyle} /&gt;&lt;br /&gt;
-			&lt;input type="submit" style={{ width: "85%", margin: "0 0 3% 2%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" /&gt;
+			&lt;input type="submit" style={{ width: "50%", margin: "0% auto 2% 23%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" /&gt;
 		&lt;/form&gt;
 	);
 };</pre></div></div>
@@ -152,7 +162,7 @@
             
             <div class="content"><div class='highlight'><pre>	onLogin(event) {
 		event.preventDefault();
-		<span class="hljs-keyword">const</span> uname = event.target[<span class="hljs-number">0</span>].value;
+		<span class="hljs-keyword">const</span> uname = event.target[<span class="hljs-number">0</span>].value.trim();
 
 		<span class="hljs-keyword">if</span> (uname === <span class="hljs-string">""</span>)	{ <span class="hljs-keyword">return</span>; }</pre></div></div>
             
@@ -248,7 +258,7 @@
             <div class="content"><div class='highlight'><pre>	onSearch(event) {
 		event.preventDefault();
 		<span class="hljs-keyword">const</span> t = event.target[<span class="hljs-number">0</span>].value;
-		<span class="hljs-keyword">this</span>.props.router.push(<span class="hljs-string">`search/<span class="hljs-subst">${t}</span>`</span>);
+		<span class="hljs-keyword">this</span>.props.router.push(<span class="hljs-string">`/search/<span class="hljs-subst">${t}</span>`</span>);
 	}</pre></div></div>
             
         </li>
@@ -290,19 +300,24 @@
 
 				&lt;div className="row" style={{ margin: "0 10% 0 10%" }}&gt;
 					&lt;div className="col s10 offset-s1"&gt;
-						&lt;ReactiveList
-							componentId="GlobalTweets"
-							appbaseField="msg"
-							title="Public Tweets"
-							from={config.ReactiveList.from}
-							size={config.ReactiveList.size}
-							onData={onDataTweets}
-							requestOnScroll={true}
-							sortOptions={config.tweetsSortOptions}
-							react={{
-								and: ["GlobalTweet"]
-							}}
-							stream={true}
+						&lt;DataController
+							componentId="GlobalTweet"
+							appbaseField="by"
+							customQuery={
+								function () {
+									return {
+										query: {
+											match_all: {}
+										}
+									};
+								}
+							}
+							showUI={false}
+						/&gt;
+						&lt;PersonalTweets
+							user={"$all"}
+							path={this.props.location.pathname}
+							reactOn={["GlobalTweet"]}
 						/&gt;
 					&lt;/div&gt;
 				&lt;/div&gt;

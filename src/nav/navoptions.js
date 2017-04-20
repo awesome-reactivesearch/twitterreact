@@ -1,5 +1,8 @@
 import React from "react";
 
+// Checks if the page is on Dashboard/Profile or on SearchPage/Login
+// For Dashboard/Profile returns `Global` and `Personal` buttons with `Profile` and `LogOut` buttons.
+// For Login returns only ViewCode button which links to Docs.
 const NavOptions = (props) => {
 	if (props.pflg === -1) {
 		return (
