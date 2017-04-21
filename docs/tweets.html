@@ -127,29 +127,29 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">const</span> onDataTweets = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">markerData</span>) </span>{
-		<span class="hljs-keyword">const</span> marker = markerData._source;
-		<span class="hljs-keyword">return</span> (&lt;Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt} path={props.path} /&gt;);
-	};
-	return (
-		&lt;div key={`${props.user}Tweets`}&gt;
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">const</span> onDataTweets = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">markerData</span>) </span>{
+        <span class="hljs-keyword">const</span> marker = markerData._source;
+        <span class="hljs-keyword">return</span> (&lt;Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt} path={props.path} /&gt;);
+    };
+    return (
+        &lt;div key={`${props.user}Tweets`}&gt;
 
-			&lt;ReactiveList
-				title="Tweets"
-				componentId="TweetsActuator"
-				appbaseField="msg"
-				from={config.ReactiveList.from}
-				size={config.ReactiveList.size}
-				stream={true}
-				onData={onDataTweets}
-				sortOptions={config.tweetsSortOptions}
-				react={{
-					and: props.reactOn
-				}}
-				showResultStats={false}
-			/&gt;
-		&lt;/div&gt;
-	);
+            &lt;ReactiveList
+                title="Tweets"
+                componentId="TweetsActuator"
+                appbaseField="msg"
+                from={config.ReactiveList.from}
+                size={config.ReactiveList.size}
+                stream={true}
+                onData={onDataTweets}
+                sortOptions={config.tweetsSortOptions}
+                react={{
+                    and: props.reactOn
+                }}
+                showResultStats={false}
+            /&gt;
+        &lt;/div&gt;
+    );
 };</pre></div></div>
             
         </li>
@@ -166,23 +166,23 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> Tweet = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
-	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collection"</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collecton-item"</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"tweet"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">margin:</span> "<span class="hljs-attr">1</span>% <span class="hljs-attr">3</span>% <span class="hljs-attr">1</span>% <span class="hljs-attr">3</span>%" }}&gt;</span>
-				{(props.path === "/") ? (props.usr) : (<span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">{</span>`/<span class="hljs-attr">profile</span>/${<span class="hljs-attr">props.usr</span>}`}&gt;</span>{props.usr}<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>)}
-				<span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">htmlFor</span>=<span class="hljs-string">"tweet"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">float:</span> "<span class="hljs-attr">right</span>" }}&gt;</span>
-					{(new moment(props.date)).fromNow()}
-				<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
-				{props.msg}
-			<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-		);
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collection"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collecton-item"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"tweet"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">margin:</span> "<span class="hljs-attr">1</span>% <span class="hljs-attr">3</span>% <span class="hljs-attr">1</span>% <span class="hljs-attr">3</span>%" }}&gt;</span>
+                {(props.path === "/") ? (props.usr) : (<span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">{</span>`/<span class="hljs-attr">profile</span>/${<span class="hljs-attr">props.usr</span>}`}&gt;</span>{props.usr}<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>)}
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">htmlFor</span>=<span class="hljs-string">"tweet"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">float:</span> "<span class="hljs-attr">right</span>" }}&gt;</span>
+                    {(new moment(props.date)).fromNow()}
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+                {props.msg}
+            <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+        );
 
 <span class="hljs-built_in">module</span>.exports = {
-	PersonalTweets,
-	Tweet
+    PersonalTweets,
+    Tweet
 };</pre></div></div>
             
         </li>

@@ -131,37 +131,37 @@ When <code>query.show</code> is set to <code>1</code> when user switches from pr
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	(
-		&lt;div className="navbar-fixed"&gt;
-			&lt;nav style={{ color: "black", backgroundColor: "#dadada", height: "60px" }}&gt;
-				&lt;div className="nav-wrapper" style={{ margin: "0.4% auto auto auto" }} &gt;
-					&lt;div style={{ float: "left", fontSize: "130%", width: "15%", margin: "-0.6% auto 2% 2.5%" }}&gt;
-						&lt;Link to={"/"} style={{ color: "black" }}&gt;Twitter on Appbase&lt;/Link&gt;
-					&lt;/div&gt;
-					&lt;div style={{ width: "30%", float: "left" }}&gt;
-						&lt;form id="searchbar" onSubmit={props.onSearch}&gt;
-							&lt;input type="text blue accent-2" style={{ height: "65%", width: "45%", margin: "1% 0 0 0" }} placeholder="Search Tweets..." /&gt;
-							&lt;input type="submit" value="Search" style={{ width: "20%", fontSize: "16px", height: "40px", textTransform: "capitalize", marginTop: "-1%" }} className="waves-effect waves-light btn" /&gt;
-						&lt;/form&gt;
+            <div class="content"><div class='highlight'><pre>    (
+        &lt;div className="navbar-fixed"&gt;
+            &lt;nav style={{ color: "black", backgroundColor: "#dadada", height: "60px" }}&gt;
+                &lt;div className="nav-wrapper" style={{ margin: "0.4% auto auto auto" }} &gt;
+                    &lt;div style={{ float: "left", fontSize: "130%", width: "15%", margin: "-0.6% auto 2% 2.5%" }}&gt;
+                        &lt;Link to={"/"} style={{ color: "black" }}&gt;Twitter on Appbase&lt;/Link&gt;
+                    &lt;/div&gt;
+                    &lt;div style={{ width: "30%", float: "left" }}&gt;
+                        &lt;form id="searchbar" onSubmit={props.onSearch}&gt;
+                            &lt;input type="text blue accent-2" style={{ height: "65%", width: "45%", margin: "1% 0 0 0" }} placeholder="Search Tweets..." /&gt;
+                            &lt;input type="submit" value="Search" style={{ width: "20%", fontSize: "16px", height: "40px", textTransform: "capitalize", marginTop: "-1%" }} className="waves-effect waves-light btn" /&gt;
+                        &lt;/form&gt;
 
-					&lt;/div&gt;
-					&lt;NavOptions
-						pflg={props.pflg}
-						path={props.path}
-						user={props.user}
-						query={props.query}
-						goProfile={props.goProfile}
-						goGlobalFeed={props.goGlobalFeed}
-						goPresonalFeed={props.goPresonalFeed}
-						logOut={props.logOut}
-					/&gt;
+                    &lt;/div&gt;
+                    &lt;NavOptions
+                        pflg={props.pflg}
+                        path={props.path}
+                        user={props.user}
+                        query={props.query}
+                        goProfile={props.goProfile}
+                        goGlobalFeed={props.goGlobalFeed}
+                        goPresonalFeed={props.goPresonalFeed}
+                        logOut={props.logOut}
+                    /&gt;
 
-				&lt;/div&gt;
-			&lt;/nav&gt;
-		&lt;/div&gt;
-	);
+                &lt;/div&gt;
+            &lt;/nav&gt;
+        &lt;/div&gt;
+    );
 module.exports = {
-	NavBar
+    NavBar
 };</pre></div></div>
             
         </li>

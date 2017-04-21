@@ -6,49 +6,49 @@ import { config } from "../config/config";
 
 // `PersonalTweets` component renders tweets via the `ReactiveList` actuator component.
 const PersonalTweets = (props) => {
-	// `ReactiveList` component renders the tweets in a list. Read more about the component [here](https://opensource.appbase.io/reactive-manual/v1.0.0/components/ReactiveList.html).
-	const onDataTweets = function (markerData) {
-		const marker = markerData._source;
-		return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt} path={props.path} />);
-	};
-	return (
-		<div key={`${props.user}Tweets`}>
+    // `ReactiveList` component renders the tweets in a list. Read more about the component [here](https://opensource.appbase.io/reactive-manual/v1.0.0/components/ReactiveList.html).
+    const onDataTweets = function (markerData) {
+        const marker = markerData._source;
+        return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt} path={props.path} />);
+    };
+    return (
+        <div key={`${props.user}Tweets`}>
 
-			<ReactiveList
-				title="Tweets"
-				componentId="TweetsActuator"
-				appbaseField="msg"
-				from={config.ReactiveList.from}
-				size={config.ReactiveList.size}
-				stream={true}
-				onData={onDataTweets}
-				sortOptions={config.tweetsSortOptions}
-				react={{
-					and: props.reactOn
-				}}
-				showResultStats={false}
-			/>
-		</div>
-	);
+            <ReactiveList
+                title="Tweets"
+                componentId="TweetsActuator"
+                appbaseField="msg"
+                from={config.ReactiveList.from}
+                size={config.ReactiveList.size}
+                stream={true}
+                onData={onDataTweets}
+                sortOptions={config.tweetsSortOptions}
+                react={{
+                    and: props.reactOn
+                }}
+                showResultStats={false}
+            />
+        </div>
+    );
 };
 
 // `Tweet` component renders an individual tweet with a relative timestamp.
 const Tweet = props => (
-	<div className="collection">
-		<div className="collecton-item">
-			<p id="tweet" style={{ margin: "1% 3% 1% 3%" }}>
-				{(props.path === "/") ? (props.usr) : (<Link to={`/profile/${props.usr}`}>{props.usr}</Link>)}
-				<label htmlFor="tweet" style={{ float: "right" }}>
-					{(new moment(props.date)).fromNow()}
-				</label>
-				<br />
-				{props.msg}
-			</p>
-		</div>
-	</div>
-		);
+    <div className="collection">
+        <div className="collecton-item">
+            <p id="tweet" style={{ margin: "1% 3% 1% 3%" }}>
+                {(props.path === "/") ? (props.usr) : (<Link to={`/profile/${props.usr}`}>{props.usr}</Link>)}
+                <label htmlFor="tweet" style={{ float: "right" }}>
+                    {(new moment(props.date)).fromNow()}
+                </label>
+                <br />
+                {props.msg}
+            </p>
+        </div>
+    </div>
+        );
 
 module.exports = {
-	PersonalTweets,
-	Tweet
+    PersonalTweets,
+    Tweet
 };

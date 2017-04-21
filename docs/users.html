@@ -95,9 +95,9 @@
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
 <span class="hljs-keyword">import</span> {
-	ReactiveBase,
-	ReactiveList,
-	DataController
+    ReactiveBase,
+    ReactiveList,
+    DataController
 } <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivesearch"</span>;
 <span class="hljs-keyword">import</span> { Link } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router"</span>;
 <span class="hljs-keyword">import</span> { config, appbaseRef } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;</pre></div></div>
@@ -116,43 +116,43 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> ListFollowers = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
-	<span class="hljs-keyword">const</span> customQuery = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-		<span class="hljs-keyword">return</span> ({
-			<span class="hljs-attr">query</span>: {
-				<span class="hljs-attr">match</span>: {
-					<span class="hljs-attr">name</span>: props.user
-				}
-			}
-		});
-	};
-	<span class="hljs-keyword">return</span> (
-		&lt;div key={`${props.user}Followers`}&gt;
-			&lt;ReactiveBase
-				app={config.credential_appbase.app}
-				credentials={config.credential_appbase.credentials}
-				type={config.credential_appbase.type}
-			&gt;
-				&lt;DataController
-					componentId={"UserFollowers"}
-					customQuery={customQuery}
-					showUI={false}
-				/&gt;
-				&lt;ReactiveList
-					title="Followers"
-					componentId={"FollowerActuator"}
-					appbaseField="followers"
-					from={config.ReactiveList.from}
-					size={config.ReactiveList.size}
-					stream={true}
-					onData={props.onDataFollowers}
-					react={{
-						and: ["UserFollowers"]
-					}}
-					showResultStats={false}
-				/&gt;
-			&lt;/ReactiveBase&gt;
-		&lt;/div&gt;
-	);
+    <span class="hljs-keyword">const</span> customQuery = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> ({
+            <span class="hljs-attr">query</span>: {
+                <span class="hljs-attr">match</span>: {
+                    <span class="hljs-attr">name</span>: props.user
+                }
+            }
+        });
+    };
+    <span class="hljs-keyword">return</span> (
+        &lt;div key={`${props.user}Followers`}&gt;
+            &lt;ReactiveBase
+                app={config.credential_appbase.app}
+                credentials={config.credential_appbase.credentials}
+                type={config.credential_appbase.type}
+            &gt;
+                &lt;DataController
+                    componentId={"UserFollowers"}
+                    customQuery={customQuery}
+                    showUI={false}
+                /&gt;
+                &lt;ReactiveList
+                    title="Followers"
+                    componentId={"FollowerActuator"}
+                    appbaseField="followers"
+                    from={config.ReactiveList.from}
+                    size={config.ReactiveList.size}
+                    stream={true}
+                    onData={props.onDataFollowers}
+                    react={{
+                        and: ["UserFollowers"]
+                    }}
+                    showResultStats={false}
+                /&gt;
+            &lt;/ReactiveBase&gt;
+        &lt;/div&gt;
+    );
 };</pre></div></div>
             
         </li>
@@ -169,45 +169,45 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> ListFollowing = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
-	<span class="hljs-keyword">const</span> customQuery = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-		<span class="hljs-keyword">return</span> ({
-			<span class="hljs-attr">query</span>: {
-				<span class="hljs-attr">match</span>: {
-					<span class="hljs-attr">name</span>: props.user
-				}
-			}
-		});
-	};
-	<span class="hljs-keyword">return</span> (
-		&lt;div key={`${props.user}Following`} &gt;
-			&lt;ReactiveBase
-				app={config.credential_appbase.app}
-				credentials={config.credential_appbase.credentials}
-				type={config.credential_appbase.type}
-			&gt;
-				&lt;DataController
-					componentId="UserFollowing"
-					customQuery={customQuery}
-					showUI={false}
-				/&gt;
-				&lt;div style={{ marginTop: "15%" }}&gt;
-					&lt;ReactiveList
-						title="Following"
-						componentId={"FollowingActuator"}
-						appbaseField="following"
-						from={config.ReactiveList.from}
-						size={config.ReactiveList.size}
-						stream={true}
-						onData={props.onDataFollowing}
-						react={{
-							and: ["UserFollowing"]
-						}}
-						showResultStats={false}
-					/&gt;
-				&lt;/div&gt;
-			&lt;/ReactiveBase&gt;
-		&lt;/div&gt;
-	);
+    <span class="hljs-keyword">const</span> customQuery = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> ({
+            <span class="hljs-attr">query</span>: {
+                <span class="hljs-attr">match</span>: {
+                    <span class="hljs-attr">name</span>: props.user
+                }
+            }
+        });
+    };
+    <span class="hljs-keyword">return</span> (
+        &lt;div key={`${props.user}Following`} &gt;
+            &lt;ReactiveBase
+                app={config.credential_appbase.app}
+                credentials={config.credential_appbase.credentials}
+                type={config.credential_appbase.type}
+            &gt;
+                &lt;DataController
+                    componentId="UserFollowing"
+                    customQuery={customQuery}
+                    showUI={false}
+                /&gt;
+                &lt;div style={{ marginTop: "15%" }}&gt;
+                    &lt;ReactiveList
+                        title="Following"
+                        componentId={"FollowingActuator"}
+                        appbaseField="following"
+                        from={config.ReactiveList.from}
+                        size={config.ReactiveList.size}
+                        stream={true}
+                        onData={props.onDataFollowing}
+                        react={{
+                            and: ["UserFollowing"]
+                        }}
+                        showResultStats={false}
+                    /&gt;
+                &lt;/div&gt;
+            &lt;/ReactiveBase&gt;
+        &lt;/div&gt;
+    );
 };</pre></div></div>
             
         </li>
@@ -224,7 +224,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> updateUser = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">follow, username</span>) </span>{
-	<span class="hljs-keyword">const</span> me = localStorage.user;</pre></div></div>
+    <span class="hljs-keyword">const</span> me = localStorage.user;</pre></div></div>
             
         </li>
         
@@ -239,19 +239,19 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	appbaseRef.search({
-		<span class="hljs-attr">type</span>: <span class="hljs-string">"users"</span>,
-		<span class="hljs-attr">body</span>: {
-			<span class="hljs-attr">query</span>: {
-				<span class="hljs-attr">match</span>: {
-					<span class="hljs-attr">name</span>: me
-				}
-			}
-		}
-	}).on(<span class="hljs-string">"data"</span>, (res) =&gt; {
-		<span class="hljs-keyword">const</span> meId = res.hits.hits[<span class="hljs-number">0</span>]._id;
-		<span class="hljs-keyword">const</span> mefollowing = res.hits.hits[<span class="hljs-number">0</span>]._source.following;
-		<span class="hljs-keyword">const</span> mefollowers = res.hits.hits[<span class="hljs-number">0</span>]._source.followers;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    appbaseRef.search({
+        <span class="hljs-attr">type</span>: <span class="hljs-string">"users"</span>,
+        <span class="hljs-attr">body</span>: {
+            <span class="hljs-attr">query</span>: {
+                <span class="hljs-attr">match</span>: {
+                    <span class="hljs-attr">name</span>: me
+                }
+            }
+        }
+    }).on(<span class="hljs-string">"data"</span>, (res) =&gt; {
+        <span class="hljs-keyword">const</span> meId = res.hits.hits[<span class="hljs-number">0</span>]._id;
+        <span class="hljs-keyword">const</span> mefollowing = res.hits.hits[<span class="hljs-number">0</span>]._source.following;
+        <span class="hljs-keyword">const</span> mefollowers = res.hits.hits[<span class="hljs-number">0</span>]._source.followers;</pre></div></div>
             
         </li>
         
@@ -266,13 +266,13 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">if</span> (follow) {
-			mefollowing.push(username);
-		} <span class="hljs-keyword">else</span> {
-			<span class="hljs-keyword">const</span> index = mefollowing.indexOf(username);
-			mefollowing.splice(index, <span class="hljs-number">1</span>);
-		}
-		localStorage.ufollowing = mefollowing;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span> (follow) {
+            mefollowing.push(username);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">const</span> index = mefollowing.indexOf(username);
+            mefollowing.splice(index, <span class="hljs-number">1</span>);
+        }
+        localStorage.ufollowing = mefollowing;</pre></div></div>
             
         </li>
         
@@ -287,20 +287,20 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		appbaseRef.index({
-			<span class="hljs-attr">type</span>: <span class="hljs-string">"users"</span>,
-			<span class="hljs-attr">id</span>: meId,
-			<span class="hljs-attr">body</span>: {
-				<span class="hljs-attr">name</span>: me,
-				<span class="hljs-attr">followers</span>: mefollowers,
-				<span class="hljs-attr">following</span>: mefollowing
-			}
-		}).on(<span class="hljs-string">"error"</span>, (error) =&gt; {
-			<span class="hljs-built_in">console</span>.error(error);
-		});
-	}).on(<span class="hljs-string">"error"</span>, (err) =&gt; {
-		<span class="hljs-built_in">console</span>.error(err);
-	});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        appbaseRef.index({
+            <span class="hljs-attr">type</span>: <span class="hljs-string">"users"</span>,
+            <span class="hljs-attr">id</span>: meId,
+            <span class="hljs-attr">body</span>: {
+                <span class="hljs-attr">name</span>: me,
+                <span class="hljs-attr">followers</span>: mefollowers,
+                <span class="hljs-attr">following</span>: mefollowing
+            }
+        }).on(<span class="hljs-string">"error"</span>, (error) =&gt; {
+            <span class="hljs-built_in">console</span>.error(error);
+        });
+    }).on(<span class="hljs-string">"error"</span>, (err) =&gt; {
+        <span class="hljs-built_in">console</span>.error(err);
+    });</pre></div></div>
             
         </li>
         
@@ -315,19 +315,19 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	appbaseRef.search({
-		<span class="hljs-attr">type</span>: <span class="hljs-string">"users"</span>,
-		<span class="hljs-attr">body</span>: {
-			<span class="hljs-attr">query</span>: {
-				<span class="hljs-attr">match</span>: {
-					<span class="hljs-attr">name</span>: username
-				}
-			}
-		}
-	}).on(<span class="hljs-string">"data"</span>, (res) =&gt; {
-		<span class="hljs-keyword">const</span> uId = res.hits.hits[<span class="hljs-number">0</span>]._id;
-		<span class="hljs-keyword">const</span> ufollowing = res.hits.hits[<span class="hljs-number">0</span>]._source.following;
-		<span class="hljs-keyword">const</span> ufollowers = res.hits.hits[<span class="hljs-number">0</span>]._source.followers;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    appbaseRef.search({
+        <span class="hljs-attr">type</span>: <span class="hljs-string">"users"</span>,
+        <span class="hljs-attr">body</span>: {
+            <span class="hljs-attr">query</span>: {
+                <span class="hljs-attr">match</span>: {
+                    <span class="hljs-attr">name</span>: username
+                }
+            }
+        }
+    }).on(<span class="hljs-string">"data"</span>, (res) =&gt; {
+        <span class="hljs-keyword">const</span> uId = res.hits.hits[<span class="hljs-number">0</span>]._id;
+        <span class="hljs-keyword">const</span> ufollowing = res.hits.hits[<span class="hljs-number">0</span>]._source.following;
+        <span class="hljs-keyword">const</span> ufollowers = res.hits.hits[<span class="hljs-number">0</span>]._source.followers;</pre></div></div>
             
         </li>
         
@@ -342,17 +342,17 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">const</span> index = ufollowers.indexOf(me);
-		<span class="hljs-keyword">debugger</span>;
-		<span class="hljs-keyword">if</span> (follow) {
-			<span class="hljs-keyword">if</span>(index == <span class="hljs-number">-1</span>){
-				ufollowers.push(me);
-			}
-		} <span class="hljs-keyword">else</span> {
-			<span class="hljs-keyword">if</span>(index !== <span class="hljs-number">-1</span>){
-				ufollowers.splice(index, <span class="hljs-number">1</span>);
-			}
-		}</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">const</span> index = ufollowers.indexOf(me);
+        <span class="hljs-keyword">debugger</span>;
+        <span class="hljs-keyword">if</span> (follow) {
+            <span class="hljs-keyword">if</span>(index == <span class="hljs-number">-1</span>){
+                ufollowers.push(me);
+            }
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">if</span>(index !== <span class="hljs-number">-1</span>){
+                ufollowers.splice(index, <span class="hljs-number">1</span>);
+            }
+        }</pre></div></div>
             
         </li>
         
@@ -367,20 +367,20 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		appbaseRef.index({
-			<span class="hljs-attr">type</span>: <span class="hljs-string">"users"</span>,
-			<span class="hljs-attr">id</span>: uId,
-			<span class="hljs-attr">body</span>: {
-				<span class="hljs-attr">name</span>: username,
-				<span class="hljs-attr">followers</span>: ufollowers,
-				<span class="hljs-attr">following</span>: ufollowing
-			}
-		}).on(<span class="hljs-string">"error"</span>, (error) =&gt; {
-			<span class="hljs-built_in">console</span>.error(error);
-		});
-	}).on(<span class="hljs-string">"error"</span>, (err) =&gt; {
-		<span class="hljs-built_in">console</span>.error(err);
-	});
+            <div class="content"><div class='highlight'><pre>        appbaseRef.index({
+            <span class="hljs-attr">type</span>: <span class="hljs-string">"users"</span>,
+            <span class="hljs-attr">id</span>: uId,
+            <span class="hljs-attr">body</span>: {
+                <span class="hljs-attr">name</span>: username,
+                <span class="hljs-attr">followers</span>: ufollowers,
+                <span class="hljs-attr">following</span>: ufollowing
+            }
+        }).on(<span class="hljs-string">"error"</span>, (error) =&gt; {
+            <span class="hljs-built_in">console</span>.error(error);
+        });
+    }).on(<span class="hljs-string">"error"</span>, (err) =&gt; {
+        <span class="hljs-built_in">console</span>.error(err);
+    });
 };</pre></div></div>
             
         </li>
@@ -397,8 +397,8 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> onDataUsers = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">markerData</span>) </span>{
-	<span class="hljs-keyword">const</span> marker = markerData._source;
-	<span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">User</span> <span class="hljs-attr">name</span>=<span class="hljs-string">{marker.name}</span> /&gt;</span>);
+    <span class="hljs-keyword">const</span> marker = markerData._source;
+    <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">User</span> <span class="hljs-attr">name</span>=<span class="hljs-string">{marker.name}</span> /&gt;</span>);
 };
 
 </span></pre></div></div>
@@ -417,22 +417,22 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> User = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
-	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collection"</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collecton-item"</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">margin:</span> "<span class="hljs-attr">3</span>% <span class="hljs-attr">auto</span> <span class="hljs-attr">3</span>% <span class="hljs-attr">5</span>%" }}&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">{</span>`/<span class="hljs-attr">profile</span>/${<span class="hljs-attr">props.name</span>}`}&gt;</span>{props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
-			<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-		);
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collection"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collecton-item"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">margin:</span> "<span class="hljs-attr">3</span>% <span class="hljs-attr">auto</span> <span class="hljs-attr">3</span>% <span class="hljs-attr">5</span>%" }}&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">{</span>`/<span class="hljs-attr">profile</span>/${<span class="hljs-attr">props.name</span>}`}&gt;</span>{props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+        );
 
 
 <span class="hljs-built_in">module</span>.exports = {
-	ListFollowing,
-	ListFollowers,
-	onDataUsers,
-	User,
-	updateUser
+    ListFollowing,
+    ListFollowers,
+    onDataUsers,
+    User,
+    updateUser
 };</pre></div></div>
             
         </li>

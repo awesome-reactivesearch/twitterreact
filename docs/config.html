@@ -95,31 +95,31 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> config = {
-	<span class="hljs-attr">credential_appbase</span>: {
-		<span class="hljs-attr">url</span>: <span class="hljs-string">"https://scalr.api.appbase.io"</span>,
-		<span class="hljs-attr">app</span>: <span class="hljs-string">"twitter-app"</span>,
-		<span class="hljs-attr">credentials</span>: <span class="hljs-string">"p1KdUffK0:9040f694-9f71-408b-8ce2-573de67fb0c4"</span>,
-		<span class="hljs-attr">type</span>: <span class="hljs-string">"tweets,users"</span>
-	},
-	<span class="hljs-attr">ReactiveList</span>: {
-		<span class="hljs-attr">size</span>: <span class="hljs-number">10</span>,
-		<span class="hljs-attr">from</span>: <span class="hljs-number">0</span>
-	},
-	<span class="hljs-attr">tweetsSortOptions</span>: [{
-		<span class="hljs-attr">appbaseField</span>: <span class="hljs-string">"createdAt"</span>,
-		<span class="hljs-attr">sortBy</span>: <span class="hljs-string">"desc"</span>
-	}]
+    <span class="hljs-attr">credential_appbase</span>: {
+        <span class="hljs-attr">url</span>: <span class="hljs-string">"https://scalr.api.appbase.io"</span>,
+        <span class="hljs-attr">app</span>: <span class="hljs-string">"twitter-app"</span>,
+        <span class="hljs-attr">credentials</span>: <span class="hljs-string">"p1KdUffK0:9040f694-9f71-408b-8ce2-573de67fb0c4"</span>,
+        <span class="hljs-attr">type</span>: <span class="hljs-string">"tweets,users"</span>
+    },
+    <span class="hljs-attr">ReactiveList</span>: {
+        <span class="hljs-attr">size</span>: <span class="hljs-number">10</span>,
+        <span class="hljs-attr">from</span>: <span class="hljs-number">0</span>
+    },
+    <span class="hljs-attr">tweetsSortOptions</span>: [{
+        <span class="hljs-attr">appbaseField</span>: <span class="hljs-string">"createdAt"</span>,
+        <span class="hljs-attr">sortBy</span>: <span class="hljs-string">"desc"</span>
+    }]
 };
 
 <span class="hljs-keyword">const</span> appbaseRef = <span class="hljs-keyword">new</span> Appbase({
-	<span class="hljs-attr">url</span>: config.credential_appbase.url,
-	<span class="hljs-attr">appname</span>: config.credential_appbase.app,
-	<span class="hljs-attr">credentials</span>: config.credential_appbase.credentials
+    <span class="hljs-attr">url</span>: config.credential_appbase.url,
+    <span class="hljs-attr">appname</span>: config.credential_appbase.app,
+    <span class="hljs-attr">credentials</span>: config.credential_appbase.credentials
 });
 
 <span class="hljs-built_in">module</span>.exports = {
-	config,
-	appbaseRef
+    config,
+    appbaseRef
 };</pre></div></div>
             
         </li>

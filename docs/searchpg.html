@@ -95,9 +95,9 @@
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
 <span class="hljs-keyword">import</span> {
-	ReactiveList,
-	ReactiveBase,
-	DataController
+    ReactiveList,
+    ReactiveBase,
+    DataController
 } <span class="hljs-keyword">from</span> <span class="hljs-string">"@appbaseio/reactivesearch"</span>;
 <span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">"../config/config"</span>;
 <span class="hljs-keyword">import</span> { PersonalTweets } <span class="hljs-keyword">from</span> <span class="hljs-string">"../helper/tweets"</span>;
@@ -118,12 +118,12 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SearchPg</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-	<span class="hljs-keyword">constructor</span>(props) {
-		<span class="hljs-keyword">super</span>(props);
-		<span class="hljs-keyword">this</span>.onSearch = <span class="hljs-keyword">this</span>.onSearch.bind(<span class="hljs-keyword">this</span>);
-		<span class="hljs-keyword">this</span>.CustomQueryTweets = <span class="hljs-keyword">this</span>.CustomQueryTweets.bind(<span class="hljs-keyword">this</span>);
-		<span class="hljs-keyword">this</span>.CustomQueryUsers = <span class="hljs-keyword">this</span>.CustomQueryUsers.bind(<span class="hljs-keyword">this</span>);
-	}</pre></div></div>
+    <span class="hljs-keyword">constructor</span>(props) {
+        <span class="hljs-keyword">super</span>(props);
+        <span class="hljs-keyword">this</span>.onSearch = <span class="hljs-keyword">this</span>.onSearch.bind(<span class="hljs-keyword">this</span>);
+        <span class="hljs-keyword">this</span>.CustomQueryTweets = <span class="hljs-keyword">this</span>.CustomQueryTweets.bind(<span class="hljs-keyword">this</span>);
+        <span class="hljs-keyword">this</span>.CustomQueryUsers = <span class="hljs-keyword">this</span>.CustomQueryUsers.bind(<span class="hljs-keyword">this</span>);
+    }</pre></div></div>
             
         </li>
         
@@ -138,11 +138,11 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	onSearch(event) {
-		event.preventDefault();
-		<span class="hljs-keyword">const</span> t = event.target[<span class="hljs-number">0</span>].value;
-		<span class="hljs-keyword">this</span>.props.router.replace(<span class="hljs-string">`/search/<span class="hljs-subst">${t}</span>`</span>);
-	}</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    onSearch(event) {
+        event.preventDefault();
+        <span class="hljs-keyword">const</span> t = event.target[<span class="hljs-number">0</span>].value;
+        <span class="hljs-keyword">this</span>.props.router.replace(<span class="hljs-string">`/search/<span class="hljs-subst">${t}</span>`</span>);
+    }</pre></div></div>
             
         </li>
         
@@ -157,8 +157,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	CustomQueryTweets() {
-		<span class="hljs-keyword">const</span> phrase = <span class="hljs-keyword">this</span>.props.params.txt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    CustomQueryTweets() {
+        <span class="hljs-keyword">const</span> phrase = <span class="hljs-keyword">this</span>.props.params.txt;</pre></div></div>
             
         </li>
         
@@ -173,7 +173,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">return</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">return</span> {</pre></div></div>
             
         </li>
         
@@ -188,13 +188,13 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			query: {
-				<span class="hljs-attr">match</span>: {
-					<span class="hljs-attr">msg</span>: phrase
-				}
-			}
-		};
-	}</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            query: {
+                <span class="hljs-attr">match</span>: {
+                    <span class="hljs-attr">msg</span>: phrase
+                }
+            }
+        };
+    }</pre></div></div>
             
         </li>
         
@@ -209,8 +209,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	CustomQueryUsers() {
-		<span class="hljs-keyword">const</span> phrase = <span class="hljs-keyword">this</span>.props.params.txt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    CustomQueryUsers() {
+        <span class="hljs-keyword">const</span> phrase = <span class="hljs-keyword">this</span>.props.params.txt;</pre></div></div>
             
         </li>
         
@@ -225,7 +225,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">return</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">return</span> {</pre></div></div>
             
         </li>
         
@@ -240,13 +240,13 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			query: {
-				<span class="hljs-attr">match</span>: {
-					<span class="hljs-attr">name</span>: phrase
-				}
-			}
-		};
-	}</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            query: {
+                <span class="hljs-attr">match</span>: {
+                    <span class="hljs-attr">name</span>: phrase
+                }
+            }
+        };
+    }</pre></div></div>
             
         </li>
         
@@ -261,7 +261,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	render() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    render() {</pre></div></div>
             
         </li>
         
@@ -276,7 +276,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">const</span> pflg = <span class="hljs-number">-1</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">const</span> pflg = <span class="hljs-number">-1</span>;</pre></div></div>
             
         </li>
         
@@ -293,59 +293,59 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">return</span> (
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">return</span> (
 
-			&lt;div className="row" key={this.props.params.txt}&gt;
-				&lt;NavBar
-					user={this.props.params.uname}
-					pflg={pflg}
-					onSearch={this.onSearch}
-					path={this.props.location.pathname}
-				/&gt;
+            &lt;div className="row" key={this.props.params.txt}&gt;
+                &lt;NavBar
+                    user={this.props.params.uname}
+                    pflg={pflg}
+                    onSearch={this.onSearch}
+                    path={this.props.location.pathname}
+                /&gt;
 
-				&lt;div className="col s4 offset-s1" style={{ marginTop: "2%" }} &gt;
-					&lt;DataController
-						componentId="SearchTweet"
-						customQuery={this.CustomQueryTweets}
-						showUI={false}
-					/&gt;
-					&lt;PersonalTweets
-						user={"$all"}
-						path={"/"}
-						reactOn={["SearchTweet"]}
-					/&gt;
-				&lt;/div&gt;
+                &lt;div className="col s4 offset-s1" style={{ marginTop: "2%" }} &gt;
+                    &lt;DataController
+                        componentId="SearchTweet"
+                        customQuery={this.CustomQueryTweets}
+                        showUI={false}
+                    /&gt;
+                    &lt;PersonalTweets
+                        user={"$all"}
+                        path={"/"}
+                        reactOn={["SearchTweet"]}
+                    /&gt;
+                &lt;/div&gt;
 
-				&lt;div className="col s4 offset-s1" style={{ marginTop: "2%" }} &gt;
-					&lt;ReactiveBase
-						app={config.credential_appbase.app}
-						credentials={config.credential_appbase.credentials}
-						type={config.credential_appbase.type}
-					&gt;
-						&lt;DataController
-							componentId="SearchUser"
-							customQuery={this.CustomQueryUsers}
-							showUI={false}
-						/&gt;
-						&lt;ReactiveList
-							title="Users"
-							componentId="UsersFound"
-							appbaseField="name"
-							from={config.ReactiveList.from}
-							size={config.ReactiveList.size}
-							stream={true}
-							requestOnScroll={true}
-							onData={onDataUsers}
-							react={{
-								and: ["SearchUser"]
-							}}
-						/&gt;
-					&lt;/ReactiveBase&gt;
-				&lt;/div&gt;
-			&lt;/div&gt;
-		);
-	}
-	}</pre></div></div>
+                &lt;div className="col s4 offset-s1" style={{ marginTop: "2%" }} &gt;
+                    &lt;ReactiveBase
+                        app={config.credential_appbase.app}
+                        credentials={config.credential_appbase.credentials}
+                        type={config.credential_appbase.type}
+                    &gt;
+                        &lt;DataController
+                            componentId="SearchUser"
+                            customQuery={this.CustomQueryUsers}
+                            showUI={false}
+                        /&gt;
+                        &lt;ReactiveList
+                            title="Users"
+                            componentId="UsersFound"
+                            appbaseField="name"
+                            from={config.ReactiveList.from}
+                            size={config.ReactiveList.size}
+                            stream={true}
+                            requestOnScroll={true}
+                            onData={onDataUsers}
+                            react={{
+                                and: ["SearchUser"]
+                            }}
+                        /&gt;
+                    &lt;/ReactiveBase&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
+    }</pre></div></div>
             
         </li>
         
