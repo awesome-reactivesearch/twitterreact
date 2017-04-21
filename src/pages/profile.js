@@ -9,7 +9,7 @@ import {
 } from "../helper/users";
 import { NavBar } from "../nav/navbar";
 
-// `ChkFollowing` chks logged user follows the current user and returns *Follow/Unfollow* as required
+// `ChkFollowing` chks whether the logged in user follows the current user and returns a *Follow or Unfollow* button accordingly
 const ChkFollowing = (props) => {
 	if (props.setKey) {
 		return (<button value="Unfollow" id="unfollowbutton" onClick={props.unfollowUser} key={props.setKey}>Unfollow</button>);
@@ -39,7 +39,7 @@ export default class Profile extends Component {
 		};
 	}
 
-	// Function called when Search is pressed
+	// Change to search route when user enters a search string
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
@@ -48,7 +48,7 @@ export default class Profile extends Component {
 		this.props.router.push(`/search/${t}`);
 	}
 
-	// Function called when the `ListFollowers` component gets data
+	// Updates the followers count. Called when the `ListFollowers` component gets data.
 	onDataFollowers(response) {
 		let nfollowing = 0;
 		let result = null;
@@ -75,7 +75,7 @@ export default class Profile extends Component {
 		return result;
 	}
 
-	// Function called when the `ListFollowing` component gets data
+	// Updates the following count. Called when the `ListFollowing` component gets data.
 	onDataFollowing(response) {
 		let result = null;
 		let nfollowers = 0;
@@ -123,21 +123,21 @@ export default class Profile extends Component {
 		this.props.router.replace(`/${u}`);
 	}
 
-	// on logout pressed this function is called
+	// on `Logout` button press, remove user session from localStorage and route to home
 	logOut(event) {
 		event.preventDefault();
 		this.props.router.push("/");
 		delete localStorage.user;
 	}
 
-	// on `Global` button pessed, function called to switch to logged user dashboard with showing Global tweets
+	// on `Global` button pess, switch to logged in user's dashboard with a view showing global tweets.
 	goGlobalFeed(event) {
 		event.preventDefault();
 		const loggedUser = localStorage.user;
 		this.props.router.replace({ pathname: `/${loggedUser}`, query: { show: 1 } });
 	}
 
-	// on `PersonalFeed` button pressed, function called to switch to logged user dashboard with showing Personal Tweets
+	// on `Personal` button press, switch to logged in user's dashboard with a view showing personal tweets.
 	goPresonalFeed(event) {
 		event.preventDefault();
 		const loggedUser = localStorage.user;
