@@ -148,12 +148,17 @@ const updateUser = function (follow, username) {
 		const uId = res.hits.hits[0]._id;
 		const ufollowing = res.hits.hits[0]._source.following;
 		const ufollowers = res.hits.hits[0]._source.followers;
-			// if `follow` is true add logged user to followers list else remove it from the list
+		// if `follow` is true add logged user to followers list else remove it from the list
+		const index = ufollowers.indexOf(me);
+		debugger;
 		if (follow) {
-			ufollowers.push(me);
+			if(index == -1){
+				ufollowers.push(me);
+			}
 		} else {
-			const index = ufollowers.indexOf(me);
-			ufollowers.splice(index, 1);
+			if(index !== -1){
+				ufollowers.splice(index, 1);
+			}
 		}
 			// Index the updated entry to the app
 		appbaseRef.index({
