@@ -1,8 +1,8 @@
 import React from "react";
 
-// Checks if the page is on Dashboard/Profile or on SearchPage/Login
-// For Dashboard/Profile returns `Global` and `Personal` buttons with `Profile` and `LogOut` buttons.
-// For Login returns only ViewCode button which links to Docs.
+// Here, `pflg` when set `-1` denotes that the page is either loginPg or searchPg it won't require button to route to `Profile` view or `Logout` button<br />
+// `pflg` set to `1` denotes that the page is proflie view of any user. Only Tweets of that user are to be displayed, hence `DataController` sensor is required to generate Personal Tweet.<br />
+// `pflg` set to `1` also shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible in dashboard.<br /><br />
 const NavOptions = (props) => {
     if (props.pflg === -1) {
         return (

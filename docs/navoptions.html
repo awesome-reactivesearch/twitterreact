@@ -102,9 +102,9 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Checks if the page is on Dashboard/Profile or on SearchPage/Login
-For Dashboard/Profile returns <code>Global</code> and <code>Personal</code> buttons with <code>Profile</code> and <code>LogOut</code> buttons.
-For Login returns only ViewCode button which links to Docs.</p>
+              <p>Here, <code>pflg</code> when set <code>-1</code> denotes that the page is either loginPg or searchPg it won’t require button to route to <code>Profile</code> view or <code>Logout</code> button<br />
+<code>pflg</code> set to <code>1</code> denotes that the page is proflie view of any user. Only Tweets of that user are to be displayed, hence <code>DataController</code> sensor is required to generate Personal Tweet.<br />
+<code>pflg</code> set to <code>1</code> also shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible in dashboard.<br /><br /></p>
 
             </div>
             

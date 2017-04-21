@@ -104,32 +104,14 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p><code>NavBar</code> component that returns navigation bar component</p>
+              <p><code>NavBar</code> component that returns navigation bar component
+NavBar contains Search Form<br />
+NavBar uses NavOptions to add buttons depending upon the current page.<br /><br /></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> NavBar = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span></pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-3">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-3">&#182;</a>
-              </div>
-              <p>NavBar contains Search Form<br />
-NavBar uses NavOptions to add buttons depending upon the current page.<br /><br />
-Here, <code>pflg</code> when set <code>-1</code> denotes that the page is either loginPg or searchPg it won’t require button to route to <code>Profile</code> view or <code>Logout</code> button<br />
-<code>pflg</code> set to <code>1</code> denotes that the page is proflie view of any user. Only Tweets of that user are to be displayed, hence <code>DataController</code> sensor is required to generate Personal Tweet.<br />
-<code>pflg</code> set to <code>1</code> also shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible in dashboard.<br /><br />
-When <code>query.show</code> is set to <code>1</code> when user switches from profilePg to dashboard to see Global Feed first, <code>defaultSelected</code> is <code>Global</code> here.<br />
-<code>query.show</code> is set to <code>0</code> when user switches from any page to dashboard to see Personal Feed first, <code>defaultSelected</code> is <code>Personal</code> here.<br /></p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    (
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> NavBar = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span>
+    (
         &lt;div className="navbar-fixed"&gt;
             &lt;nav style={{ color: "black", backgroundColor: "#dadada", height: "60px" }}&gt;
                 &lt;div className="nav-wrapper" style={{ margin: "0.4% auto auto auto" }} &gt;
@@ -147,7 +129,6 @@ When <code>query.show</code> is set to <code>1</code> when user switches from pr
                         pflg={props.pflg}
                         path={props.path}
                         user={props.user}
-                        query={props.query}
                         goProfile={props.goProfile}
                         goGlobalFeed={props.goGlobalFeed}
                         goPresonalFeed={props.goPresonalFeed}

@@ -3,14 +3,9 @@ import { Link } from "react-router";
 import { NavOptions } from "./navoptions";
 
 // `NavBar` component that returns navigation bar component
+// NavBar contains Search Form<br />
+// NavBar uses NavOptions to add buttons depending upon the current page.<br /><br />
 const NavBar = props =>
-    // NavBar contains Search Form<br />
-    // NavBar uses NavOptions to add buttons depending upon the current page.<br /><br />
-    // Here, `pflg` when set `-1` denotes that the page is either loginPg or searchPg it won't require button to route to `Profile` view or `Logout` button<br />
-    // `pflg` set to `1` denotes that the page is proflie view of any user. Only Tweets of that user are to be displayed, hence `DataController` sensor is required to generate Personal Tweet.<br />
-    // `pflg` set to `1` also shows that the page is dashboard, Toggling between Global Feed and Personal Feed is possible in dashboard.<br /><br />
-    // When `query.show` is set to `1` when user switches from profilePg to dashboard to see Global Feed first, `defaultSelected` is `Global` here.<br />
-    // `query.show` is set to `0` when user switches from any page to dashboard to see Personal Feed first, `defaultSelected` is `Personal` here.<br />
     (
         <div className="navbar-fixed">
             <nav style={{ color: "black", backgroundColor: "#dadada", height: "60px" }}>
@@ -29,7 +24,6 @@ const NavBar = props =>
                         pflg={props.pflg}
                         path={props.path}
                         user={props.user}
-                        query={props.query}
                         goProfile={props.goProfile}
                         goGlobalFeed={props.goGlobalFeed}
                         goPresonalFeed={props.goPresonalFeed}
