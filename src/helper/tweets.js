@@ -4,9 +4,9 @@ import { Link } from "react-router";
 import moment from "moment";
 import { config } from "../config/config";
 
-// `PersonalTweets` component to return the `ReactiveList` actuator component that renders tweets
+// `PersonalTweets` component renders tweets via the `ReactiveList` actuator component.
 const PersonalTweets = (props) => {
-	// on Receiving the tweets
+	// `ReactiveList` component renders the tweets in a list. Read more about the component [here](https://opensource.appbase.io/reactive-manual/v1.0.0/components/ReactiveList.html).
 	const onDataTweets = function (markerData) {
 		const marker = markerData._source;
 		return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt} path={props.path} />);
@@ -21,7 +21,6 @@ const PersonalTweets = (props) => {
 				from={config.ReactiveList.from}
 				size={config.ReactiveList.size}
 				stream={true}
-				requestOnScroll={true}
 				onData={onDataTweets}
 				sortOptions={config.tweetsSortOptions}
 				react={{
@@ -29,12 +28,11 @@ const PersonalTweets = (props) => {
 				}}
 				showResultStats={false}
 			/>
-
 		</div>
 	);
 };
 
-// Tweet Component
+// `Tweet` component renders an individual tweet with a relative timestamp.
 const Tweet = props => (
 	<div className="collection">
 		<div className="collecton-item">
