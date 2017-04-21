@@ -10,7 +10,7 @@ import { NavBar } from "../nav/navbar";
 import { onDataUsers } from "../helper/users";
 
 const date = new Date();
-// `Dashboarad` component to render the dashboard page of app
+// `Dashboard` component to render the dashboard page of app
 export default class Dashboard extends Component {
 	constructor(props) {
 		super(props);
@@ -29,26 +29,27 @@ export default class Dashboard extends Component {
 		this.state = { show: "Perosnal" };
 	}
 
-	// Function called when Search is called
+	// Function called when search is called
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
 		this.props.router.push(`/search/${t}`);
 	}
 
-	// on logout pressed to logout the loggedIn user
+	// on `Logout` button press, remove user session from localStorage and route to home
 	logOut(event) {
 		event.preventDefault();
 		this.props.router.push("/");
 		delete localStorage.user;
 	}
 
-	// on Profile pressed this function is called to go to loggedIn user profile
+	// on `Profile` button press, go to logged in user's profile
 	goProfile(event) {
 		event.preventDefault();
 		const u = this.props.params.uname;
 		this.props.router.replace(`/profile/${u}`);
 	}
+
 	// set background color button
 	setBgCOlor(active, inactive) {
 		const b = document.getElementById(active);
@@ -57,23 +58,21 @@ export default class Dashboard extends Component {
 		p.className = "waves-effect waves-light grey lighten-4 btn";
 	}
 
-	// on `Global` button pessed, function called to switch to logged user dashboard with showing Global tweets
+	// on `Global` button pess, switch to logged in user's dashboard with a view showing global tweets
 	goGlobalFeed(event) {
 		event.preventDefault();
 		this.setBgCOlor("globalButton", "personalButton");
 		this.setState({ show: "Global" });
-		// debugger;
 	}
 
-	// on `PersonalFeed` button pressed, function called to switch to logged user dashboard with showing Personal Tweets
+	// on `Personal` button press, switch to logged in user's dashboard with a view showing personal tweets
 	goPresonalFeed(event) {
 		event.preventDefault();
 		this.setBgCOlor("personalButton", "globalButton");
 		this.setState({ show: "Personal" });
-		// debugger;
 	}
 
-	// when new tweet form is submitted with non-empty string
+	// indexes data into appbase.io app when a user tweets
 	newTweet(event) {
 		event.preventDefault();
 		const msg = event.target[0].value.trim();
@@ -114,7 +113,6 @@ export default class Dashboard extends Component {
 		}
 
 		if (this.state.show === "Global") {
-			// debugger;
 			return {
 				query: {
 					match_all: {}
