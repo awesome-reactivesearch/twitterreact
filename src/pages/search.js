@@ -18,7 +18,7 @@ export default class Search extends Component {
         this.CustomQueryUsers = this.CustomQueryUsers.bind(this);
     }
 
-    // Function is called on pressed search which routess to `/search/:txt`
+    // Change to search route when user enters a search string
     onSearch(event) {
         event.preventDefault();
         const t = event.target[0].value;
@@ -28,9 +28,7 @@ export default class Search extends Component {
     // `CustomQueryTweets` function to return `match` query for `tweets` type
     CustomQueryTweets() {
         const phrase = this.props.params.txt;
-        // `pflg` set to -1 that shows that the current page is searchpage
         return {
-            // Here, // NavBar component to render navigation bar
             query: {
                 match: {
                     msg: phrase
@@ -42,9 +40,7 @@ export default class Search extends Component {
     // `CustomQueryUsers` function to return `match` query for 'users' type
     CustomQueryUsers() {
         const phrase = this.props.params.txt;
-        // `pflg` set to -1 that shows that the current page is searchpage
         return {
-            // Here, // NavBar component to render navigation bar
             query: {
                 match: {
                     name: phrase
@@ -55,11 +51,10 @@ export default class Search extends Component {
 
     // `render()` renders the component with top `NavBar` and `ReactiveList`s for displaying matched tweets and users
     render() {
-        // `pflg` set to -1 that shows that the current page is searchpage
         const pflg = -1;
-        // Here, `NavBar` component to render navigation bar.
-        // `DataController` sensor component that creates a list of tweets/users that matches the searchtext.
-        // `ReactiveList` to render tweets/users matched
+        // `pflg` set to -1 that shows that the current page is searchpage
+        // Here, `NavBar` component renders navigation bar.
+        // `ReactiveList` actuator component is used to render tweets received from `SearchTweet` sensor component.<br />
         return (
 
             <div className="row" key={this.props.params.txt}>
