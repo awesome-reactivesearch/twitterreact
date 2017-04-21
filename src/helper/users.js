@@ -37,7 +37,6 @@ const ListFollowers = (props) => {
 					from={config.ReactiveList.from}
 					size={config.ReactiveList.size}
 					stream={true}
-					requestOnScroll={true}
 					onData={props.onDataFollowers}
 					react={{
 						and: ["UserFollowers"]
@@ -80,7 +79,6 @@ const ListFollowing = (props) => {
 						from={config.ReactiveList.from}
 						size={config.ReactiveList.size}
 						stream={true}
-						requestOnScroll={true}
 						onData={props.onDataFollowing}
 						react={{
 							and: ["UserFollowing"]
