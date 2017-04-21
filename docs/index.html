@@ -118,9 +118,9 @@
             
             <div class="content"><div class='highlight'><pre>ReactDom.render((
 	&lt;ReactiveBase
-		app={config.credential_tweets.app}
-		credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-		type={config.credential_tweets.type}
+		app={config.credential_appbase.app}
+		credentials={config.credential_appbase.credentials}
+		type="tweets"
 	&gt;
 
 		&lt;Router history={browserHistory}&gt;

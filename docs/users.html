@@ -128,9 +128,9 @@
 	<span class="hljs-keyword">return</span> (
 		&lt;div key={`${props.user}Followers`}&gt;
 			&lt;ReactiveBase
-				app={config.credential_users.app}
-				credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-				type={config.credential_users.type}
+				app={config.credential_appbase.app}
+				credentials={config.credential_appbase.credentials}
+				type={config.credential_appbase.type}
 			&gt;
 				&lt;DataController
 					componentId={"UserFollowers"}
@@ -144,7 +144,6 @@
 					from={config.ReactiveList.from}
 					size={config.ReactiveList.size}
 					stream={true}
-					requestOnScroll={true}
 					onData={props.onDataFollowers}
 					react={{
 						and: ["UserFollowers"]
@@ -182,9 +181,9 @@
 	<span class="hljs-keyword">return</span> (
 		&lt;div key={`${props.user}Following`} &gt;
 			&lt;ReactiveBase
-				app={config.credential_users.app}
-				credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-				type={config.credential_users.type}
+				app={config.credential_appbase.app}
+				credentials={config.credential_appbase.credentials}
+				type={config.credential_appbase.type}
 			&gt;
 				&lt;DataController
 					componentId="UserFollowing"
@@ -199,7 +198,6 @@
 						from={config.ReactiveList.from}
 						size={config.ReactiveList.size}
 						stream={true}
-						requestOnScroll={true}
 						onData={props.onDataFollowing}
 						react={{
 							and: ["UserFollowing"]
@@ -344,11 +342,16 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">if</span> (follow) {
-			ufollowers.push(me);
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">const</span> index = ufollowers.indexOf(me);
+		<span class="hljs-keyword">debugger</span>;
+		<span class="hljs-keyword">if</span> (follow) {
+			<span class="hljs-keyword">if</span>(index == <span class="hljs-number">-1</span>){
+				ufollowers.push(me);
+			}
 		} <span class="hljs-keyword">else</span> {
-			<span class="hljs-keyword">const</span> index = ufollowers.indexOf(me);
-			ufollowers.splice(index, <span class="hljs-number">1</span>);
+			<span class="hljs-keyword">if</span>(index !== <span class="hljs-number">-1</span>){
+				ufollowers.splice(index, <span class="hljs-number">1</span>);
+			}
 		}</pre></div></div>
             
         </li>

@@ -108,7 +108,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p><code>PersonalTweets</code> component to return the <code>ReactiveList</code> actuator component that renders tweets</p>
+              <p><code>PersonalTweets</code> component renders tweets via the <code>ReactiveList</code> actuator component.</p>
 
             </div>
             
@@ -123,7 +123,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>on Receiving the tweets</p>
+              <p><code>ReactiveList</code> component renders the tweets in a list. Read more about the component <a href="https://opensource.appbase.io/reactive-manual/v1.0.0/components/ReactiveList.html">here</a>.</p>
 
             </div>
             
@@ -141,7 +141,6 @@
 				from={config.ReactiveList.from}
 				size={config.ReactiveList.size}
 				stream={true}
-				requestOnScroll={true}
 				onData={onDataTweets}
 				sortOptions={config.tweetsSortOptions}
 				react={{
@@ -149,7 +148,6 @@
 				}}
 				showResultStats={false}
 			/&gt;
-
 		&lt;/div&gt;
 	);
 };</pre></div></div>
@@ -163,7 +161,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Tweet Component</p>
+              <p><code>Tweet</code> component renders an individual tweet with a relative timestamp.</p>
 
             </div>
             

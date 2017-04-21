@@ -79,7 +79,7 @@ export default class Dashboard extends Component {
 
 		if (msg !== "") {
 			appbaseRef.index({
-				type: config.credential_tweets.type,
+				type: "tweets",
 				body: {
 					by: this.props.params.uname,
 					createdAt: date.getTime(),
@@ -152,9 +152,9 @@ export default class Dashboard extends Component {
 				/>
 				<div className="col s6 m2 offset-s2 offset-m1">
 					<ReactiveBase
-						app={config.credential_users.app}
-						credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-						type={config.credential_users.type}
+						app={config.credential_appbase.app}
+						credentials={config.credential_appbase.credentials}
+						type="users"
 					>
 						<div style={{ height: "25%" }}>
 							<div style={{ margin: "0 auto 0 auto" }}>
@@ -175,7 +175,6 @@ export default class Dashboard extends Component {
 								from={config.ReactiveList.from}
 								size={config.ReactiveList.size}
 								stream={true}
-								requestOnScroll={true}
 								onData={onDataUsers}
 								react={{
 									and: ["GetUsers"]

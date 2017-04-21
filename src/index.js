@@ -11,9 +11,9 @@ import SearchPg from "./pages/searchpg";
 // Render Router elements into the DOM
 ReactDom.render((
 	<ReactiveBase
-		app={config.credential_tweets.app}
-		credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-		type={config.credential_tweets.type}
+		app={config.credential_appbase.app}
+		credentials={config.credential_appbase.credentials}
+		type="tweets"
 	>
 
 		<Router history={browserHistory}>

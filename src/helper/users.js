@@ -21,9 +21,9 @@ const ListFollowers = (props) => {
 	return (
 		<div key={`${props.user}Followers`}>
 			<ReactiveBase
-				app={config.credential_users.app}
-				credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-				type={config.credential_users.type}
+				app={config.credential_appbase.app}
+				credentials={config.credential_appbase.credentials}
+				type={config.credential_appbase.type}
 			>
 				<DataController
 					componentId={"UserFollowers"}
@@ -62,9 +62,9 @@ const ListFollowing = (props) => {
 	return (
 		<div key={`${props.user}Following`} >
 			<ReactiveBase
-				app={config.credential_users.app}
-				credentials={`${config.credential_tweets.username}:${config.credential_tweets.password}`}
-				type={config.credential_users.type}
+				app={config.credential_appbase.app}
+				credentials={config.credential_appbase.credentials}
+				type={config.credential_appbase.type}
 			>
 				<DataController
 					componentId="UserFollowing"

@@ -1,18 +1,10 @@
 // `config` object contains all the app credentials
 const config = {
-	credential_tweets: {
+	credential_appbase: {
 		url: "https://scalr.api.appbase.io",
 		app: "twitter-app",
-		username: "p1KdUffK0",
-		password: "9040f694-9f71-408b-8ce2-573de67fb0c4",
-		type: "tweets"
-	},
-	credential_users: {
-		url: "https://scalr.api.appbase.io",
-		app: "twitter-app",
-		username: "p1KdUffK0",
-		password: "9040f694-9f71-408b-8ce2-573de67fb0c4",
-		type: "users"
+		credentials: "p1KdUffK0:9040f694-9f71-408b-8ce2-573de67fb0c4",
+		type: "tweets,users"
 	},
 	ReactiveList: {
 		size: 10,
@@ -25,10 +17,9 @@ const config = {
 };
 
 const appbaseRef = new Appbase({
-	url: config.credential_tweets.url,
-	appname: config.credential_tweets.app,
-	username: config.credential_tweets.username,
-	password: config.credential_tweets.password
+	url: config.credential_appbase.url,
+	appname: config.credential_appbase.app,
+	credentials: config.credential_appbase.credentials
 });
 
 module.exports = {
