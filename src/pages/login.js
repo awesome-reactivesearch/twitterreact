@@ -4,7 +4,7 @@ import { appbaseRef } from "../config/config";
 import { NavBar } from "../nav/navbar";
 import { PersonalTweets } from "../helper/tweets";
 
-// `LoginForm` returns form with a text input field.
+// `LoginForm` renders a form with a username text input field.
 const LoginForm = (props) => {
 	const txtstyle = {
 		width: "85%",
@@ -20,7 +20,7 @@ const LoginForm = (props) => {
 	);
 };
 
-// `Login` Component to render the login page of app
+// `Login` component to render the login page of app
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -53,7 +53,7 @@ export default class Login extends Component {
 				localStorage.ufollowing = [];
 			}
 			if (chk === 0) {
-				// If user not found, index new user
+				// If user is not found, index into appbase.io as a new user
 				appbaseRef.index({
 					type: "users",
 					body: {
@@ -72,17 +72,17 @@ export default class Login extends Component {
 		this.props.router.push({ pathname: `/${uname}`, query: { show: 0 } });
 	}
 
-	// Function called when search is called
+	// Change to search route when user enters a search string
 	onSearch(event) {
 		event.preventDefault();
 		const t = event.target[0].value;
 		this.props.router.push(`/search/${t}`);
 	}
 
-	// `render()` renders the Login component. <br />
+	// `render(..)` renders the Login component. <br />
 	// `pflg` flag is set to `-1` to get navigation bar of homepg.<br />
-	//  here, `LoginForm` is used to render Login form.<br />
-	// `ReactiveList` actuator component to render tweets received from `GlobalTweets` sensor component.<br />
+	//  here, `LoginForm` is used to render the user login form.<br />
+	// `ReactiveList` actuator component is used to render tweets received from `GlobalTweets` sensor component.<br />
 	render() {
 		const pflg = -1;
 		return (
