@@ -6,7 +6,7 @@ import { config } from "./config/config";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 import Profile from "./pages/profile";
-import SearchPg from "./pages/searchpg";
+import Search from "./pages/search";
 
 // Render Router elements into the DOM
 ReactDom.render((
@@ -20,7 +20,7 @@ ReactDom.render((
             <Route path="/" component={Login} />
             <Route path="/:uname" component={Dashboard} />
             <Route path="/profile/:uname" component={Profile} />
-            <Route path="/search/:txt" component={SearchPg} />
+            <Route path="/search/:txt" component={Search} />
         </Router>
     </ReactiveBase>
 ), document.getElementById("app"));

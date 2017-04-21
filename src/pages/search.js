@@ -9,8 +9,8 @@ import { PersonalTweets } from "../helper/tweets";
 import { onDataUsers } from "../helper/users";
 import { NavBar } from "../nav/navbar";
 
-// `SearchPg` component is rendered when user searches for tweets or users
-export default class SearchPg extends Component {
+// `Search` component is rendered when user searches for tweets or users
+export default class Search extends Component {
     constructor(props) {
         super(props);
         this.onSearch = this.onSearch.bind(this);
