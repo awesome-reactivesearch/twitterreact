@@ -15,7 +15,7 @@ const config = {
 		type: "users"
 	},
 	ReactiveList: {
-		size: 100,
+		size: 10,
 		from: 0
 	},
 	tweetsSortOptions: [{
