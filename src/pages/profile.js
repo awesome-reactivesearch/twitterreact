@@ -101,12 +101,18 @@ export default class Profile extends Component {
 	// on Follow pressed
 	followUser(event) {
 		event.preventDefault();
+		if(this.state.followingFlg){
+			return;
+		}
 		updateUser(true, this.props.params.uname);
 	}
 
 	// on Unfollow pressed
 	unfollowUser(event) {
 		event.preventDefault();
+		if(!this.state.followingFlg){
+			return;
+		}
 		updateUser(false, this.props.params.uname);
 	}
 
