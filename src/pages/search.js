@@ -65,7 +65,7 @@ export default class Search extends Component {
                     path={this.props.location.pathname}
                 />
 
-                <div className="col s4 offset-s1" style={{ marginTop: "2%" }} >
+                <div className="col s4 offset-s1" id="loginFormRender" >
                     <DataController
                         componentId="SearchTweet"
                         customQuery={this.CustomQueryTweets}
@@ -78,7 +78,7 @@ export default class Search extends Component {
                     />
                 </div>
 
-                <div className="col s4 offset-s1" style={{ marginTop: "2%" }} >
+                <div className="col s4 offset-s1" id="loginFormRender" >
                     <ReactiveBase
                         app={config.credential_appbase.app}
                         credentials={config.credential_appbase.credentials}

@@ -36,9 +36,9 @@ const PersonalTweets = (props) => {
 const Tweet = props => (
     <div className="collection">
         <div className="collecton-item">
-            <p id="tweet" style={{ margin: "1% 3% 1% 3%" }}>
+            <p id="tweet">
                 {(props.path === "/") ? (props.usr) : (<Link to={`/profile/${props.usr}`}>{props.usr}</Link>)}
-                <label htmlFor="tweet" style={{ float: "right" }}>
+                <label htmlFor="tweet" id="labeltweet">
                     {(new moment(props.date)).fromNow()}
                 </label>
                 <br />

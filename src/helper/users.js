@@ -71,7 +71,7 @@ const ListFollowing = (props) => {
                     customQuery={customQuery}
                     showUI={false}
                 />
-                <div style={{ marginTop: "15%" }}>
+                <div id="listfollowing">
                     <ReactiveList
                         title="Following"
                         componentId={"FollowingActuator"}
@@ -184,7 +184,7 @@ const onDataUsers = function (markerData) {
 const User = props => (
     <div className="collection">
         <div className="collecton-item">
-            <p style={{ margin: "3% auto 3% 5%" }}>
+            <p id="user">
                 <Link to={`/profile/${props.name}`}>{props.name}</Link>
             </p>
         </div>

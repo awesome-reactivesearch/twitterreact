@@ -6,16 +6,11 @@ import { PersonalTweets } from "../helper/tweets";
 
 // `LoginForm` renders a form with a username text input field.
 const LoginForm = (props) => {
-    const txtstyle = {
-        width: "85%",
-        backgroundColor: "#fafafa",
-        margin: "3% 3% 4% 7%",
-        fontSize: "20px"
-    };
+    
     return (
-        <form style={{ padding: "0.5%" }} className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}>
-            <input type="text blue accent-2" placeholder="Name" style={txtstyle} /><br />
-            <input type="submit" style={{ width: "50%", margin: "0% auto 2% 23%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" />
+        <form className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}>
+            <input type="text blue accent-2" placeholder="Name" id="txtstyle"/><br />
+            <button type="submit" id="loginFormSubmit" className="waves-effect waves-light btn" >Enter your name</button>
         </form>
     );
 };
@@ -97,14 +92,14 @@ export default class Login extends Component {
                     }}
                 />
                 <div className="row" >
-                    <div style={{ margin: "2%" }}>
+                    <div id="loginFormRender">
                         <LoginForm
                             onLogin={this.onLogin}
                         />
                     </div>
                 </div>
 
-                <div className="row" style={{ margin: "0 10% 0 10%" }}>
+                <div className="row" id="tweetsList">
                     <div className="col s10 offset-s1">
                         <DataController
                             componentId="GlobalTweet"

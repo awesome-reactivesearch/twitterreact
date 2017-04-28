@@ -156,10 +156,10 @@ export default class Dashboard extends Component {
                         credentials={config.credential_appbase.credentials}
                         type="users"
                     >
-                        <div style={{ height: "25%" }}>
-                            <div style={{ margin: "0 auto 0 auto" }}>
-                                <img style={{ height: "100px", padding: "3%", margin: "0 0 0 25%" }} src="/user@2x.png" alt="UserImage" />
-                                <h3 style={{ textAlign: "center", marginTop: "auto" }}>{this.props.params.uname}</h3><br />
+                        <div id="userblock">
+                            <div id="usermarginblock">
+                                <img id="userimagedashboard" src="/user@2x.png" alt="UserImage" />
+                                <h3 id="username" >{this.props.params.uname}</h3><br />
                             </div>
                         </div>
                         <DataController
@@ -167,7 +167,7 @@ export default class Dashboard extends Component {
                             customQuery={this.customQueryGlobal}
                             showUI={false}
                         />
-                        <div className="z-depth-1" style={{ marginTop: "5%", height: "auto" }}>
+                        <div className="z-depth-1" id="userslist">
                             <ReactiveList
                                 title="Users"
                                 componentId="UsersActuator"
@@ -188,7 +188,7 @@ export default class Dashboard extends Component {
 
                 <div className="col s8 m6 offset-m1">
                     <form id="newtweet" onSubmit={this.newTweet}>
-                        <input id="inputtweet" type="text accent-2" placeholder="Your tweet here..." style={{ width: "80%", height: "45px", margin: "5% 0 0 0" }} />
+                        <input id="inputtweet" type="text accent-2" placeholder="Your tweet here..."  />
                         <input type="submit" value="Tweet" className="waves-effect waves-light btn" />
                     </form>
                     <DataController

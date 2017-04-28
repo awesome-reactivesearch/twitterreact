@@ -18,6 +18,203 @@
     width:120%;
 }
 
+#txtAppbase { 
+    float: left;
+    font-size: 130%; 
+    width: 15%; 
+    margin: -0.6% auto 2% 2.5%;
+}
+
+#linktxt {
+    color: black;
+}
+
+#tweet {
+    margin: 1% 3% 1% 3%;
+}
+
+#labeltweet {
+    float: right;
+}
+
+#listfollowing {
+    margin-top: 15%;
+}
+
+#user {
+    margin: 3% auto 3% 5%;
+}
+
+#navbar {
+    color: black;
+    background-color: #dadada;
+    height: 60px;
+}
+
+#navBarWrapper {
+    margin: 0.4% auto auto auto;
+} 
+
+#searchBarBlock { 
+    width: 30%;
+    float: left;
+    margin-top: 5px;
+}
+
+#searchtxt { 
+    height: 65%; 
+    width: 45%; 
+}
+
+#searchbutton {
+    width: 20%;
+    font-size: 16px;
+    height: 40px;
+    text-transform: capitalize;
+    margin-top: -1%;
+}
+
+ #viewCodeBlock { 
+    float: right; 
+    margin: 0 2% 0 0;
+    width: 15%; 
+}
+
+#navOptions {
+    float: right;
+    width: 50%;
+}
+
+#buttonNavOptions {
+    width: 30%;
+}
+
+#globalButton {
+    width: 30%;
+}
+
+#personalButton {
+    width: 30%;
+}
+
+#tweetToggleBlock {
+    float: left;
+    width: 50%;
+}
+
+#userblock {
+    height: 25%; 
+}
+
+#usermarginblock {
+    margin: 0 auto 0 auto; 
+}
+
+#userimagedashboard {
+    height: 100px;
+    padding: 3%; 
+    margin: 0 0 0 25%;
+}
+
+#username {
+    text-align: center;
+    margin-top: auto
+}
+
+#userslist { 
+    margin-top: 5%;
+    height: auto;
+}
+
+#inputtweet {
+    width: 80%;
+    height: 45px;
+    margin: 5% 0 0 0;
+}
+
+#loginform {
+    padding: 0.5%;
+}
+
+#txtstyle {
+    width: 85%;
+    background-color: #fafafa;
+    margin: 3% 3% 4% 7%;
+    font-size: 20px;
+}
+
+#loginFormSubmit {
+    width: 50%;
+    margin: 0% auto 2% 23%;
+    padding: 2px; 
+}
+
+#login > .waves-effect.waves-light.btn.waves-input-wrapper {
+    width: 50% !important;
+    margin: 0% auto 2% 23% !important;
+    padding: 2px !important;
+}
+
+#loginFormRender {
+    margin: 2%;
+}
+
+#tweetslist {
+    margin: 0 10% 0 10%;
+}
+
+#listfollow {
+    margin-top: 3%;
+}
+
+#userinfo {
+    max-width: 800;
+    margin-left: 10%;
+    margin-top: 2%;
+}
+
+#userinfoBlock {
+    float: left;
+    width: 20%;
+}
+
+#userimgProfile {
+    height: 100px;
+    margin: 15% 10% 15% 15%;
+}
+
+#userSide {
+    float: left;
+    width: 80%;
+}
+
+#userSideBlock {
+    float: left;
+}
+
+#usernameProfile {
+    float: left;
+}
+
+#followblock {
+    width: 100%;
+    float: left;
+}
+
+#followersNo {
+    background-color: blue;
+    margin-left: 2%;
+    margin-right: 1%;
+}
+
+#followingNo {
+    background-color: blue;
+}
+
+#personaltweets{
+    margin-top: 3%;
+}
+
 .rbc-blue a {
     color: #039BFA; 
 }
@@ -108,10 +305,25 @@
     
 }
 
+.waves-effect.waves-light.btn.blue.lighten-2 {
+    color: white;
+    line-height: 250%; 
+    padding: 0 4% 0 4%; 
+}
+
 .waves-effect.waves-light.btn {
     text-transform: capitalize;
     background-color: #428bfc;
 }
+
+#searchbar >.waves-effect.waves-light.btn {
+    width: 20%;
+    font-size: 16px;
+    height: 40px;
+    text-transform: capitalize;
+    margin-top: -1%;
+}
+
 
 .waves-effect.waves-light.grey.lighten-4.btn {
     color: #777;

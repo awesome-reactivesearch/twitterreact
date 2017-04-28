@@ -152,12 +152,6 @@ export default class Profile extends Component {
 
     // renders the profile component
     render() {
-        const msgStyles = {
-            maxWidth: 800,
-            marginLeft: "10%",
-            marginTop: "2%"
-        };
-
         const pflg = 1;
         // `pflg` set to `1` i.e flage for navbar for profile page
         // `NavBar` component to render navigation bar for profile page.<br />
@@ -177,7 +171,7 @@ export default class Profile extends Component {
                     goProfile={this.goProfile}
                 />
 
-                <div className="col m2 s6 offset-s1 offset-m1" style={{ marginTop: "3%" }}>
+                <div className="col m2 s6 offset-s1 offset-m1" id="listfollow">
                     <ListFollowers
                         user={this.props.params.uname}
                         onDataFollowers={this.onDataFollowers}
@@ -188,15 +182,15 @@ export default class Profile extends Component {
                     />
                 </div>
 
-                <div id="userinfo" className="col s12 m7 l91" style={msgStyles}>
-                    <div style={{ float: "left", width: "20%" }}>
-                        <img style={{ height: "100px", margin: "15% 10% 15% 15%" }} src="/user@2x.png" alt="UserImage" />
+                <div id="userinfo" className="col s12 m7 l91">
+                    <div id="userinfoBlock">
+                        <img id="userimgProfile" src="/user@2x.png" alt="UserImage" />
                     </div>
-                    <div style={{ float: "left", width: "80%" }} >
-                        <div style={{ float: "left" }}>
-                            <h3 style={{ textAlign: "center" }}>{this.props.params.uname}</h3>
+                    <div id="userSide" >
+                        <div id="userSideblock" >
+                            <h3 id="usernameProfile">{this.props.params.uname}</h3>
                         </div>
-                        <div style={{ width: "100%", float: "left" }} key={this.state}>
+                        <div id="followblock" key={this.state}>
                             {(localStorage.user !== this.props.params.uname) ? (
                                 <div className="col s2" key={this.state}>
                                     <ChkFollowing
@@ -208,12 +202,12 @@ export default class Profile extends Component {
                                 </div>) : (
                                     <div />)}
                             <div id="followstats" key={this.state.followingFlg}>
-                                <button className="col s4 btn disabled" style={{ backgroundColor: "blue", marginLeft: "2%", marginRight: "1%" }}>Followers {this.state.nfollowing}</button>
-                                <button className="col s4 btn disabled" style={{ backgroundColor: "blue" }}>Following {this.state.nfollowers}</button>
+                                <button className="col s4 btn disabled" id="followersNo">Followers {this.state.nfollowing}</button>
+                                <button className="col s4 btn disabled" id="followingNo">Following {this.state.nfollowers}</button>
                             </div>
                         </div>
                     </div>
-                    <div className="col s8" style={{ marginTop: "3%" }}>
+                    <div className="col s8" id="personaltweets">
                         <DataController
                             componentId={"UserProfileTweet"}
                             appbaseField="by"
