@@ -113,15 +113,15 @@ NavBar uses NavOptions to add buttons depending upon the current page.<br /><br 
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> NavBar = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span>
     (
         &lt;div className="navbar-fixed"&gt;
-            &lt;nav style={{ color: "black", backgroundColor: "#dadada", height: "60px" }}&gt;
-                &lt;div className="nav-wrapper" style={{ margin: "0.4% auto auto auto" }} &gt;
-                    &lt;div style={{ float: "left", fontSize: "130%", width: "15%", margin: "-0.6% auto 2% 2.5%" }}&gt;
-                        &lt;Link to={"/"} style={{ color: "black" }}&gt;Twitter on Appbase&lt;/Link&gt;
+            &lt;nav id="navbar"&gt;
+                &lt;div className="nav-wrapper" id="navBarWrapper"&gt;
+                    &lt;div id="txtAppbase"&gt;
+                        &lt;Link id="linktxt" to={"/"}&gt;Twitter on Appbase&lt;/Link&gt;
                     &lt;/div&gt;
-                    &lt;div style={{ width: "30%", float: "left" }}&gt;
-                        &lt;form id="searchbar" onSubmit={props.onSearch}&gt;
-                            &lt;input type="text blue accent-2" style={{ height: "65%", width: "45%", margin: "1% 0 0 0" }} placeholder="Search Tweets..." /&gt;
-                            &lt;input type="submit" value="Search" style={{ width: "20%", fontSize: "16px", height: "40px", textTransform: "capitalize", marginTop: "-1%" }} className="waves-effect waves-light btn" /&gt;
+                    &lt;div id="searchBarBlock"&gt;
+                        &lt;form onSubmit={props.onSearch}&gt;
+                            &lt;input type="text blue accent-2" id="searchtxt" placeholder="Search Tweets..." /&gt;
+                            &lt;button type="submit" id="searchbutton" className="waves-effect waves-light btn"&gt;Search&lt;/button&gt;
                         &lt;/form&gt;
 
                     &lt;/div&gt;

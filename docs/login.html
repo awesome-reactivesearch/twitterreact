@@ -111,19 +111,16 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> LoginForm = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
-    <span class="hljs-keyword">const</span> txtstyle = {
-        <span class="hljs-attr">width</span>: <span class="hljs-string">"85%"</span>,
-        <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"#fafafa"</span>,
-        <span class="hljs-attr">margin</span>: <span class="hljs-string">"3% 3% 4% 7%"</span>,
-        <span class="hljs-attr">fontSize</span>: <span class="hljs-string">"20px"</span>
-    };
+    
     <span class="hljs-keyword">return</span> (
-        &lt;form style={{ padding: "0.5%" }} className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}&gt;
-            &lt;input type="text blue accent-2" placeholder="Name" style={txtstyle} /&gt;&lt;br /&gt;
-            &lt;input type="submit" style={{ width: "50%", margin: "0% auto 2% 23%", padding: "2px" }} value="Enter your name" className="waves-effect waves-light btn" /&gt;
-        &lt;/form&gt;
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"login"</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{props.onLogin}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text blue accent-2"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Name"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"txtstyle"</span>/&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"loginFormSubmit"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light btn"</span> &gt;</span>Enter your name<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
     );
-};</pre></div></div>
+};
+
+</span></pre></div></div>
             
         </li>
         
@@ -289,14 +286,14 @@
                     }}
                 /&gt;
                 &lt;div className="row" &gt;
-                    &lt;div style={{ margin: "2%" }}&gt;
+                    &lt;div id="loginFormRender"&gt;
                         &lt;LoginForm
                             onLogin={this.onLogin}
                         /&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
 
-                &lt;div className="row" style={{ margin: "0 10% 0 10%" }}&gt;
+                &lt;div className="row" id="tweetsList"&gt;
                     &lt;div className="col s10 offset-s1"&gt;
                         &lt;DataController
                             componentId="GlobalTweet"

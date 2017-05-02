@@ -166,9 +166,9 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> Tweet = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collection"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collecton-item"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"tweet"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">margin:</span> "<span class="hljs-attr">1</span>% <span class="hljs-attr">3</span>% <span class="hljs-attr">1</span>% <span class="hljs-attr">3</span>%" }}&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"tweet"</span>&gt;</span>
                 {(props.path === "/") ? (props.usr) : (<span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">{</span>`/<span class="hljs-attr">profile</span>/${<span class="hljs-attr">props.usr</span>}`}&gt;</span>{props.usr}<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>)}
-                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">htmlFor</span>=<span class="hljs-string">"tweet"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">float:</span> "<span class="hljs-attr">right</span>" }}&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">htmlFor</span>=<span class="hljs-string">"tweet"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"labeltweet"</span>&gt;</span>
                     {(new moment(props.date)).fromNow()}
                 <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>

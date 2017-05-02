@@ -98,7 +98,8 @@ export default class Dashboard extends Component {
             }
         };
     }
-
+    // CustomQuerytweets that returns query to display tweets.<br />
+    // Here, when page loads if query.show is `1` Global tweets' query is returned, else Personal tweets are returned.
     CustomQuerytweets() {
         if (this.props.location.query) {
             if (this.props.location.query.show == 1) {

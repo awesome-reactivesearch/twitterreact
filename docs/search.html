@@ -50,6 +50,7 @@
                 </a>
                 
                 
+                
                 <a class="source" href="navbar.html">
                   navbar.js
                 </a>
@@ -230,7 +231,7 @@ Here, <code>NavBar</code> component renders navigation bar.
                     path={this.props.location.pathname}
                 /&gt;
 
-                &lt;div className="col s4 offset-s1" style={{ marginTop: "2%" }} &gt;
+                &lt;div className="col s4 offset-s1" id="loginFormRender" &gt;
                     &lt;DataController
                         componentId="SearchTweet"
                         customQuery={this.CustomQueryTweets}
@@ -243,7 +244,7 @@ Here, <code>NavBar</code> component renders navigation bar.
                     /&gt;
                 &lt;/div&gt;
 
-                &lt;div className="col s4 offset-s1" style={{ marginTop: "2%" }} &gt;
+                &lt;div className="col s4 offset-s1" id="loginFormRender" &gt;
                     &lt;ReactiveBase
                         app={config.credential_appbase.app}
                         credentials={config.credential_appbase.credentials}

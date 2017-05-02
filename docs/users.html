@@ -50,6 +50,7 @@
                 </a>
                 
                 
+                
                 <a class="source" href="navbar.html">
                   navbar.js
                 </a>
@@ -187,7 +188,7 @@
                     customQuery={customQuery}
                     showUI={false}
                 /&gt;
-                &lt;div style={{ marginTop: "15%" }}&gt;
+                &lt;div id="listfollowing"&gt;
                     &lt;ReactiveList
                         title="Following"
                         componentId={"FollowingActuator"}
@@ -416,7 +417,7 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> User = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collection"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"collecton-item"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">margin:</span> "<span class="hljs-attr">3</span>% <span class="hljs-attr">auto</span> <span class="hljs-attr">3</span>% <span class="hljs-attr">5</span>%" }}&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"user"</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">{</span>`/<span class="hljs-attr">profile</span>/${<span class="hljs-attr">props.name</span>}`}&gt;</span>{props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>

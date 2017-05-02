@@ -143,7 +143,7 @@ export default class Profile extends Component {
         const loggedUser = localStorage.user;
         this.props.router.replace({ pathname: `/${loggedUser}`, query: { show: 0 } });
     }
-
+    // on `Profile` button press, switch to logged in user's profile
     goProfile(event) {
         event.preventDefault();
         const loggedUser = localStorage.user;

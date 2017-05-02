@@ -299,9 +299,23 @@
                 <span class="hljs-attr">match_all</span>: {}
             }
         };
-    }
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>CustomQuerytweets that returns query to display tweets.<br />
+Here, when page loads if query.show is <code>1</code> Global tweets’ query is returned, else Personal tweets are returned.</p>
 
-    CustomQuerytweets() {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    CustomQuerytweets() {
         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.location.query) {
             <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.location.query.show == <span class="hljs-number">1</span>) {
                 <span class="hljs-keyword">this</span>.setBgCOlor(<span class="hljs-string">"globalButton"</span>, <span class="hljs-string">"personalButton"</span>);
@@ -334,11 +348,11 @@
         </li>
         
         
-        <li id="section-11">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p><code>render()</code> renders the dashboard page with <code>Navbar</code> on top and other components like user icons and feed.<br /><br />
 the flag <code>pflg</code> is set to <code>1</code> and passed to NavBar to get navigation bar for dashboard.<br />
@@ -370,10 +384,10 @@ Here, <code>NavBar</code> component is used to render navigation bar. <br /><br 
                         credentials={config.credential_appbase.credentials}
                         type="users"
                     &gt;
-                        &lt;div style={{ height: "25%" }}&gt;
-                            &lt;div style={{ margin: "0 auto 0 auto" }}&gt;
-                                &lt;img style={{ height: "100px", padding: "3%", margin: "0 0 0 25%" }} src="/user@2x.png" alt="UserImage" /&gt;
-                                &lt;h3 style={{ textAlign: "center", marginTop: "auto" }}&gt;{this.props.params.uname}&lt;/h3&gt;&lt;br /&gt;
+                        &lt;div id="userblock"&gt;
+                            &lt;div id="usermarginblock"&gt;
+                                &lt;img id="userimagedashboard" src="/user@2x.png" alt="UserImage" /&gt;
+                                &lt;h3 id="username" &gt;{this.props.params.uname}&lt;/h3&gt;&lt;br /&gt;
                             &lt;/div&gt;
                         &lt;/div&gt;
                         &lt;DataController
@@ -381,7 +395,7 @@ Here, <code>NavBar</code> component is used to render navigation bar. <br /><br 
                             customQuery={this.customQueryGlobal}
                             showUI={false}
                         /&gt;
-                        &lt;div className="z-depth-1" style={{ marginTop: "5%", height: "auto" }}&gt;
+                        &lt;div className="z-depth-1" id="userslist"&gt;
                             &lt;ReactiveList
                                 title="Users"
                                 componentId="UsersActuator"
@@ -402,7 +416,7 @@ Here, <code>NavBar</code> component is used to render navigation bar. <br /><br 
 
                 &lt;div className="col s8 m6 offset-m1"&gt;
                     &lt;form id="newtweet" onSubmit={this.newTweet}&gt;
-                        &lt;input id="inputtweet" type="text accent-2" placeholder="Your tweet here..." style={{ width: "80%", height: "45px", margin: "5% 0 0 0" }} /&gt;
+                        &lt;input id="inputtweet" type="text accent-2" placeholder="Your tweet here..."  /&gt;
                         &lt;input type="submit" value="Tweet" className="waves-effect waves-light btn" /&gt;
                     &lt;/form&gt;
                     &lt;DataController

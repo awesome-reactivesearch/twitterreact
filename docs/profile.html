@@ -50,6 +50,7 @@
                 </a>
                 
                 
+                
                 <a class="source" href="navbar.html">
                   navbar.js
                 </a>
@@ -383,12 +384,6 @@
         event.preventDefault();
         <span class="hljs-keyword">const</span> loggedUser = localStorage.user;
         <span class="hljs-keyword">this</span>.props.router.replace({ <span class="hljs-attr">pathname</span>: <span class="hljs-string">`/<span class="hljs-subst">${loggedUser}</span>`</span>, <span class="hljs-attr">query</span>: { <span class="hljs-attr">show</span>: <span class="hljs-number">0</span> } });
-    }
-
-    goProfile(event) {
-        event.preventDefault();
-        <span class="hljs-keyword">const</span> loggedUser = localStorage.user;
-        <span class="hljs-keyword">this</span>.props.router.replace(<span class="hljs-string">`/profile/<span class="hljs-subst">${loggedUser}</span>`</span>);
     }</pre></div></div>
             
         </li>
@@ -400,18 +395,15 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>renders the profile component</p>
+              <p>on <code>Profile</code> button press, switch to logged in user’s profile</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    render() {
-        <span class="hljs-keyword">const</span> msgStyles = {
-            <span class="hljs-attr">maxWidth</span>: <span class="hljs-number">800</span>,
-            <span class="hljs-attr">marginLeft</span>: <span class="hljs-string">"10%"</span>,
-            <span class="hljs-attr">marginTop</span>: <span class="hljs-string">"2%"</span>
-        };
-
-        <span class="hljs-keyword">const</span> pflg = <span class="hljs-number">1</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    goProfile(event) {
+        event.preventDefault();
+        <span class="hljs-keyword">const</span> loggedUser = localStorage.user;
+        <span class="hljs-keyword">this</span>.props.router.replace(<span class="hljs-string">`/profile/<span class="hljs-subst">${loggedUser}</span>`</span>);
+    }</pre></div></div>
             
         </li>
         
@@ -421,6 +413,22 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>renders the profile component</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    render() {
+        <span class="hljs-keyword">const</span> pflg = <span class="hljs-number">1</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p><code>pflg</code> set to <code>1</code> i.e flage for navbar for profile page
 <code>NavBar</code> component to render navigation bar for profile page.<br />
@@ -443,7 +451,7 @@ It contains <code>PersonalTweets</code> actuator component that receives tweets 
                     goProfile={this.goProfile}
                 /&gt;
 
-                &lt;div className="col m2 s6 offset-s1 offset-m1" style={{ marginTop: "3%" }}&gt;
+                &lt;div className="col m2 s6 offset-s1 offset-m1" id="listfollow"&gt;
                     &lt;ListFollowers
                         user={this.props.params.uname}
                         onDataFollowers={this.onDataFollowers}
@@ -454,15 +462,15 @@ It contains <code>PersonalTweets</code> actuator component that receives tweets 
                     /&gt;
                 &lt;/div&gt;
 
-                &lt;div id="userinfo" className="col s12 m7 l91" style={msgStyles}&gt;
-                    &lt;div style={{ float: "left", width: "20%" }}&gt;
-                        &lt;img style={{ height: "100px", margin: "15% 10% 15% 15%" }} src="/user@2x.png" alt="UserImage" /&gt;
+                &lt;div id="userinfo" className="col s12 m7 l91"&gt;
+                    &lt;div id="userinfoBlock"&gt;
+                        &lt;img id="userimgProfile" src="/user@2x.png" alt="UserImage" /&gt;
                     &lt;/div&gt;
-                    &lt;div style={{ float: "left", width: "80%" }} &gt;
-                        &lt;div style={{ float: "left" }}&gt;
-                            &lt;h3 style={{ textAlign: "center" }}&gt;{this.props.params.uname}&lt;/h3&gt;
+                    &lt;div id="userSide" &gt;
+                        &lt;div id="userSideblock" &gt;
+                            &lt;h3 id="usernameProfile"&gt;{this.props.params.uname}&lt;/h3&gt;
                         &lt;/div&gt;
-                        &lt;div style={{ width: "100%", float: "left" }} key={this.state}&gt;
+                        &lt;div id="followblock" key={this.state}&gt;
                             {(localStorage.user !== this.props.params.uname) ? (
                                 &lt;div className="col s2" key={this.state}&gt;
                                     &lt;ChkFollowing
@@ -474,12 +482,12 @@ It contains <code>PersonalTweets</code> actuator component that receives tweets 
                                 &lt;/div&gt;) : (
                                     &lt;div /&gt;)}
                             &lt;div id="followstats" key={this.state.followingFlg}&gt;
-                                &lt;button className="col s4 btn disabled" style={{ backgroundColor: "blue", marginLeft: "2%", marginRight: "1%" }}&gt;Followers {this.state.nfollowing}&lt;/button&gt;
-                                &lt;button className="col s4 btn disabled" style={{ backgroundColor: "blue" }}&gt;Following {this.state.nfollowers}&lt;/button&gt;
+                                &lt;button className="col s4 btn disabled" id="followersNo"&gt;Followers {this.state.nfollowing}&lt;/button&gt;
+                                &lt;button className="col s4 btn disabled" id="followingNo"&gt;Following {this.state.nfollowers}&lt;/button&gt;
                             &lt;/div&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
-                    &lt;div className="col s8" style={{ marginTop: "3%" }}&gt;
+                    &lt;div className="col s8" id="personaltweets"&gt;
                         &lt;DataController
                             componentId={"UserProfileTweet"}
                             appbaseField="by"
