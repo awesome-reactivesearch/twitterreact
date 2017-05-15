@@ -9,8 +9,8 @@ const LoginForm = (props) => {
     
     return (
         <form className="col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2" id="login" onSubmit={props.onLogin}>
-            <input type="text blue accent-2" placeholder="Name" id="txtstyle"/><br />
-            <button type="submit" id="loginFormSubmit" className="waves-effect waves-light btn" >Enter your name</button>
+            <input type="text blue accent-2" placeholder="Name"/><br />
+            <button type="submit" className="waves-effect waves-light btn" >Enter your name</button>
         </form>
     );
 };
@@ -92,14 +92,14 @@ export default class Login extends Component {
                     }}
                 />
                 <div className="row" >
-                    <div id="loginFormRender">
+                    <div className="form-m2">
                         <LoginForm
                             onLogin={this.onLogin}
                         />
                     </div>
                 </div>
 
-                <div className="row" id="tweetsList">
+                <div className="row tweetsList">
                     <div className="col s10 offset-s1">
                         <DataController
                             componentId="GlobalTweet"

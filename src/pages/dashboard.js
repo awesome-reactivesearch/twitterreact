@@ -158,9 +158,9 @@ export default class Dashboard extends Component {
                         type="users"
                     >
                         <div id="userblock">
-                            <div id="usermarginblock">
-                                <img id="userimagedashboard" src="/user@2x.png" alt="UserImage" />
-                                <h3 id="username" >{this.props.params.uname}</h3><br />
+                            <div>
+                                <img  src="/user@2x.png" alt="UserImage" />
+                                <h3>{this.props.params.uname}</h3><br />
                             </div>
                         </div>
                         <DataController
@@ -168,7 +168,7 @@ export default class Dashboard extends Component {
                             customQuery={this.customQueryGlobal}
                             showUI={false}
                         />
-                        <div className="z-depth-1" id="userslist">
+                        <div className="z-depth-1 userslist">
                             <ReactiveList
                                 title="Users"
                                 componentId="UsersActuator"

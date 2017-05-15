@@ -36,9 +36,9 @@ const PersonalTweets = (props) => {
 const Tweet = props => (
     <div className="collection">
         <div className="collecton-item">
-            <p id="tweet">
+            <p  className="tweet">
                 {(props.path === "/") ? (props.usr) : (<Link to={`/profile/${props.usr}`}>{props.usr}</Link>)}
-                <label htmlFor="tweet" id="labeltweet">
+                <label htmlFor="tweet" className="labeltweet">
                     {(new moment(props.date)).fromNow()}
                 </label>
                 <br />

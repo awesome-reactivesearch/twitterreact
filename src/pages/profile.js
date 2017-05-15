@@ -12,9 +12,9 @@ import { NavBar } from "../nav/navbar";
 // `ChkFollowing` chks whether the logged in user follows the current user and returns a *Follow or Unfollow* button accordingly
 const ChkFollowing = (props) => {
     if (props.setKey) {
-        return (<button value="Unfollow" id="unfollowbutton" onClick={props.unfollowUser} key={props.setKey}>Unfollow</button>);
+        return (<button value="Unfollow" className="fbutton unfollowbutton" onClick={props.unfollowUser} key={props.setKey}>Unfollow</button>);
     }
-    return (<button value="Follow" id="followbutton" onClick={props.followUser} key={props.setKey}>Follow</button>);
+    return (<button value="Follow" className="fbutton followbutton" onClick={props.followUser} key={props.setKey}>Follow</button>);
 };
 
 // `Profile` component renders profile page of the app
@@ -171,7 +171,7 @@ export default class Profile extends Component {
                     goProfile={this.goProfile}
                 />
 
-                <div className="col m2 s6 offset-s1 offset-m1" id="listfollow">
+                <div className="col m2 s6 offset-s1 offset-m1 mtop-3">
                     <ListFollowers
                         user={this.props.params.uname}
                         onDataFollowers={this.onDataFollowers}
@@ -182,15 +182,15 @@ export default class Profile extends Component {
                     />
                 </div>
 
-                <div id="userinfo" className="col s12 m7 l91">
+                <div className="col s12 m7 l91 userinfo">
                     <div id="userinfoBlock">
-                        <img id="userimgProfile" src="/user@2x.png" alt="UserImage" />
+                        <img src="/user@2x.png" alt="UserImage" />
                     </div>
-                    <div id="userSide" >
+                    <div className="userSide" >
                         <div id="userSideblock" >
-                            <h3 id="usernameProfile">{this.props.params.uname}</h3>
+                            <h3>{this.props.params.uname}</h3>
                         </div>
-                        <div id="followblock" key={this.state}>
+                        <div className="followblock" key={this.state}>
                             {(localStorage.user !== this.props.params.uname) ? (
                                 <div className="col s2" key={this.state}>
                                     <ChkFollowing
@@ -201,13 +201,13 @@ export default class Profile extends Component {
                                     />
                                 </div>) : (
                                     <div />)}
-                            <div id="followstats" key={this.state.followingFlg}>
-                                <button className="col s4 btn disabled" id="followersNo">Followers {this.state.nfollowing}</button>
-                                <button className="col s4 btn disabled" id="followingNo">Following {this.state.nfollowers}</button>
+                            <div key={this.state.followingFlg}>
+                                <button className="col s4 btn disabled followersno">Followers {this.state.nfollowing}</button>
+                                <button className="col s4 btn disabled">Following {this.state.nfollowers}</button>
                             </div>
                         </div>
                     </div>
-                    <div className="col s8" id="personaltweets">
+                    <div className="col s8 personaltweets">
                         <DataController
                             componentId={"UserProfileTweet"}
                             appbaseField="by"

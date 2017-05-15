@@ -71,7 +71,7 @@ const ListFollowing = (props) => {
                     customQuery={customQuery}
                     showUI={false}
                 />
-                <div id="listfollowing">
+                <div className="mtop-15">
                     <ReactiveList
                         title="Following"
                         componentId={"FollowingActuator"}

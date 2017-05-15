@@ -8,15 +8,15 @@ import { NavOptions } from "./navoptions";
 const NavBar = props =>
     (
         <div className="navbar-fixed">
-            <nav id="navbar">
-                <div className="nav-wrapper" id="navBarWrapper">
-                    <div id="txtAppbase">
-                        <Link id="linktxt" to={"/"}>Twitter on Appbase</Link>
+            <nav>
+                <div className="nav-wrapper">
+                    <div>
+                        <Link to={"/"}>Twitter on Appbase</Link>
                     </div>
-                    <div id="searchBarBlock">
+                    <div className="searchBarBlock">
                         <form onSubmit={props.onSearch}>
-                            <input type="text blue accent-2" id="searchtxt" placeholder="Search Tweets..." />
-                            <button type="submit" id="searchbutton" className="waves-effect waves-light btn">Search</button>
+                            <input type="text blue accent-2" placeholder="Search Tweets..." />
+                            <button type="submit" className="waves-effect waves-light btn buttonNavOptions">Search</button>
                         </form>
 
                     </div>

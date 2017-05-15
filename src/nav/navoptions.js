@@ -6,10 +6,10 @@ import React from "react";
 const NavOptions = (props) => {
     if (props.pflg === -1) {
         return (
-            <div id="viewCodeBlock">
+            <div className="viewCodeBlock">
                 {(props.path === "/") ? (
                     <div>
-                        <a href="./docs/login.html" className="waves-effect waves-light btn blue lighten-2">View Code
+                        <a href="./docs/login.html" id="viewcode" className="waves-effect waves-light btn blue lighten-2">View Code
                         </a>
                     </div>
         ) : (<div />)}
@@ -17,15 +17,15 @@ const NavOptions = (props) => {
     }
 
     return (
-        <div id="navOptions">
-            <div id="navOptions">
-                <button id="buttonNavOptions" className="left hide-on-med-and-down waves-effect waves-light btn" value="Profile" onClick={props.goProfile} >Profile</button>
-                <button id="buttonNavOptions" value="Logout" onClick={props.logOut} className="waves-effect waves-light btn" >Logout</button>
+        <div className="navOptions">
+            <div className="navOptions">
+                <button className="left hide-on-med-and-down waves-effect waves-light btn buttonNavOptions" value="Profile" onClick={props.goProfile} >Profile</button>
+                <button value="Logout" onClick={props.logOut} className="waves-effect waves-light btn buttonNavOptions" >Logout</button>
             </div>
-            <div id="tweetToggleBlock" className="right hide-on-med-and-down z-depth-0" >
+            <div className="right hide-on-med-and-down z-depth-0 tweetToggleBlock" >
                 <div key={props.user}>
-                    <button id="globalButton" className="waves-effect waves-light grey lighten-4 btn" value="Global" onClick={props.goGlobalFeed}>Global</button>
-                    <button id="personalButton" className="waves-effect waves-light grey lighten-4 btn" value="Personal" onClick={props.goPresonalFeed}>Personal</button>
+                    <button id="globalButton" className="waves-effect waves-light grey lighten-4 btn buttonNavOptions" value="Global" onClick={props.goGlobalFeed}>Global</button>
+                    <button id="personalButton" className="waves-effect waves-light grey lighten-4 btn buttonNavOptions" value="Personal" onClick={props.goPresonalFeed}>Personal</button>
                 </div>
 
             </div>
