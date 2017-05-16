@@ -33,13 +33,13 @@ export default class Dashboard extends Component {
     onSearch(event) {
         event.preventDefault();
         const t = event.target[0].value;
-        this.props.router.push(`/search/${t}`);
+        this.props.router.push(`/twitterreact/search/${t}`);
     }
 
     // on `Logout` button press, remove user session from localStorage and route to home
     logOut(event) {
         event.preventDefault();
-        this.props.router.push("/");
+        this.props.router.push("/twitterreact/");
         delete localStorage.user;
     }
 
@@ -47,7 +47,7 @@ export default class Dashboard extends Component {
     goProfile(event) {
         event.preventDefault();
         const u = this.props.params.uname;
-        this.props.router.replace(`/profile/${u}`);
+        this.props.router.replace(`/twitterreact/profile/${u}`);
     }
 
     // set background color button
@@ -159,7 +159,7 @@ export default class Dashboard extends Component {
                     >
                         <div id="userblock">
                             <div>
-                                <img  src="/user@2x.png" alt="UserImage" />
+                                <img  src="/twitterreact/user@2x.png" alt="UserImage" />
                                 <h3>{this.props.params.uname}</h3><br />
                             </div>
                         </div>

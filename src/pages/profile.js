@@ -45,7 +45,7 @@ export default class Profile extends Component {
         const t = event.target[0].value;
 
 
-        this.props.router.push(`/search/${t}`);
+        this.props.router.push(`/twitterreact/search/${t}`);
     }
 
     // Updates the followers count. Called when the `ListFollowers` component gets data.
@@ -120,13 +120,13 @@ export default class Profile extends Component {
     goLocal(event) {
         event.preventDefault();
         const u = localStorage.user;
-        this.props.router.replace(`/${u}`);
+        this.props.router.replace(`/twitterreact/${u}`);
     }
 
     // on `Logout` button press, remove user session from localStorage and route to home
     logOut(event) {
         event.preventDefault();
-        this.props.router.push("/");
+        this.props.router.push("/twitterreact/");
         delete localStorage.user;
     }
 
@@ -134,20 +134,20 @@ export default class Profile extends Component {
     goGlobalFeed(event) {
         event.preventDefault();
         const loggedUser = localStorage.user;
-        this.props.router.replace({ pathname: `/${loggedUser}`, query: { show: 1 } });
+        this.props.router.replace({ pathname: `/twitterreact/${loggedUser}`, query: { show: 1 } });
     }
 
     // on `Personal` button press, switch to logged in user's dashboard with a view showing personal tweets.
     goPresonalFeed(event) {
         event.preventDefault();
         const loggedUser = localStorage.user;
-        this.props.router.replace({ pathname: `/${loggedUser}`, query: { show: 0 } });
+        this.props.router.replace({ pathname: `/twitterreact/${loggedUser}`, query: { show: 0 } });
     }
     // on `Profile` button press, switch to logged in user's profile
     goProfile(event) {
         event.preventDefault();
         const loggedUser = localStorage.user;
-        this.props.router.replace(`/profile/${loggedUser}`);
+        this.props.router.replace(`/twitterreact/profile/${loggedUser}`);
     }
 
     // renders the profile component
@@ -184,7 +184,7 @@ export default class Profile extends Component {
 
                 <div className="col s12 m7 l91 userinfo">
                     <div id="userinfoBlock">
-                        <img src="/user@2x.png" alt="UserImage" />
+                        <img src="/twitterreact/user@2x.png" alt="UserImage" />
                     </div>
                     <div className="userSide" >
                         <div id="userSideblock" >

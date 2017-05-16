@@ -11,7 +11,7 @@ const NavBar = props =>
             <nav>
                 <div className="nav-wrapper">
                     <div>
-                        <Link to={"/"}>Twitter on Appbase</Link>
+                        <Link to={"/twitterreact/"}>Twitter on Appbase</Link>
                     </div>
                     <div className="searchBarBlock">
                         <form onSubmit={props.onSearch}>

@@ -185,7 +185,7 @@ const User = props => (
     <div className="collection">
         <div className="collecton-item">
             <p id="user">
-                <Link to={`/profile/${props.name}`}>{props.name}</Link>
+                <Link to={`/twitterreact/profile/${props.name}`}>{props.name}</Link>
             </p>
         </div>
     </div>

@@ -7,7 +7,7 @@ const NavOptions = (props) => {
     if (props.pflg === -1) {
         return (
             <div className="viewCodeBlock">
-                {(props.path === "/") ? (
+                {(props.path === "/twitterreact/") ? (
                     <div>
                         <a href="./docs/login.html" id="viewcode" className="waves-effect waves-light btn blue lighten-2">View Code
                         </a>

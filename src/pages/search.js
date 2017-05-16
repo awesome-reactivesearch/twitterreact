@@ -22,7 +22,7 @@ export default class Search extends Component {
     onSearch(event) {
         event.preventDefault();
         const t = event.target[0].value;
-        this.props.router.replace(`/search/${t}`);
+        this.props.router.replace(`/twitterreact/search/${t}`);
     }
 
     // `CustomQueryTweets` function to return `match` query for `tweets` type
@@ -73,7 +73,7 @@ export default class Search extends Component {
                     />
                     <PersonalTweets
                         user={"$all"}
-                        path={"/"}
+                        path={"/twitterreact/"}
                         reactOn={["SearchTweet"]}
                     />
                 </div>
