@@ -19,23 +19,12 @@
           <div id="jump_page_wrapper">
             <div id="jump_page">
               
-                <a class="source" href="index.html">
-                  index.js
-                </a>
                 
-
-                <a class="source" href="login.html">
-                  login.js
-                </a>
-
-                <a class="source" href="dashboard.html">
-                  dashboard.js
-                </a>
-            
-                <a class="source" href="profile.html">
-                  profile.js
+                <a class="source" href="config.html">
+                  config.js
                 </a>
               
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -45,11 +34,11 @@
                   users.js
                 </a>
               
-                <a class="source" href="search.html">
-                  search.js
+                
+                <a class="source" href="index.html">
+                  index.js
                 </a>
-                
-                
+              
                 
                 <a class="source" href="navbar.html">
                   navbar.js
@@ -61,10 +50,23 @@
                 </a>
               
                 
+                <a class="source" href="dashboard.html">
+                  dashboard.js
+                </a>
+              
                 
-
-                <a class="source" href="config.html">
-                  config.js
+                <a class="source" href="login.html">
+                  login.js
+                </a>
+              
+                
+                <a class="source" href="profile.html">
+                  profile.js
+                </a>
+              
+                
+                <a class="source" href="search.html">
+                  search.js
                 </a>
               
             </div>
@@ -113,15 +115,15 @@ NavBar uses NavOptions to add buttons depending upon the current page.<br /><br 
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> NavBar = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span>
     (
         &lt;div className="navbar-fixed"&gt;
-            &lt;nav id="navbar"&gt;
-                &lt;div className="nav-wrapper" id="navBarWrapper"&gt;
-                    &lt;div id="txtAppbase"&gt;
-                        &lt;Link id="linktxt" to={"/"}&gt;Twitter on Appbase&lt;/Link&gt;
+            &lt;nav&gt;
+                &lt;div className="nav-wrapper"&gt;
+                    &lt;div&gt;
+                        &lt;Link to={"/"}&gt;Twitter on Appbase&lt;/Link&gt;
                     &lt;/div&gt;
-                    &lt;div id="searchBarBlock"&gt;
+                    &lt;div className="searchBarBlock"&gt;
                         &lt;form onSubmit={props.onSearch}&gt;
-                            &lt;input type="text blue accent-2" id="searchtxt" placeholder="Search Tweets..." /&gt;
-                            &lt;button type="submit" id="searchbutton" className="waves-effect waves-light btn"&gt;Search&lt;/button&gt;
+                            &lt;input type="text blue accent-2" placeholder="Search Tweets..." /&gt;
+                            &lt;button type="submit" className="waves-effect waves-light btn buttonNavOptions"&gt;Search&lt;/button&gt;
                         &lt;/form&gt;
 
                     &lt;/div&gt;

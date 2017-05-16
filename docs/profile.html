@@ -19,23 +19,12 @@
           <div id="jump_page_wrapper">
             <div id="jump_page">
               
-                <a class="source" href="index.html">
-                  index.js
-                </a>
                 
-
-                <a class="source" href="login.html">
-                  login.js
-                </a>
-
-                <a class="source" href="dashboard.html">
-                  dashboard.js
-                </a>
-            
-                <a class="source" href="profile.html">
-                  profile.js
+                <a class="source" href="config.html">
+                  config.js
                 </a>
               
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -45,11 +34,11 @@
                   users.js
                 </a>
               
-                <a class="source" href="search.html">
-                  search.js
+                
+                <a class="source" href="index.html">
+                  index.js
                 </a>
-                
-                
+              
                 
                 <a class="source" href="navbar.html">
                   navbar.js
@@ -61,10 +50,23 @@
                 </a>
               
                 
+                <a class="source" href="dashboard.html">
+                  dashboard.js
+                </a>
+              
                 
-
-                <a class="source" href="config.html">
-                  config.js
+                <a class="source" href="login.html">
+                  login.js
+                </a>
+              
+                
+                <a class="source" href="profile.html">
+                  profile.js
+                </a>
+              
+                
+                <a class="source" href="search.html">
+                  search.js
                 </a>
               
             </div>
@@ -117,9 +119,9 @@
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> ChkFollowing = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
     <span class="hljs-keyword">if</span> (props.setKey) {
-        <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Unfollow"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"unfollowbutton"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.unfollowUser}</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{props.setKey}</span>&gt;</span>Unfollow<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>);
+        <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Unfollow"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"fbutton unfollowbutton"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.unfollowUser}</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{props.setKey}</span>&gt;</span>Unfollow<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>);
     }
-    <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Follow"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"followbutton"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.followUser}</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{props.setKey}</span>&gt;</span>Follow<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>);
+    <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Follow"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"fbutton followbutton"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.followUser}</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{props.setKey}</span>&gt;</span>Follow<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>);
 };</pre></div></div>
             
         </li>
@@ -451,7 +453,7 @@ It contains <code>PersonalTweets</code> actuator component that receives tweets 
                     goProfile={this.goProfile}
                 /&gt;
 
-                &lt;div className="col m2 s6 offset-s1 offset-m1" id="listfollow"&gt;
+                &lt;div className="col m2 s6 offset-s1 offset-m1 mtop-3"&gt;
                     &lt;ListFollowers
                         user={this.props.params.uname}
                         onDataFollowers={this.onDataFollowers}
@@ -462,15 +464,15 @@ It contains <code>PersonalTweets</code> actuator component that receives tweets 
                     /&gt;
                 &lt;/div&gt;
 
-                &lt;div id="userinfo" className="col s12 m7 l91"&gt;
+                &lt;div className="col s12 m7 l91 userinfo"&gt;
                     &lt;div id="userinfoBlock"&gt;
-                        &lt;img id="userimgProfile" src="/user@2x.png" alt="UserImage" /&gt;
+                        &lt;img src="/user@2x.png" alt="UserImage" /&gt;
                     &lt;/div&gt;
-                    &lt;div id="userSide" &gt;
+                    &lt;div className="userSide" &gt;
                         &lt;div id="userSideblock" &gt;
-                            &lt;h3 id="usernameProfile"&gt;{this.props.params.uname}&lt;/h3&gt;
+                            &lt;h3&gt;{this.props.params.uname}&lt;/h3&gt;
                         &lt;/div&gt;
-                        &lt;div id="followblock" key={this.state}&gt;
+                        &lt;div className="followblock" key={this.state}&gt;
                             {(localStorage.user !== this.props.params.uname) ? (
                                 &lt;div className="col s2" key={this.state}&gt;
                                     &lt;ChkFollowing
@@ -481,13 +483,13 @@ It contains <code>PersonalTweets</code> actuator component that receives tweets 
                                     /&gt;
                                 &lt;/div&gt;) : (
                                     &lt;div /&gt;)}
-                            &lt;div id="followstats" key={this.state.followingFlg}&gt;
-                                &lt;button className="col s4 btn disabled" id="followersNo"&gt;Followers {this.state.nfollowing}&lt;/button&gt;
-                                &lt;button className="col s4 btn disabled" id="followingNo"&gt;Following {this.state.nfollowers}&lt;/button&gt;
+                            &lt;div key={this.state.followingFlg}&gt;
+                                &lt;button className="col s4 btn disabled followersno"&gt;Followers {this.state.nfollowing}&lt;/button&gt;
+                                &lt;button className="col s4 btn disabled"&gt;Following {this.state.nfollowers}&lt;/button&gt;
                             &lt;/div&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
-                    &lt;div className="col s8" id="personaltweets"&gt;
+                    &lt;div className="col s8 personaltweets"&gt;
                         &lt;DataController
                             componentId={"UserProfileTweet"}
                             appbaseField="by"

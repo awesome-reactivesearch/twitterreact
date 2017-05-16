@@ -19,23 +19,12 @@
           <div id="jump_page_wrapper">
             <div id="jump_page">
               
-                <a class="source" href="index.html">
-                  index.js
-                </a>
                 
-
-                <a class="source" href="login.html">
-                  login.js
-                </a>
-
-                <a class="source" href="dashboard.html">
-                  dashboard.js
-                </a>
-            
-                <a class="source" href="profile.html">
-                  profile.js
+                <a class="source" href="config.html">
+                  config.js
                 </a>
               
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -45,11 +34,11 @@
                   users.js
                 </a>
               
-                <a class="source" href="search.html">
-                  search.js
+                
+                <a class="source" href="index.html">
+                  index.js
                 </a>
-                
-                
+              
                 
                 <a class="source" href="navbar.html">
                   navbar.js
@@ -61,10 +50,23 @@
                 </a>
               
                 
+                <a class="source" href="dashboard.html">
+                  dashboard.js
+                </a>
+              
                 
-
-                <a class="source" href="config.html">
-                  config.js
+                <a class="source" href="login.html">
+                  login.js
+                </a>
+              
+                
+                <a class="source" href="profile.html">
+                  profile.js
+                </a>
+              
+                
+                <a class="source" href="search.html">
+                  search.js
                 </a>
               
             </div>
@@ -385,9 +387,9 @@ Here, <code>NavBar</code> component is used to render navigation bar. <br /><br 
                         type="users"
                     &gt;
                         &lt;div id="userblock"&gt;
-                            &lt;div id="usermarginblock"&gt;
-                                &lt;img id="userimagedashboard" src="/user@2x.png" alt="UserImage" /&gt;
-                                &lt;h3 id="username" &gt;{this.props.params.uname}&lt;/h3&gt;&lt;br /&gt;
+                            &lt;div&gt;
+                                &lt;img  src="/user@2x.png" alt="UserImage" /&gt;
+                                &lt;h3&gt;{this.props.params.uname}&lt;/h3&gt;&lt;br /&gt;
                             &lt;/div&gt;
                         &lt;/div&gt;
                         &lt;DataController
@@ -395,7 +397,7 @@ Here, <code>NavBar</code> component is used to render navigation bar. <br /><br 
                             customQuery={this.customQueryGlobal}
                             showUI={false}
                         /&gt;
-                        &lt;div className="z-depth-1" id="userslist"&gt;
+                        &lt;div className="z-depth-1 userslist"&gt;
                             &lt;ReactiveList
                                 title="Users"
                                 componentId="UsersActuator"

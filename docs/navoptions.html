@@ -19,23 +19,12 @@
           <div id="jump_page_wrapper">
             <div id="jump_page">
               
-                <a class="source" href="index.html">
-                  index.js
-                </a>
                 
-
-                <a class="source" href="login.html">
-                  login.js
-                </a>
-
-                <a class="source" href="dashboard.html">
-                  dashboard.js
-                </a>
-            
-                <a class="source" href="profile.html">
-                  profile.js
+                <a class="source" href="config.html">
+                  config.js
                 </a>
               
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -45,11 +34,11 @@
                   users.js
                 </a>
               
-                <a class="source" href="search.html">
-                  search.js
+                
+                <a class="source" href="index.html">
+                  index.js
                 </a>
-                
-                
+              
                 
                 <a class="source" href="navbar.html">
                   navbar.js
@@ -61,10 +50,23 @@
                 </a>
               
                 
+                <a class="source" href="dashboard.html">
+                  dashboard.js
+                </a>
+              
                 
-
-                <a class="source" href="config.html">
-                  config.js
+                <a class="source" href="login.html">
+                  login.js
+                </a>
+              
+                
+                <a class="source" href="profile.html">
+                  profile.js
+                </a>
+              
+                
+                <a class="source" href="search.html">
+                  search.js
                 </a>
               
             </div>
@@ -111,10 +113,10 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> NavOptions = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
     <span class="hljs-keyword">if</span> (props.pflg === <span class="hljs-number">-1</span>) {
         <span class="hljs-keyword">return</span> (
-            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"viewCodeBlock"</span>&gt;</span>
+            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"viewCodeBlock"</span>&gt;</span>
                 {(props.path === "/") ? (
                     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"./docs/login.html"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light btn blue lighten-2"</span>&gt;</span>View Code
+                        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"./docs/login.html"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"viewcode"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light btn blue lighten-2"</span>&gt;</span>View Code
                         <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
                     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         ) : (<span class="hljs-tag">&lt;<span class="hljs-name">div</span> /&gt;</span>)}
@@ -122,15 +124,15 @@
     }
 
     <span class="hljs-keyword">return</span> (
-        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"navOptions"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"navOptions"</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"buttonNavOptions"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"left hide-on-med-and-down waves-effect waves-light btn"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Profile"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.goProfile}</span> &gt;</span>Profile<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"buttonNavOptions"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Logout"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.logOut}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light btn"</span> &gt;</span>Logout<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"navOptions"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"navOptions"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"left hide-on-med-and-down waves-effect waves-light btn buttonNavOptions"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Profile"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.goProfile}</span> &gt;</span>Profile<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Logout"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.logOut}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light btn buttonNavOptions"</span> &gt;</span>Logout<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"tweetToggleBlock"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"right hide-on-med-and-down z-depth-0"</span> &gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"right hide-on-med-and-down z-depth-0 tweetToggleBlock"</span> &gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{props.user}</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"globalButton"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light grey lighten-4 btn"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Global"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.goGlobalFeed}</span>&gt;</span>Global<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"personalButton"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light grey lighten-4 btn"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Personal"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.goPresonalFeed}</span>&gt;</span>Personal<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"globalButton"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light grey lighten-4 btn buttonNavOptions"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Global"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.goGlobalFeed}</span>&gt;</span>Global<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"personalButton"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light grey lighten-4 btn buttonNavOptions"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Personal"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.goPresonalFeed}</span>&gt;</span>Personal<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
                 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>

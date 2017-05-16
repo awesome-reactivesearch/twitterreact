@@ -19,23 +19,12 @@
           <div id="jump_page_wrapper">
             <div id="jump_page">
               
-                <a class="source" href="index.html">
-                  index.js
-                </a>
                 
-
-                <a class="source" href="login.html">
-                  login.js
-                </a>
-
-                <a class="source" href="dashboard.html">
-                  dashboard.js
-                </a>
-            
-                <a class="source" href="profile.html">
-                  profile.js
+                <a class="source" href="config.html">
+                  config.js
                 </a>
               
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -45,11 +34,11 @@
                   users.js
                 </a>
               
-                <a class="source" href="search.html">
-                  search.js
+                
+                <a class="source" href="index.html">
+                  index.js
                 </a>
-                
-                
+              
                 
                 <a class="source" href="navbar.html">
                   navbar.js
@@ -61,10 +50,23 @@
                 </a>
               
                 
+                <a class="source" href="dashboard.html">
+                  dashboard.js
+                </a>
+              
                 
-
-                <a class="source" href="config.html">
-                  config.js
+                <a class="source" href="login.html">
+                  login.js
+                </a>
+              
+                
+                <a class="source" href="profile.html">
+                  profile.js
+                </a>
+              
+                
+                <a class="source" href="search.html">
+                  search.js
                 </a>
               
             </div>
@@ -114,8 +116,8 @@
     
     <span class="hljs-keyword">return</span> (
         <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"col s6 m3 offset-s2 offset-m5 z-depth-1 grey lighten-2"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"login"</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{props.onLogin}</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text blue accent-2"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Name"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"txtstyle"</span>/&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"loginFormSubmit"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light btn"</span> &gt;</span>Enter your name<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text blue accent-2"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Name"</span>/&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"waves-effect waves-light btn"</span> &gt;</span>Enter your name<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
     );
 };
@@ -286,14 +288,14 @@
                     }}
                 /&gt;
                 &lt;div className="row" &gt;
-                    &lt;div id="loginFormRender"&gt;
+                    &lt;div className="form-m2"&gt;
                         &lt;LoginForm
                             onLogin={this.onLogin}
                         /&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
 
-                &lt;div className="row" id="tweetsList"&gt;
+                &lt;div className="row tweetsList"&gt;
                     &lt;div className="col s10 offset-s1"&gt;
                         &lt;DataController
                             componentId="GlobalTweet"

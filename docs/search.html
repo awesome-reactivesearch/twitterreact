@@ -19,23 +19,12 @@
           <div id="jump_page_wrapper">
             <div id="jump_page">
               
-                <a class="source" href="index.html">
-                  index.js
-                </a>
                 
-
-                <a class="source" href="login.html">
-                  login.js
-                </a>
-
-                <a class="source" href="dashboard.html">
-                  dashboard.js
-                </a>
-            
-                <a class="source" href="profile.html">
-                  profile.js
+                <a class="source" href="config.html">
+                  config.js
                 </a>
               
+                
                 <a class="source" href="tweets.html">
                   tweets.js
                 </a>
@@ -45,11 +34,11 @@
                   users.js
                 </a>
               
-                <a class="source" href="search.html">
-                  search.js
+                
+                <a class="source" href="index.html">
+                  index.js
                 </a>
-                
-                
+              
                 
                 <a class="source" href="navbar.html">
                   navbar.js
@@ -61,10 +50,23 @@
                 </a>
               
                 
+                <a class="source" href="dashboard.html">
+                  dashboard.js
+                </a>
+              
                 
-
-                <a class="source" href="config.html">
-                  config.js
+                <a class="source" href="login.html">
+                  login.js
+                </a>
+              
+                
+                <a class="source" href="profile.html">
+                  profile.js
+                </a>
+              
+                
+                <a class="source" href="search.html">
+                  search.js
                 </a>
               
             </div>
@@ -231,7 +233,7 @@ Here, <code>NavBar</code> component renders navigation bar.
                     path={this.props.location.pathname}
                 /&gt;
 
-                &lt;div className="col s4 offset-s1" id="loginFormRender" &gt;
+                &lt;div className="col s4 offset-s1 form-m2"&gt;
                     &lt;DataController
                         componentId="SearchTweet"
                         customQuery={this.CustomQueryTweets}
@@ -244,7 +246,7 @@ Here, <code>NavBar</code> component renders navigation bar.
                     /&gt;
                 &lt;/div&gt;
 
-                &lt;div className="col s4 offset-s1" id="loginFormRender" &gt;
+                &lt;div className="col s4 offset-s1 form-m2"&gt;
                     &lt;ReactiveBase
                         app={config.credential_appbase.app}
                         credentials={config.credential_appbase.credentials}
