@@ -22,7 +22,7 @@ const PersonalTweets = (props) => {
                 size={config.ReactiveList.size}
                 stream={true}
                 onData={onDataTweets}
-                sortby="desc"
+                sortBy="desc"
                 react={{
                     and: props.reactOn
                 }}
