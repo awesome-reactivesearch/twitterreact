@@ -17,12 +17,12 @@ const PersonalTweets = (props) => {
             <ReactiveList
                 title="Tweets"
                 componentId="TweetsActuator"
-                appbaseField="msg"
+                appbaseField="createdAt"
                 from={config.ReactiveList.from}
                 size={config.ReactiveList.size}
                 stream={true}
                 onData={onDataTweets}
-                sortOptions={config.tweetsSortOptions}
+                sortby="desc"
                 react={{
                     and: props.reactOn
                 }}
