@@ -148,7 +148,6 @@ const updateUser = function (follow, username) {
         const ufollowers = res.hits.hits[0]._source.followers;
         // if `follow` is true add logged user to followers list else remove it from the list
         const index = ufollowers.indexOf(me);
-        debugger;
         if (follow) {
             if(index == -1){
                 ufollowers.push(me);
