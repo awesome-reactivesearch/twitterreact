@@ -73,7 +73,7 @@ export default class Search extends Component {
                     />
                     <PersonalTweets
                         user={"$all"}
-                        path={"/"}
+                        path={"/searchpg/"}
                         reactOn={["SearchTweet"]}
                     />
                 </div>

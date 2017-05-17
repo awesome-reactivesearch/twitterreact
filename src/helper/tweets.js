@@ -9,7 +9,7 @@ const PersonalTweets = (props) => {
     // `ReactiveList` component renders the tweets in a list. Read more about the component [here](https://opensource.appbase.io/reactive-manual/v1.0.0/components/ReactiveList.html).
     const onDataTweets = function (markerData) {
         const marker = markerData._source;
-        return (<Tweet msg={marker.msg} usr={marker.by} date={marker.createdAt} path={props.path} />);
+        return (<Tweet key={marker.createdAt} msg={marker.msg} usr={marker.by} date={marker.createdAt} path={props.path} />);
     };
     return (
         <div key={`${props.user}Tweets`}>
@@ -17,12 +17,12 @@ const PersonalTweets = (props) => {
             <ReactiveList
                 title="Tweets"
                 componentId="TweetsActuator"
-                appbaseField="msg"
+                appbaseField="createdAt"
                 from={config.ReactiveList.from}
                 size={config.ReactiveList.size}
                 stream={true}
+                sortBy="desc"
                 onData={onDataTweets}
-                sortOptions={config.tweetsSortOptions}
                 react={{
                     and: props.reactOn
                 }}
